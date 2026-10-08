@@ -1,46 +1,77 @@
 # financial-graphrag
 
-CSC 8851 (Deep Learning) course project — a GraphRAG system over financial filings (SEC 10-Ks).
+CSC 8851 (Deep Learning) course project - a GraphRAG system over financial filings (SEC 10-Ks).
 
 ## Current state
 
-The project is in the data-collection stage. Nothing else (graph construction, retrieval, modeling) has been built yet.
+Data collection and chunking are done. Graph construction, retrieval, and modeling are not built yet.
 
-### `data/edgar_10k/`
+### `data/edgar_10k/` - raw filings
 
-A corpus of 10-K filings pulled from SEC EDGAR, plus the script used to fetch them.
+10-K filings pulled from SEC EDGAR, plus the script used to fetch them.
 
-- **Scope:** 8 companies across 8 different industries (AAPL, MSFT, JPM, JNJ, XOM, PG, WMT, CAT), each with its two most recent annual 10-K filings as of 2026-10-05 (16 filings, 32 files total: the 10-K main document + Exhibit 21 subsidiary list for each).
-- **`filings_manifest.csv`** — the list of files to download, with ticker, CIK, fiscal year, accession number, and source URLs for each.
-- **`download_edgar_10k.py`** — standard-library-only script that downloads every file in the manifest into `raw/<TICKER>/<FY>/`, verifies each one (10-K cover tags match the expected form/fiscal year/CIK; Exhibit 21 mentions subsidiaries), and logs the result (including a SHA-256 per file) to `download_log.csv`.
-- **`download_log.csv`** — one row per downloaded file: expected vs. actual byte count, content-check result, hash, and timestamp.
-- **`SOURCES.md`** — full provenance: how the companies and filings were selected, the filing table with links to EDGAR, and notes on edge cases (e.g. the XOM/ExxonMobil Holdings naming quirk, JPMorgan's paged filing history).
-- **`raw/`** — the downloaded filings themselves (~84 MB). **Not committed** — git-ignored, since it's regenerable from the manifest.
-
-To (re-)download the raw filings:
+- **Scope:** 8 companies in 8 industries (AAPL, MSFT, JPM, JNJ, XOM, PG, WMT, CAT), each with its two most recent 10-Ks as of 2026-10-05. That is 16 filings, 32 files (10-K main document + Exhibit 21 for each).
+- **`filings_manifest.csv`** - files to download, with ticker, CIK, fiscal year, accession number, and URLs.
+- **`download_edgar_10k.py`** - downloads and checks every file in the manifest into `raw/<TICKER>/<FY>/`, and logs results to `download_log.csv`.
+- **`SOURCES.md`** - how filings were selected, links to EDGAR, and edge-case notes.
+- **`raw/`** - the downloaded filings (~84 MB). Git-ignored; regenerate with the script.
 
 ```bash
 cd data/edgar_10k
 python download_edgar_10k.py --user-agent "Your Name your.email@example.edu"
 ```
 
-See `data/edgar_10k/SOURCES.md` for full details on what's in the corpus and why.
+### `data/chunks/` - text chunks
+
+The filings split into **7,339 chunks (~2.19M tokens)**. One shared file feeds both the vector-RAG baseline and the graph.
+
+- **`chunks.jsonl`** - one chunk per line, with metadata (ticker, fiscal year, section, etc.). Use this for the vector-RAG baseline.
+- **`documents.json`** - same text as `{chunk_id: text}`, the input format G-reasoner expects. Git-ignored; it duplicates `chunks.jsonl`.
+- **`build_chunks.py`** - builds the chunks from `raw/`.
+- **`chunk_stats.csv`, `section_spans.csv`** - counts by section and where each section was found.
+
+How chunks are made:
+
+- HTML is cleaned, and table rows become one line each.
+- Text is split by 10-K section (Item 1 to Item 16), and chunks never cross a section.
+- Each chunk is at most 350 tokens (bge-small-en-v1.5 tokenizer), with about 50 tokens of overlap.
+- Each chunk starts with a header naming the company, year, and section.
+
+See `data/chunks/README.md` for fields, counts, known quirks, and rebuild steps.
+
+## Setup
+
+```bash
+pip install -r requirements.txt
+python data/chunks/build_chunks.py
+```
+
+The download script uses only the standard library. Chunking needs `lxml` and `tokenizers`, plus the raw filings.
 
 ## Repo layout
 
 ```
 .
 ├── README.md
+├── CONTRIBUTIONS.md
+├── requirements.txt
 └── data/
-    └── edgar_10k/
-        ├── download_edgar_10k.py
-        ├── filings_manifest.csv
-        ├── download_log.csv
-        ├── SOURCES.md
-        ├── .gitignore         # ignores raw/
-        └── raw/               # downloaded filings (git-ignored, not committed)
+    ├── edgar_10k/
+    │   ├── download_edgar_10k.py
+    │   ├── filings_manifest.csv
+    │   ├── download_log.csv
+    │   ├── SOURCES.md
+    │   └── raw/                  # git-ignored
+    └── chunks/
+        ├── README.md
+        ├── build_chunks.py
+        ├── chunks.jsonl
+        ├── documents.json        # git-ignored
+        ├── chunk_stats.csv
+        ├── section_spans.csv
+        └── bert-base-uncased-vocab.txt   # fallback tokenizer vocab
 ```
 
 ## Next steps
 
-Not yet started: document parsing/chunking, graph construction, retrieval, and the GraphRAG pipeline itself.
+Graph construction, retrieval, and the GraphRAG pipeline itself.

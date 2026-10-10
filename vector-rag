@@ -1,0 +1,24 @@
+chunks.jsonl (7,339 chunks)          questions.jsonl (15-20, with gold chunk ids + gold answer)
+        │                                         │
+        ▼                                         │
+[1] EMBED chunks  ── bge-small (33M)              │
+                  └─ DistilBERT (66M)             │
+        ▼                                         ▼
+[2] INDEX         ── FAISS IndexFlatIP      [3] EMBED query (same encoder)
+        │                                         │
+        └──────────────► [4] RETRIEVE top-k (k = 5, 10), cosine search
+                                      │
+                    (optional) [5] RERANK top-20 ── cross-encoder MiniLM-L6 (22M)
+                                      │
+                ┌─────────────────────┴──────────────────────┐
+                ▼                                            ▼
+   [6] RETRIEVAL METRICS                          [7] GENERATE answer from retrieved chunks
+       precision@k, recall@k vs gold ids               Gemini 2.5 Flash, temp 0
+       (no LLM involved)                                          │
+                                                                  ▼
+                                                   [8] JUDGE answer vs gold answer
+                                                       Gemini 2.5 Flash-Lite, temp 0
+                                                       → correct / hallucination / missing
+                                                                  │
+                                                                  ▼
+                                       [9] LATENCY (retrieve, rerank, generate) → summary.json / results table

@@ -1,0 +1,76 @@
+chunks.jsonl (7,339 chunks, 16 filings)      questions.jsonl = GOLDEN SET (19 questions, gold chunk ids + gold answer)
+        │                                         │
+        ▼                                         │
+[1] EMBED chunks  ── bge-small (33M)              │
+                  └─ DistilBERT (66M)             │
+        ▼                                         ▼
+[2] INDEX         ── FAISS IndexFlatIP      [3] EMBED query (same encoder)
+        │                                         │
+        └──────────────► [4] RETRIEVE top-k (k = 5, 10), cosine search
+                                      │
+                    (optional) [5] RERANK top-20 ── cross-encoder MiniLM-L6 (22M)
+                                      │
+                ┌─────────────────────┴──────────────────────┐
+                ▼                                            ▼
+   [6] RETRIEVAL METRICS                          [7] GENERATE answer from retrieved chunks
+       precision@k, recall@k, hit@k vs gold ids        Gemini 2.5 Flash-Lite, temp 0
+       (no LLM involved)                                          │
+                                                                  ▼
+                                                   [8] JUDGE answer vs gold answer
+                                                       Gemini 2.5 Flash, temp 0
+                                                       → correct / hallucination / missing
+                                                                  │
+                                                                  ▼
+                                       [9] LATENCY = retrieve + rerank + generate (judge not counted)
+                                           → results/<run>/summary.json + per_question.jsonl
+
+
+Mean time per question (run full_run_2, V100 GPU):
+    query embed + FAISS search   ~11 ms
+    rerank of top 20             ~38 ms   (only when rerank is on)
+    generate (Flash-Lite)        ~468 ms  (94% of end-to-end time)
+    judge (Flash)                ~1.6 s   (evaluation only, not counted)
+
+
+GOLDEN SET (data/questions.jsonl) - how the gold chunk ids are made
+===================================================================
+
+Status: 1 of 19 questions validated by an independent LLM labeler (q01).
+        q02-q19 use pattern-matched labels that are NOT yet verified. All numbers are preliminary.
+
+Types: 9 single-fact, 5 multi-hop within one company, 5 cross-company.
+
+ [a] PATTERN LABELS (all questions)
+     gold = every chunk in the named company + fiscal-year filing whose text matches a label+number pattern
+     (scripts/build_questions.py)  ->  data/questions.jsonl, backup kept in data/questions_pattern_gold.jsonl
+        │
+        ▼
+ [b] CANDIDATE POOLS (scripts/build_label_pools.py)
+     per question: top chunks from bge-small + DistilBERT + BM25, restricted to the filings the question names
+     + 8 off-target chunks (other years/companies); shuffled; no reference answer
+     40 chunks (single filing) or 72 chunks (two filings)  ->  data/labeling/qNN.txt   (not stored in the repo)
+        │
+        ▼
+ [c] OTHER LLM (different model family) + data/labeling/PROMPT.txt
+     labels every chunk: answer / supporting / irrelevant, with a verbatim quote for each "answer"
+     one chat per question  ->  JSON reply saved as data/labeling/replies/qNN.json
+        │
+        ▼
+ [d] VALIDATE (scripts/ingest_labels.py)
+     accept only if: every candidate labeled once, quote found verbatim in the chunk and contains a figure,
+     chunk is from the company + fiscal year the question names
+        │
+        ▼
+ [e] APPLY (--apply): validated "answer" chunks replace the gold set in data/questions.jsonl
+     (gold_source = "llm-labeler (validated)"); the rest stay "pattern-match (unverified)"
+
+
+Run 2 results (19 questions, mixed gold) - main findings
+========================================================
+
+  - Retrieval never picks the wrong company, but picks the wrong fiscal year of the right company 43% of the time.
+  - Cross-company questions: both companies' answer chunks found for only 0-1 of the 5 questions in every config.
+  - When a gold chunk is retrieved, the answer is judged correct only 47-64% of the time.
+  - Rerunning gave identical retrievals and answers (0/152 changed); 1 of 152 judge verdicts flipped on the same text.
+
+Files: README.md, GOLDEN_SET.md, docs/baseline_report_v2.docx, results/full_run_2/

@@ -1,0 +1,210 @@
+{
+ "qid": "q01",
+ "required_facts": [
+  "Apple Inc.'s total net sales for fiscal 2025, the fiscal year ended September 27, 2025, in millions of dollars."
+ ],
+ "labels": [
+  {
+   "chunk_id": "AAPL_FY2025_ITEM7_0009",
+   "label": "irrelevant",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2025_ITEM7_0008",
+   "label": "supporting",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2024_ITEM7_0003",
+   "label": "irrelevant",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2024_ITEM8_0050",
+   "label": "irrelevant",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2025_ITEM8_0000",
+   "label": "answer",
+   "quote": "Total net sales | 416,161 | 391,035 | 383,285"
+  },
+  {
+   "chunk_id": "AAPL_FY2025_ITEM8_0049",
+   "label": "irrelevant",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2025_ITEM8_0010",
+   "label": "supporting",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2025_ITEM8_0051",
+   "label": "answer",
+   "quote": "Total net sales | $416,161 | $391,035 | $383,285"
+  },
+  {
+   "chunk_id": "AAPL_FY2025_ITEM8_0004",
+   "label": "irrelevant",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2025_ITEM7_0006",
+   "label": "irrelevant",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2025_ITEM8_0031",
+   "label": "irrelevant",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2025_ITEM8_0015",
+   "label": "answer",
+   "quote": "Total net sales | $416,161 | $391,035 | $383,285"
+  },
+  {
+   "chunk_id": "AAPL_FY2025_ITEM8_0016",
+   "label": "irrelevant",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2025_ITEM8_0037",
+   "label": "irrelevant",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2025_ITEM8_0001",
+   "label": "irrelevant",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2025_ITEM7_0007",
+   "label": "irrelevant",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2024_ITEM8_0009",
+   "label": "irrelevant",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2025_ITEM8_0039",
+   "label": "irrelevant",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2025_ITEM8_0025",
+   "label": "irrelevant",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2024_ITEM8_0015",
+   "label": "irrelevant",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2025_ITEM8_0027",
+   "label": "irrelevant",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2025_ITEM8_0030",
+   "label": "irrelevant",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2025_ITEM8_0057",
+   "label": "irrelevant",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2025_ITEM8_0048",
+   "label": "answer",
+   "quote": "Total Net Sales"
+  },
+  {
+   "chunk_id": "AAPL_FY2024_ITEM7_0004",
+   "label": "irrelevant",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2025_ITEM8_0052",
+   "label": "irrelevant",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2025_ITEM8_0041",
+   "label": "irrelevant",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2024_ITEM7_0001",
+   "label": "irrelevant",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2025_ITEM8_0026",
+   "label": "irrelevant",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2025_ITEM7_0004",
+   "label": "answer",
+   "quote": "Total net sales | $416,161 | 6% | $391,035 | 2% | $383,285"
+  },
+  {
+   "chunk_id": "AAPL_FY2025_ITEM8_0038",
+   "label": "irrelevant",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2025_ITEM8_0050",
+   "label": "irrelevant",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2024_ITEM8_0051",
+   "label": "irrelevant",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2025_ITEM7_0005",
+   "label": "answer",
+   "quote": "Total net sales | $416,161 | 6% | $391,035 | 2% | $383,285"
+  },
+  {
+   "chunk_id": "AAPL_FY2025_ITEM5_0001",
+   "label": "irrelevant",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2025_ITEM8_0044",
+   "label": "irrelevant",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2024_ITEM7_0006",
+   "label": "irrelevant",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2025_ITEM7_0001",
+   "label": "supporting",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2025_ITEM8_0009",
+   "label": "supporting",
+   "quote": ""
+  },
+  {
+   "chunk_id": "AAPL_FY2025_ITEM7_0000",
+   "label": "irrelevant",
+   "quote": ""
+  }
+ ],
+ "missing_facts": [],
+ "notes": "Reply saved from the labeler; per-chunk 'reason' text omitted when saving. Labeler note: required figure is $416,161 million; multiple FY2025 chunks state it; FY2024 chunks are irrelevant."
+}

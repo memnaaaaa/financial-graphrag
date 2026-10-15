@@ -1,0 +1,12 @@
+name,attributes
+has_subsidiary,{'description': 'A company owns the subsidiary (Exhibit 21 of the 10-K).'}
+incorporated_in,{'description': 'A subsidiary is incorporated or organized in this jurisdiction.'}
+part_of,{'description': 'A location (e.g. a U.S. state) is part of a larger location.'}
+has_segment,{'description': 'A company reports this operating segment.'}
+has_business_line,{'description': 'A segment contains this business line or franchise.'}
+has_product,"{'description': 'A company, segment or business line sells this product or product line.'}"
+has_value,{'description': 'An entity has this reported number (a Value node).'}
+of_metric,{'description': 'A Value node measures this financial metric.'}
+for_period,{'description': 'A Value node covers this fiscal year (or is measured at its end).'}
+in_location,{'description': 'A Value node is limited to this geographic area.'}
+is_mentioned_in,{'description': 'An entity or number appears in the document chunk.'}

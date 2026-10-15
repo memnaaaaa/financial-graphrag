@@ -1,0 +1,39 @@
+{
+  "tickers": [
+    "AAPL",
+    "JNJ",
+    "MSFT"
+  ],
+  "nodes": 3618,
+  "edges": 14431,
+  "node_types": {
+    "entity": 669,
+    "attribute": 1094,
+    "document": 1855
+  },
+  "node_kinds": {
+    "document": 1855,
+    "Value": 1094,
+    "Subsidiary": 450,
+    "Location": 101,
+    "Product": 60,
+    "Metric": 21,
+    "FiscalYear": 13,
+    "Segment": 11,
+    "BusinessLine": 10,
+    "Company": 3
+  },
+  "relations": {
+    "is_mentioned_in": 9711,
+    "has_value": 1094,
+    "of_metric": 1094,
+    "for_period": 1094,
+    "incorporated_in": 455,
+    "has_subsidiary": 450,
+    "in_location": 432,
+    "has_product": 60,
+    "part_of": 19,
+    "has_segment": 11,
+    "has_business_line": 11
+  }
+}

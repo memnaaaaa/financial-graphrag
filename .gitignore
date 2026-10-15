@@ -22,6 +22,7 @@ dist/
 # Environment / secrets
 .env
 .env.*
+!.env.example
 *.pem
 *.key
 
@@ -46,3 +47,7 @@ htmlcov/
 # but ignore any top-level raw data dumps by default)
 *.sqlite3
 *.db
+
+# Phase 2 LLM extraction: cached Gemini answers and the unfinished fin10k_v1 graph stay local for now
+data/graph/llm_cache/
+data/graph/fin10k_v1/

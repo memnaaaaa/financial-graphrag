@@ -4,7 +4,9 @@ CSC 8851 (Deep Learning) course project - a GraphRAG system over financial filin
 
 ## Current state
 
-Data collection and chunking are done. Graph construction, retrieval, and modeling are not built yet.
+Data collection and chunking are done. The vector-RAG baseline (`vector_rag_baseline/`), the first
+knowledge graph for 3 companies (`data/graph/fin10k_v0`, see `data/graph/README.md`) and zero-shot
+G-reasoner retrieval (`G-reasoner/`) run end to end. Fine-tuning and LLM answer generation are next.
 
 ### `data/edgar_10k/` - raw filings
 
@@ -39,6 +41,12 @@ How chunks are made:
 
 See `data/chunks/README.md` for fields, counts, known quirks, and rebuild steps.
 
+### `G-reasoner/` - graph retriever (G-reasoner-34M)
+
+Runs the pretrained G-reasoner graph retriever (gfmrag 2.0.0) on `data/graph/fin10k_v0` in Colab, scores it on the golden questions with the vector baseline's metrics, and generates synthetic question/subgraph pairs for fine-tuning. Zero-shot it reaches hit@5 0.18 on the 11 covered golden questions (dense similarity on the same features: 0.82); choosing its start nodes with Gemini instead of rules gives identical results.
+
+See `G-reasoner/README.md` (how to run, files, fixes) and `G-reasoner/report/` (tables, pipeline figure and method text for the report).
+
 ## Setup
 
 ```bash
@@ -55,23 +63,33 @@ The download script uses only the standard library. Chunking needs `lxml` and `t
 ├── README.md
 ├── CONTRIBUTIONS.md
 ├── requirements.txt
-└── data/
-    ├── edgar_10k/
-    │   ├── download_edgar_10k.py
-    │   ├── filings_manifest.csv
-    │   ├── download_log.csv
-    │   ├── SOURCES.md
-    │   └── raw/                  # git-ignored
-    └── chunks/
-        ├── README.md
-        ├── build_chunks.py
-        ├── chunks.jsonl
-        ├── documents.json        # git-ignored
-        ├── chunk_stats.csv
-        ├── section_spans.csv
-        └── bert-base-uncased-vocab.txt   # fallback tokenizer vocab
+├── data/
+│   ├── edgar_10k/
+│   │   ├── download_edgar_10k.py
+│   │   ├── filings_manifest.csv
+│   │   ├── download_log.csv
+│   │   ├── SOURCES.md
+│   │   └── raw/                  # git-ignored
+│   ├── chunks/
+│   │   ├── README.md
+│   │   ├── build_chunks.py
+│   │   ├── chunks.jsonl
+│   │   ├── documents.json        # git-ignored
+│   │   ├── chunk_stats.csv
+│   │   ├── section_spans.csv
+│   │   └── bert-base-uncased-vocab.txt   # fallback tokenizer vocab
+│   └── graph/                    # knowledge graph (see data/graph/README.md)
+│       ├── build_graph.py, validate_graph.py, extract_relations_llm.py
+│       └── fin10k_v0/processed/stage1/   # nodes.csv, relations.csv, edges.csv
+├── vector_rag_baseline/          # vector RAG + reranking baseline, golden questions, metrics
+└── G-reasoner/                   # graph retriever: scripts, Colab notebooks, results, synthetic data
+    ├── README.md
+    ├── docs/                     # INPUT_FORMAT.md (technical notes)
+    └── report/                   # report drafts: intro_method.md/.tex, REPORT_NOTES.md
 ```
 
 ## Next steps
 
-Graph construction, retrieval, and the GraphRAG pipeline itself.
+Extend the graph to all 8 companies and LLM-extracted relations (`fin10k_v1`), fine-tune G-reasoner
+on synthetic questions, build subgraph pruning and LLM answers with an evidence trail, and compare
+against the baselines (see each folder's README).

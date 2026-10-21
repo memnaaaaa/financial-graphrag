@@ -51,3 +51,19 @@ htmlcov/
 # Phase 2 LLM extraction: cached Gemini answers and the unfinished fin10k_v1 graph stay local for now
 data/graph/llm_cache/
 data/graph/fin10k_v1/
+
+# LaTeX build files (report/): keep .tex, .bib, figures and the final report PDF only
+*.aux
+*.bbl
+*.blg
+*.brf
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+report/prelim_sections.pdf
+
+# Vector-RAG baseline: machine-specific config and the FAISS index cache
+vector_rag_baseline/rag/local_config.py
+vector_rag_baseline/indexes/

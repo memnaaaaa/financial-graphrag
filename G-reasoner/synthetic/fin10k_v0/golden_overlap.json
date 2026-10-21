@@ -1,0 +1,7110 @@
+[
+ {
+  "id": "fin10k_v0-lookup-00014",
+  "question": "What was Johnson & Johnson's Innovative Medicine segment revenue in fiscal 2025?",
+  "start_nodes": {
+   "entity": [
+    "Innovative Medicine (JNJ)",
+    "Johnson & Johnson",
+    "Revenue",
+    "FY2025 (JNJ)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "JNJ_FY2025_ITEM7_0012",
+    "JNJ_FY2025_ITEM7_0032",
+    "JNJ_FY2025_ITEM8_0120"
+   ],
+   "attribute": [
+    "Innovative Medicine (JNJ) revenue FY2025 = $60,401 million"
+   ],
+   "entity": []
+  },
+  "answer": "$60,401 million",
+  "template": "lookup",
+  "hops": 2,
+  "path": [
+   [
+    "Innovative Medicine (JNJ)",
+    "has_value",
+    "Innovative Medicine (JNJ) revenue FY2025 = $60,401 million"
+   ],
+   [
+    "Innovative Medicine (JNJ) revenue FY2025 = $60,401 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Innovative Medicine (JNJ) revenue FY2025 = $60,401 million",
+    "for_period",
+    "FY2025 (JNJ)"
+   ],
+   [
+    "Innovative Medicine (JNJ) revenue FY2025 = $60,401 million",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM7_0012"
+   ],
+   [
+    "Innovative Medicine (JNJ) revenue FY2025 = $60,401 million",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM7_0032"
+   ],
+   [
+    "Innovative Medicine (JNJ) revenue FY2025 = $60,401 million",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0120"
+   ]
+  ],
+  "tickers": [
+   "JNJ"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-lookup-00243",
+  "question": "What was Microsoft's revenue in fiscal 2025?",
+  "start_nodes": {
+   "entity": [
+    "Microsoft Corporation",
+    "Revenue",
+    "FY2025 (MSFT)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "MSFT_FY2025_ITEM7_0010",
+    "MSFT_FY2025_ITEM7_0012",
+    "MSFT_FY2025_ITEM8_0000",
+    "MSFT_FY2025_ITEM8_0086",
+    "MSFT_FY2025_ITEM8_0087",
+    "MSFT_FY2025_ITEM8_0088",
+    "MSFT_FY2026_ITEM7_0009",
+    "MSFT_FY2026_ITEM7_0012",
+    "MSFT_FY2026_ITEM7_0013",
+    "MSFT_FY2026_ITEM8_0000",
+    "MSFT_FY2026_ITEM8_0090",
+    "MSFT_FY2026_ITEM8_0091",
+    "MSFT_FY2026_ITEM8_0092"
+   ],
+   "attribute": [
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   "entity": []
+  },
+  "answer": "$281,724 million",
+  "template": "lookup",
+  "hops": 2,
+  "path": [
+   [
+    "Microsoft Corporation",
+    "has_value",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0010"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0086"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0087"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0088"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0009"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0013"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0090"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0091"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0092"
+   ]
+  ],
+  "tickers": [
+   "MSFT"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-lookup-00357",
+  "question": "What was Apple's revenue in fiscal 2025?",
+  "start_nodes": {
+   "entity": [
+    "Revenue",
+    "Apple Inc.",
+    "FY2025 (AAPL)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "AAPL_FY2025_ITEM7_0004",
+    "AAPL_FY2025_ITEM7_0005",
+    "AAPL_FY2025_ITEM8_0000",
+    "AAPL_FY2025_ITEM8_0015",
+    "AAPL_FY2025_ITEM8_0048",
+    "AAPL_FY2025_ITEM8_0051"
+   ],
+   "attribute": [
+    "Apple Inc. revenue FY2025 = $416,161 million"
+   ],
+   "entity": []
+  },
+  "answer": "$416,161 million",
+  "template": "lookup",
+  "hops": 2,
+  "path": [
+   [
+    "Apple Inc.",
+    "has_value",
+    "Apple Inc. revenue FY2025 = $416,161 million"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "for_period",
+    "FY2025 (AAPL)"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0051"
+   ]
+  ],
+  "tickers": [
+   "AAPL"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-lookup-00571",
+  "question": "What was Apple's iPhone revenue in fiscal 2025?",
+  "start_nodes": {
+   "entity": [
+    "Revenue",
+    "iPhone (AAPL)",
+    "Apple Inc.",
+    "FY2025 (AAPL)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "AAPL_FY2025_ITEM7_0005",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   "attribute": [
+    "iPhone (AAPL) revenue FY2025 = $209,586 million"
+   ],
+   "entity": []
+  },
+  "answer": "$209,586 million",
+  "template": "lookup",
+  "hops": 2,
+  "path": [
+   [
+    "iPhone (AAPL)",
+    "has_value",
+    "iPhone (AAPL) revenue FY2025 = $209,586 million"
+   ],
+   [
+    "iPhone (AAPL) revenue FY2025 = $209,586 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "iPhone (AAPL) revenue FY2025 = $209,586 million",
+    "for_period",
+    "FY2025 (AAPL)"
+   ],
+   [
+    "iPhone (AAPL) revenue FY2025 = $209,586 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "iPhone (AAPL) revenue FY2025 = $209,586 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ]
+  ],
+  "tickers": [
+   "AAPL"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-change-00621",
+  "question": "How did Apple's iPhone revenue change from fiscal 2024 to fiscal 2025?",
+  "start_nodes": {
+   "entity": [
+    "Revenue",
+    "iPhone (AAPL)",
+    "Apple Inc.",
+    "FY2024 (AAPL)",
+    "FY2025 (AAPL)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "AAPL_FY2024_ITEM7_0003",
+    "AAPL_FY2024_ITEM8_0015",
+    "AAPL_FY2025_ITEM7_0005",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   "attribute": [
+    "iPhone (AAPL) revenue FY2024 = $201,183 million",
+    "iPhone (AAPL) revenue FY2025 = $209,586 million"
+   ],
+   "entity": []
+  },
+  "answer": "It increased by $8,403 million (+4.2%), from $201,183 million to $209,586 million.",
+  "template": "change",
+  "hops": 2,
+  "path": [
+   [
+    "iPhone (AAPL)",
+    "has_value",
+    "iPhone (AAPL) revenue FY2024 = $201,183 million"
+   ],
+   [
+    "iPhone (AAPL) revenue FY2024 = $201,183 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "iPhone (AAPL) revenue FY2024 = $201,183 million",
+    "for_period",
+    "FY2024 (AAPL)"
+   ],
+   [
+    "iPhone (AAPL) revenue FY2024 = $201,183 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0003"
+   ],
+   [
+    "iPhone (AAPL) revenue FY2024 = $201,183 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0015"
+   ],
+   [
+    "iPhone (AAPL) revenue FY2024 = $201,183 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "iPhone (AAPL) revenue FY2024 = $201,183 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "iPhone (AAPL)",
+    "has_value",
+    "iPhone (AAPL) revenue FY2025 = $209,586 million"
+   ],
+   [
+    "iPhone (AAPL) revenue FY2025 = $209,586 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "iPhone (AAPL) revenue FY2025 = $209,586 million",
+    "for_period",
+    "FY2025 (AAPL)"
+   ],
+   [
+    "iPhone (AAPL) revenue FY2025 = $209,586 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "iPhone (AAPL) revenue FY2025 = $209,586 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ]
+  ],
+  "tickers": [
+   "AAPL"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-change-00639",
+  "question": "How did Microsoft's revenue change from fiscal 2024 to fiscal 2025?",
+  "start_nodes": {
+   "entity": [
+    "Microsoft Corporation",
+    "Revenue",
+    "FY2024 (MSFT)",
+    "FY2025 (MSFT)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "MSFT_FY2025_ITEM7_0010",
+    "MSFT_FY2025_ITEM7_0012",
+    "MSFT_FY2025_ITEM8_0000",
+    "MSFT_FY2025_ITEM8_0086",
+    "MSFT_FY2025_ITEM8_0087",
+    "MSFT_FY2025_ITEM8_0088",
+    "MSFT_FY2026_ITEM7_0009",
+    "MSFT_FY2026_ITEM7_0012",
+    "MSFT_FY2026_ITEM7_0013",
+    "MSFT_FY2026_ITEM8_0000",
+    "MSFT_FY2026_ITEM8_0090",
+    "MSFT_FY2026_ITEM8_0091",
+    "MSFT_FY2026_ITEM8_0092"
+   ],
+   "attribute": [
+    "Microsoft Corporation revenue FY2024 = $245,122 million",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   "entity": []
+  },
+  "answer": "It increased by $36,602 million (+14.9%), from $245,122 million to $281,724 million.",
+  "template": "change",
+  "hops": 2,
+  "path": [
+   [
+    "Microsoft Corporation",
+    "has_value",
+    "Microsoft Corporation revenue FY2024 = $245,122 million"
+   ],
+   [
+    "Microsoft Corporation revenue FY2024 = $245,122 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Microsoft Corporation revenue FY2024 = $245,122 million",
+    "for_period",
+    "FY2024 (MSFT)"
+   ],
+   [
+    "Microsoft Corporation revenue FY2024 = $245,122 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0010"
+   ],
+   [
+    "Microsoft Corporation revenue FY2024 = $245,122 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2024 = $245,122 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2024 = $245,122 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0086"
+   ],
+   [
+    "Microsoft Corporation revenue FY2024 = $245,122 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0087"
+   ],
+   [
+    "Microsoft Corporation revenue FY2024 = $245,122 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0088"
+   ],
+   [
+    "Microsoft Corporation revenue FY2024 = $245,122 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2024 = $245,122 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0090"
+   ],
+   [
+    "Microsoft Corporation revenue FY2024 = $245,122 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0091"
+   ],
+   [
+    "Microsoft Corporation revenue FY2024 = $245,122 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0092"
+   ],
+   [
+    "Microsoft Corporation",
+    "has_value",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0010"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0086"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0087"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0088"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0009"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0013"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0090"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0091"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0092"
+   ]
+  ],
+  "tickers": [
+   "MSFT"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-change-00767",
+  "question": "How did Apple's revenue change from fiscal 2023 to fiscal 2024?",
+  "start_nodes": {
+   "entity": [
+    "Revenue",
+    "Apple Inc.",
+    "FY2023 (AAPL)",
+    "FY2024 (AAPL)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "AAPL_FY2024_ITEM7_0002",
+    "AAPL_FY2024_ITEM7_0003",
+    "AAPL_FY2024_ITEM7_0004",
+    "AAPL_FY2024_ITEM8_0000",
+    "AAPL_FY2024_ITEM8_0015",
+    "AAPL_FY2024_ITEM8_0051",
+    "AAPL_FY2025_ITEM7_0004",
+    "AAPL_FY2025_ITEM7_0005",
+    "AAPL_FY2025_ITEM8_0000",
+    "AAPL_FY2025_ITEM8_0015",
+    "AAPL_FY2025_ITEM8_0048",
+    "AAPL_FY2025_ITEM8_0049",
+    "AAPL_FY2025_ITEM8_0050",
+    "AAPL_FY2025_ITEM8_0051"
+   ],
+   "attribute": [
+    "Apple Inc. revenue FY2023 = $383,285 million",
+    "Apple Inc. revenue FY2024 = $391,035 million"
+   ],
+   "entity": []
+  },
+  "answer": "It increased by $7,750 million (+2.0%), from $383,285 million to $391,035 million.",
+  "template": "change",
+  "hops": 2,
+  "path": [
+   [
+    "Apple Inc.",
+    "has_value",
+    "Apple Inc. revenue FY2023 = $383,285 million"
+   ],
+   [
+    "Apple Inc. revenue FY2023 = $383,285 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Apple Inc. revenue FY2023 = $383,285 million",
+    "for_period",
+    "FY2023 (AAPL)"
+   ],
+   [
+    "Apple Inc. revenue FY2023 = $383,285 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0002"
+   ],
+   [
+    "Apple Inc. revenue FY2023 = $383,285 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0003"
+   ],
+   [
+    "Apple Inc. revenue FY2023 = $383,285 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2023 = $383,285 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2023 = $383,285 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2023 = $383,285 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0051"
+   ],
+   [
+    "Apple Inc. revenue FY2023 = $383,285 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2023 = $383,285 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "Apple Inc. revenue FY2023 = $383,285 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2023 = $383,285 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2023 = $383,285 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0049"
+   ],
+   [
+    "Apple Inc. revenue FY2023 = $383,285 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0050"
+   ],
+   [
+    "Apple Inc. revenue FY2023 = $383,285 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0051"
+   ],
+   [
+    "Apple Inc.",
+    "has_value",
+    "Apple Inc. revenue FY2024 = $391,035 million"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "for_period",
+    "FY2024 (AAPL)"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0002"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0003"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0051"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0049"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0051"
+   ]
+  ],
+  "tickers": [
+   "AAPL"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-change-00883",
+  "question": "How did Microsoft's research and development expense change from fiscal 2024 to fiscal 2025?",
+  "start_nodes": {
+   "entity": [
+    "Research and development expense",
+    "Microsoft Corporation",
+    "FY2024 (MSFT)",
+    "FY2025 (MSFT)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "MSFT_FY2025_ITEM7_0015",
+    "MSFT_FY2025_ITEM7_0016",
+    "MSFT_FY2025_ITEM8_0000",
+    "MSFT_FY2026_ITEM7_0017",
+    "MSFT_FY2026_ITEM8_0000"
+   ],
+   "attribute": [
+    "Microsoft Corporation research and development expense FY2024 = $29,510 million",
+    "Microsoft Corporation research and development expense FY2025 = $32,488 million"
+   ],
+   "entity": []
+  },
+  "answer": "It increased by $2,978 million (+10.1%), from $29,510 million to $32,488 million.",
+  "template": "change",
+  "hops": 2,
+  "path": [
+   [
+    "Microsoft Corporation",
+    "has_value",
+    "Microsoft Corporation research and development expense FY2024 = $29,510 million"
+   ],
+   [
+    "Microsoft Corporation research and development expense FY2024 = $29,510 million",
+    "of_metric",
+    "Research and development expense"
+   ],
+   [
+    "Microsoft Corporation research and development expense FY2024 = $29,510 million",
+    "for_period",
+    "FY2024 (MSFT)"
+   ],
+   [
+    "Microsoft Corporation research and development expense FY2024 = $29,510 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0015"
+   ],
+   [
+    "Microsoft Corporation research and development expense FY2024 = $29,510 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0016"
+   ],
+   [
+    "Microsoft Corporation research and development expense FY2024 = $29,510 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation research and development expense FY2024 = $29,510 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation",
+    "has_value",
+    "Microsoft Corporation research and development expense FY2025 = $32,488 million"
+   ],
+   [
+    "Microsoft Corporation research and development expense FY2025 = $32,488 million",
+    "of_metric",
+    "Research and development expense"
+   ],
+   [
+    "Microsoft Corporation research and development expense FY2025 = $32,488 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Microsoft Corporation research and development expense FY2025 = $32,488 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0015"
+   ],
+   [
+    "Microsoft Corporation research and development expense FY2025 = $32,488 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0016"
+   ],
+   [
+    "Microsoft Corporation research and development expense FY2025 = $32,488 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation research and development expense FY2025 = $32,488 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0017"
+   ],
+   [
+    "Microsoft Corporation research and development expense FY2025 = $32,488 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0000"
+   ]
+  ],
+  "tickers": [
+   "MSFT"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-change-00903",
+  "question": "How did Apple's research and development expense change from fiscal 2024 to fiscal 2025?",
+  "start_nodes": {
+   "entity": [
+    "Research and development expense",
+    "Apple Inc.",
+    "FY2024 (AAPL)",
+    "FY2025 (AAPL)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "AAPL_FY2024_ITEM7_0005",
+    "AAPL_FY2024_ITEM8_0000",
+    "AAPL_FY2024_ITEM8_0050",
+    "AAPL_FY2025_ITEM7_0007",
+    "AAPL_FY2025_ITEM8_0000",
+    "AAPL_FY2025_ITEM8_0048",
+    "AAPL_FY2025_ITEM8_0049"
+   ],
+   "attribute": [
+    "Apple Inc. research and development expense FY2024 = $31,370 million",
+    "Apple Inc. research and development expense FY2025 = $34,550 million"
+   ],
+   "entity": []
+  },
+  "answer": "It increased by $3,180 million (+10.1%), from $31,370 million to $34,550 million.",
+  "template": "change",
+  "hops": 2,
+  "path": [
+   [
+    "Apple Inc.",
+    "has_value",
+    "Apple Inc. research and development expense FY2024 = $31,370 million"
+   ],
+   [
+    "Apple Inc. research and development expense FY2024 = $31,370 million",
+    "of_metric",
+    "Research and development expense"
+   ],
+   [
+    "Apple Inc. research and development expense FY2024 = $31,370 million",
+    "for_period",
+    "FY2024 (AAPL)"
+   ],
+   [
+    "Apple Inc. research and development expense FY2024 = $31,370 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0005"
+   ],
+   [
+    "Apple Inc. research and development expense FY2024 = $31,370 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. research and development expense FY2024 = $31,370 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0050"
+   ],
+   [
+    "Apple Inc. research and development expense FY2024 = $31,370 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0007"
+   ],
+   [
+    "Apple Inc. research and development expense FY2024 = $31,370 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. research and development expense FY2024 = $31,370 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0049"
+   ],
+   [
+    "Apple Inc.",
+    "has_value",
+    "Apple Inc. research and development expense FY2025 = $34,550 million"
+   ],
+   [
+    "Apple Inc. research and development expense FY2025 = $34,550 million",
+    "of_metric",
+    "Research and development expense"
+   ],
+   [
+    "Apple Inc. research and development expense FY2025 = $34,550 million",
+    "for_period",
+    "FY2025 (AAPL)"
+   ],
+   [
+    "Apple Inc. research and development expense FY2025 = $34,550 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0007"
+   ],
+   [
+    "Apple Inc. research and development expense FY2025 = $34,550 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. research and development expense FY2025 = $34,550 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ]
+  ],
+  "tickers": [
+   "AAPL"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-change-00940",
+  "question": "How did Microsoft's revenue change from fiscal 2025 to fiscal 2026?",
+  "start_nodes": {
+   "entity": [
+    "Microsoft Corporation",
+    "Revenue",
+    "FY2025 (MSFT)",
+    "FY2026 (MSFT)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "MSFT_FY2025_ITEM7_0010",
+    "MSFT_FY2025_ITEM7_0012",
+    "MSFT_FY2025_ITEM8_0000",
+    "MSFT_FY2025_ITEM8_0086",
+    "MSFT_FY2025_ITEM8_0087",
+    "MSFT_FY2025_ITEM8_0088",
+    "MSFT_FY2026_ITEM7_0009",
+    "MSFT_FY2026_ITEM7_0012",
+    "MSFT_FY2026_ITEM7_0013",
+    "MSFT_FY2026_ITEM8_0000",
+    "MSFT_FY2026_ITEM8_0090",
+    "MSFT_FY2026_ITEM8_0091",
+    "MSFT_FY2026_ITEM8_0092"
+   ],
+   "attribute": [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "Microsoft Corporation revenue FY2026 = $331,839 million"
+   ],
+   "entity": []
+  },
+  "answer": "It increased by $50,115 million (+17.8%), from $281,724 million to $331,839 million.",
+  "template": "change",
+  "hops": 2,
+  "path": [
+   [
+    "Microsoft Corporation",
+    "has_value",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0010"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0086"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0087"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0088"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0009"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0013"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0090"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0091"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0092"
+   ],
+   [
+    "Microsoft Corporation",
+    "has_value",
+    "Microsoft Corporation revenue FY2026 = $331,839 million"
+   ],
+   [
+    "Microsoft Corporation revenue FY2026 = $331,839 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Microsoft Corporation revenue FY2026 = $331,839 million",
+    "for_period",
+    "FY2026 (MSFT)"
+   ],
+   [
+    "Microsoft Corporation revenue FY2026 = $331,839 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0009"
+   ],
+   [
+    "Microsoft Corporation revenue FY2026 = $331,839 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2026 = $331,839 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0013"
+   ],
+   [
+    "Microsoft Corporation revenue FY2026 = $331,839 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2026 = $331,839 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0090"
+   ],
+   [
+    "Microsoft Corporation revenue FY2026 = $331,839 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0091"
+   ],
+   [
+    "Microsoft Corporation revenue FY2026 = $331,839 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0092"
+   ]
+  ],
+  "tickers": [
+   "MSFT"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-change-01088",
+  "question": "How did Microsoft's research and development expense change from fiscal 2025 to fiscal 2026?",
+  "start_nodes": {
+   "entity": [
+    "Research and development expense",
+    "Microsoft Corporation",
+    "FY2025 (MSFT)",
+    "FY2026 (MSFT)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "MSFT_FY2025_ITEM7_0015",
+    "MSFT_FY2025_ITEM7_0016",
+    "MSFT_FY2025_ITEM8_0000",
+    "MSFT_FY2026_ITEM7_0017",
+    "MSFT_FY2026_ITEM8_0000"
+   ],
+   "attribute": [
+    "Microsoft Corporation research and development expense FY2025 = $32,488 million",
+    "Microsoft Corporation research and development expense FY2026 = $35,562 million"
+   ],
+   "entity": []
+  },
+  "answer": "It increased by $3,074 million (+9.5%), from $32,488 million to $35,562 million.",
+  "template": "change",
+  "hops": 2,
+  "path": [
+   [
+    "Microsoft Corporation",
+    "has_value",
+    "Microsoft Corporation research and development expense FY2025 = $32,488 million"
+   ],
+   [
+    "Microsoft Corporation research and development expense FY2025 = $32,488 million",
+    "of_metric",
+    "Research and development expense"
+   ],
+   [
+    "Microsoft Corporation research and development expense FY2025 = $32,488 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Microsoft Corporation research and development expense FY2025 = $32,488 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0015"
+   ],
+   [
+    "Microsoft Corporation research and development expense FY2025 = $32,488 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0016"
+   ],
+   [
+    "Microsoft Corporation research and development expense FY2025 = $32,488 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation research and development expense FY2025 = $32,488 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0017"
+   ],
+   [
+    "Microsoft Corporation research and development expense FY2025 = $32,488 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation",
+    "has_value",
+    "Microsoft Corporation research and development expense FY2026 = $35,562 million"
+   ],
+   [
+    "Microsoft Corporation research and development expense FY2026 = $35,562 million",
+    "of_metric",
+    "Research and development expense"
+   ],
+   [
+    "Microsoft Corporation research and development expense FY2026 = $35,562 million",
+    "for_period",
+    "FY2026 (MSFT)"
+   ],
+   [
+    "Microsoft Corporation research and development expense FY2026 = $35,562 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0017"
+   ],
+   [
+    "Microsoft Corporation research and development expense FY2026 = $35,562 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0000"
+   ]
+  ],
+  "tickers": [
+   "MSFT"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-change-01114",
+  "question": "How did Apple's revenue change from fiscal 2024 to fiscal 2025?",
+  "start_nodes": {
+   "entity": [
+    "Revenue",
+    "Apple Inc.",
+    "FY2024 (AAPL)",
+    "FY2025 (AAPL)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "AAPL_FY2024_ITEM7_0002",
+    "AAPL_FY2024_ITEM7_0003",
+    "AAPL_FY2024_ITEM7_0004",
+    "AAPL_FY2024_ITEM8_0000",
+    "AAPL_FY2024_ITEM8_0015",
+    "AAPL_FY2024_ITEM8_0051",
+    "AAPL_FY2025_ITEM7_0004",
+    "AAPL_FY2025_ITEM7_0005",
+    "AAPL_FY2025_ITEM8_0000",
+    "AAPL_FY2025_ITEM8_0015",
+    "AAPL_FY2025_ITEM8_0048",
+    "AAPL_FY2025_ITEM8_0049",
+    "AAPL_FY2025_ITEM8_0051"
+   ],
+   "attribute": [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "Apple Inc. revenue FY2025 = $416,161 million"
+   ],
+   "entity": []
+  },
+  "answer": "It increased by $25,126 million (+6.4%), from $391,035 million to $416,161 million.",
+  "template": "change",
+  "hops": 2,
+  "path": [
+   [
+    "Apple Inc.",
+    "has_value",
+    "Apple Inc. revenue FY2024 = $391,035 million"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "for_period",
+    "FY2024 (AAPL)"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0002"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0003"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0051"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0049"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0051"
+   ],
+   [
+    "Apple Inc.",
+    "has_value",
+    "Apple Inc. revenue FY2025 = $416,161 million"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "for_period",
+    "FY2025 (AAPL)"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0051"
+   ]
+  ],
+  "tickers": [
+   "AAPL"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01328",
+  "question": "What share of Apple's fiscal 2024 revenue came from Mac?",
+  "start_nodes": {
+   "entity": [
+    "Revenue",
+    "Apple Inc.",
+    "Mac (AAPL)",
+    "FY2024 (AAPL)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "AAPL_FY2024_ITEM7_0002",
+    "AAPL_FY2024_ITEM7_0003",
+    "AAPL_FY2024_ITEM7_0004",
+    "AAPL_FY2024_ITEM8_0000",
+    "AAPL_FY2024_ITEM8_0015",
+    "AAPL_FY2024_ITEM8_0051",
+    "AAPL_FY2025_ITEM7_0004",
+    "AAPL_FY2025_ITEM7_0005",
+    "AAPL_FY2025_ITEM8_0000",
+    "AAPL_FY2025_ITEM8_0015",
+    "AAPL_FY2025_ITEM8_0048",
+    "AAPL_FY2025_ITEM8_0049",
+    "AAPL_FY2025_ITEM8_0051"
+   ],
+   "attribute": [
+    "Mac (AAPL) revenue FY2024 = $29,984 million",
+    "Apple Inc. revenue FY2024 = $391,035 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 7.7% ($29,984 million of $391,035 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "Mac (AAPL)",
+    "has_value",
+    "Mac (AAPL) revenue FY2024 = $29,984 million"
+   ],
+   [
+    "Mac (AAPL) revenue FY2024 = $29,984 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Mac (AAPL) revenue FY2024 = $29,984 million",
+    "for_period",
+    "FY2024 (AAPL)"
+   ],
+   [
+    "Mac (AAPL) revenue FY2024 = $29,984 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0003"
+   ],
+   [
+    "Mac (AAPL) revenue FY2024 = $29,984 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0015"
+   ],
+   [
+    "Mac (AAPL) revenue FY2024 = $29,984 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "Mac (AAPL) revenue FY2024 = $29,984 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc.",
+    "has_value",
+    "Apple Inc. revenue FY2024 = $391,035 million"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "for_period",
+    "FY2024 (AAPL)"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0002"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0003"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0051"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0049"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0051"
+   ]
+  ],
+  "tickers": [
+   "AAPL"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01334",
+  "question": "What share of Apple's fiscal 2025 revenue came from its Europe segment?",
+  "start_nodes": {
+   "entity": [
+    "Revenue",
+    "Europe (AAPL)",
+    "Apple Inc.",
+    "FY2025 (AAPL)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "AAPL_FY2025_ITEM7_0003",
+    "AAPL_FY2025_ITEM7_0004",
+    "AAPL_FY2025_ITEM7_0005",
+    "AAPL_FY2025_ITEM8_0000",
+    "AAPL_FY2025_ITEM8_0015",
+    "AAPL_FY2025_ITEM8_0048",
+    "AAPL_FY2025_ITEM8_0051"
+   ],
+   "attribute": [
+    "Europe (AAPL) revenue FY2025 = $111,032 million",
+    "Apple Inc. revenue FY2025 = $416,161 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 26.7% ($111,032 million of $416,161 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "Europe (AAPL)",
+    "has_value",
+    "Europe (AAPL) revenue FY2025 = $111,032 million"
+   ],
+   [
+    "Europe (AAPL) revenue FY2025 = $111,032 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Europe (AAPL) revenue FY2025 = $111,032 million",
+    "for_period",
+    "FY2025 (AAPL)"
+   ],
+   [
+    "Europe (AAPL) revenue FY2025 = $111,032 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0003"
+   ],
+   [
+    "Europe (AAPL) revenue FY2025 = $111,032 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Apple Inc.",
+    "has_value",
+    "Apple Inc. revenue FY2025 = $416,161 million"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "for_period",
+    "FY2025 (AAPL)"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0051"
+   ]
+  ],
+  "tickers": [
+   "AAPL"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01339",
+  "question": "What share of Apple's fiscal 2024 revenue came from its Japan segment?",
+  "start_nodes": {
+   "entity": [
+    "Revenue",
+    "Apple Inc.",
+    "Japan (AAPL)",
+    "FY2024 (AAPL)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "AAPL_FY2024_ITEM7_0002",
+    "AAPL_FY2024_ITEM7_0003",
+    "AAPL_FY2024_ITEM7_0004",
+    "AAPL_FY2024_ITEM8_0000",
+    "AAPL_FY2024_ITEM8_0015",
+    "AAPL_FY2024_ITEM8_0050",
+    "AAPL_FY2024_ITEM8_0051",
+    "AAPL_FY2025_ITEM7_0003",
+    "AAPL_FY2025_ITEM7_0004",
+    "AAPL_FY2025_ITEM7_0005",
+    "AAPL_FY2025_ITEM8_0000",
+    "AAPL_FY2025_ITEM8_0015",
+    "AAPL_FY2025_ITEM8_0048",
+    "AAPL_FY2025_ITEM8_0049",
+    "AAPL_FY2025_ITEM8_0051"
+   ],
+   "attribute": [
+    "Japan (AAPL) revenue FY2024 = $25,052 million",
+    "Apple Inc. revenue FY2024 = $391,035 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 6.4% ($25,052 million of $391,035 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "Japan (AAPL)",
+    "has_value",
+    "Japan (AAPL) revenue FY2024 = $25,052 million"
+   ],
+   [
+    "Japan (AAPL) revenue FY2024 = $25,052 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Japan (AAPL) revenue FY2024 = $25,052 million",
+    "for_period",
+    "FY2024 (AAPL)"
+   ],
+   [
+    "Japan (AAPL) revenue FY2024 = $25,052 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0002"
+   ],
+   [
+    "Japan (AAPL) revenue FY2024 = $25,052 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0050"
+   ],
+   [
+    "Japan (AAPL) revenue FY2024 = $25,052 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0003"
+   ],
+   [
+    "Japan (AAPL) revenue FY2024 = $25,052 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0004"
+   ],
+   [
+    "Japan (AAPL) revenue FY2024 = $25,052 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Japan (AAPL) revenue FY2024 = $25,052 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0049"
+   ],
+   [
+    "Apple Inc.",
+    "has_value",
+    "Apple Inc. revenue FY2024 = $391,035 million"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "for_period",
+    "FY2024 (AAPL)"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0002"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0003"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0051"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0049"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0051"
+   ]
+  ],
+  "tickers": [
+   "AAPL"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01342",
+  "question": "What share of Microsoft's fiscal 2025 revenue came from Microsoft 365 Commercial products and cloud services?",
+  "start_nodes": {
+   "entity": [
+    "Microsoft 365 Commercial products and cloud services (MSFT)",
+    "Microsoft Corporation",
+    "Revenue",
+    "FY2025 (MSFT)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "MSFT_FY2025_ITEM7_0010",
+    "MSFT_FY2025_ITEM7_0012",
+    "MSFT_FY2025_ITEM8_0000",
+    "MSFT_FY2025_ITEM8_0086",
+    "MSFT_FY2025_ITEM8_0087",
+    "MSFT_FY2025_ITEM8_0088",
+    "MSFT_FY2026_ITEM7_0009",
+    "MSFT_FY2026_ITEM7_0012",
+    "MSFT_FY2026_ITEM7_0013",
+    "MSFT_FY2026_ITEM8_0000",
+    "MSFT_FY2026_ITEM8_0090",
+    "MSFT_FY2026_ITEM8_0091",
+    "MSFT_FY2026_ITEM8_0092"
+   ],
+   "attribute": [
+    "Microsoft 365 Commercial products and cloud services (MSFT) revenue FY2025 = $87,767 million",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 31.2% ($87,767 million of $281,724 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "Microsoft 365 Commercial products and cloud services (MSFT)",
+    "has_value",
+    "Microsoft 365 Commercial products and cloud services (MSFT) revenue FY2025 = $87,767 million"
+   ],
+   [
+    "Microsoft 365 Commercial products and cloud services (MSFT) revenue FY2025 = $87,767 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Microsoft 365 Commercial products and cloud services (MSFT) revenue FY2025 = $87,767 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Microsoft 365 Commercial products and cloud services (MSFT) revenue FY2025 = $87,767 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0087"
+   ],
+   [
+    "Microsoft 365 Commercial products and cloud services (MSFT) revenue FY2025 = $87,767 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0091"
+   ],
+   [
+    "Microsoft Corporation",
+    "has_value",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0010"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0086"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0087"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0088"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0009"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0013"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0090"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0091"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0092"
+   ]
+  ],
+  "tickers": [
+   "MSFT"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01347",
+  "question": "What share of Apple's fiscal 2025 revenue came from its Japan segment?",
+  "start_nodes": {
+   "entity": [
+    "Revenue",
+    "Apple Inc.",
+    "Japan (AAPL)",
+    "FY2025 (AAPL)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "AAPL_FY2025_ITEM7_0003",
+    "AAPL_FY2025_ITEM7_0004",
+    "AAPL_FY2025_ITEM7_0005",
+    "AAPL_FY2025_ITEM8_0000",
+    "AAPL_FY2025_ITEM8_0015",
+    "AAPL_FY2025_ITEM8_0048",
+    "AAPL_FY2025_ITEM8_0051"
+   ],
+   "attribute": [
+    "Japan (AAPL) revenue FY2025 = $28,703 million",
+    "Apple Inc. revenue FY2025 = $416,161 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 6.9% ($28,703 million of $416,161 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "Japan (AAPL)",
+    "has_value",
+    "Japan (AAPL) revenue FY2025 = $28,703 million"
+   ],
+   [
+    "Japan (AAPL) revenue FY2025 = $28,703 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Japan (AAPL) revenue FY2025 = $28,703 million",
+    "for_period",
+    "FY2025 (AAPL)"
+   ],
+   [
+    "Japan (AAPL) revenue FY2025 = $28,703 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0003"
+   ],
+   [
+    "Japan (AAPL) revenue FY2025 = $28,703 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0004"
+   ],
+   [
+    "Japan (AAPL) revenue FY2025 = $28,703 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Apple Inc.",
+    "has_value",
+    "Apple Inc. revenue FY2025 = $416,161 million"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "for_period",
+    "FY2025 (AAPL)"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0051"
+   ]
+  ],
+  "tickers": [
+   "AAPL"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01350",
+  "question": "What share of Microsoft's fiscal 2025 revenue came from Gaming?",
+  "start_nodes": {
+   "entity": [
+    "Microsoft Corporation",
+    "Revenue",
+    "Gaming (MSFT)",
+    "FY2025 (MSFT)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "MSFT_FY2025_ITEM7_0010",
+    "MSFT_FY2025_ITEM7_0012",
+    "MSFT_FY2025_ITEM8_0000",
+    "MSFT_FY2025_ITEM8_0086",
+    "MSFT_FY2025_ITEM8_0087",
+    "MSFT_FY2025_ITEM8_0088",
+    "MSFT_FY2026_ITEM7_0009",
+    "MSFT_FY2026_ITEM7_0012",
+    "MSFT_FY2026_ITEM7_0013",
+    "MSFT_FY2026_ITEM8_0000",
+    "MSFT_FY2026_ITEM8_0090",
+    "MSFT_FY2026_ITEM8_0091",
+    "MSFT_FY2026_ITEM8_0092"
+   ],
+   "attribute": [
+    "Gaming (MSFT) revenue FY2025 = $23,455 million",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 8.3% ($23,455 million of $281,724 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "Gaming (MSFT)",
+    "has_value",
+    "Gaming (MSFT) revenue FY2025 = $23,455 million"
+   ],
+   [
+    "Gaming (MSFT) revenue FY2025 = $23,455 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Gaming (MSFT) revenue FY2025 = $23,455 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Gaming (MSFT) revenue FY2025 = $23,455 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0087"
+   ],
+   [
+    "Gaming (MSFT) revenue FY2025 = $23,455 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0088"
+   ],
+   [
+    "Microsoft Corporation",
+    "has_value",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0010"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0086"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0087"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0088"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0009"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0013"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0090"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0091"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0092"
+   ]
+  ],
+  "tickers": [
+   "MSFT"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01361",
+  "question": "What share of Microsoft's fiscal 2025 revenue came from Dynamics products and cloud services?",
+  "start_nodes": {
+   "entity": [
+    "Dynamics products and cloud services (MSFT)",
+    "Microsoft Corporation",
+    "Revenue",
+    "FY2025 (MSFT)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "MSFT_FY2025_ITEM7_0010",
+    "MSFT_FY2025_ITEM7_0012",
+    "MSFT_FY2025_ITEM8_0000",
+    "MSFT_FY2025_ITEM8_0086",
+    "MSFT_FY2025_ITEM8_0087",
+    "MSFT_FY2025_ITEM8_0088",
+    "MSFT_FY2026_ITEM7_0009",
+    "MSFT_FY2026_ITEM7_0012",
+    "MSFT_FY2026_ITEM7_0013",
+    "MSFT_FY2026_ITEM8_0000",
+    "MSFT_FY2026_ITEM8_0090",
+    "MSFT_FY2026_ITEM8_0091",
+    "MSFT_FY2026_ITEM8_0092"
+   ],
+   "attribute": [
+    "Dynamics products and cloud services (MSFT) revenue FY2025 = $7,827 million",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 2.8% ($7,827 million of $281,724 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "Dynamics products and cloud services (MSFT)",
+    "has_value",
+    "Dynamics products and cloud services (MSFT) revenue FY2025 = $7,827 million"
+   ],
+   [
+    "Dynamics products and cloud services (MSFT) revenue FY2025 = $7,827 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Dynamics products and cloud services (MSFT) revenue FY2025 = $7,827 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Dynamics products and cloud services (MSFT) revenue FY2025 = $7,827 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0088"
+   ],
+   [
+    "Dynamics products and cloud services (MSFT) revenue FY2025 = $7,827 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0091"
+   ],
+   [
+    "Microsoft Corporation",
+    "has_value",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0010"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0086"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0087"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0088"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0009"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0013"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0090"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0091"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0092"
+   ]
+  ],
+  "tickers": [
+   "MSFT"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01366",
+  "question": "What share of Microsoft's fiscal 2025 revenue came from Microsoft 365 Consumer products and cloud services?",
+  "start_nodes": {
+   "entity": [
+    "Microsoft 365 Consumer products and cloud services (MSFT)",
+    "Microsoft Corporation",
+    "Revenue",
+    "FY2025 (MSFT)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "MSFT_FY2025_ITEM7_0010",
+    "MSFT_FY2025_ITEM7_0012",
+    "MSFT_FY2025_ITEM8_0000",
+    "MSFT_FY2025_ITEM8_0086",
+    "MSFT_FY2025_ITEM8_0087",
+    "MSFT_FY2025_ITEM8_0088",
+    "MSFT_FY2026_ITEM7_0009",
+    "MSFT_FY2026_ITEM7_0012",
+    "MSFT_FY2026_ITEM7_0013",
+    "MSFT_FY2026_ITEM8_0000",
+    "MSFT_FY2026_ITEM8_0090",
+    "MSFT_FY2026_ITEM8_0091",
+    "MSFT_FY2026_ITEM8_0092"
+   ],
+   "attribute": [
+    "Microsoft 365 Consumer products and cloud services (MSFT) revenue FY2025 = $7,404 million",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 2.6% ($7,404 million of $281,724 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "Microsoft 365 Consumer products and cloud services (MSFT)",
+    "has_value",
+    "Microsoft 365 Consumer products and cloud services (MSFT) revenue FY2025 = $7,404 million"
+   ],
+   [
+    "Microsoft 365 Consumer products and cloud services (MSFT) revenue FY2025 = $7,404 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Microsoft 365 Consumer products and cloud services (MSFT) revenue FY2025 = $7,404 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Microsoft 365 Consumer products and cloud services (MSFT) revenue FY2025 = $7,404 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0088"
+   ],
+   [
+    "Microsoft 365 Consumer products and cloud services (MSFT) revenue FY2025 = $7,404 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0091"
+   ],
+   [
+    "Microsoft Corporation",
+    "has_value",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0010"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0086"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0087"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0088"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0009"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0013"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0090"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0091"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0092"
+   ]
+  ],
+  "tickers": [
+   "MSFT"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01374",
+  "question": "What share of Apple's fiscal 2024 revenue came from iPad?",
+  "start_nodes": {
+   "entity": [
+    "Revenue",
+    "Apple Inc.",
+    "iPad (AAPL)",
+    "FY2024 (AAPL)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "AAPL_FY2024_ITEM7_0002",
+    "AAPL_FY2024_ITEM7_0003",
+    "AAPL_FY2024_ITEM7_0004",
+    "AAPL_FY2024_ITEM8_0000",
+    "AAPL_FY2024_ITEM8_0015",
+    "AAPL_FY2024_ITEM8_0051",
+    "AAPL_FY2025_ITEM7_0004",
+    "AAPL_FY2025_ITEM7_0005",
+    "AAPL_FY2025_ITEM8_0000",
+    "AAPL_FY2025_ITEM8_0015",
+    "AAPL_FY2025_ITEM8_0048",
+    "AAPL_FY2025_ITEM8_0049",
+    "AAPL_FY2025_ITEM8_0051"
+   ],
+   "attribute": [
+    "iPad (AAPL) revenue FY2024 = $26,694 million",
+    "Apple Inc. revenue FY2024 = $391,035 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 6.8% ($26,694 million of $391,035 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "iPad (AAPL)",
+    "has_value",
+    "iPad (AAPL) revenue FY2024 = $26,694 million"
+   ],
+   [
+    "iPad (AAPL) revenue FY2024 = $26,694 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "iPad (AAPL) revenue FY2024 = $26,694 million",
+    "for_period",
+    "FY2024 (AAPL)"
+   ],
+   [
+    "iPad (AAPL) revenue FY2024 = $26,694 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0003"
+   ],
+   [
+    "iPad (AAPL) revenue FY2024 = $26,694 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0015"
+   ],
+   [
+    "iPad (AAPL) revenue FY2024 = $26,694 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "iPad (AAPL) revenue FY2024 = $26,694 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc.",
+    "has_value",
+    "Apple Inc. revenue FY2024 = $391,035 million"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "for_period",
+    "FY2024 (AAPL)"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0002"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0003"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0051"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0049"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0051"
+   ]
+  ],
+  "tickers": [
+   "AAPL"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01386",
+  "question": "What share of Apple's fiscal 2025 revenue came from Wearables, Home and Accessories?",
+  "start_nodes": {
+   "entity": [
+    "Wearables, Home and Accessories (AAPL)",
+    "Revenue",
+    "Apple Inc.",
+    "FY2025 (AAPL)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "AAPL_FY2025_ITEM7_0004",
+    "AAPL_FY2025_ITEM7_0005",
+    "AAPL_FY2025_ITEM8_0000",
+    "AAPL_FY2025_ITEM8_0015",
+    "AAPL_FY2025_ITEM8_0048",
+    "AAPL_FY2025_ITEM8_0051"
+   ],
+   "attribute": [
+    "Wearables, Home and Accessories (AAPL) revenue FY2025 = $35,686 million",
+    "Apple Inc. revenue FY2025 = $416,161 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 8.6% ($35,686 million of $416,161 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "Wearables, Home and Accessories (AAPL)",
+    "has_value",
+    "Wearables, Home and Accessories (AAPL) revenue FY2025 = $35,686 million"
+   ],
+   [
+    "Wearables, Home and Accessories (AAPL) revenue FY2025 = $35,686 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Wearables, Home and Accessories (AAPL) revenue FY2025 = $35,686 million",
+    "for_period",
+    "FY2025 (AAPL)"
+   ],
+   [
+    "Wearables, Home and Accessories (AAPL) revenue FY2025 = $35,686 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "Wearables, Home and Accessories (AAPL) revenue FY2025 = $35,686 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc.",
+    "has_value",
+    "Apple Inc. revenue FY2025 = $416,161 million"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "for_period",
+    "FY2025 (AAPL)"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0051"
+   ]
+  ],
+  "tickers": [
+   "AAPL"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01402",
+  "question": "What share of Microsoft's fiscal 2025 revenue came from Windows and Devices?",
+  "start_nodes": {
+   "entity": [
+    "Windows and Devices (MSFT)",
+    "Microsoft Corporation",
+    "Revenue",
+    "FY2025 (MSFT)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "MSFT_FY2025_ITEM7_0010",
+    "MSFT_FY2025_ITEM7_0012",
+    "MSFT_FY2025_ITEM8_0000",
+    "MSFT_FY2025_ITEM8_0086",
+    "MSFT_FY2025_ITEM8_0087",
+    "MSFT_FY2025_ITEM8_0088",
+    "MSFT_FY2026_ITEM7_0009",
+    "MSFT_FY2026_ITEM7_0012",
+    "MSFT_FY2026_ITEM7_0013",
+    "MSFT_FY2026_ITEM8_0000",
+    "MSFT_FY2026_ITEM8_0090",
+    "MSFT_FY2026_ITEM8_0091",
+    "MSFT_FY2026_ITEM8_0092"
+   ],
+   "attribute": [
+    "Windows and Devices (MSFT) revenue FY2025 = $17,314 million",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 6.1% ($17,314 million of $281,724 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "Windows and Devices (MSFT)",
+    "has_value",
+    "Windows and Devices (MSFT) revenue FY2025 = $17,314 million"
+   ],
+   [
+    "Windows and Devices (MSFT) revenue FY2025 = $17,314 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Windows and Devices (MSFT) revenue FY2025 = $17,314 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Windows and Devices (MSFT) revenue FY2025 = $17,314 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0087"
+   ],
+   [
+    "Windows and Devices (MSFT) revenue FY2025 = $17,314 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0088"
+   ],
+   [
+    "Windows and Devices (MSFT) revenue FY2025 = $17,314 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0091"
+   ],
+   [
+    "Microsoft Corporation",
+    "has_value",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0010"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0086"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0087"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0088"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0009"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0013"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0090"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0091"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0092"
+   ]
+  ],
+  "tickers": [
+   "MSFT"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01409",
+  "question": "What share of Microsoft's fiscal 2025 revenue came from its More Personal Computing segment?",
+  "start_nodes": {
+   "entity": [
+    "More Personal Computing (MSFT)",
+    "Microsoft Corporation",
+    "Revenue",
+    "FY2025 (MSFT)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "MSFT_FY2025_ITEM7_0010",
+    "MSFT_FY2025_ITEM7_0011",
+    "MSFT_FY2025_ITEM7_0012",
+    "MSFT_FY2025_ITEM8_0000",
+    "MSFT_FY2025_ITEM8_0086",
+    "MSFT_FY2025_ITEM8_0087",
+    "MSFT_FY2025_ITEM8_0088",
+    "MSFT_FY2026_ITEM7_0009",
+    "MSFT_FY2026_ITEM7_0012",
+    "MSFT_FY2026_ITEM7_0013",
+    "MSFT_FY2026_ITEM8_0000",
+    "MSFT_FY2026_ITEM8_0090",
+    "MSFT_FY2026_ITEM8_0091",
+    "MSFT_FY2026_ITEM8_0092"
+   ],
+   "attribute": [
+    "More Personal Computing (MSFT) revenue FY2025 = $54,649 million",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 19.4% ($54,649 million of $281,724 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "More Personal Computing (MSFT)",
+    "has_value",
+    "More Personal Computing (MSFT) revenue FY2025 = $54,649 million"
+   ],
+   [
+    "More Personal Computing (MSFT) revenue FY2025 = $54,649 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "More Personal Computing (MSFT) revenue FY2025 = $54,649 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "More Personal Computing (MSFT) revenue FY2025 = $54,649 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0011"
+   ],
+   [
+    "More Personal Computing (MSFT) revenue FY2025 = $54,649 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0012"
+   ],
+   [
+    "More Personal Computing (MSFT) revenue FY2025 = $54,649 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0086"
+   ],
+   [
+    "More Personal Computing (MSFT) revenue FY2025 = $54,649 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0012"
+   ],
+   [
+    "More Personal Computing (MSFT) revenue FY2025 = $54,649 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0090"
+   ],
+   [
+    "Microsoft Corporation",
+    "has_value",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0010"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0086"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0087"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0088"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0009"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0013"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0090"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0091"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0092"
+   ]
+  ],
+  "tickers": [
+   "MSFT"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01415",
+  "question": "What share of Apple's fiscal 2025 revenue came from its Americas segment?",
+  "start_nodes": {
+   "entity": [
+    "Americas (AAPL)",
+    "Revenue",
+    "Apple Inc.",
+    "FY2025 (AAPL)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "AAPL_FY2025_ITEM7_0003",
+    "AAPL_FY2025_ITEM7_0004",
+    "AAPL_FY2025_ITEM7_0005",
+    "AAPL_FY2025_ITEM8_0000",
+    "AAPL_FY2025_ITEM8_0015",
+    "AAPL_FY2025_ITEM8_0048",
+    "AAPL_FY2025_ITEM8_0051"
+   ],
+   "attribute": [
+    "Americas (AAPL) revenue FY2025 = $178,353 million",
+    "Apple Inc. revenue FY2025 = $416,161 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 42.9% ($178,353 million of $416,161 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "Americas (AAPL)",
+    "has_value",
+    "Americas (AAPL) revenue FY2025 = $178,353 million"
+   ],
+   [
+    "Americas (AAPL) revenue FY2025 = $178,353 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Americas (AAPL) revenue FY2025 = $178,353 million",
+    "for_period",
+    "FY2025 (AAPL)"
+   ],
+   [
+    "Americas (AAPL) revenue FY2025 = $178,353 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0003"
+   ],
+   [
+    "Americas (AAPL) revenue FY2025 = $178,353 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Apple Inc.",
+    "has_value",
+    "Apple Inc. revenue FY2025 = $416,161 million"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "for_period",
+    "FY2025 (AAPL)"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0051"
+   ]
+  ],
+  "tickers": [
+   "AAPL"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01419",
+  "question": "What share of Microsoft's fiscal 2025 revenue came from Server products and cloud services?",
+  "start_nodes": {
+   "entity": [
+    "Server products and cloud services (MSFT)",
+    "Microsoft Corporation",
+    "Revenue",
+    "FY2025 (MSFT)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "MSFT_FY2025_ITEM7_0010",
+    "MSFT_FY2025_ITEM7_0012",
+    "MSFT_FY2025_ITEM8_0000",
+    "MSFT_FY2025_ITEM8_0086",
+    "MSFT_FY2025_ITEM8_0087",
+    "MSFT_FY2025_ITEM8_0088",
+    "MSFT_FY2026_ITEM7_0009",
+    "MSFT_FY2026_ITEM7_0012",
+    "MSFT_FY2026_ITEM7_0013",
+    "MSFT_FY2026_ITEM8_0000",
+    "MSFT_FY2026_ITEM8_0090",
+    "MSFT_FY2026_ITEM8_0091",
+    "MSFT_FY2026_ITEM8_0092"
+   ],
+   "attribute": [
+    "Server products and cloud services (MSFT) revenue FY2025 = $98,435 million",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 34.9% ($98,435 million of $281,724 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "Server products and cloud services (MSFT)",
+    "has_value",
+    "Server products and cloud services (MSFT) revenue FY2025 = $98,435 million"
+   ],
+   [
+    "Server products and cloud services (MSFT) revenue FY2025 = $98,435 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Server products and cloud services (MSFT) revenue FY2025 = $98,435 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Server products and cloud services (MSFT) revenue FY2025 = $98,435 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0087"
+   ],
+   [
+    "Server products and cloud services (MSFT) revenue FY2025 = $98,435 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0091"
+   ],
+   [
+    "Microsoft Corporation",
+    "has_value",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0010"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0086"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0087"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0088"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0009"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0013"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0090"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0091"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0092"
+   ]
+  ],
+  "tickers": [
+   "MSFT"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01421",
+  "question": "What share of Apple's fiscal 2025 revenue came from Mac?",
+  "start_nodes": {
+   "entity": [
+    "Revenue",
+    "Apple Inc.",
+    "Mac (AAPL)",
+    "FY2025 (AAPL)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "AAPL_FY2025_ITEM7_0004",
+    "AAPL_FY2025_ITEM7_0005",
+    "AAPL_FY2025_ITEM8_0000",
+    "AAPL_FY2025_ITEM8_0015",
+    "AAPL_FY2025_ITEM8_0048",
+    "AAPL_FY2025_ITEM8_0051"
+   ],
+   "attribute": [
+    "Mac (AAPL) revenue FY2025 = $33,708 million",
+    "Apple Inc. revenue FY2025 = $416,161 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 8.1% ($33,708 million of $416,161 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "Mac (AAPL)",
+    "has_value",
+    "Mac (AAPL) revenue FY2025 = $33,708 million"
+   ],
+   [
+    "Mac (AAPL) revenue FY2025 = $33,708 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Mac (AAPL) revenue FY2025 = $33,708 million",
+    "for_period",
+    "FY2025 (AAPL)"
+   ],
+   [
+    "Mac (AAPL) revenue FY2025 = $33,708 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "Mac (AAPL) revenue FY2025 = $33,708 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc.",
+    "has_value",
+    "Apple Inc. revenue FY2025 = $416,161 million"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "for_period",
+    "FY2025 (AAPL)"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0051"
+   ]
+  ],
+  "tickers": [
+   "AAPL"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01429",
+  "question": "What share of Apple's fiscal 2024 revenue came from its Europe segment?",
+  "start_nodes": {
+   "entity": [
+    "Revenue",
+    "Europe (AAPL)",
+    "Apple Inc.",
+    "FY2024 (AAPL)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "AAPL_FY2024_ITEM7_0001",
+    "AAPL_FY2024_ITEM7_0002",
+    "AAPL_FY2024_ITEM7_0003",
+    "AAPL_FY2024_ITEM7_0004",
+    "AAPL_FY2024_ITEM8_0000",
+    "AAPL_FY2024_ITEM8_0015",
+    "AAPL_FY2024_ITEM8_0050",
+    "AAPL_FY2024_ITEM8_0051",
+    "AAPL_FY2025_ITEM7_0003",
+    "AAPL_FY2025_ITEM7_0004",
+    "AAPL_FY2025_ITEM7_0005",
+    "AAPL_FY2025_ITEM8_0000",
+    "AAPL_FY2025_ITEM8_0015",
+    "AAPL_FY2025_ITEM8_0048",
+    "AAPL_FY2025_ITEM8_0049",
+    "AAPL_FY2025_ITEM8_0051"
+   ],
+   "attribute": [
+    "Europe (AAPL) revenue FY2024 = $101,328 million",
+    "Apple Inc. revenue FY2024 = $391,035 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 25.9% ($101,328 million of $391,035 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "Europe (AAPL)",
+    "has_value",
+    "Europe (AAPL) revenue FY2024 = $101,328 million"
+   ],
+   [
+    "Europe (AAPL) revenue FY2024 = $101,328 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Europe (AAPL) revenue FY2024 = $101,328 million",
+    "for_period",
+    "FY2024 (AAPL)"
+   ],
+   [
+    "Europe (AAPL) revenue FY2024 = $101,328 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0001"
+   ],
+   [
+    "Europe (AAPL) revenue FY2024 = $101,328 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0002"
+   ],
+   [
+    "Europe (AAPL) revenue FY2024 = $101,328 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0050"
+   ],
+   [
+    "Europe (AAPL) revenue FY2024 = $101,328 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0003"
+   ],
+   [
+    "Europe (AAPL) revenue FY2024 = $101,328 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Europe (AAPL) revenue FY2024 = $101,328 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0049"
+   ],
+   [
+    "Apple Inc.",
+    "has_value",
+    "Apple Inc. revenue FY2024 = $391,035 million"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "for_period",
+    "FY2024 (AAPL)"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0002"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0003"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0051"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0049"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0051"
+   ]
+  ],
+  "tickers": [
+   "AAPL"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01442",
+  "question": "What share of Microsoft's fiscal 2025 revenue came from Search Advertising?",
+  "start_nodes": {
+   "entity": [
+    "Search Advertising (MSFT)",
+    "Microsoft Corporation",
+    "Revenue",
+    "FY2025 (MSFT)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "MSFT_FY2025_ITEM7_0010",
+    "MSFT_FY2025_ITEM7_0012",
+    "MSFT_FY2025_ITEM8_0000",
+    "MSFT_FY2025_ITEM8_0086",
+    "MSFT_FY2025_ITEM8_0087",
+    "MSFT_FY2025_ITEM8_0088",
+    "MSFT_FY2026_ITEM7_0009",
+    "MSFT_FY2026_ITEM7_0012",
+    "MSFT_FY2026_ITEM7_0013",
+    "MSFT_FY2026_ITEM8_0000",
+    "MSFT_FY2026_ITEM8_0090",
+    "MSFT_FY2026_ITEM8_0091",
+    "MSFT_FY2026_ITEM8_0092"
+   ],
+   "attribute": [
+    "Search Advertising (MSFT) revenue FY2025 = $13,878 million",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 4.9% ($13,878 million of $281,724 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "Search Advertising (MSFT)",
+    "has_value",
+    "Search Advertising (MSFT) revenue FY2025 = $13,878 million"
+   ],
+   [
+    "Search Advertising (MSFT) revenue FY2025 = $13,878 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Search Advertising (MSFT) revenue FY2025 = $13,878 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Search Advertising (MSFT) revenue FY2025 = $13,878 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0091"
+   ],
+   [
+    "Microsoft Corporation",
+    "has_value",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0010"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0086"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0087"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0088"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0009"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0013"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0090"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0091"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0092"
+   ]
+  ],
+  "tickers": [
+   "MSFT"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01455",
+  "question": "What share of Microsoft's fiscal 2025 revenue came from its Productivity and Business Processes segment?",
+  "start_nodes": {
+   "entity": [
+    "Productivity and Business Processes (MSFT)",
+    "Microsoft Corporation",
+    "Revenue",
+    "FY2025 (MSFT)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "MSFT_FY2025_ITEM7_0010",
+    "MSFT_FY2025_ITEM7_0011",
+    "MSFT_FY2025_ITEM7_0012",
+    "MSFT_FY2025_ITEM8_0000",
+    "MSFT_FY2025_ITEM8_0086",
+    "MSFT_FY2025_ITEM8_0087",
+    "MSFT_FY2025_ITEM8_0088",
+    "MSFT_FY2026_ITEM7_0009",
+    "MSFT_FY2026_ITEM7_0012",
+    "MSFT_FY2026_ITEM7_0013",
+    "MSFT_FY2026_ITEM8_0000",
+    "MSFT_FY2026_ITEM8_0089",
+    "MSFT_FY2026_ITEM8_0090",
+    "MSFT_FY2026_ITEM8_0091",
+    "MSFT_FY2026_ITEM8_0092"
+   ],
+   "attribute": [
+    "Productivity and Business Processes (MSFT) revenue FY2025 = $120,810 million",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 42.9% ($120,810 million of $281,724 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "Productivity and Business Processes (MSFT)",
+    "has_value",
+    "Productivity and Business Processes (MSFT) revenue FY2025 = $120,810 million"
+   ],
+   [
+    "Productivity and Business Processes (MSFT) revenue FY2025 = $120,810 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Productivity and Business Processes (MSFT) revenue FY2025 = $120,810 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Productivity and Business Processes (MSFT) revenue FY2025 = $120,810 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0011"
+   ],
+   [
+    "Productivity and Business Processes (MSFT) revenue FY2025 = $120,810 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0086"
+   ],
+   [
+    "Productivity and Business Processes (MSFT) revenue FY2025 = $120,810 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0012"
+   ],
+   [
+    "Productivity and Business Processes (MSFT) revenue FY2025 = $120,810 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0089"
+   ],
+   [
+    "Microsoft Corporation",
+    "has_value",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0010"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0086"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0087"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0088"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0009"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0013"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0090"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0091"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0092"
+   ]
+  ],
+  "tickers": [
+   "MSFT"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01457",
+  "question": "What share of Microsoft's fiscal 2025 revenue came from LinkedIn?",
+  "start_nodes": {
+   "entity": [
+    "Microsoft Corporation",
+    "LinkedIn (MSFT)",
+    "Revenue",
+    "FY2025 (MSFT)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "MSFT_FY2025_ITEM7_0010",
+    "MSFT_FY2025_ITEM7_0012",
+    "MSFT_FY2025_ITEM8_0000",
+    "MSFT_FY2025_ITEM8_0086",
+    "MSFT_FY2025_ITEM8_0087",
+    "MSFT_FY2025_ITEM8_0088",
+    "MSFT_FY2026_ITEM7_0009",
+    "MSFT_FY2026_ITEM7_0012",
+    "MSFT_FY2026_ITEM7_0013",
+    "MSFT_FY2026_ITEM8_0000",
+    "MSFT_FY2026_ITEM8_0090",
+    "MSFT_FY2026_ITEM8_0091",
+    "MSFT_FY2026_ITEM8_0092"
+   ],
+   "attribute": [
+    "LinkedIn (MSFT) revenue FY2025 = $17,812 million",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 6.3% ($17,812 million of $281,724 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "LinkedIn (MSFT)",
+    "has_value",
+    "LinkedIn (MSFT) revenue FY2025 = $17,812 million"
+   ],
+   [
+    "LinkedIn (MSFT) revenue FY2025 = $17,812 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "LinkedIn (MSFT) revenue FY2025 = $17,812 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "LinkedIn (MSFT) revenue FY2025 = $17,812 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0087"
+   ],
+   [
+    "LinkedIn (MSFT) revenue FY2025 = $17,812 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0088"
+   ],
+   [
+    "LinkedIn (MSFT) revenue FY2025 = $17,812 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0091"
+   ],
+   [
+    "Microsoft Corporation",
+    "has_value",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0010"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0086"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0087"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0088"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0009"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0013"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0090"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0091"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0092"
+   ]
+  ],
+  "tickers": [
+   "MSFT"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01461",
+  "question": "What share of Apple's fiscal 2024 revenue came from Wearables, Home and Accessories?",
+  "start_nodes": {
+   "entity": [
+    "Wearables, Home and Accessories (AAPL)",
+    "Revenue",
+    "Apple Inc.",
+    "FY2024 (AAPL)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "AAPL_FY2024_ITEM7_0002",
+    "AAPL_FY2024_ITEM7_0003",
+    "AAPL_FY2024_ITEM7_0004",
+    "AAPL_FY2024_ITEM8_0000",
+    "AAPL_FY2024_ITEM8_0015",
+    "AAPL_FY2024_ITEM8_0051",
+    "AAPL_FY2025_ITEM7_0004",
+    "AAPL_FY2025_ITEM7_0005",
+    "AAPL_FY2025_ITEM8_0000",
+    "AAPL_FY2025_ITEM8_0015",
+    "AAPL_FY2025_ITEM8_0048",
+    "AAPL_FY2025_ITEM8_0049",
+    "AAPL_FY2025_ITEM8_0051"
+   ],
+   "attribute": [
+    "Wearables, Home and Accessories (AAPL) revenue FY2024 = $37,005 million",
+    "Apple Inc. revenue FY2024 = $391,035 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 9.5% ($37,005 million of $391,035 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "Wearables, Home and Accessories (AAPL)",
+    "has_value",
+    "Wearables, Home and Accessories (AAPL) revenue FY2024 = $37,005 million"
+   ],
+   [
+    "Wearables, Home and Accessories (AAPL) revenue FY2024 = $37,005 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Wearables, Home and Accessories (AAPL) revenue FY2024 = $37,005 million",
+    "for_period",
+    "FY2024 (AAPL)"
+   ],
+   [
+    "Wearables, Home and Accessories (AAPL) revenue FY2024 = $37,005 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0003"
+   ],
+   [
+    "Wearables, Home and Accessories (AAPL) revenue FY2024 = $37,005 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0015"
+   ],
+   [
+    "Wearables, Home and Accessories (AAPL) revenue FY2024 = $37,005 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "Wearables, Home and Accessories (AAPL) revenue FY2024 = $37,005 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc.",
+    "has_value",
+    "Apple Inc. revenue FY2024 = $391,035 million"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "for_period",
+    "FY2024 (AAPL)"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0002"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0003"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0051"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0049"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0051"
+   ]
+  ],
+  "tickers": [
+   "AAPL"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01479",
+  "question": "What share of Microsoft's fiscal 2025 revenue came from Search and News Advertising?",
+  "start_nodes": {
+   "entity": [
+    "Search and News Advertising (MSFT)",
+    "Microsoft Corporation",
+    "Revenue",
+    "FY2025 (MSFT)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "MSFT_FY2025_ITEM7_0010",
+    "MSFT_FY2025_ITEM7_0012",
+    "MSFT_FY2025_ITEM8_0000",
+    "MSFT_FY2025_ITEM8_0086",
+    "MSFT_FY2025_ITEM8_0087",
+    "MSFT_FY2025_ITEM8_0088",
+    "MSFT_FY2026_ITEM7_0009",
+    "MSFT_FY2026_ITEM7_0012",
+    "MSFT_FY2026_ITEM7_0013",
+    "MSFT_FY2026_ITEM8_0000",
+    "MSFT_FY2026_ITEM8_0090",
+    "MSFT_FY2026_ITEM8_0091",
+    "MSFT_FY2026_ITEM8_0092"
+   ],
+   "attribute": [
+    "Search and News Advertising (MSFT) revenue FY2025 = $13,878 million",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 4.9% ($13,878 million of $281,724 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "Search and News Advertising (MSFT)",
+    "has_value",
+    "Search and News Advertising (MSFT) revenue FY2025 = $13,878 million"
+   ],
+   [
+    "Search and News Advertising (MSFT) revenue FY2025 = $13,878 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Search and News Advertising (MSFT) revenue FY2025 = $13,878 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Search and News Advertising (MSFT) revenue FY2025 = $13,878 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0088"
+   ],
+   [
+    "Microsoft Corporation",
+    "has_value",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0010"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0086"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0087"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0088"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0009"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0013"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0090"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0091"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0092"
+   ]
+  ],
+  "tickers": [
+   "MSFT"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01481",
+  "question": "What share of Johnson & Johnson's fiscal 2025 revenue came from its Innovative Medicine segment?",
+  "start_nodes": {
+   "entity": [
+    "Innovative Medicine (JNJ)",
+    "Johnson & Johnson",
+    "Revenue",
+    "FY2025 (JNJ)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "JNJ_FY2025_ITEM7_0012",
+    "JNJ_FY2025_ITEM7_0032",
+    "JNJ_FY2025_ITEM7_0033",
+    "JNJ_FY2025_ITEM8_0002",
+    "JNJ_FY2025_ITEM8_0120",
+    "JNJ_FY2025_ITEM8_0125",
+    "JNJ_FY2025_ITEM8_0128",
+    "JNJ_FY2025_ITEM8_0129"
+   ],
+   "attribute": [
+    "Innovative Medicine (JNJ) revenue FY2025 = $60,401 million",
+    "Johnson & Johnson revenue FY2025 = $94,193 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 64.1% ($60,401 million of $94,193 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "Innovative Medicine (JNJ)",
+    "has_value",
+    "Innovative Medicine (JNJ) revenue FY2025 = $60,401 million"
+   ],
+   [
+    "Innovative Medicine (JNJ) revenue FY2025 = $60,401 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Innovative Medicine (JNJ) revenue FY2025 = $60,401 million",
+    "for_period",
+    "FY2025 (JNJ)"
+   ],
+   [
+    "Innovative Medicine (JNJ) revenue FY2025 = $60,401 million",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM7_0012"
+   ],
+   [
+    "Innovative Medicine (JNJ) revenue FY2025 = $60,401 million",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM7_0032"
+   ],
+   [
+    "Innovative Medicine (JNJ) revenue FY2025 = $60,401 million",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0120"
+   ],
+   [
+    "Johnson & Johnson",
+    "has_value",
+    "Johnson & Johnson revenue FY2025 = $94,193 million"
+   ],
+   [
+    "Johnson & Johnson revenue FY2025 = $94,193 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Johnson & Johnson revenue FY2025 = $94,193 million",
+    "for_period",
+    "FY2025 (JNJ)"
+   ],
+   [
+    "Johnson & Johnson revenue FY2025 = $94,193 million",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM7_0032"
+   ],
+   [
+    "Johnson & Johnson revenue FY2025 = $94,193 million",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM7_0033"
+   ],
+   [
+    "Johnson & Johnson revenue FY2025 = $94,193 million",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0002"
+   ],
+   [
+    "Johnson & Johnson revenue FY2025 = $94,193 million",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0125"
+   ],
+   [
+    "Johnson & Johnson revenue FY2025 = $94,193 million",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0128"
+   ],
+   [
+    "Johnson & Johnson revenue FY2025 = $94,193 million",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0129"
+   ]
+  ],
+  "tickers": [
+   "JNJ"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01484",
+  "question": "What share of Apple's fiscal 2025 revenue came from iPhone?",
+  "start_nodes": {
+   "entity": [
+    "Revenue",
+    "iPhone (AAPL)",
+    "Apple Inc.",
+    "FY2025 (AAPL)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "AAPL_FY2025_ITEM7_0004",
+    "AAPL_FY2025_ITEM7_0005",
+    "AAPL_FY2025_ITEM8_0000",
+    "AAPL_FY2025_ITEM8_0015",
+    "AAPL_FY2025_ITEM8_0048",
+    "AAPL_FY2025_ITEM8_0051"
+   ],
+   "attribute": [
+    "iPhone (AAPL) revenue FY2025 = $209,586 million",
+    "Apple Inc. revenue FY2025 = $416,161 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 50.4% ($209,586 million of $416,161 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "iPhone (AAPL)",
+    "has_value",
+    "iPhone (AAPL) revenue FY2025 = $209,586 million"
+   ],
+   [
+    "iPhone (AAPL) revenue FY2025 = $209,586 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "iPhone (AAPL) revenue FY2025 = $209,586 million",
+    "for_period",
+    "FY2025 (AAPL)"
+   ],
+   [
+    "iPhone (AAPL) revenue FY2025 = $209,586 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "iPhone (AAPL) revenue FY2025 = $209,586 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc.",
+    "has_value",
+    "Apple Inc. revenue FY2025 = $416,161 million"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "for_period",
+    "FY2025 (AAPL)"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0051"
+   ]
+  ],
+  "tickers": [
+   "AAPL"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01491",
+  "question": "What share of Apple's fiscal 2024 revenue came from its Rest of Asia Pacific segment?",
+  "start_nodes": {
+   "entity": [
+    "Rest of Asia Pacific (AAPL)",
+    "Revenue",
+    "Apple Inc.",
+    "FY2024 (AAPL)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "AAPL_FY2024_ITEM7_0002",
+    "AAPL_FY2024_ITEM7_0003",
+    "AAPL_FY2024_ITEM7_0004",
+    "AAPL_FY2024_ITEM8_0000",
+    "AAPL_FY2024_ITEM8_0015",
+    "AAPL_FY2024_ITEM8_0050",
+    "AAPL_FY2024_ITEM8_0051",
+    "AAPL_FY2025_ITEM7_0003",
+    "AAPL_FY2025_ITEM7_0004",
+    "AAPL_FY2025_ITEM7_0005",
+    "AAPL_FY2025_ITEM8_0000",
+    "AAPL_FY2025_ITEM8_0015",
+    "AAPL_FY2025_ITEM8_0048",
+    "AAPL_FY2025_ITEM8_0049",
+    "AAPL_FY2025_ITEM8_0051"
+   ],
+   "attribute": [
+    "Rest of Asia Pacific (AAPL) revenue FY2024 = $30,658 million",
+    "Apple Inc. revenue FY2024 = $391,035 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 7.8% ($30,658 million of $391,035 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "Rest of Asia Pacific (AAPL)",
+    "has_value",
+    "Rest of Asia Pacific (AAPL) revenue FY2024 = $30,658 million"
+   ],
+   [
+    "Rest of Asia Pacific (AAPL) revenue FY2024 = $30,658 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Rest of Asia Pacific (AAPL) revenue FY2024 = $30,658 million",
+    "for_period",
+    "FY2024 (AAPL)"
+   ],
+   [
+    "Rest of Asia Pacific (AAPL) revenue FY2024 = $30,658 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0002"
+   ],
+   [
+    "Rest of Asia Pacific (AAPL) revenue FY2024 = $30,658 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0050"
+   ],
+   [
+    "Rest of Asia Pacific (AAPL) revenue FY2024 = $30,658 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0003"
+   ],
+   [
+    "Rest of Asia Pacific (AAPL) revenue FY2024 = $30,658 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0004"
+   ],
+   [
+    "Apple Inc.",
+    "has_value",
+    "Apple Inc. revenue FY2024 = $391,035 million"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "for_period",
+    "FY2024 (AAPL)"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0002"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0003"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0051"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0049"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0051"
+   ]
+  ],
+  "tickers": [
+   "AAPL"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01494",
+  "question": "What share of Microsoft's fiscal 2025 revenue came from Xbox?",
+  "start_nodes": {
+   "entity": [
+    "Microsoft Corporation",
+    "Revenue",
+    "Xbox (MSFT)",
+    "FY2025 (MSFT)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "MSFT_FY2025_ITEM7_0010",
+    "MSFT_FY2025_ITEM7_0012",
+    "MSFT_FY2025_ITEM8_0000",
+    "MSFT_FY2025_ITEM8_0086",
+    "MSFT_FY2025_ITEM8_0087",
+    "MSFT_FY2025_ITEM8_0088",
+    "MSFT_FY2026_ITEM7_0009",
+    "MSFT_FY2026_ITEM7_0012",
+    "MSFT_FY2026_ITEM7_0013",
+    "MSFT_FY2026_ITEM8_0000",
+    "MSFT_FY2026_ITEM8_0090",
+    "MSFT_FY2026_ITEM8_0091",
+    "MSFT_FY2026_ITEM8_0092"
+   ],
+   "attribute": [
+    "Xbox (MSFT) revenue FY2025 = $23,455 million",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 8.3% ($23,455 million of $281,724 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "Xbox (MSFT)",
+    "has_value",
+    "Xbox (MSFT) revenue FY2025 = $23,455 million"
+   ],
+   [
+    "Xbox (MSFT) revenue FY2025 = $23,455 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Xbox (MSFT) revenue FY2025 = $23,455 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Xbox (MSFT) revenue FY2025 = $23,455 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0091"
+   ],
+   [
+    "Microsoft Corporation",
+    "has_value",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0010"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0086"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0087"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0088"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0009"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0013"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0090"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0091"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0092"
+   ]
+  ],
+  "tickers": [
+   "MSFT"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01509",
+  "question": "What share of Microsoft's fiscal 2025 revenue came from Enterprise and Partner Services?",
+  "start_nodes": {
+   "entity": [
+    "Enterprise and Partner Services (MSFT)",
+    "Microsoft Corporation",
+    "Revenue",
+    "FY2025 (MSFT)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "MSFT_FY2025_ITEM7_0010",
+    "MSFT_FY2025_ITEM7_0012",
+    "MSFT_FY2025_ITEM8_0000",
+    "MSFT_FY2025_ITEM8_0086",
+    "MSFT_FY2025_ITEM8_0087",
+    "MSFT_FY2025_ITEM8_0088",
+    "MSFT_FY2026_ITEM7_0009",
+    "MSFT_FY2026_ITEM7_0012",
+    "MSFT_FY2026_ITEM7_0013",
+    "MSFT_FY2026_ITEM8_0000",
+    "MSFT_FY2026_ITEM8_0090",
+    "MSFT_FY2026_ITEM8_0091",
+    "MSFT_FY2026_ITEM8_0092"
+   ],
+   "attribute": [
+    "Enterprise and Partner Services (MSFT) revenue FY2025 = $7,760 million",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 2.8% ($7,760 million of $281,724 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "Enterprise and Partner Services (MSFT)",
+    "has_value",
+    "Enterprise and Partner Services (MSFT) revenue FY2025 = $7,760 million"
+   ],
+   [
+    "Enterprise and Partner Services (MSFT) revenue FY2025 = $7,760 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Enterprise and Partner Services (MSFT) revenue FY2025 = $7,760 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Enterprise and Partner Services (MSFT) revenue FY2025 = $7,760 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0088"
+   ],
+   [
+    "Enterprise and Partner Services (MSFT) revenue FY2025 = $7,760 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0091"
+   ],
+   [
+    "Enterprise and Partner Services (MSFT) revenue FY2025 = $7,760 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0092"
+   ],
+   [
+    "Microsoft Corporation",
+    "has_value",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0010"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0086"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0087"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0088"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0009"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0013"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0090"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0091"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0092"
+   ]
+  ],
+  "tickers": [
+   "MSFT"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01513",
+  "question": "What share of Apple's fiscal 2025 revenue came from its Rest of Asia Pacific segment?",
+  "start_nodes": {
+   "entity": [
+    "Rest of Asia Pacific (AAPL)",
+    "Revenue",
+    "Apple Inc.",
+    "FY2025 (AAPL)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "AAPL_FY2025_ITEM7_0003",
+    "AAPL_FY2025_ITEM7_0004",
+    "AAPL_FY2025_ITEM7_0005",
+    "AAPL_FY2025_ITEM8_0000",
+    "AAPL_FY2025_ITEM8_0015",
+    "AAPL_FY2025_ITEM8_0048",
+    "AAPL_FY2025_ITEM8_0051"
+   ],
+   "attribute": [
+    "Rest of Asia Pacific (AAPL) revenue FY2025 = $33,696 million",
+    "Apple Inc. revenue FY2025 = $416,161 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 8.1% ($33,696 million of $416,161 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "Rest of Asia Pacific (AAPL)",
+    "has_value",
+    "Rest of Asia Pacific (AAPL) revenue FY2025 = $33,696 million"
+   ],
+   [
+    "Rest of Asia Pacific (AAPL) revenue FY2025 = $33,696 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Rest of Asia Pacific (AAPL) revenue FY2025 = $33,696 million",
+    "for_period",
+    "FY2025 (AAPL)"
+   ],
+   [
+    "Rest of Asia Pacific (AAPL) revenue FY2025 = $33,696 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0003"
+   ],
+   [
+    "Rest of Asia Pacific (AAPL) revenue FY2025 = $33,696 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0004"
+   ],
+   [
+    "Apple Inc.",
+    "has_value",
+    "Apple Inc. revenue FY2025 = $416,161 million"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "for_period",
+    "FY2025 (AAPL)"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0051"
+   ]
+  ],
+  "tickers": [
+   "AAPL"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01515",
+  "question": "What share of Apple's fiscal 2024 revenue came from iPhone?",
+  "start_nodes": {
+   "entity": [
+    "Revenue",
+    "iPhone (AAPL)",
+    "Apple Inc.",
+    "FY2024 (AAPL)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "AAPL_FY2024_ITEM7_0002",
+    "AAPL_FY2024_ITEM7_0003",
+    "AAPL_FY2024_ITEM7_0004",
+    "AAPL_FY2024_ITEM8_0000",
+    "AAPL_FY2024_ITEM8_0015",
+    "AAPL_FY2024_ITEM8_0051",
+    "AAPL_FY2025_ITEM7_0004",
+    "AAPL_FY2025_ITEM7_0005",
+    "AAPL_FY2025_ITEM8_0000",
+    "AAPL_FY2025_ITEM8_0015",
+    "AAPL_FY2025_ITEM8_0048",
+    "AAPL_FY2025_ITEM8_0049",
+    "AAPL_FY2025_ITEM8_0051"
+   ],
+   "attribute": [
+    "iPhone (AAPL) revenue FY2024 = $201,183 million",
+    "Apple Inc. revenue FY2024 = $391,035 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 51.4% ($201,183 million of $391,035 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "iPhone (AAPL)",
+    "has_value",
+    "iPhone (AAPL) revenue FY2024 = $201,183 million"
+   ],
+   [
+    "iPhone (AAPL) revenue FY2024 = $201,183 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "iPhone (AAPL) revenue FY2024 = $201,183 million",
+    "for_period",
+    "FY2024 (AAPL)"
+   ],
+   [
+    "iPhone (AAPL) revenue FY2024 = $201,183 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0003"
+   ],
+   [
+    "iPhone (AAPL) revenue FY2024 = $201,183 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0015"
+   ],
+   [
+    "iPhone (AAPL) revenue FY2024 = $201,183 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "iPhone (AAPL) revenue FY2024 = $201,183 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc.",
+    "has_value",
+    "Apple Inc. revenue FY2024 = $391,035 million"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "for_period",
+    "FY2024 (AAPL)"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0002"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0003"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0051"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0049"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0051"
+   ]
+  ],
+  "tickers": [
+   "AAPL"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01516",
+  "question": "What share of Apple's fiscal 2024 revenue came from its Americas segment?",
+  "start_nodes": {
+   "entity": [
+    "Americas (AAPL)",
+    "Revenue",
+    "Apple Inc.",
+    "FY2024 (AAPL)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "AAPL_FY2024_ITEM7_0001",
+    "AAPL_FY2024_ITEM7_0002",
+    "AAPL_FY2024_ITEM7_0003",
+    "AAPL_FY2024_ITEM7_0004",
+    "AAPL_FY2024_ITEM8_0000",
+    "AAPL_FY2024_ITEM8_0015",
+    "AAPL_FY2024_ITEM8_0050",
+    "AAPL_FY2024_ITEM8_0051",
+    "AAPL_FY2025_ITEM7_0003",
+    "AAPL_FY2025_ITEM7_0004",
+    "AAPL_FY2025_ITEM7_0005",
+    "AAPL_FY2025_ITEM8_0000",
+    "AAPL_FY2025_ITEM8_0015",
+    "AAPL_FY2025_ITEM8_0048",
+    "AAPL_FY2025_ITEM8_0049",
+    "AAPL_FY2025_ITEM8_0051"
+   ],
+   "attribute": [
+    "Americas (AAPL) revenue FY2024 = $167,045 million",
+    "Apple Inc. revenue FY2024 = $391,035 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 42.7% ($167,045 million of $391,035 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "Americas (AAPL)",
+    "has_value",
+    "Americas (AAPL) revenue FY2024 = $167,045 million"
+   ],
+   [
+    "Americas (AAPL) revenue FY2024 = $167,045 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Americas (AAPL) revenue FY2024 = $167,045 million",
+    "for_period",
+    "FY2024 (AAPL)"
+   ],
+   [
+    "Americas (AAPL) revenue FY2024 = $167,045 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0001"
+   ],
+   [
+    "Americas (AAPL) revenue FY2024 = $167,045 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0050"
+   ],
+   [
+    "Americas (AAPL) revenue FY2024 = $167,045 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0003"
+   ],
+   [
+    "Americas (AAPL) revenue FY2024 = $167,045 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Americas (AAPL) revenue FY2024 = $167,045 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0049"
+   ],
+   [
+    "Apple Inc.",
+    "has_value",
+    "Apple Inc. revenue FY2024 = $391,035 million"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "for_period",
+    "FY2024 (AAPL)"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0002"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0003"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0051"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0049"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0051"
+   ]
+  ],
+  "tickers": [
+   "AAPL"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01523",
+  "question": "What share of Apple's fiscal 2025 revenue came from iPad?",
+  "start_nodes": {
+   "entity": [
+    "Revenue",
+    "Apple Inc.",
+    "iPad (AAPL)",
+    "FY2025 (AAPL)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "AAPL_FY2025_ITEM7_0004",
+    "AAPL_FY2025_ITEM7_0005",
+    "AAPL_FY2025_ITEM8_0000",
+    "AAPL_FY2025_ITEM8_0015",
+    "AAPL_FY2025_ITEM8_0048",
+    "AAPL_FY2025_ITEM8_0051"
+   ],
+   "attribute": [
+    "iPad (AAPL) revenue FY2025 = $28,023 million",
+    "Apple Inc. revenue FY2025 = $416,161 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 6.7% ($28,023 million of $416,161 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "iPad (AAPL)",
+    "has_value",
+    "iPad (AAPL) revenue FY2025 = $28,023 million"
+   ],
+   [
+    "iPad (AAPL) revenue FY2025 = $28,023 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "iPad (AAPL) revenue FY2025 = $28,023 million",
+    "for_period",
+    "FY2025 (AAPL)"
+   ],
+   [
+    "iPad (AAPL) revenue FY2025 = $28,023 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "iPad (AAPL) revenue FY2025 = $28,023 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc.",
+    "has_value",
+    "Apple Inc. revenue FY2025 = $416,161 million"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "for_period",
+    "FY2025 (AAPL)"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0051"
+   ]
+  ],
+  "tickers": [
+   "AAPL"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01525",
+  "question": "What share of Apple's fiscal 2024 revenue came from its Greater China segment?",
+  "start_nodes": {
+   "entity": [
+    "Greater China (AAPL)",
+    "Revenue",
+    "Apple Inc.",
+    "FY2024 (AAPL)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "AAPL_FY2024_ITEM7_0001",
+    "AAPL_FY2024_ITEM7_0002",
+    "AAPL_FY2024_ITEM7_0003",
+    "AAPL_FY2024_ITEM7_0004",
+    "AAPL_FY2024_ITEM8_0000",
+    "AAPL_FY2024_ITEM8_0015",
+    "AAPL_FY2024_ITEM8_0050",
+    "AAPL_FY2024_ITEM8_0051",
+    "AAPL_FY2025_ITEM7_0003",
+    "AAPL_FY2025_ITEM7_0004",
+    "AAPL_FY2025_ITEM7_0005",
+    "AAPL_FY2025_ITEM8_0000",
+    "AAPL_FY2025_ITEM8_0015",
+    "AAPL_FY2025_ITEM8_0048",
+    "AAPL_FY2025_ITEM8_0049",
+    "AAPL_FY2025_ITEM8_0051"
+   ],
+   "attribute": [
+    "Greater China (AAPL) revenue FY2024 = $66,952 million",
+    "Apple Inc. revenue FY2024 = $391,035 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 17.1% ($66,952 million of $391,035 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "Greater China (AAPL)",
+    "has_value",
+    "Greater China (AAPL) revenue FY2024 = $66,952 million"
+   ],
+   [
+    "Greater China (AAPL) revenue FY2024 = $66,952 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Greater China (AAPL) revenue FY2024 = $66,952 million",
+    "for_period",
+    "FY2024 (AAPL)"
+   ],
+   [
+    "Greater China (AAPL) revenue FY2024 = $66,952 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0001"
+   ],
+   [
+    "Greater China (AAPL) revenue FY2024 = $66,952 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0002"
+   ],
+   [
+    "Greater China (AAPL) revenue FY2024 = $66,952 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0050"
+   ],
+   [
+    "Greater China (AAPL) revenue FY2024 = $66,952 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0003"
+   ],
+   [
+    "Apple Inc.",
+    "has_value",
+    "Apple Inc. revenue FY2024 = $391,035 million"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "for_period",
+    "FY2024 (AAPL)"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0002"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0003"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0051"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0049"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0051"
+   ]
+  ],
+  "tickers": [
+   "AAPL"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01528",
+  "question": "What share of Microsoft's fiscal 2025 revenue came from its Intelligent Cloud segment?",
+  "start_nodes": {
+   "entity": [
+    "Intelligent Cloud (MSFT)",
+    "Microsoft Corporation",
+    "Revenue",
+    "FY2025 (MSFT)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "MSFT_FY2025_ITEM7_0010",
+    "MSFT_FY2025_ITEM7_0011",
+    "MSFT_FY2025_ITEM7_0012",
+    "MSFT_FY2025_ITEM8_0000",
+    "MSFT_FY2025_ITEM8_0086",
+    "MSFT_FY2025_ITEM8_0087",
+    "MSFT_FY2025_ITEM8_0088",
+    "MSFT_FY2026_ITEM7_0009",
+    "MSFT_FY2026_ITEM7_0012",
+    "MSFT_FY2026_ITEM7_0013",
+    "MSFT_FY2026_ITEM8_0000",
+    "MSFT_FY2026_ITEM8_0089",
+    "MSFT_FY2026_ITEM8_0090",
+    "MSFT_FY2026_ITEM8_0091",
+    "MSFT_FY2026_ITEM8_0092"
+   ],
+   "attribute": [
+    "Intelligent Cloud (MSFT) revenue FY2025 = $106,265 million",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 37.7% ($106,265 million of $281,724 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "Intelligent Cloud (MSFT)",
+    "has_value",
+    "Intelligent Cloud (MSFT) revenue FY2025 = $106,265 million"
+   ],
+   [
+    "Intelligent Cloud (MSFT) revenue FY2025 = $106,265 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Intelligent Cloud (MSFT) revenue FY2025 = $106,265 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Intelligent Cloud (MSFT) revenue FY2025 = $106,265 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0011"
+   ],
+   [
+    "Intelligent Cloud (MSFT) revenue FY2025 = $106,265 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0086"
+   ],
+   [
+    "Intelligent Cloud (MSFT) revenue FY2025 = $106,265 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0012"
+   ],
+   [
+    "Intelligent Cloud (MSFT) revenue FY2025 = $106,265 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0089"
+   ],
+   [
+    "Microsoft Corporation",
+    "has_value",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0010"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0086"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0087"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0088"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0009"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0013"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0090"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0091"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0092"
+   ]
+  ],
+  "tickers": [
+   "MSFT"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-share-01535",
+  "question": "What share of Apple's fiscal 2025 revenue came from its Greater China segment?",
+  "start_nodes": {
+   "entity": [
+    "Greater China (AAPL)",
+    "Revenue",
+    "Apple Inc.",
+    "FY2025 (AAPL)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "AAPL_FY2025_ITEM7_0003",
+    "AAPL_FY2025_ITEM7_0004",
+    "AAPL_FY2025_ITEM7_0005",
+    "AAPL_FY2025_ITEM8_0000",
+    "AAPL_FY2025_ITEM8_0015",
+    "AAPL_FY2025_ITEM8_0048",
+    "AAPL_FY2025_ITEM8_0051"
+   ],
+   "attribute": [
+    "Greater China (AAPL) revenue FY2025 = $64,377 million",
+    "Apple Inc. revenue FY2025 = $416,161 million"
+   ],
+   "entity": []
+  },
+  "answer": "About 15.5% ($64,377 million of $416,161 million).",
+  "template": "share",
+  "hops": 3,
+  "path": [
+   [
+    "Greater China (AAPL)",
+    "has_value",
+    "Greater China (AAPL) revenue FY2025 = $64,377 million"
+   ],
+   [
+    "Greater China (AAPL) revenue FY2025 = $64,377 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Greater China (AAPL) revenue FY2025 = $64,377 million",
+    "for_period",
+    "FY2025 (AAPL)"
+   ],
+   [
+    "Greater China (AAPL) revenue FY2025 = $64,377 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0003"
+   ],
+   [
+    "Apple Inc.",
+    "has_value",
+    "Apple Inc. revenue FY2025 = $416,161 million"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "for_period",
+    "FY2025 (AAPL)"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0051"
+   ]
+  ],
+  "tickers": [
+   "AAPL"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-compare-01559",
+  "question": "Which had higher revenue in fiscal 2025, Apple or Microsoft, and by how much?",
+  "start_nodes": {
+   "entity": [
+    "Microsoft Corporation",
+    "Revenue",
+    "Apple Inc.",
+    "FY2025 (AAPL)",
+    "FY2025 (MSFT)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "AAPL_FY2025_ITEM7_0004",
+    "AAPL_FY2025_ITEM7_0005",
+    "AAPL_FY2025_ITEM8_0000",
+    "AAPL_FY2025_ITEM8_0015",
+    "AAPL_FY2025_ITEM8_0048",
+    "AAPL_FY2025_ITEM8_0051",
+    "MSFT_FY2025_ITEM7_0010",
+    "MSFT_FY2025_ITEM7_0012",
+    "MSFT_FY2025_ITEM8_0000",
+    "MSFT_FY2025_ITEM8_0086",
+    "MSFT_FY2025_ITEM8_0087",
+    "MSFT_FY2025_ITEM8_0088",
+    "MSFT_FY2026_ITEM7_0009",
+    "MSFT_FY2026_ITEM7_0012",
+    "MSFT_FY2026_ITEM7_0013",
+    "MSFT_FY2026_ITEM8_0000",
+    "MSFT_FY2026_ITEM8_0090",
+    "MSFT_FY2026_ITEM8_0091",
+    "MSFT_FY2026_ITEM8_0092"
+   ],
+   "attribute": [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   "entity": []
+  },
+  "answer": "Apple, by $134,437 million ($416,161 million vs $281,724 million).",
+  "template": "compare",
+  "hops": 2,
+  "path": [
+   [
+    "Apple Inc.",
+    "has_value",
+    "Apple Inc. revenue FY2025 = $416,161 million"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "for_period",
+    "FY2025 (AAPL)"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0051"
+   ],
+   [
+    "Microsoft Corporation",
+    "has_value",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0010"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0086"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0087"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0088"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0009"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0013"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0090"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0091"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0092"
+   ]
+  ],
+  "tickers": [
+   "AAPL",
+   "MSFT"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-compare-01560",
+  "question": "Which had higher revenue in fiscal 2024, Apple or Microsoft, and by how much?",
+  "start_nodes": {
+   "entity": [
+    "Microsoft Corporation",
+    "Revenue",
+    "Apple Inc.",
+    "FY2024 (AAPL)",
+    "FY2024 (MSFT)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "AAPL_FY2024_ITEM7_0002",
+    "AAPL_FY2024_ITEM7_0003",
+    "AAPL_FY2024_ITEM7_0004",
+    "AAPL_FY2024_ITEM8_0000",
+    "AAPL_FY2024_ITEM8_0015",
+    "AAPL_FY2024_ITEM8_0051",
+    "AAPL_FY2025_ITEM7_0004",
+    "AAPL_FY2025_ITEM7_0005",
+    "AAPL_FY2025_ITEM8_0000",
+    "AAPL_FY2025_ITEM8_0015",
+    "AAPL_FY2025_ITEM8_0048",
+    "AAPL_FY2025_ITEM8_0049",
+    "AAPL_FY2025_ITEM8_0051",
+    "MSFT_FY2025_ITEM7_0010",
+    "MSFT_FY2025_ITEM7_0012",
+    "MSFT_FY2025_ITEM8_0000",
+    "MSFT_FY2025_ITEM8_0086",
+    "MSFT_FY2025_ITEM8_0087",
+    "MSFT_FY2025_ITEM8_0088",
+    "MSFT_FY2026_ITEM8_0000",
+    "MSFT_FY2026_ITEM8_0090",
+    "MSFT_FY2026_ITEM8_0091",
+    "MSFT_FY2026_ITEM8_0092"
+   ],
+   "attribute": [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "Microsoft Corporation revenue FY2024 = $245,122 million"
+   ],
+   "entity": []
+  },
+  "answer": "Apple, by $145,913 million ($391,035 million vs $245,122 million).",
+  "template": "compare",
+  "hops": 2,
+  "path": [
+   [
+    "Apple Inc.",
+    "has_value",
+    "Apple Inc. revenue FY2024 = $391,035 million"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "for_period",
+    "FY2024 (AAPL)"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0002"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0003"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0051"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0049"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0051"
+   ],
+   [
+    "Microsoft Corporation",
+    "has_value",
+    "Microsoft Corporation revenue FY2024 = $245,122 million"
+   ],
+   [
+    "Microsoft Corporation revenue FY2024 = $245,122 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Microsoft Corporation revenue FY2024 = $245,122 million",
+    "for_period",
+    "FY2024 (MSFT)"
+   ],
+   [
+    "Microsoft Corporation revenue FY2024 = $245,122 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0010"
+   ],
+   [
+    "Microsoft Corporation revenue FY2024 = $245,122 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2024 = $245,122 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2024 = $245,122 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0086"
+   ],
+   [
+    "Microsoft Corporation revenue FY2024 = $245,122 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0087"
+   ],
+   [
+    "Microsoft Corporation revenue FY2024 = $245,122 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0088"
+   ],
+   [
+    "Microsoft Corporation revenue FY2024 = $245,122 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2024 = $245,122 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0090"
+   ],
+   [
+    "Microsoft Corporation revenue FY2024 = $245,122 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0091"
+   ],
+   [
+    "Microsoft Corporation revenue FY2024 = $245,122 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0092"
+   ]
+  ],
+  "tickers": [
+   "AAPL",
+   "MSFT"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-compare-01572",
+  "question": "Which had higher revenue in fiscal 2025, Apple or Johnson & Johnson, and by how much?",
+  "start_nodes": {
+   "entity": [
+    "Johnson & Johnson",
+    "Revenue",
+    "Apple Inc.",
+    "FY2025 (AAPL)",
+    "FY2025 (JNJ)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "AAPL_FY2025_ITEM7_0004",
+    "AAPL_FY2025_ITEM7_0005",
+    "AAPL_FY2025_ITEM8_0000",
+    "AAPL_FY2025_ITEM8_0015",
+    "AAPL_FY2025_ITEM8_0048",
+    "AAPL_FY2025_ITEM8_0051",
+    "JNJ_FY2025_ITEM7_0032",
+    "JNJ_FY2025_ITEM7_0033",
+    "JNJ_FY2025_ITEM8_0002",
+    "JNJ_FY2025_ITEM8_0125",
+    "JNJ_FY2025_ITEM8_0128",
+    "JNJ_FY2025_ITEM8_0129"
+   ],
+   "attribute": [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "Johnson & Johnson revenue FY2025 = $94,193 million"
+   ],
+   "entity": []
+  },
+  "answer": "Apple, by $321,968 million ($416,161 million vs $94,193 million).",
+  "template": "compare",
+  "hops": 2,
+  "path": [
+   [
+    "Apple Inc.",
+    "has_value",
+    "Apple Inc. revenue FY2025 = $416,161 million"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "for_period",
+    "FY2025 (AAPL)"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Apple Inc. revenue FY2025 = $416,161 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0051"
+   ],
+   [
+    "Johnson & Johnson",
+    "has_value",
+    "Johnson & Johnson revenue FY2025 = $94,193 million"
+   ],
+   [
+    "Johnson & Johnson revenue FY2025 = $94,193 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Johnson & Johnson revenue FY2025 = $94,193 million",
+    "for_period",
+    "FY2025 (JNJ)"
+   ],
+   [
+    "Johnson & Johnson revenue FY2025 = $94,193 million",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM7_0032"
+   ],
+   [
+    "Johnson & Johnson revenue FY2025 = $94,193 million",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM7_0033"
+   ],
+   [
+    "Johnson & Johnson revenue FY2025 = $94,193 million",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0002"
+   ],
+   [
+    "Johnson & Johnson revenue FY2025 = $94,193 million",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0125"
+   ],
+   [
+    "Johnson & Johnson revenue FY2025 = $94,193 million",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0128"
+   ],
+   [
+    "Johnson & Johnson revenue FY2025 = $94,193 million",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0129"
+   ]
+  ],
+  "tickers": [
+   "AAPL",
+   "JNJ"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-compare-01612",
+  "question": "Which had higher revenue in fiscal 2024, Apple or Johnson & Johnson, and by how much?",
+  "start_nodes": {
+   "entity": [
+    "Johnson & Johnson",
+    "Revenue",
+    "Apple Inc.",
+    "FY2024 (AAPL)",
+    "FY2024 (JNJ)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "AAPL_FY2024_ITEM7_0002",
+    "AAPL_FY2024_ITEM7_0003",
+    "AAPL_FY2024_ITEM7_0004",
+    "AAPL_FY2024_ITEM8_0000",
+    "AAPL_FY2024_ITEM8_0015",
+    "AAPL_FY2024_ITEM8_0051",
+    "AAPL_FY2025_ITEM7_0004",
+    "AAPL_FY2025_ITEM7_0005",
+    "AAPL_FY2025_ITEM8_0000",
+    "AAPL_FY2025_ITEM8_0015",
+    "AAPL_FY2025_ITEM8_0048",
+    "AAPL_FY2025_ITEM8_0049",
+    "AAPL_FY2025_ITEM8_0051",
+    "JNJ_FY2024_ITEM7_0033",
+    "JNJ_FY2024_ITEM8_0002",
+    "JNJ_FY2024_ITEM8_0123",
+    "JNJ_FY2024_ITEM8_0126",
+    "JNJ_FY2025_ITEM7_0032",
+    "JNJ_FY2025_ITEM7_0033",
+    "JNJ_FY2025_ITEM8_0002",
+    "JNJ_FY2025_ITEM8_0125",
+    "JNJ_FY2025_ITEM8_0128",
+    "JNJ_FY2025_ITEM8_0129"
+   ],
+   "attribute": [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "Johnson & Johnson revenue FY2024 = $88,821 million"
+   ],
+   "entity": []
+  },
+  "answer": "Apple, by $302,214 million ($391,035 million vs $88,821 million).",
+  "template": "compare",
+  "hops": 2,
+  "path": [
+   [
+    "Apple Inc.",
+    "has_value",
+    "Apple Inc. revenue FY2024 = $391,035 million"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "for_period",
+    "FY2024 (AAPL)"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0002"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0003"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2024_ITEM8_0051"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0004"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0005"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0015"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0049"
+   ],
+   [
+    "Apple Inc. revenue FY2024 = $391,035 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0051"
+   ],
+   [
+    "Johnson & Johnson",
+    "has_value",
+    "Johnson & Johnson revenue FY2024 = $88,821 million"
+   ],
+   [
+    "Johnson & Johnson revenue FY2024 = $88,821 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Johnson & Johnson revenue FY2024 = $88,821 million",
+    "for_period",
+    "FY2024 (JNJ)"
+   ],
+   [
+    "Johnson & Johnson revenue FY2024 = $88,821 million",
+    "is_mentioned_in",
+    "JNJ_FY2024_ITEM7_0033"
+   ],
+   [
+    "Johnson & Johnson revenue FY2024 = $88,821 million",
+    "is_mentioned_in",
+    "JNJ_FY2024_ITEM8_0002"
+   ],
+   [
+    "Johnson & Johnson revenue FY2024 = $88,821 million",
+    "is_mentioned_in",
+    "JNJ_FY2024_ITEM8_0123"
+   ],
+   [
+    "Johnson & Johnson revenue FY2024 = $88,821 million",
+    "is_mentioned_in",
+    "JNJ_FY2024_ITEM8_0126"
+   ],
+   [
+    "Johnson & Johnson revenue FY2024 = $88,821 million",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM7_0032"
+   ],
+   [
+    "Johnson & Johnson revenue FY2024 = $88,821 million",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM7_0033"
+   ],
+   [
+    "Johnson & Johnson revenue FY2024 = $88,821 million",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0002"
+   ],
+   [
+    "Johnson & Johnson revenue FY2024 = $88,821 million",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0125"
+   ],
+   [
+    "Johnson & Johnson revenue FY2024 = $88,821 million",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0128"
+   ],
+   [
+    "Johnson & Johnson revenue FY2024 = $88,821 million",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0129"
+   ]
+  ],
+  "tickers": [
+   "AAPL",
+   "JNJ"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-compare-01613",
+  "question": "Which had higher research and development expense in fiscal 2025, Apple or Microsoft, and by how much?",
+  "start_nodes": {
+   "entity": [
+    "Research and development expense",
+    "Microsoft Corporation",
+    "Apple Inc.",
+    "FY2025 (AAPL)",
+    "FY2025 (MSFT)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "AAPL_FY2025_ITEM7_0007",
+    "AAPL_FY2025_ITEM8_0000",
+    "AAPL_FY2025_ITEM8_0048",
+    "MSFT_FY2025_ITEM7_0015",
+    "MSFT_FY2025_ITEM7_0016",
+    "MSFT_FY2025_ITEM8_0000",
+    "MSFT_FY2026_ITEM7_0017",
+    "MSFT_FY2026_ITEM8_0000"
+   ],
+   "attribute": [
+    "Apple Inc. research and development expense FY2025 = $34,550 million",
+    "Microsoft Corporation research and development expense FY2025 = $32,488 million"
+   ],
+   "entity": []
+  },
+  "answer": "Apple, by $2,062 million ($34,550 million vs $32,488 million).",
+  "template": "compare",
+  "hops": 2,
+  "path": [
+   [
+    "Apple Inc.",
+    "has_value",
+    "Apple Inc. research and development expense FY2025 = $34,550 million"
+   ],
+   [
+    "Apple Inc. research and development expense FY2025 = $34,550 million",
+    "of_metric",
+    "Research and development expense"
+   ],
+   [
+    "Apple Inc. research and development expense FY2025 = $34,550 million",
+    "for_period",
+    "FY2025 (AAPL)"
+   ],
+   [
+    "Apple Inc. research and development expense FY2025 = $34,550 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM7_0007"
+   ],
+   [
+    "Apple Inc. research and development expense FY2025 = $34,550 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0000"
+   ],
+   [
+    "Apple Inc. research and development expense FY2025 = $34,550 million",
+    "is_mentioned_in",
+    "AAPL_FY2025_ITEM8_0048"
+   ],
+   [
+    "Microsoft Corporation",
+    "has_value",
+    "Microsoft Corporation research and development expense FY2025 = $32,488 million"
+   ],
+   [
+    "Microsoft Corporation research and development expense FY2025 = $32,488 million",
+    "of_metric",
+    "Research and development expense"
+   ],
+   [
+    "Microsoft Corporation research and development expense FY2025 = $32,488 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Microsoft Corporation research and development expense FY2025 = $32,488 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0015"
+   ],
+   [
+    "Microsoft Corporation research and development expense FY2025 = $32,488 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0016"
+   ],
+   [
+    "Microsoft Corporation research and development expense FY2025 = $32,488 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation research and development expense FY2025 = $32,488 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0017"
+   ],
+   [
+    "Microsoft Corporation research and development expense FY2025 = $32,488 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0000"
+   ]
+  ],
+  "tickers": [
+   "AAPL",
+   "MSFT"
+  ],
+  "split": "golden_overlap"
+ },
+ {
+  "id": "fin10k_v0-compare-01629",
+  "question": "Which had higher revenue in fiscal 2025, Johnson & Johnson or Microsoft, and by how much?",
+  "start_nodes": {
+   "entity": [
+    "Johnson & Johnson",
+    "Microsoft Corporation",
+    "Revenue",
+    "FY2025 (JNJ)",
+    "FY2025 (MSFT)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "JNJ_FY2025_ITEM7_0032",
+    "JNJ_FY2025_ITEM7_0033",
+    "JNJ_FY2025_ITEM8_0002",
+    "JNJ_FY2025_ITEM8_0125",
+    "JNJ_FY2025_ITEM8_0128",
+    "JNJ_FY2025_ITEM8_0129",
+    "MSFT_FY2025_ITEM7_0010",
+    "MSFT_FY2025_ITEM7_0012",
+    "MSFT_FY2025_ITEM8_0000",
+    "MSFT_FY2025_ITEM8_0086",
+    "MSFT_FY2025_ITEM8_0087",
+    "MSFT_FY2025_ITEM8_0088",
+    "MSFT_FY2026_ITEM7_0009",
+    "MSFT_FY2026_ITEM7_0012",
+    "MSFT_FY2026_ITEM7_0013",
+    "MSFT_FY2026_ITEM8_0000",
+    "MSFT_FY2026_ITEM8_0090",
+    "MSFT_FY2026_ITEM8_0091",
+    "MSFT_FY2026_ITEM8_0092"
+   ],
+   "attribute": [
+    "Johnson & Johnson revenue FY2025 = $94,193 million",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   "entity": []
+  },
+  "answer": "Microsoft, by $187,531 million ($281,724 million vs $94,193 million).",
+  "template": "compare",
+  "hops": 2,
+  "path": [
+   [
+    "Johnson & Johnson",
+    "has_value",
+    "Johnson & Johnson revenue FY2025 = $94,193 million"
+   ],
+   [
+    "Johnson & Johnson revenue FY2025 = $94,193 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Johnson & Johnson revenue FY2025 = $94,193 million",
+    "for_period",
+    "FY2025 (JNJ)"
+   ],
+   [
+    "Johnson & Johnson revenue FY2025 = $94,193 million",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM7_0032"
+   ],
+   [
+    "Johnson & Johnson revenue FY2025 = $94,193 million",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM7_0033"
+   ],
+   [
+    "Johnson & Johnson revenue FY2025 = $94,193 million",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0002"
+   ],
+   [
+    "Johnson & Johnson revenue FY2025 = $94,193 million",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0125"
+   ],
+   [
+    "Johnson & Johnson revenue FY2025 = $94,193 million",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0128"
+   ],
+   [
+    "Johnson & Johnson revenue FY2025 = $94,193 million",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0129"
+   ],
+   [
+    "Microsoft Corporation",
+    "has_value",
+    "Microsoft Corporation revenue FY2025 = $281,724 million"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "of_metric",
+    "Revenue"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "for_period",
+    "FY2025 (MSFT)"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0010"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0086"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0087"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2025_ITEM8_0088"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0009"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0012"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM7_0013"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0000"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0090"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0091"
+   ],
+   [
+    "Microsoft Corporation revenue FY2025 = $281,724 million",
+    "is_mentioned_in",
+    "MSFT_FY2026_ITEM8_0092"
+   ]
+  ],
+  "tickers": [
+   "JNJ",
+   "MSFT"
+  ],
+  "split": "golden_overlap"
+ }
+]

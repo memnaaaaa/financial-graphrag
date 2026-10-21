@@ -1,0 +1,49 @@
+{
+  "graph": "fin10k_v0",
+  "test_tickers": [
+    "MSFT"
+  ],
+  "values_with_chunks": 909,
+  "pairs": 2135,
+  "by_split": {
+    "train": 1734,
+    "test": 350,
+    "golden_overlap": 51
+  },
+  "by_template": {
+    "lookup": 600,
+    "change": 600,
+    "hierarchy": 123,
+    "share": 219,
+    "compare": 147,
+    "subsidiary": 446
+  },
+  "by_template_and_split": {
+    "train": {
+      "lookup": 485,
+      "change": 486,
+      "hierarchy": 123,
+      "share": 148,
+      "compare": 54,
+      "subsidiary": 438
+    },
+    "test": {
+      "lookup": 111,
+      "change": 106,
+      "share": 38,
+      "compare": 87,
+      "subsidiary": 8
+    },
+    "golden_overlap": {
+      "lookup": 4,
+      "change": 8,
+      "share": 33,
+      "compare": 6
+    }
+  },
+  "dropped": {
+    "lookup: over cap": 309,
+    "change: over cap": 63,
+    "subsidiary: key entity not found by the query-time matcher": 1
+  }
+}

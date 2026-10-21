@@ -1,0 +1,4 @@
+# G-reasoner runs in a separate Python 3.12 venv on Colab (see g_reasoner_fin10k.ipynb cells 1-4).
+# gfmrag pulls in torch, torch-geometric, vLLM 0.10, transformers, sentence-transformers and more.
+gfmrag==2.0.0
+ninja

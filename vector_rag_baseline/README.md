@@ -11,7 +11,6 @@ Updated seed questions (golden set v2) on three companies: Johnson & Johnson, Ap
 | deep relation chains (3-5 hops) | 5 |
 | **Total** | **35** |
 
-Gold chunk ids are pattern-matched; numbers and key terms in every gold answer were checked automatically against the gold chunks. A by-hand spot-check against the 10-Ks is still pending (`golden_v2_review.md`).
 
 Files: `questions_v2.jsonl`, `golden_v2_review.md`, `build_questions_v2.py` (rebuilds both from `data/chunks.jsonl`).
 

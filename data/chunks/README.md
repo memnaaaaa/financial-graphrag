@@ -1,8 +1,9 @@
 # Text chunks of the 10-K corpus (`chunks.jsonl`)
 
-Built Oct 8, 2026 from the 16 filings in `data/edgar_10k/` (8 companies x 2 fiscal years: the
-10-K main document plus Exhibit 21). **7,339 chunks, about 2.19 million tokens.** The same
-file is shared by every system:
+Rebuilt Nov 18, 2026 from 6 filings in `data/edgar_10k/` (Johnson & Johnson, Apple and
+Microsoft x 2 fiscal years: the 10-K main document plus Exhibit 21). **1,855 chunks, 573,200
+tokens.** The other five downloaded companies are no longer chunked (the project now covers
+these 3; `--tickers` brings them back). The same file is shared by every system:
 
 - **Vector-RAG baseline:** embed the `text` field (bge-small-en-v1.5, max 512 tokens).
 - **Graph (G-reasoner / QuadGraph document layer):** each chunk is one document node, named
@@ -28,10 +29,24 @@ file is shared by every system:
    sentence or table row split across two chunks, appears whole in at least one of them.
    Inside tables, whole rows are repeated rather than half rows. A chunk that starts in the
    middle of a table also repeats the table's column-header row, so numbers keep their years.
-5. **Header line.** Every `text` begins with a line naming the company, year and section,
-   e.g. `Johnson & Johnson (JNJ) | FY2025 Form 10-K | Item 7. Management's Discussion and
-   Analysis of ...`. Many passages never name the company themselves, so this keeps
-   retrieval from mixing up companies. It counts toward the 350 tokens.
+5. **Header line.** Every `text` begins with one line naming the company, the fiscal year,
+   when that year ended, and the section, e.g. `Apple Inc. (AAPL) | Form 10-K annual report
+   for fiscal year 2025 (FY2025), fiscal year ended September 27, 2025 | Item 7.
+   Management's Discussion and Analysis of ...`. Many passages never name the company or
+   the year themselves; the year and end date in words keep retrieval from mixing up
+   companies and, especially, the two years of the same company (Nov 18 fix).
+6. **Chunk ids and bodies are frozen.** Chunks are still cut using the short Oct header
+   (`Apple Inc. (AAPL) | FY2025 Form 10-K | Item 7. ...`); only the written header is the long
+   one. So every `chunk_id` and every passage below the header is the same as in the Oct
+   build, and the questions' `gold_chunk_ids` stay valid. Before writing, the script compares
+   with the existing `chunks.jsonl` and stops without writing anything if any id or body
+   changed (`--no-check` skips this, e.g. when you change the chunk size on purpose). With
+   the longer header a chunk can be up to 367 tokens, still under the 512 limit of bge-small.
+7. **Year twins.** Most 10-K text is repeated almost word for word the next year. Each chunk
+   gets `twin_chunk_id`: the most similar chunk of the same company and section in the other
+   fiscal year, if their bodies share at least 80% of their words (Jaccard on word sets;
+   `--twin-threshold`). 750 of 1,855 chunks have a twin. Use it to see whether a retrieval or
+   answer error was a wrong-year mix-up.
 
 ## Fields (one JSON object per line)
 
@@ -44,42 +59,31 @@ file is shared by every system:
 | `document` | `10-K` or `EX-21` / `EX-21.1` | Which file in the filing |
 | `section`, `section_title` | `Item 7`, `Management's Discussion and Analysis of ...` | 10-K section (`Cover`, `Item 1` ... `Item 16`, `Exhibit 21`) |
 | `chunk_index` | `9` | Position within the section, from 0 |
-| `n_tokens` | `332` | Tokens in `text` without [CLS]/[SEP]; max 349 in this build |
+| `n_tokens` | `332` | Tokens in `text` (long header included) without [CLS]/[SEP]; max 367 in this build |
 | `has_table` | `true` | Chunk contains table rows |
 | `source_url` | EDGAR link | Original document |
+| `twin_chunk_id`, `twin_similarity` | `JNJ_FY2024_ITEM7_0009`, `0.93` | Near-identical chunk of the other fiscal year (Jaccard >= 0.8), else `null` |
 | `text` | header line + passage | What to embed / show the LLM |
 
 ## Counts
 
-| Ticker | FY | Chunks | Tokens | Chunks with tables |
-| --- | --- | --- | --- | --- |
-| AAPL | FY2025 | 198 | 56,385 | 73 |
-| AAPL | FY2024 | 194 | 55,442 | 73 |
-| MSFT | FY2026 | 300 | 86,938 | 103 |
-| MSFT | FY2025 | 290 | 83,946 | 100 |
-| JPM | FY2025 | 1,168 | 360,262 | 708 |
-| JPM | FY2024 | 1,195 | 368,512 | 714 |
-| JNJ | FY2025 | 433 | 128,043 | 210 |
-| JNJ | FY2024 | 440 | 129,056 | 198 |
-| XOM | FY2025 | 440 | 134,040 | 322 |
-| XOM | FY2024 | 467 | 141,204 | 292 |
-| PG | FY2026 | 302 | 89,273 | 139 |
-| PG | FY2025 | 301 | 88,586 | 134 |
-| WMT | FY2026 | 354 | 100,128 | 142 |
-| WMT | FY2025 | 365 | 103,134 | 141 |
-| CAT | FY2025 | 449 | 134,625 | 221 |
-| CAT | FY2024 | 443 | 133,936 | 216 |
-| **Total** | | **7,339** | **2,193,510** | **3,786** |
+| Ticker | FY | Chunks | Tokens | Chunks with tables | Chunks with a year twin |
+| --- | --- | --- | --- | --- | --- |
+| AAPL | FY2025 | 198 | 59,949 | 73 | 77 |
+| AAPL | FY2024 | 194 | 58,934 | 73 | 77 |
+| MSFT | FY2026 | 300 | 92,338 | 103 | 127 |
+| MSFT | FY2025 | 290 | 89,166 | 100 | 127 |
+| JNJ | FY2025 | 433 | 135,837 | 210 | 171 |
+| JNJ | FY2024 | 440 | 136,976 | 198 | 171 |
+| **Total** | | **1,855** | **573,200** | **757** | **750** |
+
+Chunk counts are the same as in the Oct build; token counts are higher only because of the
+longer header.
 
 `chunk_stats.csv` breaks this down by section. `section_spans.csv` shows where each section
 was found in each filing.
 
 Known gaps and quirks:
-- **Missing items:** JPMorgan's 10-K has no Item 16 and Exxon's has no Item 6. Every other
-  filing has all 23 items.
-- **Content after the relocated sections:** for JPMorgan and Exxon, anything that follows the
-  financial statements at the end of the filing (e.g. JPMorgan's glossary) is also labeled
-  Item 8.
 - **Spacing:** some numbers keep odd spacing from the source HTML, e.g. `$( 651 ) million`.
 
 ## Rebuilding
@@ -88,8 +92,9 @@ Needs Python 3.8+, `lxml` and `tokenizers` (`pip install lxml tokenizers`), plus
 filings (`python data/edgar_10k/download_edgar_10k.py ...` first). From the repo root:
 
 ```
-python data/chunks/build_chunks.py              # defaults: 350 tokens, 50 overlap
-python data/chunks/build_chunks.py --max-tokens 300 --overlap 40
+python data/chunks/build_chunks.py              # defaults: JNJ AAPL MSFT, 350 tokens, 50 overlap
+python data/chunks/build_chunks.py --tickers JNJ AAPL MSFT JPM XOM PG WMT CAT --no-check   # all 8
+python data/chunks/build_chunks.py --max-tokens 300 --overlap 40 --no-check
 ```
 
 If the Hugging Face Hub is reachable, the official `BAAI/bge-small-en-v1.5` tokenizer is used.

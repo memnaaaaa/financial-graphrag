@@ -6874,6 +6874,9 @@ Johnson & Johnson,has_subsidiary,XO1 Limited,{'source_filings': ['JNJ FY2024']}
 Johnson & Johnson,has_subsidiary,Xian Janssen Pharmaceutical Ltd.,"{'source_filings': ['JNJ FY2024', 'JNJ FY2025']}"
 Johnson & Johnson,has_subsidiary,Yellow Jersey Therapeutics AG,{'source_filings': ['JNJ FY2024']}
 Johnson & Johnson,has_subsidiary,preCARDIA,"{'source_filings': ['JNJ FY2024', 'JNJ FY2025']}"
+Johnson & Johnson,has_value,Johnson & Johnson acquired in-process research and development FY2023 = $483 million,{}
+Johnson & Johnson,has_value,"Johnson & Johnson acquired in-process research and development FY2024 = $1,841 million",{}
+Johnson & Johnson,has_value,Johnson & Johnson acquired in-process research and development FY2025 = $109 million,{}
 Johnson & Johnson,has_value,Johnson & Johnson basic earnings per share FY2022 = $6.83 per share,{}
 Johnson & Johnson,has_value,Johnson & Johnson basic earnings per share FY2023 = $13.88 per share,{}
 Johnson & Johnson,has_value,Johnson & Johnson basic earnings per share FY2024 = $5.84 per share,{}
@@ -6921,9 +6924,9 @@ Johnson & Johnson,has_value,"Johnson & Johnson operating cash flow FY2023 = $22,
 Johnson & Johnson,has_value,"Johnson & Johnson operating cash flow FY2024 = $24,266 million",{}
 Johnson & Johnson,has_value,"Johnson & Johnson operating cash flow FY2025 = $24,530 million",{}
 Johnson & Johnson,has_value,"Johnson & Johnson research and development expense FY2022 = $14,135 million",{}
-Johnson & Johnson,has_value,Johnson & Johnson research and development expense FY2023 = $483 million,{}
-Johnson & Johnson,has_value,"Johnson & Johnson research and development expense FY2024 = $1,841 million",{}
-Johnson & Johnson,has_value,Johnson & Johnson research and development expense FY2025 = $109 million,{}
+Johnson & Johnson,has_value,"Johnson & Johnson research and development expense FY2023 = $15,085 million",{}
+Johnson & Johnson,has_value,"Johnson & Johnson research and development expense FY2024 = $17,232 million",{}
+Johnson & Johnson,has_value,"Johnson & Johnson research and development expense FY2025 = $14,665 million",{}
 Johnson & Johnson,has_value,"Johnson & Johnson revenue FY2022 = $79,990 million",{}
 Johnson & Johnson,has_value,"Johnson & Johnson revenue FY2023 = $85,159 million",{}
 Johnson & Johnson,has_value,"Johnson & Johnson revenue FY2024 = $88,821 million",{}
@@ -8151,6 +8154,17 @@ Johnson & Johnson Vision Care Ireland Unlimited Company,is_mentioned_in,JNJ_FY20
 "Johnson & Johnson Vision Korea, Ltd.",incorporated_in,South Korea,{}
 "Johnson & Johnson Vision Korea, Ltd.",is_mentioned_in,JNJ_FY2024_EX21_0012,{}
 "Johnson & Johnson Vision Korea, Ltd.",is_mentioned_in,JNJ_FY2025_EX21_0012,{}
+Johnson & Johnson acquired in-process research and development FY2023 = $483 million,for_period,FY2023 (JNJ),{}
+Johnson & Johnson acquired in-process research and development FY2023 = $483 million,is_mentioned_in,JNJ_FY2024_ITEM8_0009,{}
+Johnson & Johnson acquired in-process research and development FY2023 = $483 million,is_mentioned_in,JNJ_FY2025_ITEM8_0008,{}
+Johnson & Johnson acquired in-process research and development FY2023 = $483 million,of_metric,Acquired in-process research and development,{}
+"Johnson & Johnson acquired in-process research and development FY2024 = $1,841 million",for_period,FY2024 (JNJ),{}
+"Johnson & Johnson acquired in-process research and development FY2024 = $1,841 million",is_mentioned_in,JNJ_FY2024_ITEM8_0009,{}
+"Johnson & Johnson acquired in-process research and development FY2024 = $1,841 million",is_mentioned_in,JNJ_FY2025_ITEM8_0008,{}
+"Johnson & Johnson acquired in-process research and development FY2024 = $1,841 million",of_metric,Acquired in-process research and development,{}
+Johnson & Johnson acquired in-process research and development FY2025 = $109 million,for_period,FY2025 (JNJ),{}
+Johnson & Johnson acquired in-process research and development FY2025 = $109 million,is_mentioned_in,JNJ_FY2025_ITEM8_0008,{}
+Johnson & Johnson acquired in-process research and development FY2025 = $109 million,of_metric,Acquired in-process research and development,{}
 Johnson & Johnson basic earnings per share FY2022 = $6.83 per share,for_period,FY2022 (JNJ),{}
 Johnson & Johnson basic earnings per share FY2022 = $6.83 per share,is_mentioned_in,JNJ_FY2024_ITEM8_0004,{}
 Johnson & Johnson basic earnings per share FY2022 = $6.83 per share,is_mentioned_in,JNJ_FY2024_ITEM8_0099,{}
@@ -8437,26 +8451,21 @@ Johnson & Johnson for Export and Import LLC,is_mentioned_in,JNJ_FY2025_EX21_0010
 "Johnson & Johnson research and development expense FY2022 = $14,135 million",for_period,FY2022 (JNJ),{}
 "Johnson & Johnson research and development expense FY2022 = $14,135 million",is_mentioned_in,JNJ_FY2024_ITEM8_0003,{}
 "Johnson & Johnson research and development expense FY2022 = $14,135 million",of_metric,Research and development expense,{}
-Johnson & Johnson research and development expense FY2023 = $483 million,for_period,FY2023 (JNJ),{}
-Johnson & Johnson research and development expense FY2023 = $483 million,is_mentioned_in,JNJ_FY2024_ITEM7_0027,{}
-Johnson & Johnson research and development expense FY2023 = $483 million,is_mentioned_in,JNJ_FY2024_ITEM8_0003,{}
-Johnson & Johnson research and development expense FY2023 = $483 million,is_mentioned_in,JNJ_FY2024_ITEM8_0009,{}
-Johnson & Johnson research and development expense FY2023 = $483 million,is_mentioned_in,JNJ_FY2025_ITEM8_0003,{}
-Johnson & Johnson research and development expense FY2023 = $483 million,is_mentioned_in,JNJ_FY2025_ITEM8_0008,{}
-Johnson & Johnson research and development expense FY2023 = $483 million,of_metric,Research and development expense,{}
-"Johnson & Johnson research and development expense FY2024 = $1,841 million",for_period,FY2024 (JNJ),{}
-"Johnson & Johnson research and development expense FY2024 = $1,841 million",is_mentioned_in,JNJ_FY2024_ITEM7_0027,{}
-"Johnson & Johnson research and development expense FY2024 = $1,841 million",is_mentioned_in,JNJ_FY2024_ITEM8_0003,{}
-"Johnson & Johnson research and development expense FY2024 = $1,841 million",is_mentioned_in,JNJ_FY2024_ITEM8_0009,{}
-"Johnson & Johnson research and development expense FY2024 = $1,841 million",is_mentioned_in,JNJ_FY2025_ITEM7_0027,{}
-"Johnson & Johnson research and development expense FY2024 = $1,841 million",is_mentioned_in,JNJ_FY2025_ITEM8_0003,{}
-"Johnson & Johnson research and development expense FY2024 = $1,841 million",is_mentioned_in,JNJ_FY2025_ITEM8_0008,{}
-"Johnson & Johnson research and development expense FY2024 = $1,841 million",of_metric,Research and development expense,{}
-Johnson & Johnson research and development expense FY2025 = $109 million,for_period,FY2025 (JNJ),{}
-Johnson & Johnson research and development expense FY2025 = $109 million,is_mentioned_in,JNJ_FY2025_ITEM7_0027,{}
-Johnson & Johnson research and development expense FY2025 = $109 million,is_mentioned_in,JNJ_FY2025_ITEM8_0003,{}
-Johnson & Johnson research and development expense FY2025 = $109 million,is_mentioned_in,JNJ_FY2025_ITEM8_0008,{}
-Johnson & Johnson research and development expense FY2025 = $109 million,of_metric,Research and development expense,{}
+"Johnson & Johnson research and development expense FY2023 = $15,085 million",for_period,FY2023 (JNJ),{}
+"Johnson & Johnson research and development expense FY2023 = $15,085 million",is_mentioned_in,JNJ_FY2024_ITEM7_0027,{}
+"Johnson & Johnson research and development expense FY2023 = $15,085 million",is_mentioned_in,JNJ_FY2024_ITEM8_0003,{}
+"Johnson & Johnson research and development expense FY2023 = $15,085 million",is_mentioned_in,JNJ_FY2025_ITEM8_0003,{}
+"Johnson & Johnson research and development expense FY2023 = $15,085 million",of_metric,Research and development expense,{}
+"Johnson & Johnson research and development expense FY2024 = $17,232 million",for_period,FY2024 (JNJ),{}
+"Johnson & Johnson research and development expense FY2024 = $17,232 million",is_mentioned_in,JNJ_FY2024_ITEM7_0027,{}
+"Johnson & Johnson research and development expense FY2024 = $17,232 million",is_mentioned_in,JNJ_FY2024_ITEM8_0003,{}
+"Johnson & Johnson research and development expense FY2024 = $17,232 million",is_mentioned_in,JNJ_FY2025_ITEM7_0027,{}
+"Johnson & Johnson research and development expense FY2024 = $17,232 million",is_mentioned_in,JNJ_FY2025_ITEM8_0003,{}
+"Johnson & Johnson research and development expense FY2024 = $17,232 million",of_metric,Research and development expense,{}
+"Johnson & Johnson research and development expense FY2025 = $14,665 million",for_period,FY2025 (JNJ),{}
+"Johnson & Johnson research and development expense FY2025 = $14,665 million",is_mentioned_in,JNJ_FY2025_ITEM7_0027,{}
+"Johnson & Johnson research and development expense FY2025 = $14,665 million",is_mentioned_in,JNJ_FY2025_ITEM8_0003,{}
+"Johnson & Johnson research and development expense FY2025 = $14,665 million",of_metric,Research and development expense,{}
 "Johnson & Johnson revenue FY2022 = $79,990 million",for_period,FY2022 (JNJ),{}
 "Johnson & Johnson revenue FY2022 = $79,990 million",is_mentioned_in,JNJ_FY2024_ITEM8_0002,{}
 "Johnson & Johnson revenue FY2022 = $79,990 million",is_mentioned_in,JNJ_FY2024_ITEM8_0123,{}

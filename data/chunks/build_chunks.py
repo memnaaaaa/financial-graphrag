@@ -5,7 +5,17 @@ section boundary. The same file feeds the vector-RAG baseline (embed `text`) and
 graph's document layer (one document node per `chunk_id`).
 
 Usage (from the repo root):
-    python data/chunks/build_chunks.py
+    python data/chunks/build_chunks.py                      # J&J, Apple, Microsoft (default)
+    python data/chunks/build_chunks.py --tickers JNJ AAPL MSFT JPM
+
+Each chunk starts with one header line naming the company, the fiscal year and its end date,
+and the section, e.g.
+    Apple Inc. (AAPL) | Form 10-K annual report for fiscal year 2025 (FY2025), fiscal year ended
+    September 27, 2025 | Item 7. Management's Discussion and Analysis ...
+Chunks are packed as if the header were the short one used before Nov 2026
+("Apple Inc. (AAPL) | FY2025 Form 10-K | Item 7. ..."), so chunk IDs and chunk bodies stay
+exactly the same as in earlier builds; only the header line is longer. If chunks.jsonl already
+exists, the script checks that every chunk ID and body is unchanged before overwriting it.
 
 Outputs in data/chunks/:
     chunks.jsonl          one JSON object per chunk (schema in README.md)
@@ -299,12 +309,14 @@ def tail_words(text, budget, ntok):
     return " ".join(out)
 
 
-def chunk_section(blocks, header, max_tokens, overlap, ntok):
+def chunk_section(blocks, header, max_tokens, overlap, ntok, out_header=None):
     """Pack whole lines (paragraphs, table rows) into chunks of at most `max_tokens`, header included.
 
     Overlap: each new chunk repeats about `overlap` tokens from the end of the previous one
     (whole table rows when the previous chunk ended inside a table, otherwise its last words).
     A chunk that starts in the middle of a table also repeats that table's first (column header) row.
+    `header` sizes the chunks; `out_header` (default: `header`) is the line written on top of each chunk,
+    so a longer header can be written without moving any chunk boundary.
     """
     body_limit = max_tokens - ntok(header) - 1
     units, table_id, first_row = [], 0, None   # unit = (text, table_id or None, table's first row)
@@ -352,7 +364,69 @@ def chunk_section(blocks, header, max_tokens, overlap, ntok):
             chunks[-1] = chunks[-1] + cur                 # fold a tiny last piece into the previous chunk
         else:
             chunks.append(cur)
-    return [(header + "\n" + body(c), any(t is not None for _, t in c)) for c in chunks]
+    top = out_header or header
+    return [(top + "\n" + body(c), any(t is not None for _, t in c)) for c in chunks]
+
+
+# ---------------------------------------------------------------- header and twins
+MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September",
+          "October", "November", "December"]
+
+
+def long_header(ticker, fy, period_end, sec, sec_title):
+    """Header that states the fiscal year in words and dates, so text from the two filings of a
+    company (which is often word for word the same) carries a clear year signal."""
+    y, m, d = (int(x) for x in period_end.split("-"))
+    year = fy[2:] if fy.upper().startswith("FY") else fy
+    return (f"{COMPANY[ticker]} ({ticker}) | Form 10-K annual report for fiscal year {year} ({fy}), "
+            f"fiscal year ended {MONTHS[m - 1]} {d}, {y} | {sec}. {sec_title}")
+
+
+def body_of(text):
+    return text.split("\n", 1)[1] if "\n" in text else ""
+
+
+def add_twins(recs, threshold):
+    """For each chunk, the most similar chunk of the same company and section in the other fiscal
+    year (word-set Jaccard similarity of the bodies). Chunks at or above `threshold` get
+    `twin_chunk_id` and `twin_similarity`; the rest get None. Twins are kept: questions need both years."""
+    words = {r["chunk_id"]: set(re.findall(r"[a-z0-9]+", body_of(r["text"]).lower())) for r in recs}
+    groups = defaultdict(list)
+    for r in recs:
+        groups[(r["ticker"], r["section"])].append(r)
+    n = 0
+    for grp in groups.values():
+        for r in grp:
+            best, best_sim = None, 0.0
+            a = words[r["chunk_id"]]
+            for o in grp:
+                if o["fiscal_year"] == r["fiscal_year"]:
+                    continue
+                b = words[o["chunk_id"]]
+                sim = len(a & b) / len(a | b) if a and b else 0.0
+                if sim > best_sim:
+                    best, best_sim = o["chunk_id"], sim
+            ok = best is not None and best_sim >= threshold
+            r["twin_chunk_id"] = best if ok else None
+            r["twin_similarity"] = round(best_sim, 3) if ok else None
+            n += ok
+    return n
+
+
+def check_same_chunks(old_path, recs):
+    """Compare with the previous chunks.jsonl: same IDs and same bodies for the companies built now."""
+    tickers = {r["ticker"] for r in recs}
+    old = {}
+    for line in open(old_path, encoding="utf-8"):
+        if line.strip():
+            o = json.loads(line)
+            if o["ticker"] in tickers:
+                old[o["chunk_id"]] = body_of(o["text"])
+    new = {r["chunk_id"]: body_of(r["text"]) for r in recs}
+    missing = sorted(set(old) - set(new))
+    extra = sorted(set(new) - set(old))
+    changed = sorted(c for c in set(old) & set(new) if old[c] != new[c])
+    return len(old), missing, extra, changed
 
 
 # ---------------------------------------------------------------- main
@@ -364,57 +438,78 @@ def main():
     ap.add_argument("--max-tokens", type=int, default=350, help="max tokens per chunk, header included")
     ap.add_argument("--overlap", type=int, default=50, help="tokens repeated from the end of the previous chunk")
     ap.add_argument("--vocab", default=os.path.join(HERE, "bert-base-uncased-vocab.txt"))
+    ap.add_argument("--tickers", nargs="+", default=["JNJ", "AAPL", "MSFT"],
+                    help="companies to build (default: the 3 used in the project)")
+    ap.add_argument("--twin-threshold", type=float, default=0.8,
+                    help="word-set Jaccard similarity at which a chunk in the other fiscal year counts as a twin")
+    ap.add_argument("--no-check", action="store_true",
+                    help="skip the check that chunk IDs and bodies match the existing chunks.jsonl")
     a = ap.parse_args()
 
     tok, tok_name = load_tokenizer(a.vocab)
     ntok = Counter_(tok)
-    rows = list(csv.DictReader(open(a.manifest, newline="", encoding="utf-8")))
+    rows = [r for r in csv.DictReader(open(a.manifest, newline="", encoding="utf-8")) if r["ticker"] in a.tickers]
+    if not rows:
+        sys.exit(f"no filings for {a.tickers} in {a.manifest}")
     out_path = os.path.join(a.out_dir, "chunks.jsonl")
+    recs = []
     stats = defaultdict(lambda: [0, 0, 0])  # chunks, tokens, max tokens
     spans_log, docs, n_total = [], {}, 0
     seen_ids = set()
+    for r in rows:
+        fy = r["fiscal_year"]
+        folder = os.path.join(a.raw_dir, r["ticker"], fy)
+        next_idx = Counter()  # chunk numbering continues if a section has two spans (relocated Items 7/8)
+        for kind in ("tenk", "ex21"):
+            path = os.path.join(folder, r[f"{kind}_file"])
+            if not os.path.exists(path):
+                sys.exit(f"missing {path}; run data/edgar_10k/download_edgar_10k.py first")
+            blocks = html_to_blocks(path)
+            if kind == "tenk":
+                spans, note = find_sections(blocks)
+                doc_type = "10-K"
+            else:
+                spans, note, doc_type = [(0, len(blocks), "EX21")], "", r["ex21_type"]
+            for s, e, code in spans:
+                spans_log.append({"ticker": r["ticker"], "fiscal_year": fy, "document": doc_type,
+                                  "section": section_label(code)[0], "start_block": s, "end_block": e,
+                                  "n_blocks": e - s, "note": note})
+                if e <= s:
+                    continue
+                sec, sec_title = section_label(code)
+                header = f"{COMPANY[r['ticker']]} ({r['ticker']}) | {fy} Form 10-K | {sec}. {sec_title}"
+                top = long_header(r["ticker"], fy, r["period_end"], sec, sec_title)
+                for text, has_tab in chunk_section(blocks[s:e], header, a.max_tokens, a.overlap, ntok, top):
+                    idx = next_idx[code]
+                    next_idx[code] += 1
+                    cid = f"{r['ticker']}_{fy}_{code if code in ('COVER', 'EX21') else 'ITEM' + code}_{idx:04d}"
+                    assert cid not in seen_ids, cid
+                    seen_ids.add(cid)
+                    n = ntok(text)
+                    rec = {
+                        "chunk_id": cid, "ticker": r["ticker"], "company": COMPANY[r["ticker"]], "cik": r["cik"],
+                        "fiscal_year": fy, "period_end": r["period_end"], "filing_date": r["filing_date"],
+                        "accession": r["accession"], "document": doc_type, "section": sec,
+                        "section_title": sec_title, "chunk_index": idx, "n_tokens": n, "has_table": has_tab,
+                        "source_url": r[f"{kind}_url"], "text": text,
+                    }
+                    recs.append(rec)
+                    docs[cid] = text
+                    st = stats[(r["ticker"], fy, sec)]
+                    st[0] += 1; st[1] += n; st[2] = max(st[2], n)
+                    n_total += 1
+    if os.path.exists(out_path) and not a.no_check:
+        n_old, missing, extra, changed = check_same_chunks(out_path, recs)
+        print(f"check against the existing chunks.jsonl: {n_old} old chunks for {', '.join(a.tickers)}, "
+              f"{len(missing)} missing, {len(extra)} new, {len(changed)} with a different body")
+        if missing or extra or changed:
+            for c in (missing + extra + changed)[:10]:
+                print("   ", c)
+            sys.exit("chunk IDs or bodies changed: nothing was written (rerun with --no-check to overwrite anyway)")
+    n_twins = add_twins(recs, a.twin_threshold)
     with open(out_path, "w", encoding="utf-8") as out:
-        for r in rows:
-            fy = r["fiscal_year"]
-            folder = os.path.join(a.raw_dir, r["ticker"], fy)
-            next_idx = Counter()  # chunk numbering continues if a section has two spans (relocated Items 7/8)
-            for kind in ("tenk", "ex21"):
-                path = os.path.join(folder, r[f"{kind}_file"])
-                if not os.path.exists(path):
-                    sys.exit(f"missing {path}; run data/edgar_10k/download_edgar_10k.py first")
-                blocks = html_to_blocks(path)
-                if kind == "tenk":
-                    spans, note = find_sections(blocks)
-                    doc_type = "10-K"
-                else:
-                    spans, note, doc_type = [(0, len(blocks), "EX21")], "", r["ex21_type"]
-                for s, e, code in spans:
-                    spans_log.append({"ticker": r["ticker"], "fiscal_year": fy, "document": doc_type,
-                                      "section": section_label(code)[0], "start_block": s, "end_block": e,
-                                      "n_blocks": e - s, "note": note})
-                    if e <= s:
-                        continue
-                    sec, sec_title = section_label(code)
-                    header = f"{COMPANY[r['ticker']]} ({r['ticker']}) | {fy} Form 10-K | {sec}. {sec_title}"
-                    for text, has_tab in chunk_section(blocks[s:e], header, a.max_tokens, a.overlap, ntok):
-                        idx = next_idx[code]
-                        next_idx[code] += 1
-                        cid = f"{r['ticker']}_{fy}_{code if code in ('COVER', 'EX21') else 'ITEM' + code}_{idx:04d}"
-                        assert cid not in seen_ids, cid
-                        seen_ids.add(cid)
-                        n = ntok(text)
-                        rec = {
-                            "chunk_id": cid, "ticker": r["ticker"], "company": COMPANY[r["ticker"]], "cik": r["cik"],
-                            "fiscal_year": fy, "period_end": r["period_end"], "filing_date": r["filing_date"],
-                            "accession": r["accession"], "document": doc_type, "section": sec,
-                            "section_title": sec_title, "chunk_index": idx, "n_tokens": n, "has_table": has_tab,
-                            "source_url": r[f"{kind}_url"], "text": text,
-                        }
-                        out.write(json.dumps(rec, ensure_ascii=False) + "\n")
-                        docs[cid] = text
-                        st = stats[(r["ticker"], fy, sec)]
-                        st[0] += 1; st[1] += n; st[2] = max(st[2], n)
-                        n_total += 1
+        for rec in recs:
+            out.write(json.dumps(rec, ensure_ascii=False) + "\n")
     json.dump(docs, open(os.path.join(a.out_dir, "documents.json"), "w", encoding="utf-8"), ensure_ascii=False)
     with open(os.path.join(a.out_dir, "chunk_stats.csv"), "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
@@ -425,7 +520,9 @@ def main():
         w = csv.DictWriter(f, fieldnames=list(spans_log[0]))
         w.writeheader(); w.writerows(spans_log)
     print(f"{n_total} chunks from {len(rows)} filings -> {out_path}")
-    print(f"tokenizer: {tok_name}; max {a.max_tokens} tokens per chunk, overlap {a.overlap}")
+    print(f"tokenizer: {tok_name}; chunks sized to {a.max_tokens} tokens with the short header, overlap {a.overlap}; "
+          f"longest chunk with the new header: {max(r['n_tokens'] for r in recs)} tokens")
+    print(f"{n_twins} of {len(recs)} chunks have a twin in the other fiscal year (Jaccard >= {a.twin_threshold})")
 
 
 if __name__ == "__main__":

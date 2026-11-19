@@ -41,9 +41,12 @@ METRICS = {
     "CostOfGoodsAndServicesSold": ("Cost of sales", ["cost of"]),
     "CostOfRevenue": ("Cost of sales", ["cost of"]),
     "GrossProfit": ("Gross margin", ["gross"]),
-    "ResearchAndDevelopmentExpense": ("Research and development expense", ["research"]),
+    # Total R&D. Companies that also tag acquired in-process R&D separately (J&J) report their
+    # total under ...ExcludingAcquiredInProcessCost and use ResearchAndDevelopmentExpense for the
+    # in-process charges alone, so the "Excluding" concept is listed first and wins (see IPRD_METRIC).
     "ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost": (
         "Research and development expense", ["research"]),
+    "ResearchAndDevelopmentExpense": ("Research and development expense", ["research"]),
     "SellingGeneralAndAdministrativeExpense": ("Selling, general and administrative expense",
                                                ["general and administrative"]),
     "OperatingIncomeLoss": ("Operating income", ["operating income"]),
@@ -67,6 +70,11 @@ METRICS = {
     "PaymentsOfDividendsCommonStock": ("Dividends paid", ["dividend"]),
     "PaymentsForRepurchaseOfCommonStock": ("Share repurchases", ["repurchase"]),
 }
+# When a company tags ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost, its
+# ResearchAndDevelopmentExpense facts are the acquired in-process R&D charges, kept as this metric.
+IPRD_METRIC = ("Acquired in-process research and development", ["in-process"])
+# Concept order in METRICS = priority when two concepts give the same metric for the same period.
+PRIORITY = {c: i for i, c in enumerate(METRICS)}
 # Dimensions we keep. A fact with any other dimension (debt instrument, equity component...)
 # is skipped.
 SEG_AXIS = "StatementBusinessSegmentsAxis"
@@ -350,16 +358,36 @@ def build(repo, tickers):
             g.edge(company_name[t], "has_subsidiary", sub, source_filings=[f"{t} {fy}"])
             g.edge(sub, "incorporated_in", location(juris))
 
-    # XBRL facts, deduplicated across the two filings of each company (newest filing wins)
-    merged = {}
+    # XBRL facts, deduplicated across the two filings of each company (newest filing wins).
+    # When two different concepts give the same metric for the same period and dimensions, the one
+    # listed first in METRICS wins and the other is reported as a conflict (never silently mixed).
+    facts_by_filing = []
     for r in sorted(manifest, key=lambda r: r["period_end"]):          # oldest first
+        path = os.path.join(repo, "data/edgar_10k/raw", r["ticker"], r["fiscal_year"], r["tenk_file"])
+        facts_by_filing.append((r, parse_xbrl(path)))
+    iprd_tickers = {r["ticker"] for r, facts in facts_by_filing
+                    if any(f["concept"] == "ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost" for f in facts)}
+    filing_row = {(r["ticker"], r["fiscal_year"]): r for r in manifest}
+    merged, conflicts = {}, []
+    for r, facts in facts_by_filing:
         t, fy = r["ticker"], r["fiscal_year"]
-        path = os.path.join(repo, "data/edgar_10k/raw", t, fy, r["tenk_file"])
-        for f in parse_xbrl(path):
-            metric = METRICS[f["concept"]][0]
+        for f in facts:
+            if f["concept"] == "ResearchAndDevelopmentExpense" and t in iprd_tickers:
+                metric = IPRD_METRIC[0]
+            else:
+                metric = METRICS[f["concept"]][0]
             key = (t, metric, f["start"], f["end"], tuple(sorted(f["dims"].items())))
             prev = merged.get(key)
             f.update(ticker=t, metric=metric, filings=[fy])
+            if prev and prev["concept"] != f["concept"]:
+                if abs(prev["value"] - f["value"]) > 0.5:
+                    conflicts.append((t, metric, f["end"], prev["concept"], prev["value"], f["concept"], f["value"]))
+                if PRIORITY[prev["concept"]] <= PRIORITY[f["concept"]]:
+                    prev["filings"] = sorted(set(prev["filings"]) | {fy})
+                    continue
+                f["texts"] = {f["text"]}
+                merged[key] = f
+                continue
             if prev:
                 f["filings"] = sorted(set(prev["filings"]) | {fy})
                 if abs(prev["value"] - f["value"]) > 0.5:
@@ -409,7 +437,9 @@ def build(repo, tickers):
         attrs = dict(kind="Value", value=f["value"], display=display, unit=f["unit"],
                      metric=metric, xbrl_concept="us-gaap:" + f["concept"], ticker=t,
                      fiscal_year=fy, period_end=f["end"], source="xbrl",
-                     source_filings=[f"{t} {x}" for x in f["filings"]])
+                     source_filings=[f"{t} {x}" for x in f["filings"]],
+                     source_accessions=[filing_row[(t, x)]["accession"] for x in f["filings"]],
+                     source_urls=[filing_row[(t, x)]["tenk_url"] for x in f["filings"]])
         if not f["instant"]:
             attrs["period_start"] = f["start"]
         if "earlier_reported" in f:
@@ -464,7 +494,7 @@ def build(repo, tickers):
         num_pat = re.compile(r"(?<![\d.,])(" + "|".join(re.escape(x) for x in nums) + r")(?![\d]|\.\d|,\d)")
         subj = f["subject"]
         if g.nodes[subj][1].get("kind") == "Company":
-            words = METRICS[f["concept"]][1]
+            words = IPRD_METRIC[1] if f["metric"] == IPRD_METRIC[0] else METRICS[f["concept"]][1]
             need = re.compile("|".join(re.escape(w) for w in words), re.I)
         else:
             al = [a for a in g.aliases.get(subj, ([], None))[0] if a not in NO_TEXT_MATCH]
@@ -476,6 +506,10 @@ def build(repo, tickers):
             if num_pat.search(b) and need.search(b):
                 g.edge(f["vname"], "is_mentioned_in", cid)
 
+    for c in conflicts:
+        print("concept conflict (kept the first): %s %s %s: %s=%s vs %s=%s" % c, file=sys.stderr)
+    print(f"{len(conflicts)} concept conflicts; acquired IPR&D split out for: {sorted(iprd_tickers) or 'none'}",
+          file=sys.stderr)
     return g, n_values
 
 

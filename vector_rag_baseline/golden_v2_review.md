@@ -1,12 +1,10 @@
-# Golden set v2: by-hand check sheet
+# Golden set v2: 
 
-For every question: the question, the gold answer, and for each fact the chunk(s) it was matched in with a snippet.
-Open the filing URL, find the passage, and tick the box if the chunk and the answer are right.
 
 ## v2_q01  [single]  AAPL FY2025
 **Q:** What were Apple's total net sales in fiscal 2025 (fiscal year ended September 27, 2025)?
 **Gold answer:** $416,161 million (about $416.2 billion).
-- [x] `a_sales25` (AAPL FY2025), 5 chunk(s)
+- [x] `a_sales25` (AAPL FY2025), 6 chunk(s)
     - `AAPL_FY2025_ITEM7_0004`: ... Rest of Asia Pacific | 33,696 | 10% | 30,658 | 4% | 29,615 Total net sales | $416,161 | 6% | $391,035 | 2% | $383,285 Americas Americas net sales...  (https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm)
     - `AAPL_FY2025_ITEM7_0005`: ...39,845 Services (1) | 109,158 | 14% | 96,169 | 13% | 85,200 Total net sales | $416,161 | 6% | $391,035 | 2% | $383,285 (1) Services net sales incl...  (https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm)
     - `AAPL_FY2025_ITEM8_0000`: ... | $294,866 | $298,085 Services | 109,158 | 96,169 | 85,200 Total net sales | 416,161 | 391,035 | 383,285 Cost of sales: Products | 194,116 | 185...  (https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm)
@@ -14,9 +12,10 @@ Open the filing URL, find the passage, and tick the box if the chunk and the ans
 ## v2_q02  [single]  AAPL FY2025
 **Q:** How much did Apple spend on research and development in fiscal 2025?
 **Gold answer:** $34,550 million.
-- [x] `a_rd25` (AAPL FY2025), 2 chunk(s)
+- [x] `a_rd25` (AAPL FY2025), 3 chunk(s)
     - `AAPL_FY2025_ITEM7_0007`: ...(dollars in millions): 2025 | Change | 2024 | Change | 2023 Research and development | $34,550 | 10% | $31,370 | 5% | $29,915 Percentage of total net sale...  (https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm)
     - `AAPL_FY2025_ITEM8_0000`: ...ss margin | 195,201 | 180,683 | 169,148 Operating expenses: Research and development | 34,550 | 31,370 | 29,915 Selling, general and administrative | 27,...  (https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm)
+    - `AAPL_FY2025_ITEM8_0048`: ...| (58,617) | (35,141) | (13,779) | (17,724) | — | (220,960) Research and development | — | — | — | — | — | (34,550) | (34,550) Selling and marketing | (10,174) | (4,676) | (2,...  (https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm)
 
 ## v2_q03  [single]  AAPL FY2025
 **Q:** What were Apple's Services net sales in fiscal 2025?
@@ -52,15 +51,17 @@ Open the filing URL, find the passage, and tick the box if the chunk and the ans
 ## v2_q07  [single]  JNJ FY2025
 **Q:** What was Johnson & Johnson's total research and development expense in fiscal 2025?
 **Gold answer:** $14,665 million.
-- [x] `j_rd25` (JNJ FY2025), 1 chunk(s)
+- [x] `j_rd25` (JNJ FY2025), 2 chunk(s)
     - `JNJ_FY2025_ITEM7_0027`: ...9.6% | $13,529 | 23.8% MedTech | 2,838 | 8.4 | 3,703 | 11.6 Total research and development expense | $14,665 | 15.6% | $17,232 | 19.4% Percent increase/(decrease) over ...  (https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm)
+    - `JNJ_FY2025_ITEM8_0003`: ...ting and administrative expenses | 23,676 | 22,869 | 21,512 Research and development expense | 14,665 | 17,232 | 15,085 In-process research and development impai...  (https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm)
 
 ## v2_q08  [single]  JNJ FY2025
 **Q:** What were Johnson & Johnson's Innovative Medicine segment sales in fiscal 2025?
 **Gold answer:** $60,401 million (about $60.4 billion).
-- [x] `j_im25` (JNJ FY2025), 2 chunk(s)
+- [x] `j_im25` (JNJ FY2025), 4 chunk(s)
     - `JNJ_FY2025_ITEM7_0012`: ...11.0 | 11.0 | — Other | 1,145 | 1,189 | (3.7) | (4.0) | 0.3 Total Innovative Medicine Sales | $60,401 | 56,964 | 6.0% | 5.3% | 0.7% (1) Previously in Other Oncol...  (https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm)
-    - `JNJ_FY2025_ITEM8_0126`: ...ne | MedTech | Total | InnovativeMedicine | MedTech | Total Sales to customers | $60,401 | 33,792 | 56,964 | 31,857 | 54,759 | 30,400 Cost of produc...  (https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm)
+    - `JNJ_FY2025_ITEM7_0032`: ...lars in Millions) | 2025 | 2024 | 2025 | 2024 | 2025 | 2024 Innovative Medicine | $22,266 | 18,919 | 60,401 | 56,964 | 36.9% | 33.2 MedTech | 4,113 | 3,740 | 33,792 | ...  (https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm)
+    - `JNJ_FY2025_ITEM8_0120`: ...) | (9.1) Worldwide | 1,145 | 1,189 | 1,306 | (3.7) | (8.9) TOTAL INNOVATIVE MEDICINE U.S. | 36,344 | 33,970 | 31,169 | 7.0 | 9.0 International | 24,057 | 22,994 | 23,590 | 4.6 | (2.5) Worldwide | 60,401 | 56,964 | 54,759 | 6.0 | 4.0 MEDTECH Cardiovascular U.S...  (https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm)
 
 ## v2_q09  [single]  JNJ FY2025
 **Q:** What were Johnson & Johnson's net earnings in fiscal 2025?
@@ -78,9 +79,10 @@ Open the filing URL, find the passage, and tick the box if the chunk and the ans
     - `JNJ_FY2025_ITEM1_0011`: ...tely 15.0% of the Company's total revenues for fiscal 2025. Genmab A/S owns two patent families related to DARZALEX, and Janssen Biotech, Inc. (a wholly-owned subsidiary of the Company) has an exc...  (https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm)
 - [x] `j_darz_im` (JNJ FY2025), 1 chunk(s)
     - `JNJ_FY2025_ITEM1_0001`: ...ospitals and healthcare professionals for prescription use. Key products in the Innovative Medicine segment include: CARVYKTI (ciltacabtagene autoleucel), a chimeric antigen receptor (CAR)-T-cell therapy for the treatment of patients with relapsed/refractory m...  (https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm)
-- [x] `j_im25` (JNJ FY2025), 2 chunk(s)
+- [x] `j_im25` (JNJ FY2025), 4 chunk(s)
     - `JNJ_FY2025_ITEM7_0012`: ...11.0 | 11.0 | — Other | 1,145 | 1,189 | (3.7) | (4.0) | 0.3 Total Innovative Medicine Sales | $60,401 | 56,964 | 6.0% | 5.3% | 0.7% (1) Previously in Other Oncol...  (https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm)
-    - `JNJ_FY2025_ITEM8_0126`: ...ne | MedTech | Total | InnovativeMedicine | MedTech | Total Sales to customers | $60,401 | 33,792 | 56,964 | 31,857 | 54,759 | 30,400 Cost of produc...  (https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm)
+    - `JNJ_FY2025_ITEM7_0032`: ...lars in Millions) | 2025 | 2024 | 2025 | 2024 | 2025 | 2024 Innovative Medicine | $22,266 | 18,919 | 60,401 | 56,964 | 36.9% | 33.2 MedTech | 4,113 | 3,740 | 33,792 | ...  (https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm)
+    - `JNJ_FY2025_ITEM8_0120`: ...) | (9.1) Worldwide | 1,145 | 1,189 | 1,306 | (3.7) | (8.9) TOTAL INNOVATIVE MEDICINE U.S. | 36,344 | 33,970 | 31,169 | 7.0 | 9.0 International | 24,057 | 22,994 | 23,590 | 4.6 | (2.5) Worldwide | 60,401 | 56,964 | 54,759 | 6.0 | 4.0 MEDTECH Cardiovascular U.S...  (https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm)
 
 ## v2_q11  [relation]  JNJ FY2025
 **Q:** Which Johnson & Johnson subsidiary holds the exclusive license to Genmab's DARZALEX patent families, and in which U.S. state is it incorporated?
@@ -135,16 +137,16 @@ Open the filing URL, find the passage, and tick the box if the chunk and the ans
 **Q:** Which company owns the patent families behind Johnson & Johnson's largest product, which J&J subsidiary licenses them, and when do the U.S. patents expire?
 **Gold answer:** Genmab A/S owns the two DARZALEX patent families; Janssen Biotech, Inc. (a wholly-owned J&J subsidiary) holds the exclusive license. The U.S. patents both expire in 2029; in Europe, compound/use protection in select countries extends to 2031/2032.
 **Chain:** largest product (DARZALEX) -> patent owner (Genmab) -> licensee (Janssen Biotech) -> patent expiry
-- [ ] `j_genmab` (JNJ FY2025), 1 chunk(s)
+- [x] `j_genmab` (JNJ FY2025), 1 chunk(s)
     - `JNJ_FY2025_ITEM1_0011`: ...tely 15.0% of the Company's total revenues for fiscal 2025. Genmab A/S owns two patent families related to DARZALEX, and Janssen Biotech, Inc. (a wholly-owned subsidiary of the Company) has an exc...  (https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm)
-- [ ] `j_patent_exp` (JNJ FY2025), 1 chunk(s)
+- [x] `j_patent_exp` (JNJ FY2025), 1 chunk(s)
     - `JNJ_FY2025_ITEM1_0011`: ...nd $2.0 billion, respectively. The two patent families both expire in the United States in 2029, and in Europe, compound/use patent protection in select countries extends...  (https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm)
 
 ## v2_q17  [relation_text]  JNJ FY2025
 **Q:** Which outside companies does Johnson & Johnson name as collaboration partners for XARELTO, IMBRUVICA and CARVYKTI, and how does each one work with J&J?
 **Gold answer:** XARELTO is co-developed with Bayer HealthCare AG; IMBRUVICA is developed in collaboration and co-marketed with Pharmacyclics LLC, an AbbVie company; CARVYKTI is licensed and developed in collaboration with Legend Biotech USA Inc. and Legend Biotech Ireland Limited.
 **Chain:** product -> partner company -> type of collaboration (x3)
-- [ ] `j_partners` (JNJ FY2025), 1 chunk(s)
+- [x] `j_partners` (JNJ FY2025), 1 chunk(s)
     - `JNJ_FY2025_ITEM8_0029`: ...eveloped in collaboration with strategic partners including XARELTO, co-developed with Bayer HealthCare AG, IMBRUVICA, developed in collaboration and co-marketed with Pharmacyclics LLC, an AbbVie company and CARVYKTI, licensed and developed in collaboration wi...  (https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm)
 
 ## v2_q18  [relation_text]  MSFT FY2026
@@ -239,8 +241,9 @@ Open the filing URL, find the passage, and tick the box if the chunk and the ans
     - `JNJ_FY2025_ITEM1_0011`: ...tely 15.0% of the Company's total revenues for fiscal 2025. Genmab A/S owns two patent families related to DARZALEX, and Janssen Biotech, Inc. (a wholly-owned subsidiary of the Company) has an exc...  (https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm)
 - [ ] `j_royalty` (JNJ FY2025), 1 chunk(s)
     - `JNJ_FY2025_ITEM1_0011`: ... of total DARZALEX net sales. For the fiscal 2025 and 2024, royalty amounts to Genmab were approximately $2.4 billion and $2.0 billion, respectively. The two patent families bot...  (https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm)
-- [ ] `j_darz_sales` (JNJ FY2025), 1 chunk(s)
+- [ ] `j_darz_sales` (JNJ FY2025), 2 chunk(s)
     - `JNJ_FY2025_ITEM7_0009`: ...% | 20.9% | 1.2% CARVYKTI | 1,887 | 963 | 95.9 | 94.3 | 1.6 DARZALEX | 14,351 | 11,670 | 23.0 | 22.0 | 1.0 ERLEADA | 3,574 | 2,999 | 19.2...  (https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm)
+    - `JNJ_FY2025_ITEM8_0111`: ...395 | 94 | 30** Worldwide | 1,887 | 963 | 500 | 95.9 | 92.7 DARZALEX U.S. | 8,266 | 6,588 | 5,277 | 25.5 | 24.8 International | 6,085 | 5,082 | 4,467 | 19.7 | 13.8 Worldwide | 14,351 | 11,670 | 9,744 | 23.0 | 19.8 ERLEADA U.S. | 1,453 | 1,282...  (https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm)
 
 ## v2_q29  [relation_deep]  JNJ FY2025
 **Q:** J&J acquired Shockwave Medical in 2024. Which franchise reports Shockwave sales, what share of that franchise's 2025 sales was Shockwave, and where is Shockwave Medical, Inc. incorporated?
@@ -250,8 +253,10 @@ Open the filing URL, find the passage, and tick the box if the chunk and the ans
     - `JNJ_FY2025_ITEM8_0141`: ...25 and 2024 were not material. On May 31, 2024, the Company acquired all the outstanding shares of Shockwave Medical Inc. (SWAV), a leading, first-to-market provider of innovat...  (https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm)
 - [ ] `j_shock_mt` (JNJ FY2025), 1 chunk(s)
     - `JNJ_FY2025_ITEM1_0007`: ...going a high-risk percutaneous coronary intervention (PCI), circulatory restoration products (Shockwave) for the treatment of calcified coronary artery disease (CAD...  (https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm)
-- [ ] `j_cardio` (JNJ FY2025), 1 chunk(s)
+- [ ] `j_cardio` (JNJ FY2025), 3 chunk(s)
+    - `JNJ_FY2025_ITEM7_0021`: ...Spine, Sports & Other | 2,852 | 2,926 | (2.5) | (3.5) | 1.0 Cardiovascular | 8,928 | 7,707 | 15.8 | 15.2 | 0.6...  (https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm)
     - `JNJ_FY2025_ITEM7_0022`: ...25 | 2024 | TotalChange | OperationsChange | CurrencyChange Cardiovascular | 8,928 | 7,707 | 15.8 | 15.2 | 0.6 Electrophysiology | 5,634 | 5,267 | 7.0 | 6.4 | 0.6 Abiomed | 1,751 | 1,496 | 17.1 | 16.2 | 0.9 Shockwave(1) | 1,146 | 564*** Other Cardiovascular | ...  (https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm)
+    - `JNJ_FY2025_ITEM8_0121`: ... Millions) | 2025 | 2024 | 2023 | '25 vs. '24 | '24 vs. '23 SHOCKWAVE(6) U.S. | 897 | 442 | —** International | 249 | 122 | —** Worldwide | 1,146 | 564 | —** OTHER CARDIOVASCULAR U.S. | 124 | 120 | 109 | 3...  (https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm)
 - [ ] `j_shock_de` (JNJ FY2025), 2 chunk(s)
     - `JNJ_FY2025_EX21_0003`: ...xas Rutan Realty LLC | New Jersey Serotiny, Inc. | Delaware Shockwave Medical, Inc. | Delaware SterilMed, Inc. | Minnesota...  (https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/ex21-subsidiariesxform10xk.htm)
     - `JNJ_FY2025_EX21_0004`: ...xas Rutan Realty LLC | New Jersey Serotiny, Inc. | Delaware Shockwave Medical, Inc. | Delaware SterilMed, Inc. | Minnesota Synthes USA Products, LLC | Del...  (https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/ex21-subsidiariesxform10xk.htm)
@@ -262,8 +267,9 @@ Open the filing URL, find the passage, and tick the box if the chunk and the ans
 **Chain:** Activision Blizzard acquisition -> goodwill -> More Personal Computing segment -> segment goodwill balance; Exhibit 21 subsidiary -> jurisdiction
 - [ ] `m_act_acq` (MSFT FY2026), 1 chunk(s)
     - `MSFT_FY2026_ITEM8_0052`: ... Other liabilities | (3,620) Total purchase price | $75,408 Goodwill was assigned to our More Personal Computing segment. The goodwill was primarily attributed to increased synergi...  (https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm)
-- [ ] `m_gw_mpc` (MSFT FY2026), 1 chunk(s)
+- [ ] `m_gw_mpc` (MSFT FY2026), 2 chunk(s)
     - `MSFT_FY2026_ITEM8_0053`: ...lligent Cloud | 25,648 | 0 | 41 | 25,689 | 36 | 16 | 25,741 More Personal Computing | 62,211 | 0 | 152 | 62,363 | 5 | (28) | 62,340 Total | $119,220 | $0 | $289 | $119,509 | $108 | $34 | $119...  (https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm)
+    - `MSFT_FY2026_ITEM8_0054`: ... 10-K | Item 8. Financial Statements and Supplementary Data 0 | 152 | 62,363 | 5 | (28) | 62,340 Total | $119,220 | $0 | $289 | $119,509 | $108 | $34 | $119...  (https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm)
 - [ ] `m_act_pub` (MSFT FY2026), 1 chunk(s)
     - `MSFT_FY2026_EX21_0000`: ...Company | Ireland Activision Blizzard, Inc. | United States Activision Publishing, Inc. | United States...  (https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-ex21.htm)
 
@@ -314,17 +320,17 @@ Open the filing URL, find the passage, and tick the box if the chunk and the ans
 ## v2_q35  [cross_year]  MSFT FY2025, MSFT FY2026
 **Q:** How did Microsoft's full-time headcount change between June 30, 2025 and June 30, 2026?
 **Gold answer:** It fell by about 5,000, from approximately 228,000 to approximately 223,000.
-- [ ] `m_emp25` (MSFT FY2025), 1 chunk(s)
+- [x] `m_emp25` (MSFT FY2025), 1 chunk(s)
     - `MSFT_FY2025_ITEM1_0019`: ... end users. HUMAN CAPITAL RESOURCES As of June 30, 2025, we employed approximately 228,000 people on a full-time basis, 125,000 in the U.S. and 103,00...  (https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm)
-- [ ] `m_emp26` (MSFT FY2026), 1 chunk(s)
+- [x] `m_emp26` (MSFT FY2026), 1 chunk(s)
     - `MSFT_FY2026_ITEM1_0019`: ... end users. HUMAN CAPITAL RESOURCES As of June 30, 2026, we employed approximately 223,000 people on a full-time basis, 121,000 in the U.S. and 102,00...  (https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm)
 
 ## v2_q36  [cross_year]  JNJ FY2024, JNJ FY2025
 **Q:** What share of Johnson & Johnson's total revenues came from DARZALEX (with DARZALEX FASPRO) in fiscal 2024 versus fiscal 2025?
 **Gold answer:** About 13.1% in fiscal 2024 and 15.0% in fiscal 2025 (up about 1.9 percentage points).
-- [ ] `j_darz24` (JNJ FY2024), 1 chunk(s)
+- [x] `j_darz24` (JNJ FY2024), 1 chunk(s)
     - `JNJ_FY2024_ITEM1_0010`: ... FASPRO (daratumumab and hyaluronidase-fihj), accounted for approximately 13.1% of the Company's total revenues for fiscal 2024. Accordingly, the patents related to these products are bel...  (https://www.sec.gov/Archives/edgar/data/200406/000020040625000038/jnj-20241229.htm)
-- [ ] `j_darz25` (JNJ FY2025), 1 chunk(s)
+- [x] `j_darz25` (JNJ FY2025), 1 chunk(s)
     - `JNJ_FY2025_ITEM1_0011`: ... FASPRO (daratumumab and hyaluronidase-fihj), accounted for approximately 15.0% of the Company's total revenues for fiscal 2025. Genmab A/S owns two patent families related to DARZALEX, a...  (https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm)
 
 ## v2_q37  [cross_year]  MSFT FY2025, MSFT FY2026
@@ -338,9 +344,10 @@ Open the filing URL, find the passage, and tick the box if the chunk and the ans
 ## v2_q38  [cross_company]  AAPL FY2025, MSFT FY2026
 **Q:** Which spent more on research and development, Apple in fiscal 2025 or Microsoft in fiscal 2026, and by how much?
 **Gold answer:** Microsoft, by $1,012 million ($35,562 million vs Apple's $34,550 million).
-- [ ] `a_rd25` (AAPL FY2025), 2 chunk(s)
+- [ ] `a_rd25` (AAPL FY2025), 3 chunk(s)
     - `AAPL_FY2025_ITEM7_0007`: ...(dollars in millions): 2025 | Change | 2024 | Change | 2023 Research and development | $34,550 | 10% | $31,370 | 5% | $29,915 Percentage of total net sale...  (https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm)
     - `AAPL_FY2025_ITEM8_0000`: ...ss margin | 195,201 | 180,683 | 169,148 Operating expenses: Research and development | 34,550 | 31,370 | 29,915 Selling, general and administrative | 27,...  (https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm)
+    - `AAPL_FY2025_ITEM8_0048`: ...| (58,617) | (35,141) | (13,779) | (17,724) | — | (220,960) Research and development | — | — | — | — | — | (34,550) | (34,550) Selling and marketing | (10,174) | (4,676) | (2,...  (https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm)
 - [ ] `m_rd26` (MSFT FY2026), 2 chunk(s)
     - `MSFT_FY2026_ITEM7_0017`: ...lions, except percentages) | 2026 | 2025 | PercentageChange Research and development | $35,562 | $32,488 | 9% As a percent of revenue | 11% | 12% | (1)ppt...  (https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm)
     - `MSFT_FY2026_ITEM8_0000`: ... 87,831 | 74,114 Gross margin | 225,465 | 193,893 | 171,008 Research and development | 35,562 | 32,488 | 29,510 Sales and marketing | 26,710 | 25,654 | 2...  (https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm)

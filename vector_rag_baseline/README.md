@@ -14,7 +14,7 @@ Seed questions (golden set v2) on three companies: Johnson & Johnson, Apple, Mic
 
 Ordered by type, ids q01-q40. `draft_qid` in the jsonl is the id used while drafting.
 
-Gold chunk ids are pattern-matched; numbers and key terms in every gold answer were checked automatically against the gold chunks. A by-hand spot-check against the 10-Ks is still pending (`golden_v2_review.md`).
+Gold chunk ids are pattern-matched; numbers and key terms in every gold answer were checked automatically against the gold chunks. The numeric questions (`answer_kind` = numeric, 26 of 40) were reviewed by hand against the filings on 2026-11-18; the 14 text-answer questions (q11, q15, q16-q27) are not yet hand-verified (`golden_v2_review.md`).
 
 Files: `questions_v2.jsonl`, `golden_v2_review.md`, `build_questions_v2.py` (rebuilds both from `data/chunks.jsonl`).
 

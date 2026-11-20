@@ -5,7 +5,10 @@
 import ast
 import collections
 import csv
+import re
 import sys
+
+csv.field_size_limit(2**31 - 1)  # document nodes hold whole chunks (Windows C long is 32-bit, so not sys.maxsize)
 
 d = sys.argv[1] if len(sys.argv) > 1 else "data/graph/fin10k_v0/processed/stage1"
 ok = True
@@ -75,5 +78,44 @@ for k, ns in sorted(by_kind.items(), key=lambda x: -len(x[1])):
         linked = sum(1 for n in ns if mention[n])
     top = max(ns, key=lambda n: deg[n])
     print(f"{k:<14}{len(ns):>7}{iso:>10}{linked:>13} ({linked / len(ns):4.0%}){deg[top]:>12}  {top[:50]}")
+
+# Source fields on Value nodes (traceability): every cited chunk must exist, belong to a filing
+# that reported the number, and show the number as printed.
+SOURCE_KEYS = ["source_filing", "source_accession", "source_url", "source_section", "source_chunk_id",
+               "source_chunk_ids", "xbrl_fact_id", "xbrl_context_ref", "printed_value"]
+attrs = {r["name"]: ast.literal_eval(r["attributes"]) for r in nodes}
+values = [n for n in names if kind[n] == "Value"]
+if values and "source_filing" in attrs[values[0]]:
+    missing, wrong_filing, no_number, no_doc, bad_url = [], [], [], [], []
+    for v in values:
+        a = attrs[v]
+        if any(a.get(k) in (None, "", []) for k in SOURCE_KEYS):
+            missing.append(v)
+            continue
+        if a["source_accession"].replace("-", "") not in a["source_url"]:
+            bad_url.append(v)
+        num = re.compile(r"(?<![\d.,])" + re.escape(a["printed_value"]) + r"(?![\d]|\.\d|,\d)")
+        for cid in a["source_chunk_ids"]:
+            if node_type.get(cid) != "document":
+                no_doc.append((v, cid))
+                continue
+            d = attrs[cid]
+            filing = f"{d['ticker']} {d['fiscal_year']}"
+            if (cid == a["source_chunk_id"] and filing != a["source_filing"]) or filing not in a["source_filings"]:
+                wrong_filing.append((v, cid))
+            if not num.search(d["content"].split("\n", 1)[-1]):
+                no_number.append((v, cid))
+    n_cites = sum(len(attrs[v].get("source_chunk_ids") or []) for v in values)
+    print(f"Value sources: {len(values) - len(missing)} of {len(values)} Values have all source fields; "
+          f"{n_cites} cited chunks checked")
+    for label, bad in (("missing source fields", missing), ("cited chunk is not a document node", no_doc),
+                       ("cited chunk from a filing that did not report the number", wrong_filing),
+                       ("cited chunk does not show the printed number", no_number),
+                       ("source_url does not match the accession", bad_url)):
+        if bad:
+            fail(f"{len(bad)} {label}, e.g. {bad[0]}")
+    secs = collections.Counter(attrs[v].get("source_section") for v in values)
+    print("primary source section:", dict(secs.most_common()))
+
 print("PASS" if ok else "FAILED")
 sys.exit(0 if ok else 1)

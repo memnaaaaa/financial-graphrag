@@ -8,12 +8,15 @@ Phase 1 (this script, no LLM):
     tags inside the 10-K. Every number becomes its own Value node (type "attribute").
   - Document nodes = the chunks in data/chunks/chunks.jsonl (named by chunk_id)
   - is_mentioned_in edges from entities and Values to the chunks whose text contains them
+  - Source fields on every Value (filing, accession, URL, section, chunk, XBRL fact id): where the
+    number is printed in the 10-K. All places it is printed go to <name>/value_sources.csv.
 
 Run from the repo root:
     python data/graph/build_graph.py                       # JNJ AAPL MSFT, both fiscal years
     python data/graph/build_graph.py --tickers JNJ AAPL MSFT JPM --name fin10k_v1
 
-Output: data/graph/<name>/processed/stage1/{nodes,relations,edges}.csv plus graph_stats.json.
+Output: data/graph/<name>/processed/stage1/{nodes,relations,edges}.csv plus graph_stats.json
+and value_sources.csv.
 """
 import argparse
 import collections
@@ -25,6 +28,9 @@ import re
 import sys
 
 from lxml import etree, html
+
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "chunks"))
+import build_chunks  # noqa: E402  (same HTML walk and sections as the chunks, to place each number)
 
 NS = {
     "ix": "http://www.xbrl.org/2013/inlineXBRL",
@@ -229,6 +235,7 @@ class Graph:
         self.nodes = {}          # name -> (type, attributes)
         self.edges = {}          # (source, relation, target) -> attributes
         self.aliases = {}        # name -> (list of text aliases, scope ticker or None)
+        self.value_sources = []  # one row per place a Value's number is printed (value_sources.csv)
 
     def node(self, name, ntype, **attrs):
         if name in self.nodes:
@@ -313,8 +320,55 @@ def parse_xbrl(path):
         if unit not in ("USD", "USD/shares"):
             continue
         facts.append(dict(concept=concept, start=start, end=end or instant,
-                          instant=bool(instant), dims=dims, value=value, text=text, unit=unit))
+                          instant=bool(instant), dims=dims, value=value, text=text, unit=unit,
+                          fact_id=f.get("id"), context_ref=f.get("contextRef")))
     return facts
+
+
+# ---------------------------------------------------------------- where each number is printed
+def locate_facts(tenk_path, filing_chunks, printed):
+    """Place inline-XBRL facts in the filing's sections and chunks.
+
+    Walks the 10-K exactly as build_chunks.py does (same blocks, same sections), so each fact's
+    paragraph or table row is known. The chunk is the first one of that section, at or after the
+    previous fact's chunk (blocks and chunks run in the same order), that has a line taken from that
+    block and showing the printed number; following chunks that repeat the line (overlap) are added.
+
+    filing_chunks: {section: [(chunk_id, [body lines])]} in chunk order.
+    printed: {fact_id: text as printed}, the facts to place.
+    Returns {fact_id: (section, section_title, [chunk_ids])}; chunk_ids is empty if no chunk matched.
+    Facts hidden from the reader (not in the text) are left out.
+    """
+    blocks = build_chunks.html_to_blocks(tenk_path, track_facts=True)
+    spans, _ = build_chunks.find_sections(blocks)
+    out, ptr = {}, collections.Counter()
+
+    def holds(lines, block_text, num):
+        return any(num in ln and ln in block_text for ln in lines)
+
+    for s, e, code in spans:
+        sec, title = build_chunks.section_label(code)
+        cks = filing_chunks.get(sec, [])
+        for b in blocks[s:e]:
+            for fid in b.get("fact_ids", []):
+                if fid not in printed:
+                    continue
+                num = printed[fid]
+                hit = next((i for i in range(ptr[sec], len(cks)) if holds(cks[i][1], b["text"], num)), None)
+                if hit is None:   # out of order (should be rare): search the whole section
+                    hit = next((i for i in range(len(cks)) if holds(cks[i][1], b["text"], num)), None)
+                ids = []
+                if hit is not None:
+                    ptr[sec] = max(ptr[sec], hit)
+                    j = hit
+                    while j < len(cks) and holds(cks[j][1], b["text"], num):
+                        ids.append(cks[j][0])
+                        j += 1
+                out[fid] = (sec, title, ids)
+    return out
+
+
+SECTION_RANK = {"Item 8": 0, "Item 7": 1}   # primary source: audited statements first, then MD&A
 
 
 # ---------------------------------------------------------------- build
@@ -368,6 +422,20 @@ def build(repo, tickers):
     iprd_tickers = {r["ticker"] for r, facts in facts_by_filing
                     if any(f["concept"] == "ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost" for f in facts)}
     filing_row = {(r["ticker"], r["fiscal_year"]): r for r in manifest}
+
+    # Where each kept fact is printed: section and chunk(s) of its own filing
+    located = {}
+    for r, facts in facts_by_filing:
+        t, fy = r["ticker"], r["fiscal_year"]
+        by_sec = collections.defaultdict(list)
+        for c in sorted((c for c in chunks if c["ticker"] == t and c["fiscal_year"] == fy
+                         and c["document"] == "10-K"), key=lambda c: (c["section"], c["chunk_index"])):
+            by_sec[c["section"]].append((c["chunk_id"], c["text"].split("\n")[1:]))
+        path = os.path.join(repo, "data/edgar_10k/raw", t, fy, r["tenk_file"])
+        printed = {f["fact_id"]: f["text"] for f in facts if f["fact_id"]}
+        for fid, loc in locate_facts(path, by_sec, printed).items():
+            located[(t, fy, fid)] = loc
+
     merged, conflicts = {}, []
     for r, facts in facts_by_filing:
         t, fy = r["ticker"], r["fiscal_year"]
@@ -379,6 +447,9 @@ def build(repo, tickers):
             key = (t, metric, f["start"], f["end"], tuple(sorted(f["dims"].items())))
             prev = merged.get(key)
             f.update(ticker=t, metric=metric, filings=[fy])
+            sec, title, cids = located.get((t, fy, f["fact_id"]), (None, None, []))
+            occ = dict(filing=fy, fact_id=f["fact_id"], context_ref=f["context_ref"], concept=f["concept"],
+                       text=f["text"], value=f["value"], section=sec, section_title=title, chunk_ids=cids)
             if prev and prev["concept"] != f["concept"]:
                 if abs(prev["value"] - f["value"]) > 0.5:
                     conflicts.append((t, metric, f["end"], prev["concept"], prev["value"], f["concept"], f["value"]))
@@ -386,6 +457,7 @@ def build(repo, tickers):
                     prev["filings"] = sorted(set(prev["filings"]) | {fy})
                     continue
                 f["texts"] = {f["text"]}
+                f["occ"] = [occ]
                 merged[key] = f
                 continue
             if prev:
@@ -393,8 +465,10 @@ def build(repo, tickers):
                 if abs(prev["value"] - f["value"]) > 0.5:
                     f["earlier_reported"] = prev["value"]
                 f["texts"] = prev["texts"] | {f["text"]}
+                f["occ"] = prev["occ"] + [occ]
             else:
                 f["texts"] = {f["text"]}
+                f["occ"] = [occ]
             merged[key] = f
 
     n_values = 0
@@ -444,6 +518,24 @@ def build(repo, tickers):
             attrs["period_start"] = f["start"]
         if "earlier_reported" in f:
             attrs["earlier_reported_value"] = f["earlier_reported"]
+        # Source: one place where this exact number is printed. Only occurrences showing the value
+        # kept in the graph count (a restated older figure does not). Newest filing first, then
+        # Item 8 (audited statements), then Item 7, then document order.
+        same = [o for o in f["occ"] if abs(o["value"] - f["value"]) <= 0.5]
+        order = sorted(range(len(same)), key=lambda i: (
+            -int(same[i]["filing"][2:]), same[i]["section"] is None,
+            SECTION_RANK.get(same[i]["section"], 2), not same[i]["chunk_ids"], i))
+        top = same[order[0]]
+        row = filing_row[(t, top["filing"])]
+        chunk_ids = list(top["chunk_ids"])
+        for i in order[1:]:
+            chunk_ids += [c for c in same[i]["chunk_ids"] if c not in chunk_ids]
+        attrs.update(source_filing=f"{t} {top['filing']}", source_accession=row["accession"],
+                     source_url=row["tenk_url"],
+                     source_fact_url=f"{row['tenk_url']}#{top['fact_id']}" if top["fact_id"] else None,
+                     source_section=top["section"], source_chunk_id=(top["chunk_ids"] or [None])[0],
+                     source_chunk_ids=chunk_ids, xbrl_fact_id=top["fact_id"],
+                     xbrl_context_ref=top["context_ref"], printed_value=top["text"])
         assert vname not in g.nodes, f"duplicate value name {vname}"
         g.node(vname, "attribute", **attrs)
         n_values += 1
@@ -454,6 +546,16 @@ def build(repo, tickers):
         if geo:
             g.edge(vname, "in_location", geo)
         f["vname"], f["subject"] = vname, subject
+        for o in f["occ"]:
+            row = filing_row[(t, o["filing"])]
+            g.value_sources.append(dict(
+                value_node=vname, is_primary=o is top, filing=f"{t} {o['filing']}",
+                accession=row["accession"], section=o["section"] or "",
+                chunk_ids=";".join(o["chunk_ids"]), xbrl_concept="us-gaap:" + o["concept"],
+                xbrl_fact_id=o["fact_id"] or "", xbrl_context_ref=o["context_ref"] or "",
+                printed_value=o["text"], reported_value=o["value"],
+                same_as_graph_value=abs(o["value"] - f["value"]) <= 0.5,
+                fact_url=f"{row['tenk_url']}#{o['fact_id']}" if o["fact_id"] else ""))
 
     # Document nodes
     for c in chunks:
@@ -506,6 +608,15 @@ def build(repo, tickers):
             if num_pat.search(b) and need.search(b):
                 g.edge(f["vname"], "is_mentioned_in", cid)
 
+    # is_mentioned_in: Value nodes -> the chunks where their XBRL tag is printed (exact location,
+    # so this also links numbers the text rule above misses, e.g. a table without the product name)
+    n_loc_edges = 0
+    for f in merged.values():
+        for cid in g.nodes[f["vname"]][1]["source_chunk_ids"]:
+            n_loc_edges += (f["vname"], "is_mentioned_in", cid) not in g.edges
+            g.edge(f["vname"], "is_mentioned_in", cid)
+    print(f"{n_loc_edges} Value -> chunk links added from the XBRL tag locations", file=sys.stderr)
+
     for c in conflicts:
         print("concept conflict (kept the first): %s %s %s: %s=%s vs %s=%s" % c, file=sys.stderr)
     print(f"{len(conflicts)} concept conflicts; acquired IPR&D split out for: {sorted(iprd_tickers) or 'none'}",
@@ -541,12 +652,27 @@ def main():
     g, n_values = build(a.repo, set(a.tickers))
     out = os.path.join(a.repo, "data/graph", a.name, "processed/stage1")
     write(g, out)
+    # Outside stage1 on purpose: gfmrag only reads nodes/relations/edges.csv there.
+    with open(os.path.join(a.repo, "data/graph", a.name, "value_sources.csv"), "w", newline="",
+              encoding="utf-8") as fh:
+        w = csv.DictWriter(fh, fieldnames=list(g.value_sources[0]))
+        w.writeheader()
+        w.writerows(sorted(g.value_sources, key=lambda r: (r["value_node"], not r["is_primary"],
+                                                            r["filing"], r["xbrl_fact_id"])))
     kinds = collections.Counter(attrs.get("kind", ntype) for ntype, attrs in g.nodes.values())
     types = collections.Counter(ntype for ntype, _ in g.nodes.values())
     rels = collections.Counter(r for _, r, _ in g.edges)
     stats = {"tickers": sorted(a.tickers), "nodes": len(g.nodes), "edges": len(g.edges),
              "node_types": dict(types), "node_kinds": dict(kinds.most_common()),
              "relations": dict(rels.most_common())}
+    vals = [attrs for _, attrs in g.nodes.values() if attrs.get("kind") == "Value"]
+    stats["value_sources"] = {
+        "values": len(vals),
+        "with_section": sum(1 for v in vals if v["source_section"]),
+        "with_chunk": sum(1 for v in vals if v["source_chunk_id"]),
+        "primary_section": dict(collections.Counter(v["source_section"] or "not printed" for v in vals).most_common()),
+        "printed_occurrences": len(g.value_sources),
+    }
     json.dump(stats, open(os.path.join(a.repo, "data/graph", a.name, "graph_stats.json"), "w"), indent=2)
     print(json.dumps(stats, indent=2))
     print("wrote", out, file=sys.stderr)

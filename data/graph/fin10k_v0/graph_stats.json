@@ -5,7 +5,7 @@
     "MSFT"
   ],
   "nodes": 3622,
-  "edges": 14440,
+  "edges": 14875,
   "node_types": {
     "entity": 670,
     "attribute": 1097,
@@ -24,7 +24,7 @@
     "Company": 3
   },
   "relations": {
-    "is_mentioned_in": 9711,
+    "is_mentioned_in": 10146,
     "has_value": 1097,
     "of_metric": 1097,
     "for_period": 1097,
@@ -35,5 +35,14 @@
     "part_of": 19,
     "has_segment": 11,
     "has_business_line": 11
+  },
+  "value_sources": {
+    "values": 1097,
+    "with_section": 1097,
+    "with_chunk": 1097,
+    "primary_section": {
+      "Item 8": 1097
+    },
+    "printed_occurrences": 1911
   }
 }

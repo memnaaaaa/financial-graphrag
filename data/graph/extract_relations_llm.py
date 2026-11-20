@@ -21,6 +21,7 @@ import csv
 import json
 import os
 import re
+import shutil
 import sys
 import time
 import urllib.error
@@ -368,6 +369,10 @@ def build(a):
         w.writerow(["source", "relation", "target", "attributes"])
         for (s, r, t), at in sorted(edges.items()):
             w.writerow([s, r, t, repr(at)])
+    # Value nodes keep their source fields; the list of every place each number is printed comes along too
+    src = os.path.join(a.repo, "data/graph", a.base, "value_sources.csv")
+    if os.path.exists(src):
+        shutil.copyfile(src, os.path.join(a.repo, "data/graph", a.name, "value_sources.csv"))
     rep = os.path.join(a.repo, "data/graph", a.name, "merge_report.csv")
     with open(rep, "w", newline="", encoding="utf-8") as fh:
         w = csv.writer(fh)

@@ -104,8 +104,18 @@ def _is_toc_table(rows):
     return toc / len(rows) >= 0.5
 
 
-def html_to_blocks(path):
-    """Ordered list of blocks {"kind": "text" | "row" | "table_end", "text": str}."""
+def _fact_ids(el):
+    """ids of the inline-XBRL numbers (ix:nonFraction) inside an element, in document order."""
+    return [e.get("id") for e in el.iter() if isinstance(e.tag, str)
+            and e.tag.lower() == "ix:nonfraction" and e.get("id")]
+
+
+def html_to_blocks(path, track_facts=False):
+    """Ordered list of blocks {"kind": "text" | "row" | "table_end", "text": str}.
+
+    With track_facts=True, a block that shows inline-XBRL numbers also gets "fact_ids" (the ids of
+    its ix:nonFraction tags), so the graph can say in which section and chunk a number is printed.
+    The block texts are the same either way."""
     raw = open(path, "rb").read()
     # strip the SEC SGML wrapper some files carry (<DOCUMENT><TYPE>EX-21 ...<TEXT>); its unclosed tags confuse HTML parsing
     raw = re.sub(rb"(?i)<(type|sequence|filename|description)>[^<\n]*", b"", raw)
@@ -120,12 +130,16 @@ def html_to_blocks(path):
         el.drop_tree()
 
     blocks, buf = [], []
+    pending = []  # fact ids seen since the last text block (track_facts only)
 
     def flush():
         t = _clean(" ".join(buf))
         buf.clear()
         if t:
             blocks.append({"kind": "text", "text": t})
+            if pending:
+                blocks[-1]["fact_ids"] = pending[:]
+                pending.clear()
 
     def walk(el):
         if not isinstance(el.tag, str):  # comments / processing instructions: keep only their tail
@@ -135,10 +149,13 @@ def html_to_blocks(path):
         tag = el.tag.split("}")[-1].lower()
         if tag == "table":
             flush()
-            rows = [c for c in (_row_cells(tr) for tr in el.iter("tr")) if c]
+            trs = [(cells, tr) for cells, tr in ((_row_cells(tr), tr) for tr in el.iter("tr")) if cells]
+            rows = [cells for cells, _ in trs]
             if not _is_toc_table(rows):
-                for cells in rows:
+                for cells, tr in trs:
                     blocks.append({"kind": "row", "text": " | ".join(cells)})
+                    if track_facts and _fact_ids(tr):
+                        blocks[-1]["fact_ids"] = _fact_ids(tr)
                 blocks.append({"kind": "table_end", "text": ""})
             if el.tail:
                 buf.append(el.tail)
@@ -146,6 +163,8 @@ def html_to_blocks(path):
         is_block = tag in BLOCK_TAGS
         if is_block:
             flush()
+        if track_facts and tag == "ix:nonfraction" and el.get("id"):
+            pending.append(el.get("id"))
         if el.text:
             buf.append(el.text)
         for ch in el:

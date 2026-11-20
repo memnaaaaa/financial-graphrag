@@ -4,11 +4,26 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 Q = [json.loads(l) for l in open(ROOT / "data/questions.jsonl", encoding="utf-8")]
-RUN = ROOT / "results/full_run_2/summary.json"
+RUN = ROOT / "results/full_run_2_no_jnj/summary.json"
 S = json.load(open(RUN)) if RUN.exists() else []
 validated = [q for q in Q if q["gold_source"].startswith("llm-labeler")]
 types = {t: sum(q["type"] == t for q in Q) for t in ("single", "within", "cross")}
 replies = sorted(p.stem for p in (ROOT / "data/labeling/replies").glob("q*.json"))
+ALL19 = ROOT / "data/questions_all19.jsonl"
+removed = []
+if ALL19.exists():
+    allq = [json.loads(l) for l in open(ALL19, encoding="utf-8")]
+    kept = {q["qid"] for q in Q}
+    removed = [q for q in allq if q["qid"] not in kept]
+orig_p = ROOT / "data/questions_pattern_gold.jsonl"
+cov_txt = ""
+if orig_p.exists() and all((ROOT / f"data/labeling/{q['qid']}.txt").exists() for q in Q):
+    orig = {json.loads(l)["qid"]: json.loads(l) for l in open(orig_p, encoding="utf-8")}
+    tot = hit = 0
+    for q in Q:
+        pool = (ROOT / f"data/labeling/{q['qid']}.txt").read_text(encoding="utf-8")
+        g = orig[q["qid"]]["gold_chunk_ids"]; tot += len(g); hit += sum(f'"{x}"' in pool for x in g)
+    cov_txt = f"{hit} of the {tot}"
 name = {"bge-small": "bge-small", "bge-small+rerank": "bge-small + rerank", "distilbert": "DistilBERT",
         "distilbert+rerank": "DistilBERT + rerank"}
 
@@ -36,7 +51,8 @@ against the filings.
 |---|---|
 | `data/questions.jsonl` | The golden set currently used by the evaluation. One JSON object per question. |
 | `data/questions_pattern_gold.jsonl` | The original pattern-matched labels, kept as a backup and for comparison. |
-| `data/labeling/q01.txt` ... `q19.txt` | **Not stored in this repo** (they contain chunk text). Candidate-chunk pools sent to the labeler (40 chunks for single-filing questions, 72 for two-filing questions, shuffled, no reference answer). Regenerate them with `python scripts/build_label_pools.py` once `data/chunks.jsonl` is in place. |
+| `data/questions_all19.jsonl` | Backup of the full 19-question set before the J&J questions were removed. |
+| `data/labeling/qNN.txt` | **Not stored in this repo** (they contain chunk text). Candidate-chunk pools sent to the labeler (40 chunks for single-filing questions, 72 for two-filing questions, shuffled, no reference answer). Regenerate them with `python scripts/build_label_pools.py` once `data/chunks.jsonl` is in place. |
 | `data/labeling/PROMPT.txt` | The fixed labeler prompt. |
 | `data/labeling/replies/qNN.json` | Labeler replies (saved with the per-chunk `reason` text omitted). |
 | `scripts/build_questions.py` | Builds the pattern-based gold labels. |
@@ -82,13 +98,17 @@ against the filings.
 for q in Q:
     ids = "<br>".join(f"`{i}`" for i in q["gold_chunk_ids"])
     g += f"| {q['qid']} | {q['type']} | {q['question']} | {ids} | {q['gold_source'].split(' (')[0]} |\n"
+if removed:
+    g += "\n## Removed questions\n\nThese questions were removed from the golden set because they involve Johnson & Johnson. The full set is "
+    g += "kept in `data/questions_all19.jsonl`. Johnson & Johnson chunks remain in the corpus, where they act as distractors.\n\n"
+    g += "| Q | Question |\n|---|---|\n" + "".join(f"| {q['qid']} | {q['question']} |\n" for q in removed)
 g += f"""
 ## Known limitations
 
 * **Mostly unverified.** Only {len(validated)} of {len(Q)} questions have validated labels.
 * **Pattern labels can miss chunks.** For q01 the pattern missed `AAPL_FY2025_ITEM8_0000` (a valid income-statement chunk
   that writes the figure without a `$`), which the labeler found.
-* **Pooling limit.** A labeler can only label chunks it is shown. The pools contained 51 of the 57 pattern-based gold chunks, so
+* **Pooling limit.** A labeler can only label chunks it is shown. The pools contained {cov_txt} pattern-based gold chunks, so
   facts phrased very differently from the question (for example "associates" for "employees") may need a second pool.
 * **Duplicates are counted.** A fact repeated in several chunks gives a question several gold chunks, which lowers recall and
   precision even when a correct chunk is found. Use hit@k alongside recall@k.
@@ -139,7 +159,7 @@ chunks.jsonl -> embed (bge-small / DistilBERT) -> FAISS IndexFlatIP -> dense top
 | Generator / judge | Gemini 2.5 Flash-Lite / Gemini 2.5 Flash, temperature 0 |
 | Metrics | precision@k, recall@k, hit@k, judge accuracy / hallucination / missing rate, latency |
 
-## Results (run `full_run_2`, {len(Q)} questions, 7,339 chunks)
+## Results (`full_run_2` re-aggregated on the {len(Q)}-question golden set, 7,339 chunks in the corpus)
 
 | Config | k | P@k | R@k | Hit@k | Correct | Halluc. | Missing | Retrieval ms | End-to-end ms |
 |---|---|---|---|---|---|---|---|---|---|
@@ -147,7 +167,7 @@ chunks.jsonl -> embed (bge-small / DistilBERT) -> FAISS IndexFlatIP -> dense top
 Definitions of every metric are in `docs/baseline_report_v2.docx` (Appendix A). Main findings: retrieval never picks the wrong
 company but picks the wrong fiscal year of the right company 43% of the time; cross-company questions almost never retrieve
 both companies' answer chunks; generation is about 94% of end-to-end latency. Raw per-question results are in
-`results/full_run_1/` and `results/full_run_2/`.
+`results/full_run_1/`, `results/full_run_2/` (19 questions) and `results/full_run_2_no_jnj/` (the table above; same run without the J&J questions, see its `NOTE.txt`).
 
 ## Quick start
 
@@ -176,7 +196,7 @@ by setting `GOOGLE_CLOUD_PROJECT` (and signing in with `gcloud auth login`). Mac
 | `rag/` | data loading, embedding, FAISS index, retrieval and rerank, generation, judge, metrics |
 | `scripts/` | `run_eval.py`, `smoke_test.py`, `build_questions.py`, `build_label_pools.py`, `ingest_labels.py`, `make_docs.py` |
 | `data/` | `questions.jsonl` (golden set), `questions_pattern_gold.jsonl`, `labeling/` (labeler pools, prompt, replies), `dummy_*` stand-ins |
-| `results/` | `full_run_1/`, `full_run_2/` (`per_question.jsonl` and `summary.json`) |
+| `results/` | `full_run_1/`, `full_run_2/`, `full_run_2_no_jnj/` (`per_question.jsonl` and `summary.json`) |
 | `docs/` | `baseline_report_v2.docx`: flow, results, explanations, metric definitions |
 | `tests/` | unit tests for metrics, the judge parser and the data loader |
 
@@ -188,5 +208,6 @@ by setting `GOOGLE_CLOUD_PROJECT` (and signing in with `gcloud auth login`). Mac
 * Retrieval picks the wrong fiscal year of the right company often; a year filter and a BM25 or hybrid baseline are the
   next experiments.
 """
-(ROOT / "README.md").write_text(r, encoding="utf-8")
+# README.md is now maintained by hand (Nov 19); the generated copy goes to docs/ instead of overwriting it
+(ROOT / "docs/README_generated_v1.md").write_text(r, encoding="utf-8")
 print("wrote README.md and GOLDEN_SET.md")

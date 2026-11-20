@@ -94,6 +94,26 @@ Each wrong answer is tagged with the first stage that failed (graph, entity link
 4. **Multi-hop questions need every fact.** Among bge-small + rerank failures at k = 10, 6 of 11 questions were missing two or more facts; one missing hop is enough to fail the question.
 5. **Generation errors are rare (1 per configuration at k = 10).** Example: q37 (R&D, Apple FY2025 vs Microsoft FY2026): both figures were retrieved and cited correctly ($34,550M and $35,562M), but the model named the wrong winner. The traceability checks pass on such an answer; only the judge catches it.
 
+### Cross-year and cross-company: what goes wrong
+
+These two types fail for different reasons. In both, retrieval does not pull the right passages; wrong-fiscal-year focus is not the main cause.
+
+| | Cross-year (q33-q36) | Cross-company (q37-q39) |
+|---|---|---|
+| Correct answers (k = 10) | 0-50% | 0% in every configuration |
+| Every gold fact retrieved (k = 10) | 0-50% | 0-33% |
+| What was retrieved | chunks from **both** years (q33: 4 FY2024 + 6 FY2025, bge-small + rerank) | chunks from **one** company (q39: all 10 J&J; q38: 9 of 10 J&J) |
+| Why it fails | the passage that holds the fact (for example the headcount sentence of each year) is not ranked in the top k | one question vector sits near one company's text, so the other companies' facts never reach Gemini |
+| What the model does | cannot find the figure for one year, so it answers "missing" | cannot compare, so it refuses (or, rarely, compares wrongly) |
+
+A wrong fiscal year of the right company is rare: 2 missing facts across all four configurations, DistilBERT only.
+
+**What would fix them (not yet tested, except the filter):**
+- **Cross-year:** retrieve per filing (one search per fiscal year), then merge, so each year's passage gets its own top-k.
+- **Cross-company:** retrieve per company (one search per company), then merge.
+- **A company and fiscal-year filter alone is not enough.** In the filter test (bge-small, k = 10) it left cross-year and cross-company at 0% of questions with every fact retrieved, because it still ran one pooled search over the allowed filings.
+- **Graph retrieval** should help both by starting from several company and filing nodes at once; that is what the G-Reasoner comparison will show.
+
 ### Hardest and easiest questions (k = 10)
 
 - **Wrong in all four configurations (9):** q11 (relation), q23 (relation_text), q28 (relation_deep), q29 (relation_deep), q33 (cross_year), q34 (cross_year), q37 (cross_company), q38 (cross_company), q39 (cross_company).

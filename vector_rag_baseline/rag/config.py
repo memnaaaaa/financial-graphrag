@@ -33,11 +33,12 @@ RERANKER = "cross-encoder/ms-marco-MiniLM-L-6-v2"
 RERANK_POOL = 20
 KS = (5, 10)
 
-GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash-lite")  # generator
+AGREED_GEMINI = "gemini-3.5-flash-lite"  # the one model the team agreed on (Nov 19); 2.5 Flash-Lite / Flash are closed to new keys
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", AGREED_GEMINI)  # generator
 GROQ_MODEL = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
 GCP_PROJECT = os.getenv("GOOGLE_CLOUD_PROJECT", "")  # Vertex AI fallback; set via env or rag/local_config.py
 VERTEX_LLAMA_MODEL = os.getenv("VERTEX_LLAMA_MODEL", "meta/llama-3.3-70b-instruct-maas")
-JUDGE_MODEL = os.getenv("JUDGE_MODEL", "gemini-2.5-flash")  # judge (stronger than generator)
+JUDGE_MODEL = os.getenv("JUDGE_MODEL", AGREED_GEMINI)  # judge: same agreed model, temperature 0, kept as in rag/judge.py
 GCP_LOCATION = os.getenv("GOOGLE_CLOUD_LOCATION", "us-central1")
 GCLOUD_BIN = os.getenv("GCLOUD_BIN", "")
 TEMPERATURE = 0.0

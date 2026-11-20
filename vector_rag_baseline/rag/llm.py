@@ -139,11 +139,6 @@ class VertexLlama:
         return _retry(call)
 
 
-def get_judge_llm():
-    """Groq if GROQ_API_KEY is set, else Llama on company Vertex AI."""
-    return Groq() if os.getenv("GROQ_API_KEY") else VertexLlama()
-
-
 class GeminiJudge(Gemini):
     """Judge model (Gemini Flash) on company Vertex AI; same chat() interface as Groq."""
 
@@ -165,5 +160,6 @@ class GeminiJudge(Gemini):
 
 
 def get_judge_llm():
-    """Groq if GROQ_API_KEY is set, else Gemini Flash on company Vertex AI."""
-    return Groq() if os.getenv("GROQ_API_KEY") else GeminiJudge()
+    """The judge is Gemini (JUDGE_MODEL). Groq is used only if JUDGE_BACKEND=groq is set explicitly, so a stray
+    GROQ_API_KEY in .env can never change which model judges."""
+    return Groq() if os.getenv("JUDGE_BACKEND", "").lower() == "groq" else GeminiJudge()

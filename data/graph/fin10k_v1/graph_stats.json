@@ -1,0 +1,17 @@
+{
+  "base": "fin10k_v0",
+  "model": "gemini-3.5-flash-lite",
+  "chunks_in_cache": 623,
+  "triples_kept": 985,
+  "triples_dropped": 41,
+  "llm_edges": 382,
+  "new_nodes": 219,
+  "name_matching": {
+    "exact": 1266,
+    "new": 599,
+    "prefix": 83,
+    "ambiguous": 22
+  },
+  "nodes": 3841,
+  "edges": 15884
+}

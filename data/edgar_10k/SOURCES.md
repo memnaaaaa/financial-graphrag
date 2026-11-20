@@ -1,6 +1,9 @@
 # 10-K corpus: sources and provenance
 
 Selected Oct 5, 2026 by Mohini Tiwari for CSC 8851 (Financial GraphRAG project).
+
+> **Scope since Nov 2026:** the project uses only Johnson & Johnson, Apple and Microsoft (6 filings).
+> The other 5 companies stay listed and downloadable here but are not chunked or in the graph.
 Every filing below was looked up on SEC EDGAR on Oct 5, 2026: company and CIK from
 [company_tickers.json](https://www.sec.gov/files/company_tickers.json), filing list from the
 EDGAR submissions API (`data.sec.gov/submissions/CIK##########.json`), and document names, types

@@ -1,25 +1,39 @@
-# Knowledge graph for G-reasoner (`fin10k_v0`)
+# Knowledge graph for G-reasoner (`fin10k_v0`, `fin10k_v1`)
 
-Built Oct 14, 2026 for **Johnson & Johnson, Apple and Microsoft** (both fiscal years each, 6 filings).
-It uses rules only, with no LLM. The files follow gfmrag's
+Two versions of the graph for **Johnson & Johnson, Apple and Microsoft** (both fiscal years each,
+6 filings):
+
+- **`fin10k_v0`**: rules only, no LLM (Exhibit 21, inline XBRL numbers, text chunks). Built Oct 14;
+  rebuilt Nov 18 (fixed chunks, J&J R&D fix) and Nov 20 (source fields on every Value).
+- **`fin10k_v1`**: `fin10k_v0` plus the relations Gemini extracted from the prose (licences,
+  acquisitions, partners, ...), built Nov 20. **Use this one for G-reasoner from Nov 22.**
+  See [Phase 2](#phase-2-llm-extraction-of-prose-relations-fin10k_v1).
+
+The files follow gfmrag's
 ["bring your own graph"](https://rmanluo.github.io/gfm-rag/latest/workflow/data_format/) format:
 
 ```
-data/graph/fin10k_v0/
-├── graph_stats.json
-├── value_sources.csv   every place each Value's number is printed (not read by gfmrag)
-└── processed/stage1/
-    ├── nodes.csv       name,type,attributes   (3,622 nodes)
-    ├── relations.csv   name,attributes        (11 relations)
-    └── edges.csv       source,relation,target,attributes   (14,875 edges)
+data/graph/
+├── fin10k_v0/
+│   ├── graph_stats.json
+│   ├── value_sources.csv   every place each Value's number is printed (not read by gfmrag)
+│   └── processed/stage1/
+│       ├── nodes.csv       name,type,attributes   (3,622 nodes)
+│       ├── relations.csv   name,attributes        (11 relations)
+│       └── edges.csv       source,relation,target,attributes   (14,875 edges)
+└── fin10k_v1/              same layout (3,841 nodes, 19 relations, 15,884 edges)
+    └── merge_report.csv    every LLM triple: kept or dropped, and which node each name became
 ```
 
-**To use it with gfmrag:** copy the `fin10k_v0` folder into gfmrag's data root and use
-`data_name=fin10k_v0`. Because `processed/stage1/` already exists, gfmrag skips its own
+**To use it with gfmrag:** copy the `fin10k_v1` (or `fin10k_v0`) folder into gfmrag's data root
+and use `data_name=fin10k_v1`. Because `processed/stage1/` already exists, gfmrag skips its own
 LLM graph construction. `attributes` are Python dict literals (`{'kind': 'Product', ...}`),
 which is what gfmrag's loader (`ast.literal_eval`) expects.
 
 ## What is in the graph
+
+This section describes `fin10k_v0`; `fin10k_v1` keeps all of it and adds the nodes and edges listed
+under Phase 2.
 
 `type` is one of gfmrag's three groups: `entity`, `attribute` or `document`. The finer kind is
 in `attributes['kind']`.
@@ -120,6 +134,10 @@ keys when indexing if they hurt retrieval.
 3. **Numbers (inline XBRL):** the 10-K HTML has hidden tags on every number in the financial
    statements. The script keeps:
    - a curated list of 26 concepts (revenue, net income, R&D, EPS, total assets, cash flow, ...);
+   - J&J tags its total R&D as `ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost` and
+     its acquired in-process R&D charges as `ResearchAndDevelopmentExpense`, so the two are kept
+     as separate metrics ("Research and development expense", "Acquired in-process research and
+     development"); fixed Nov 18 (before, J&J's total R&D showed only the $109M charge);
    - only full fiscal years (duration 350–380 days) or fiscal-year-end balances;
    - only facts with no dimension or with segment / sub-segment / product / geography
      dimensions. Facts with other dimensions (debt tranches, equity components) are dropped,
@@ -147,8 +165,10 @@ keys when indexing if they hurt retrieval.
 
 ```
 python data/graph/build_graph.py                           # JNJ AAPL MSFT -> fin10k_v0 (~1 min)
-python data/graph/build_graph.py --tickers JNJ AAPL MSFT JPM --name fin10k_v1
 python data/graph/validate_graph.py data/graph/fin10k_v0/processed/stage1
+python data/graph/extract_relations_llm.py build           # fin10k_v0 + LLM relations -> fin10k_v1
+python data/graph/validate_graph.py data/graph/fin10k_v1/processed/stage1
+python data/graph/build_graph.py --tickers JNJ AAPL MSFT JPM --name fin10k_4co   # other companies: use a new name
 ```
 
 Needs `lxml` plus the raw filings and `data/chunks/chunks.jsonl`. `validate_graph.py` reads the
@@ -157,7 +177,7 @@ that point only to existing nodes and relations. It also prints coverage by kind
 checks the source fields: every cited chunk must be a document node from a filing that reported
 the number and must show `printed_value`; `source_url` must match `source_accession`.
 
-Hand check: 30 randomly sampled edges were checked against the filings, and 29 were correct
+Hand check (Oct 14 build): 30 randomly sampled edges were checked against the filings, and 29 were correct
 (97%). The one error was a place name matched inside a court name ("United States District
 Court"). Results are in `edge_check.csv`.
 
@@ -166,7 +186,7 @@ $11,670M; Apple revenue FY2024 $391,035M and FY2025 $416,161M; Microsoft revenue
 
 ## Known gaps
 
-- **Only structured facts so far.** Relations written in prose are not in the graph yet,
+- **`fin10k_v0` has only structured facts.** Relations written in prose are only in `fin10k_v1`,
   e.g. "DARZALEX is licensed from Genmab", acquisitions, partners and competitors. That is
   phase 2 (below).
 - **XBRL member names are turned into readable names by rule** (`MEMBER_NAMES` in the script
@@ -177,7 +197,7 @@ $11,670M; Apple revenue FY2024 $391,035M and FY2025 $416,161M; Microsoft revenue
   so those 5 product nodes reach chunks only through their Values. (Values without a chunk
   link, 16% before, are fixed by the source fields.)
 
-## Phase 2 (in progress): LLM extraction of prose relations
+## Phase 2: LLM extraction of prose relations (`fin10k_v1`)
 
 `extract_relations_llm.py` asks Gemini (`gemini-3.5-flash-lite`) for relationships that are
 written in sentences rather than tables, then adds them to the graph as a new version,
@@ -204,9 +224,13 @@ the daily free-tier limit), run the same command again; finished chunks are skip
 - keeps a triple only if its evidence quote is really in the chunk (ignoring punctuation),
 - drops triples with generic names such as "security solution vendors" (no capital letter),
 - flips has_product triples written backwards ("DARZALEX has_product J&J"),
-- merges names into existing nodes: exact match first, then a unique short form
-  ("Intra-Cellular" -> "Intra-Cellular Therapies, Inc."). Names that could match several nodes
-  ("Shockwave") become new nodes. Every decision is listed in `fin10k_v1/merge_report.csv`,
+- merges names into existing nodes: exact match first (case, punctuation, "Inc./LLC/Ltd." and
+  "U.S."/"US" ignored), then a unique short form ("Intra-Cellular" -> "Intra-Cellular Therapies,
+  Inc."). When several nodes share a name once suffixes are dropped ("ABIOMED, Inc." and
+  "ABIOMED, LTD."), the one spelled like the mention wins. Names that still fit several nodes
+  ("Shockwave", "Ethicon") become one new node. A new node is reused by later mentions of the
+  same name ("XBOX Game Pass" -> "Xbox Game Pass"). Every decision is listed in
+  `fin10k_v1/merge_report.csv`,
 - tags each new edge with `source: 'llm'`, the chunk_ids and the evidence quote.
 
 **Test on 5 chunks:** after three prompt rounds, the output has the key DARZALEX chain
@@ -215,6 +239,32 @@ J&J acquisitions (Intra-Cellular, Halda, Shockwave), Microsoft invests_in OpenAI
 Intelligent Cloud products. Known weak spots: patent ownership is sometimes read as has_product,
 and one acquisition (Abiomed) was inferred rather than stated.
 
-**Status (Oct 15):** 476 of 623 chunks done before the free-tier daily limit; the other 147 will run
-next. The cache and `fin10k_v1` are git-ignored until the run is finished and 30 LLM edges are
-hand-checked. A later rerun with a stronger Gemini model is planned (see Notion).
+**Result (Nov 20, built on `fin10k_v0` with the Value source fields):** all 623 chunks extracted;
+985 triples kept and 41 dropped (21 quote not in the chunk, 17 generic names, 3 head = tail).
+They give 382 new edges, since repeated triples merge:
+
+| Relation | Edges | Relation | Edges |
+| --- | ---: | --- | ---: |
+| has_product | 276 | licensed_from | 13 |
+| competes_with | 29 | invests_in | 8 |
+| partners_with | 18 | supplies_to | 3 |
+| acquired | 18 | manufactures | 2 |
+| subsidiary_of | 15 | | |
+
+`fin10k_v1` has 3,841 nodes (219 new: 156 Product, 59 Organization, 4 Segment) and 15,884 edges
+over 19 relations, and passes `validate_graph.py`, including the Value source checks. Key chains
+are present: Janssen Biotech, Inc. and DARZALEX licensed_from Genmab A/S; Johnson & Johnson
+acquired Intra-Cellular Therapies, Halda Therapeutics, Shockwave Medical and ABIOMED;
+Microsoft invests_in and partners_with OpenAI. `fin10k_v1/value_sources.csv` is copied from
+`fin10k_v0`.
+
+Known weak spots (to be measured by the hand check of 30 LLM edges, Nov 22):
+- patent ownership still read as has_product once (Genmab A/S has_product DARZALEX);
+- some has_product edges between two products point the wrong way (OpenAI API has_product Azure);
+- 4 new "Segment" nodes are licensing programs (e.g. "Open Value"); they link only to generic
+  product nodes with no reported numbers;
+- bare names of acquired businesses ("Shockwave", "V-Wave", "Ethicon") stay separate from the
+  subsidiaries of the same name.
+
+`fin10k_v1` is in git (released to G-reasoner on Nov 21); the Gemini cache (`llm_cache/`) stays
+local. A rerun with a stronger Gemini model is still planned.

@@ -48,6 +48,10 @@ these 3; `--tickers` brings them back). The same file is shared by every system:
    `--twin-threshold`). 750 of 1,855 chunks have a twin. Use it to see whether a retrieval or
    answer error was a wrong-year mix-up.
 
+**Used by the graph:** `data/graph/build_graph.py` calls `html_to_blocks(path, track_facts=True)`
+and `find_sections` from this script to find the section and chunk where each inline-XBRL number
+is printed (the Value source fields). The flag only records the tags' ids; the chunks are the same.
+
 ## Fields (one JSON object per line)
 
 | Field | Example | Meaning |

@@ -220,6 +220,7 @@ SUFFIX = re.compile(r"\b(incorporated|inc|llc|l\.l\.c|ltd|limited|corp|corporati
 
 def norm(name):
     s = name.lower().replace("&", " and ").replace("’", "'")
+    s = re.sub(r"\bu\.s\.(a\.)?", "us", s)                       # "U.S." and "US" are the same
     s = re.sub(r"\((jnj|aapl|msft)\)$", "", s)
     s = SUFFIX.sub(" ", s)
     s = re.sub(r"^the\s+", "", s)
@@ -285,6 +286,11 @@ def build(a):
             return None, "empty"
         hits = [h for h in index.get(k, []) if h[1] in (ticker, None)] or index.get(k, [])
         if hits:
+            # Several legal entities can share a name once suffixes are dropped ("ABIOMED, Inc." and
+            # "ABIOMED, LTD."); a node spelled like the mention (ignoring case and punctuation) wins.
+            same = {n for n, _, _ in hits if squash(re.sub(r" \((JNJ|AAPL|MSFT)\)$", "", n)) == squash(raw)}
+            if len(same) == 1:
+                return same.pop(), "exact"
             node = pick(hits, ntype)
             return (node, "exact") if node else (None, "ambiguous")
         # Short name of an existing node of the same company ("Shockwave" -> "Shockwave Medical,
@@ -299,6 +305,7 @@ def build(a):
 
     kept = dropped = 0
     new_nodes = {}
+    new_by_key = {}     # normalised name -> new node, so "XBOX Game Pass" reuses "Xbox Game Pass"
     for cid, rec in cache.items():
         c = chunks.get(cid)
         if not c:
@@ -329,9 +336,13 @@ def build(a):
             ends = []
             for raw, typ in ((head, t.get("head_type")), (tail, t.get("tail_type"))):
                 node, how = resolve(raw, typ, c["ticker"])
-                if node is None:
+                if node is None and norm(raw) in new_by_key:
+                    node = new_by_key[norm(raw)]
+                    how = how if how == "ambiguous" else "new"
+                elif node is None:
                     clean = raw.strip()
                     node = clean if clean not in nodes or nodes[clean][0] == "entity" else f"{clean} (llm)"
+                    new_by_key[norm(raw)] = node
                     if node not in nodes:
                         kind = {"company": "Organization", "product": "Product", "segment": "Segment"}.get(typ, "Organization")
                         new_nodes.setdefault(node, ("entity", {"kind": kind, "source": "llm",

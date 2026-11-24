@@ -173,10 +173,3 @@ Table 3. Wrong answers by first failed stage (questions out of 39).
 
 **Hardest questions** (wrong in all four configurations at k = 10): q11, q23, q28, q29, q33, q34, q37, q38, q39. **Easiest** (right in all four): 16 questions whose answer sits in one passage.
 
-**Side experiment.** A company and fiscal-year filter before the search (bge-small) raised AllFacts@10 from 56% to 67% and correct answers from 67% to 74%. It did not help cross-year or cross-company, because it still runs one pooled search.
-
-**Implication for the graph comparison.** Fixes the baseline cannot make by tuning: retrieving per company or per filing (cross-company, cross-year) and following relations between facts (deep chains). These are the cases where a graph retriever, which starts from several entity nodes at once and passes scores along edges, should gain. The same tagging rules and the same 39 questions will be used, so the stage counts in Table 3 compare directly.
-
----
-
-Note: the request said "error findings from Notion". I have no access to the Notion page, so Part B4 is built from our own run results. If the Notion page has findings from Mohini or Rida, paste them and I will merge them.

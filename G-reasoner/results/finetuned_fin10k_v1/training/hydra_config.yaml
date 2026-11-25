@@ -1,0 +1,109 @@
+seed: 1024
+timeout: 60
+save_pretrained: true
+load_model_from_pretrained: rmanluo/G-reasoner-34M
+datasets:
+  _target_: gfmrag.graph_index_datasets.GraphIndexDataset
+  cfgs:
+    root: /content/drive/MyDrive/fin_greasoner_cache/data
+    force_reload: false
+    text_emb_model_cfgs: ${text_emb_model}
+    use_node_feat: true
+    use_relation_feat: true
+    use_edge_feat: false
+    inverse_relation_feat: text
+  train_names:
+  - fin10k_v1_sft
+  valid_names:
+  - fin10k_v1_sft
+  init_datasets: true
+  feat_dim: 1024
+  max_datasets_in_memory: 2
+  data_loading_workers: 2
+model:
+  _target_: gfmrag.models.gfm_reasoner.GraphReasoner
+  use_ent_emb: early-late-fusion
+  dtype: float32
+  entity_model:
+    _target_: gfmrag.models.ultra.models.QueryNBFNet
+    input_dim: 1024
+    hidden_dims:
+    - 1024
+    - 1024
+    - 1024
+    - 1024
+    - 1024
+    - 1024
+    message_func: distmult
+    aggregate_func: sum
+    short_cut: true
+    layer_norm: true
+    return_hidden: true
+losses:
+- name: bce_loss
+  loss:
+    _target_: gfmrag.losses.BCELoss
+    adversarial_temperature: 0.2
+  weight: 0.3
+  target_node_type: document
+- name: pcr_loss
+  loss:
+    _target_: gfmrag.losses.ListCELoss
+  weight: 0.7
+  target_node_type: document
+- name: mse_loss
+  loss:
+    _target_: gfmrag.losses.MSELoss
+  weight: 1
+  target_node_type: document
+  is_distillation_loss: true
+optimizer:
+  _target_: torch.optim.AdamW
+  lr: 0.0001
+trainer:
+  _target_: gfmrag.trainers.SFTTrainer
+  args:
+    _target_: gfmrag.trainers.TrainingArguments
+    train_batch_size: 8
+    num_epoch: 10
+    logging_steps: 50
+    max_steps_per_epoch: null
+    resume_from_checkpoint: null
+    do_train: true
+    do_eval: true
+    save_best_only: true
+    load_best_model_at_end: true
+    metric_for_best_model: document_mrr
+    dtype: ${model.dtype}
+    split_graph_inference: false
+    split_graph_training: false
+    split_graph_partition: contiguous
+  metrics:
+  - mrr
+  - hits@1
+  - hits@5
+  - hits@10
+  - recall@5
+  - recall@10
+  target_types:
+  - document
+text_emb_model:
+  _target_: gfmrag.text_emb_models.Qwen3TextEmbModel
+  text_emb_model_name: Qwen/Qwen3-Embedding-0.6B
+  normalize: true
+  batch_size: 32
+  query_instruct: 'Instruct: Given a web search query, retrieve relevant passages
+    that answer the query
+
+    Query: '
+  passage_instruct: null
+  truncate_dim: 1024
+wandb:
+  enabled: false
+  log_model: true
+  project: gfm-rag
+  entity: null
+  name: null
+  group: null
+  tags: []
+  notes: ''

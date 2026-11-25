@@ -1,0 +1,50 @@
+{
+    "text_emb_model_config": {
+        "_target_": "gfmrag.text_emb_models.Qwen3TextEmbModel",
+        "text_emb_model_name": "Qwen/Qwen3-Embedding-0.6B",
+        "normalize": true,
+        "batch_size": 32,
+        "query_instruct": "Instruct: Given a web search query, retrieve relevant passages that answer the query\nQuery: ",
+        "passage_instruct": null,
+        "truncate_dim": 1024
+    },
+    "dataset_config": {
+        "class_name": "GraphIndexDataset",
+        "text_emb_model_cfgs": {
+            "_target_": "gfmrag.text_emb_models.Qwen3TextEmbModel",
+            "text_emb_model_name": "Qwen/Qwen3-Embedding-0.6B",
+            "normalize": true,
+            "batch_size": 32,
+            "query_instruct": "Instruct: Given a web search query, retrieve relevant passages that answer the query\nQuery: ",
+            "passage_instruct": null,
+            "truncate_dim": 1024
+        },
+        "use_node_feat": true,
+        "use_relation_feat": true,
+        "use_edge_feat": false,
+        "inverse_relation_feat": "text"
+    },
+    "model_config": {
+        "_target_": "gfmrag.models.gfm_reasoner.GraphReasoner",
+        "use_ent_emb": "early-late-fusion",
+        "dtype": "float32",
+        "entity_model": {
+            "_target_": "gfmrag.models.ultra.models.QueryNBFNet",
+            "input_dim": 1024,
+            "hidden_dims": [
+                1024,
+                1024,
+                1024,
+                1024,
+                1024,
+                1024
+            ],
+            "message_func": "distmult",
+            "aggregate_func": "sum",
+            "short_cut": true,
+            "layer_norm": true,
+            "return_hidden": true
+        },
+        "feat_dim": 1024
+    }
+}

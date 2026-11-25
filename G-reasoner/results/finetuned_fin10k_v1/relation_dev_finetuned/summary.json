@@ -1,0 +1,30 @@
+[
+  {
+    "config": "fine-tuned",
+    "k": 5,
+    "n": 9,
+    "P@5": 0.48888888888888893,
+    "R@5": 0.7177328843995511,
+    "Hit@5": 0.8888888888888888,
+    "AllFacts@5": 0.8888888888888888,
+    "all_facts_from_fact_chunks": 0,
+    "retrieval_ms": 360.3457419998853,
+    "matching_ms": 7.021089777784558,
+    "total_ms": 360.3457419998853,
+    "skipped_qids": []
+  },
+  {
+    "config": "fine-tuned",
+    "k": 10,
+    "n": 9,
+    "P@10": 0.3111111111111111,
+    "R@10": 0.8821548821548821,
+    "Hit@10": 1.0,
+    "AllFacts@10": 1.0,
+    "all_facts_from_fact_chunks": 0,
+    "retrieval_ms": 360.3457419998853,
+    "matching_ms": 7.021089777784558,
+    "total_ms": 360.3457419998853,
+    "skipped_qids": []
+  }
+]

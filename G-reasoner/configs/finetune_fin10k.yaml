@@ -1,0 +1,109 @@
+# Fine-tune G-reasoner-34M on the synthetic fin10k_v1 pairs (E3), on one Colab T4.
+# Based on gfmrag 2.0.0's workflow/config/gfm_reasoner/sft_training.yaml. Changes, and why:
+#   - load_model_from_pretrained: start from the released checkpoint instead of random weights
+#   - dtype float32 (was bfloat16): the T4 has no bfloat16, and gfmrag 2.0.0's float16 path cannot train: it
+#     casts the model weights to float16 AND enables the gradient scaler, which then fails with "Attempting to
+#     unscale FP16 gradients" (utils/setup_training.py configure_model_precision). float32 needs no scaler; the
+#     34M model on a 3,841-node graph fits on the T4 in float32, just slower
+#   - lr 1e-4 (was 5e-4) and 10 epochs (was 20): adapting a pretrained model on ~2,000 pairs, not training
+#   - datasets: fin10k_v1_sft (prepare_sft.py), validated on its test.json = the Microsoft synthetic pairs;
+#     the best epoch by document MRR on those is kept and saved
+# Run (from the notebook):
+#   python -m gfmrag.workflow.sft_training --config-path <repo>/G-reasoner/configs --config-name finetune_fin10k \
+#       datasets.cfgs.root=<data root> hydra.run.dir=<output dir>
+# Short smoke test: add trainer.args.num_epoch=1 trainer.args.max_steps_per_epoch=20
+
+hydra:
+  run:
+    dir: outputs/finetune_fin10k/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  searchpath:
+    - pkg://gfmrag.workflow.config
+
+defaults:
+  - _self_
+  - text_emb_model: qwen3   # Qwen3-Embedding-0.6B, the same settings as the checkpoint's config.json
+  - wandb: default          # disabled by default
+
+seed: 1024
+timeout: 60
+save_pretrained: yes                                # writes <output dir>/pretrained/{config.json,model.pth}
+load_model_from_pretrained: rmanluo/G-reasoner-34M
+
+datasets:
+  _target_: gfmrag.graph_index_datasets.GraphIndexDataset
+  cfgs:
+    root: ./data                                    # overridden on the command line
+    force_reload: False
+    text_emb_model_cfgs: ${text_emb_model}
+    # Same values as G-reasoner-34M's dataset_config. They must be written out: save_pretrained copies these keys
+    # into pretrained/config.json, and a missing key is saved as null, which at evaluation time would rebuild the
+    # graph cache with node features off. (They equal the class defaults, so the cache fingerprint is unchanged.)
+    use_node_feat: true
+    use_relation_feat: true
+    use_edge_feat: false
+    inverse_relation_feat: text
+  train_names: [fin10k_v1_sft]
+  valid_names: [fin10k_v1_sft]
+  init_datasets: True
+  feat_dim: 1024
+  max_datasets_in_memory: 2
+  data_loading_workers: 2
+
+# Saved into pretrained/config.json; must describe the same architecture as G-reasoner-34M
+model:
+  _target_: gfmrag.models.gfm_reasoner.GraphReasoner
+  use_ent_emb: early-late-fusion
+  dtype: float32
+  entity_model:
+    _target_: gfmrag.models.ultra.models.QueryNBFNet
+    input_dim: 1024
+    hidden_dims: [1024, 1024, 1024, 1024, 1024, 1024]
+    message_func: distmult
+    aggregate_func: sum
+    short_cut: yes
+    layer_norm: yes
+    return_hidden: True
+
+losses:                                             # unchanged from gfmrag's G-reasoner recipe
+  - name: bce_loss
+    loss:
+      _target_: gfmrag.losses.BCELoss
+      adversarial_temperature: 0.2
+    weight: 0.3
+    target_node_type: document
+  - name: pcr_loss
+    loss:
+      _target_: gfmrag.losses.ListCELoss
+    weight: 0.7
+    target_node_type: document
+  - name: mse_loss
+    loss:
+      _target_: gfmrag.losses.MSELoss
+    weight: 1
+    target_node_type: document
+    is_distillation_loss: True
+
+optimizer:
+  _target_: torch.optim.AdamW
+  lr: 1.0e-4
+
+trainer:
+  _target_: gfmrag.trainers.SFTTrainer
+  args:
+    _target_: gfmrag.trainers.TrainingArguments
+    train_batch_size: 8
+    num_epoch: 10
+    logging_steps: 50
+    max_steps_per_epoch: null
+    resume_from_checkpoint: null
+    do_train: true
+    do_eval: true
+    save_best_only: yes
+    load_best_model_at_end: yes
+    metric_for_best_model: document_mrr
+    dtype: ${model.dtype}
+    split_graph_inference: false
+    split_graph_training: false
+    split_graph_partition: contiguous
+  metrics: [mrr, hits@1, hits@5, hits@10, recall@5, recall@10]
+  target_types: [document]

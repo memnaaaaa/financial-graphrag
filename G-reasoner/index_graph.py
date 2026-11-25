@@ -8,7 +8,7 @@ the build here means query.py only finds the cache and starts one vLLM.
 The embedding model and dataset settings come from the G-reasoner checkpoint's config.json
 (Qwen3-Embedding-0.6B, 1024-dim), so the features match what the model was trained on.
 
-    python index_graph.py --root /content/drive/MyDrive/fin_greasoner_cache/data --data-name fin10k_v0
+    python index_graph.py --root /content/drive/MyDrive/fin_greasoner_cache/data --data-name fin10k_v1
 """
 import argparse
 import json
@@ -27,7 +27,7 @@ from vllm_limits import limit_vllm_memory  # noqa: E402
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--root", required=True, help="gfmrag data root (prepare_data.py --root)")
-    ap.add_argument("--data-name", default="fin10k_v0")
+    ap.add_argument("--data-name", default="fin10k_v1")
     ap.add_argument("--model", default="rmanluo/G-reasoner-34M")
     ap.add_argument("--force", action="store_true", help="rebuild stage2 even if it exists")
     a = ap.parse_args()
@@ -44,6 +44,11 @@ def main():
     print("nodes by type:", {k: len(v) for k, v in g.nodes_by_type.items()})
     print("documents loaded:", len(data.doc))
     print("files:", sorted(os.listdir(data.processed_dir)))
+    for split in ("train", "test"):                  # fine-tuning datasets (prepare_sft.py) only
+        raw, proc = getattr(data, f"raw_{split}_data", None), getattr(data, f"{split}_data", None)
+        if raw is not None and proc is not None:
+            print(f"{split} pairs: {len(proc)} of {len(raw)} kept by gfmrag"
+                  + ("" if len(proc) == len(raw) else "  <- some skipped (no start or target node); see warnings"))
 
 
 if __name__ == "__main__":

@@ -58,7 +58,7 @@ def short(item):
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--root", required=True)
-    ap.add_argument("--data-name", default="fin10k_v0")
+    ap.add_argument("--data-name", default="fin10k_v1")
     ap.add_argument("--model", default="rmanluo/G-reasoner-34M")
     ap.add_argument("-q", action="append", default=[], help="a question (repeatable)")
     ap.add_argument("--questions", help="file: JSONL with 'question' (and 'qid'), or one question per line")

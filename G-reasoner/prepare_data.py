@@ -28,7 +28,7 @@ csv.field_size_limit(sys.maxsize)  # document nodes hold whole chunks in their a
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--repo", required=True, help="clone of financial-graphrag")
-    ap.add_argument("--graph", default="fin10k_v0", help="folder under data/graph/ in the repo")
+    ap.add_argument("--graph", default="fin10k_v1", help="folder under data/graph/ in the repo")
     ap.add_argument("--root", required=True, help="gfmrag data root (data_dir) to copy into")
     a = ap.parse_args()
 

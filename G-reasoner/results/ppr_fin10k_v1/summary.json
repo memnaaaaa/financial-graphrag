@@ -1,0 +1,36 @@
+[
+  {
+    "config": "ppr",
+    "k": 5,
+    "n": 39,
+    "P@5": 0.22051282051282056,
+    "R@5": 0.37570207570207576,
+    "Hit@5": 0.6923076923076923,
+    "AllFacts@5": 0.6923076923076923,
+    "all_facts_from_fact_chunks": 0,
+    "retrieval_ms": 63.653350410256394,
+    "matching_ms": 1.7472926923076983,
+    "total_ms": 65.40064310256409,
+    "damping": 0.5,
+    "graph": "fin10k_v1",
+    "no_start_node_qids": [],
+    "skipped_qids": []
+  },
+  {
+    "config": "ppr",
+    "k": 10,
+    "n": 39,
+    "P@10": 0.16153846153846155,
+    "R@10": 0.5212454212454213,
+    "Hit@10": 0.717948717948718,
+    "AllFacts@10": 0.717948717948718,
+    "all_facts_from_fact_chunks": 0,
+    "retrieval_ms": 63.653350410256394,
+    "matching_ms": 1.7472926923076983,
+    "total_ms": 65.40064310256409,
+    "damping": 0.5,
+    "graph": "fin10k_v1",
+    "no_start_node_qids": [],
+    "skipped_qids": []
+  }
+]

@@ -1,0 +1,30 @@
+| Config | k | Question type | n | P@k | R@k | Hit@k | AllFacts@k |
+|---|---|---|---|---|---|---|---|
+| ppr | 5 | single | 9 | 0.422 | 0.598 | 1.00 | 1.00 |
+| ppr | 5 | relation | 6 | 0.200 | 0.333 | 0.83 | 0.83 |
+| ppr | 5 | relation_text | 12 | 0.100 | 0.292 | 0.42 | 0.42 |
+| ppr | 5 | relation_deep | 5 | 0.240 | 0.367 | 0.80 | 0.80 |
+| ppr | 5 | cross_year | 4 | 0.100 | 0.250 | 0.25 | 0.25 |
+| ppr | 5 | cross_company | 3 | 0.267 | 0.311 | 1.00 | 1.00 |
+| ppr | 5 | **ALL** | 39 | 0.221 | 0.376 | 0.69 | 0.69 |
+| ppr | 10 | single | 9 | 0.311 | 0.874 | 1.00 | 1.00 |
+| ppr | 10 | relation | 6 | 0.133 | 0.444 | 1.00 | 1.00 |
+| ppr | 10 | relation_text | 12 | 0.067 | 0.375 | 0.42 | 0.42 |
+| ppr | 10 | relation_deep | 5 | 0.140 | 0.433 | 0.80 | 0.80 |
+| ppr | 10 | cross_year | 4 | 0.050 | 0.250 | 0.25 | 0.25 |
+| ppr | 10 | cross_company | 3 | 0.333 | 0.711 | 1.00 | 1.00 |
+| ppr | 10 | **ALL** | 39 | 0.162 | 0.521 | 0.72 | 0.72 |
+| g-reasoner | 5 | single | 9 | 0.022 | 0.019 | 0.11 | 0.11 |
+| g-reasoner | 5 | relation | 6 | 0.000 | 0.000 | 0.00 | 0.00 |
+| g-reasoner | 5 | relation_text | 12 | 0.017 | 0.042 | 0.08 | 0.08 |
+| g-reasoner | 5 | relation_deep | 5 | 0.120 | 0.129 | 0.60 | 0.60 |
+| g-reasoner | 5 | cross_year | 4 | 0.100 | 0.250 | 0.25 | 0.25 |
+| g-reasoner | 5 | cross_company | 3 | 0.000 | 0.000 | 0.00 | 0.00 |
+| g-reasoner | 5 | **ALL** | 39 | 0.036 | 0.059 | 0.15 | 0.15 |
+| g-reasoner | 10 | single | 9 | 0.033 | 0.069 | 0.33 | 0.33 |
+| g-reasoner | 10 | relation | 6 | 0.033 | 0.083 | 0.17 | 0.17 |
+| g-reasoner | 10 | relation_text | 12 | 0.025 | 0.125 | 0.17 | 0.17 |
+| g-reasoner | 10 | relation_deep | 5 | 0.060 | 0.129 | 0.60 | 0.60 |
+| g-reasoner | 10 | cross_year | 4 | 0.075 | 0.312 | 0.50 | 0.50 |
+| g-reasoner | 10 | cross_company | 3 | 0.000 | 0.000 | 0.00 | 0.00 |
+| g-reasoner | 10 | **ALL** | 39 | 0.036 | 0.116 | 0.28 | 0.28 |

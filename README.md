@@ -25,7 +25,7 @@ split into 1,855 text chunks, and a golden set of 39 hand-checked questions.
 | Graph `fin10k_v0` | `data/graph/` | Done: rule-based, 3,622 nodes; every number tied to its filing, section, chunk and XBRL tag | Mohini |
 | Graph `fin10k_v1` | `data/graph/` | Done: `fin10k_v0` + 382 LLM-extracted relation edges (3,841 nodes); hand check: 18 of 30 LLM edges correct, about 71% weighted (errors mostly from lawsuit text) | Mohini |
 | Vector-RAG baseline, golden set v2 | `vector_rag_baseline/` | Done on golden set v2 | Mahua |
-| G-reasoner | `G-reasoner/` | Zero-shot, fine-tuned and Personalized PageRank retrieval on golden set v2 | Rida |
+| G-reasoner | `G-reasoner/` | Done on golden set v2: zero-shot (E2), fine-tuned (E3), Personalized PageRank (E4), hop analysis (E7); per-question files for the answer step in `G-reasoner/results/` | Rida |
 | Answer step with citations, trace view | `answer_step/` | Built (Nov 25); vector RAG answered and scored (69% correct, same as the baseline); graph retrievers next | Mohini |
 | Report | `report/` | Preliminary report done (Oct 21); poster Nov 30, final report Dec 7 | All |
 
@@ -34,6 +34,12 @@ answers 69% of questions correctly and hallucinates in 0-3%. Almost every wrong 
 retrieval miss: the passage holding a needed fact is not in the top 10, so Gemini declines to
 answer. Single-fact questions are near 100% correct; cross-company questions fail in every setup.
 Details: `vector_rag_baseline/results/v2_all_baselines/summary.md`.
+
+**Retrieval, all systems (golden set v2, 39 questions):** Hit@5 is 0.79 for vector RAG with reranking,
+0.69 for Personalized PageRank, 0.59 for fine-tuned G-reasoner and 0.15 for zero-shot G-reasoner.
+Fine-tuning lifts G-reasoner from 0.15 to 0.59. The graph methods match or beat vector RAG on single-fact and
+cross-company questions (Hit@10 1.00) and lose on descriptive and cross-year questions, whose topic is not a
+node in the graph. Table by question type: `G-reasoner/results/e1_e4_by_type.md`.
 
 ## Folders
 
@@ -65,7 +71,7 @@ the README in their folders.
 ## Next steps
 
 - Nov 25-26: answers from G-reasoner (zero-shot, fine-tuned) and Personalized PageRank through the
-  answer step, once Rida's per-question files are pushed (Mohini)
+  answer step (Mohini); retrieval files: `G-reasoner/results/{zero_shot,finetuned,ppr}_fin10k_v1/per_question.jsonl`
 - Nov 25-26: tag the failure stage of every wrong answer (Mohini, Rida)
 - Nov 30: poster; Dec 7: final report and open-source release
 

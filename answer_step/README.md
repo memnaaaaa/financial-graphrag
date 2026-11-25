@@ -53,9 +53,12 @@ python answer_step/answer.py --system vector_rag --config bge-small+rerank \
     --retrievals vector_rag_baseline/results/v2_all_baselines/per_question_all.jsonl
 
 # graph retrievers: any per_question.jsonl with retrieved / top_entities / top_attributes / start_nodes
-python answer_step/answer.py --system g_reasoner_zero_shot --retrievals <E2 per_question.jsonl>
-python answer_step/answer.py --system g_reasoner_finetuned --retrievals <E3 per_question.jsonl>
-python answer_step/answer.py --system ppr --retrievals <E4 per_question.jsonl>
+python answer_step/answer.py --system g_reasoner_zero_shot --config g-reasoner \
+    --retrievals G-reasoner/results/zero_shot_fin10k_v1/per_question.jsonl
+python answer_step/answer.py --system g_reasoner_finetuned --config g-reasoner-ft \
+    --retrievals G-reasoner/results/finetuned_fin10k_v1/per_question.jsonl
+python answer_step/answer.py --system ppr --config ppr \
+    --retrievals G-reasoner/results/ppr_fin10k_v1/per_question.jsonl
 
 python answer_step/compare.py                                   # table of all runs -> results/comparison.md
 python answer_step/trace.py answer_step/results/g_reasoner_finetuned_k10/per_question.jsonl v2_q11
@@ -75,8 +78,8 @@ Sanity check: the vector RAG run reproduces the baseline's 69.2% correct
 (`vector_rag_baseline/results/v2_all_baselines`), with the same judge verdict on 38 of 39 questions. The
 higher unsupported-number rate (baseline 0%) comes from two answers Gemini worded differently this run:
 v2_q37 states six numbers without a citation and then refuses, and v2_q10's "$60.4 billion" is not found in
-its cited passage. G-reasoner (zero-shot, fine-tuned) and Personalized PageRank are run once their
-per-question retrieval files are in the repo.
+its cited passage. G-reasoner (zero-shot, fine-tuned) and Personalized PageRank are next; their
+per-question retrieval files are in `G-reasoner/results/` (commands above).
 
 ## Files
 

@@ -1,0 +1,635 @@
+{
+ "qid": "v2_q10",
+ "question": "Which Johnson & Johnson segment sells the drug licensed from Genmab, and what were that segment's sales in fiscal 2025?",
+ "gold_answer": "DARZALEX is licensed from Genmab A/S and sold by the Innovative Medicine segment, whose fiscal 2025 sales were $60,401 million.",
+ "model": "/content/drive/MyDrive/fin_greasoner_cache/finetune/20261124-113036/pretrained",
+ "name": "g-reasoner-ft",
+ "graph": "fin10k_v1",
+ "anchor": "Genmab A/S",
+ "start_nodes": [
+  "Johnson & Johnson",
+  "Genmab A/S",
+  "Revenue",
+  "FY2025 (JNJ)"
+ ],
+ "max_abs_diff_last_layer": 0.0,
+ "tracked_order": [
+  "Genmab A/S",
+  "DARZALEX (JNJ)",
+  "Oncology (JNJ)",
+  "Innovative Medicine (JNJ)",
+  "Innovative Medicine (JNJ) revenue FY2025 = $60,401 million",
+  "JNJ_FY2025_ITEM1_0011",
+  "JNJ_FY2025_ITEM1_0001",
+  "JNJ_FY2025_ITEM7_0012",
+  "JNJ_FY2025_ITEM7_0032",
+  "JNJ_FY2025_ITEM8_0120",
+  "JNJ_FY2025_ITEM8_0126",
+  "DARZALEX (JNJ) revenue FY2025 = $14,351 million"
+ ],
+ "tracked": {
+  "Genmab A/S": {
+   "type": "entity",
+   "of": 889,
+   "layers": [
+    {
+     "layer": 0,
+     "score": -3.3628,
+     "rank": 4
+    },
+    {
+     "layer": 1,
+     "score": -6.0207,
+     "rank": 23
+    },
+    {
+     "layer": 2,
+     "score": -4.9186,
+     "rank": 8
+    },
+    {
+     "layer": 3,
+     "score": -3.5595,
+     "rank": 2
+    },
+    {
+     "layer": 4,
+     "score": -1.6705,
+     "rank": 1
+    },
+    {
+     "layer": 5,
+     "score": 0.0029,
+     "rank": 1
+    },
+    {
+     "layer": 6,
+     "score": -4.2896,
+     "rank": 3
+    }
+   ],
+   "role": "chain",
+   "hops_from_anchor": 0,
+   "hops_from_start": 0,
+   "is_start": true
+  },
+  "DARZALEX (JNJ)": {
+   "type": "entity",
+   "of": 889,
+   "layers": [
+    {
+     "layer": 0,
+     "score": -10.2508,
+     "rank": 644
+    },
+    {
+     "layer": 1,
+     "score": -11.0852,
+     "rank": 617
+    },
+    {
+     "layer": 2,
+     "score": -8.2259,
+     "rank": 151
+    },
+    {
+     "layer": 3,
+     "score": -7.644,
+     "rank": 66
+    },
+    {
+     "layer": 4,
+     "score": -7.7321,
+     "rank": 34
+    },
+    {
+     "layer": 5,
+     "score": -5.8014,
+     "rank": 8
+    },
+    {
+     "layer": 6,
+     "score": -9.5434,
+     "rank": 11
+    }
+   ],
+   "role": "chain",
+   "hops_from_anchor": 1,
+   "hops_from_start": 1,
+   "is_start": false
+  },
+  "Oncology (JNJ)": {
+   "type": "entity",
+   "of": 889,
+   "layers": [
+    {
+     "layer": 0,
+     "score": -8.1284,
+     "rank": 452
+    },
+    {
+     "layer": 1,
+     "score": -8.1533,
+     "rank": 242
+    },
+    {
+     "layer": 2,
+     "score": -8.0685,
+     "rank": 138
+    },
+    {
+     "layer": 3,
+     "score": -7.6975,
+     "rank": 70
+    },
+    {
+     "layer": 4,
+     "score": -8.5393,
+     "rank": 72
+    },
+    {
+     "layer": 5,
+     "score": -7.7884,
+     "rank": 37
+    },
+    {
+     "layer": 6,
+     "score": -11.945,
+     "rank": 46
+    }
+   ],
+   "role": "chain",
+   "hops_from_anchor": 2,
+   "hops_from_start": 2,
+   "is_start": false
+  },
+  "Innovative Medicine (JNJ)": {
+   "type": "entity",
+   "of": 889,
+   "layers": [
+    {
+     "layer": 0,
+     "score": -9.7166,
+     "rank": 612
+    },
+    {
+     "layer": 1,
+     "score": -8.9189,
+     "rank": 363
+    },
+    {
+     "layer": 2,
+     "score": -7.7854,
+     "rank": 110
+    },
+    {
+     "layer": 3,
+     "score": -7.7104,
+     "rank": 72
+    },
+    {
+     "layer": 4,
+     "score": -7.5638,
+     "rank": 28
+    },
+    {
+     "layer": 5,
+     "score": -6.3356,
+     "rank": 14
+    },
+    {
+     "layer": 6,
+     "score": -10.6949,
+     "rank": 22
+    }
+   ],
+   "role": "chain",
+   "hops_from_anchor": 2,
+   "hops_from_start": 1,
+   "is_start": false
+  },
+  "Innovative Medicine (JNJ) revenue FY2025 = $60,401 million": {
+   "type": "attribute",
+   "of": 1097,
+   "layers": [
+    {
+     "layer": 0,
+     "score": -5.8752,
+     "rank": 814
+    },
+    {
+     "layer": 1,
+     "score": -6.4379,
+     "rank": 772
+    },
+    {
+     "layer": 2,
+     "score": -7.4215,
+     "rank": 833
+    },
+    {
+     "layer": 3,
+     "score": -8.7162,
+     "rank": 816
+    },
+    {
+     "layer": 4,
+     "score": -12.3196,
+     "rank": 1055
+    },
+    {
+     "layer": 5,
+     "score": -12.4857,
+     "rank": 1022
+    },
+    {
+     "layer": 6,
+     "score": -20.091,
+     "rank": 1019
+    }
+   ],
+   "role": "chain",
+   "hops_from_anchor": 3,
+   "hops_from_start": 1,
+   "is_start": false
+  },
+  "JNJ_FY2025_ITEM1_0011": {
+   "type": "document",
+   "of": 1855,
+   "layers": [
+    {
+     "layer": 0,
+     "score": -7.7156,
+     "rank": 1406
+    },
+    {
+     "layer": 1,
+     "score": -7.3748,
+     "rank": 1063
+    },
+    {
+     "layer": 2,
+     "score": -6.863,
+     "rank": 865
+    },
+    {
+     "layer": 3,
+     "score": -4.3455,
+     "rank": 175
+    },
+    {
+     "layer": 4,
+     "score": -2.0507,
+     "rank": 21
+    },
+    {
+     "layer": 5,
+     "score": -1.0898,
+     "rank": 31
+    },
+    {
+     "layer": 6,
+     "score": -1.3365,
+     "rank": 7
+    }
+   ],
+   "role": "gold chunk",
+   "hops_from_anchor": 1,
+   "hops_from_start": 1,
+   "is_start": false
+  },
+  "JNJ_FY2025_ITEM1_0001": {
+   "type": "document",
+   "of": 1855,
+   "layers": [
+    {
+     "layer": 0,
+     "score": -7.1082,
+     "rank": 1257
+    },
+    {
+     "layer": 1,
+     "score": -6.9835,
+     "rank": 962
+    },
+    {
+     "layer": 2,
+     "score": -7.2103,
+     "rank": 960
+    },
+    {
+     "layer": 3,
+     "score": -7.2043,
+     "rank": 939
+    },
+    {
+     "layer": 4,
+     "score": -6.3057,
+     "rank": 308
+    },
+    {
+     "layer": 5,
+     "score": -6.7897,
+     "rank": 129
+    },
+    {
+     "layer": 6,
+     "score": -11.1361,
+     "rank": 51
+    }
+   ],
+   "role": "gold chunk",
+   "hops_from_anchor": 2,
+   "hops_from_start": 1,
+   "is_start": false
+  },
+  "JNJ_FY2025_ITEM7_0012": {
+   "type": "document",
+   "of": 1855,
+   "layers": [
+    {
+     "layer": 0,
+     "score": -4.8739,
+     "rank": 542
+    },
+    {
+     "layer": 1,
+     "score": -4.9531,
+     "rank": 350
+    },
+    {
+     "layer": 2,
+     "score": -5.1252,
+     "rank": 319
+    },
+    {
+     "layer": 3,
+     "score": -4.9088,
+     "rank": 259
+    },
+    {
+     "layer": 4,
+     "score": -4.782,
+     "rank": 103
+    },
+    {
+     "layer": 5,
+     "score": -0.5077,
+     "rank": 25
+    },
+    {
+     "layer": 6,
+     "score": -7.8903,
+     "rank": 20
+    }
+   ],
+   "role": "gold chunk",
+   "hops_from_anchor": 2,
+   "hops_from_start": 1,
+   "is_start": false
+  },
+  "JNJ_FY2025_ITEM7_0032": {
+   "type": "document",
+   "of": 1855,
+   "layers": [
+    {
+     "layer": 0,
+     "score": -5.3014,
+     "rank": 675
+    },
+    {
+     "layer": 1,
+     "score": -5.1163,
+     "rank": 389
+    },
+    {
+     "layer": 2,
+     "score": -5.3566,
+     "rank": 386
+    },
+    {
+     "layer": 3,
+     "score": -5.193,
+     "rank": 336
+    },
+    {
+     "layer": 4,
+     "score": -4.297,
+     "rank": 77
+    },
+    {
+     "layer": 5,
+     "score": 0.8058,
+     "rank": 12
+    },
+    {
+     "layer": 6,
+     "score": 4.0104,
+     "rank": 2
+    }
+   ],
+   "role": "gold chunk",
+   "hops_from_anchor": 2,
+   "hops_from_start": 1,
+   "is_start": false
+  },
+  "JNJ_FY2025_ITEM8_0120": {
+   "type": "document",
+   "of": 1855,
+   "layers": [
+    {
+     "layer": 0,
+     "score": -3.5739,
+     "rank": 236
+    },
+    {
+     "layer": 1,
+     "score": -2.8442,
+     "rank": 74
+    },
+    {
+     "layer": 2,
+     "score": -2.5511,
+     "rank": 35
+    },
+    {
+     "layer": 3,
+     "score": -1.9643,
+     "rank": 12
+    },
+    {
+     "layer": 4,
+     "score": -0.1331,
+     "rank": 2
+    },
+    {
+     "layer": 5,
+     "score": 2.6764,
+     "rank": 3
+    },
+    {
+     "layer": 6,
+     "score": -6.1547,
+     "rank": 17
+    }
+   ],
+   "role": "gold chunk",
+   "hops_from_anchor": 2,
+   "hops_from_start": 1,
+   "is_start": false
+  },
+  "JNJ_FY2025_ITEM8_0126": {
+   "type": "document",
+   "of": 1855,
+   "layers": [
+    {
+     "layer": 0,
+     "score": -5.2537,
+     "rank": 659
+    },
+    {
+     "layer": 1,
+     "score": -4.875,
+     "rank": 330
+    },
+    {
+     "layer": 2,
+     "score": -4.8035,
+     "rank": 268
+    },
+    {
+     "layer": 3,
+     "score": -4.2628,
+     "rank": 166
+    },
+    {
+     "layer": 4,
+     "score": -2.6002,
+     "rank": 31
+    },
+    {
+     "layer": 5,
+     "score": -1.4282,
+     "rank": 36
+    },
+    {
+     "layer": 6,
+     "score": -13.3137,
+     "rank": 71
+    }
+   ],
+   "role": "gold chunk",
+   "hops_from_anchor": 2,
+   "hops_from_start": 1,
+   "is_start": false
+  },
+  "DARZALEX (JNJ) revenue FY2025 = $14,351 million": {
+   "type": "attribute",
+   "of": 1097,
+   "layers": [
+    {
+     "layer": 0,
+     "score": -7.2709,
+     "rank": 1035
+    },
+    {
+     "layer": 1,
+     "score": -8.0425,
+     "rank": 1030
+    },
+    {
+     "layer": 2,
+     "score": -9.2327,
+     "rank": 1061
+    },
+    {
+     "layer": 3,
+     "score": -10.5754,
+     "rank": 1049
+    },
+    {
+     "layer": 4,
+     "score": -14.5383,
+     "rank": 1095
+    },
+    {
+     "layer": 5,
+     "score": -15.798,
+     "rank": 1085
+    },
+    {
+     "layer": 6,
+     "score": -23.2435,
+     "rank": 1083
+    }
+   ],
+   "role": "distractor",
+   "hops_from_anchor": 2,
+   "hops_from_start": 1,
+   "is_start": false
+  }
+ },
+ "top_docs_by_layer": [
+  [
+   "JNJ_FY2024_ITEM8_0107",
+   "AAPL_FY2024_ITEM8_0017",
+   "JNJ_FY2024_ITEM7_0023",
+   "JNJ_FY2024_ITEM8_0004",
+   "AAPL_FY2024_ITEM7_0005"
+  ],
+  [
+   "JNJ_FY2024_ITEM8_0107",
+   "AAPL_FY2024_ITEM8_0017",
+   "JNJ_FY2024_ITEM7_0023",
+   "AAPL_FY2024_ITEM7_0005",
+   "JNJ_FY2024_ITEM8_0004"
+  ],
+  [
+   "JNJ_FY2024_ITEM8_0107",
+   "AAPL_FY2024_ITEM8_0017",
+   "JNJ_FY2024_ITEM7_0023",
+   "AAPL_FY2024_ITEM7_0005",
+   "AAPL_FY2024_ITEM7_0004"
+  ],
+  [
+   "JNJ_FY2024_ITEM8_0107",
+   "AAPL_FY2024_ITEM8_0017",
+   "JNJ_FY2024_ITEM7_0023",
+   "JNJ_FY2024_ITEM8_0106",
+   "AAPL_FY2024_ITEM7_0004"
+  ],
+  [
+   "JNJ_FY2025_ITEM8_0111",
+   "JNJ_FY2025_ITEM8_0120",
+   "JNJ_FY2025_ITEM8_0125",
+   "JNJ_FY2025_ITEM8_0030",
+   "JNJ_FY2024_ITEM8_0114"
+  ],
+  [
+   "JNJ_FY2025_ITEM8_0125",
+   "JNJ_FY2025_ITEM8_0111",
+   "JNJ_FY2025_ITEM8_0120",
+   "JNJ_FY2025_ITEM8_0128",
+   "JNJ_FY2025_ITEM8_0121"
+  ],
+  [
+   "JNJ_FY2025_ITEM8_0125",
+   "JNJ_FY2025_ITEM7_0032",
+   "JNJ_FY2025_ITEM8_0128",
+   "JNJ_FY2025_ITEM7_0033",
+   "JNJ_FY2025_ITEM8_0129"
+  ]
+ ],
+ "retrieved": [
+  "JNJ_FY2025_ITEM8_0125",
+  "JNJ_FY2025_ITEM7_0032",
+  "JNJ_FY2025_ITEM8_0128",
+  "JNJ_FY2025_ITEM7_0033",
+  "JNJ_FY2025_ITEM8_0129",
+  "JNJ_FY2025_ITEM8_0002",
+  "JNJ_FY2025_ITEM1_0011",
+  "JNJ_FY2024_ITEM1_0010",
+  "JNJ_FY2025_ITEM8_0030",
+  "JNJ_FY2025_ITEM7_0009"
+ ]
+}

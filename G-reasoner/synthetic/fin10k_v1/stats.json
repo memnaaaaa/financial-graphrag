@@ -1,0 +1,122 @@
+{
+  "graph": "fin10k_v1",
+  "golden": "vector_rag_baseline/data/questions_v2.jsonl",
+  "test_tickers": [
+    "MSFT"
+  ],
+  "relation_dev_edges": [
+    [
+      "Aragon Pharmaceuticals, Inc.",
+      "subsidiary_of",
+      "Johnson & Johnson"
+    ],
+    [
+      "Janssen Pharmaceuticals, Inc.",
+      "subsidiary_of",
+      "Johnson & Johnson"
+    ],
+    [
+      "Janssen Products, LP",
+      "partners_with",
+      "Gilead Sciences Ireland UC"
+    ],
+    [
+      "Janssen Sciences Ireland Unlimited Company",
+      "partners_with",
+      "Gilead Sciences Ireland UC"
+    ],
+    [
+      "Johnson & Johnson",
+      "acquired",
+      "Abiomed (JNJ)"
+    ],
+    [
+      "Johnson & Johnson",
+      "acquired",
+      "Ambrx Biopharma, Inc."
+    ],
+    [
+      "Johnson & Johnson",
+      "acquired",
+      "Halda Therapeutics OpCo, Inc."
+    ],
+    [
+      "Johnson & Johnson",
+      "acquired",
+      "Intra-Cellular Therapies, Inc."
+    ],
+    [
+      "Red River Talc LLC",
+      "subsidiary_of",
+      "Johnson & Johnson"
+    ],
+    [
+      "Royalty A&M LLC",
+      "subsidiary_of",
+      "LTL Management LLC"
+    ]
+  ],
+  "relation_dev_mixed_dropped": 3,
+  "excluded_values": [],
+  "values_with_chunks": 1097,
+  "pairs": 2344,
+  "by_split": {
+    "train": 1838,
+    "test": 377,
+    "golden_overlap": 117,
+    "relation_dev": 9
+  },
+  "by_template": {
+    "lookup": 600,
+    "change": 600,
+    "hierarchy": 171,
+    "share": 266,
+    "compare": 164,
+    "subsidiary": 446,
+    "relation": 82,
+    "relation_chain": 15
+  },
+  "by_template_and_split": {
+    "train": {
+      "lookup": 488,
+      "change": 485,
+      "hierarchy": 150,
+      "share": 187,
+      "compare": 61,
+      "subsidiary": 426,
+      "relation": 33,
+      "relation_chain": 8
+    },
+    "test": {
+      "lookup": 103,
+      "change": 99,
+      "hierarchy": 21,
+      "share": 49,
+      "compare": 95,
+      "subsidiary": 6,
+      "relation": 4
+    },
+    "golden_overlap": {
+      "lookup": 9,
+      "change": 16,
+      "share": 30,
+      "compare": 8,
+      "subsidiary": 14,
+      "relation": 33,
+      "relation_chain": 7
+    },
+    "relation_dev": {
+      "relation": 9
+    }
+  },
+  "dropped": {
+    "lookup: key entity not found by the query-time matcher": 6,
+    "lookup: over cap": 491,
+    "change: key entity not found by the query-time matcher": 3,
+    "change: over cap": 207,
+    "hierarchy: key entity not found by the query-time matcher": 2,
+    "share: key entity not found by the query-time matcher": 2,
+    "subsidiary: key entity not found by the query-time matcher": 1,
+    "relation: key entity not found by the query-time matcher": 2
+  }
+}

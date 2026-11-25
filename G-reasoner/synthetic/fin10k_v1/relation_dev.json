@@ -1,0 +1,598 @@
+[
+ {
+  "id": "fin10k_v1-relation-02250",
+  "question": "According to Johnson & Johnson's 10-K filings, which company acquired Intra-Cellular Therapies, Inc.?",
+  "start_nodes": {
+   "entity": [
+    "Intra-Cellular Therapies, Inc.",
+    "Johnson & Johnson"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "JNJ_FY2025_ITEM7_0013",
+    "JNJ_FY2025_ITEM7_0015",
+    "JNJ_FY2025_ITEM7_0031",
+    "JNJ_FY2025_ITEM7_0034",
+    "JNJ_FY2025_ITEM7_0047",
+    "JNJ_FY2025_ITEM8_0130",
+    "JNJ_FY2025_ITEM8_0133",
+    "JNJ_FY2025_ITEM8_0134",
+    "JNJ_FY2025_ITEM8_0136"
+   ],
+   "attribute": [],
+   "entity": [
+    "Johnson & Johnson"
+   ]
+  },
+  "answer": "Johnson & Johnson",
+  "template": "relation",
+  "hops": 2,
+  "path": [
+   [
+    "Johnson & Johnson",
+    "acquired",
+    "Intra-Cellular Therapies, Inc."
+   ],
+   [
+    "Intra-Cellular Therapies, Inc.",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM7_0013"
+   ],
+   [
+    "Intra-Cellular Therapies, Inc.",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM7_0015"
+   ],
+   [
+    "Intra-Cellular Therapies, Inc.",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM7_0031"
+   ],
+   [
+    "Intra-Cellular Therapies, Inc.",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM7_0034"
+   ],
+   [
+    "Intra-Cellular Therapies, Inc.",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM7_0047"
+   ],
+   [
+    "Intra-Cellular Therapies, Inc.",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0130"
+   ],
+   [
+    "Intra-Cellular Therapies, Inc.",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0133"
+   ],
+   [
+    "Intra-Cellular Therapies, Inc.",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0134"
+   ],
+   [
+    "Intra-Cellular Therapies, Inc.",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0136"
+   ]
+  ],
+  "tickers": [
+   "JNJ"
+  ],
+  "split": "relation_dev",
+  "rel_edges": [
+   [
+    "Johnson & Johnson",
+    "acquired",
+    "Intra-Cellular Therapies, Inc."
+   ]
+  ]
+ },
+ {
+  "id": "fin10k_v1-relation-02279",
+  "question": "According to Johnson & Johnson's 10-K filings, which company acquired Halda Therapeutics OpCo, Inc.?",
+  "start_nodes": {
+   "entity": [
+    "Halda Therapeutics OpCo, Inc.",
+    "Johnson & Johnson"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "JNJ_FY2025_ITEM7_0031",
+    "JNJ_FY2025_ITEM7_0034",
+    "JNJ_FY2025_ITEM8_0130",
+    "JNJ_FY2025_ITEM8_0133",
+    "JNJ_FY2025_ITEM8_0134"
+   ],
+   "attribute": [],
+   "entity": [
+    "Johnson & Johnson"
+   ]
+  },
+  "answer": "Johnson & Johnson",
+  "template": "relation",
+  "hops": 2,
+  "path": [
+   [
+    "Johnson & Johnson",
+    "acquired",
+    "Halda Therapeutics OpCo, Inc."
+   ],
+   [
+    "Halda Therapeutics OpCo, Inc.",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM7_0031"
+   ],
+   [
+    "Halda Therapeutics OpCo, Inc.",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM7_0034"
+   ],
+   [
+    "Halda Therapeutics OpCo, Inc.",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0130"
+   ],
+   [
+    "Halda Therapeutics OpCo, Inc.",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0133"
+   ],
+   [
+    "Halda Therapeutics OpCo, Inc.",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0134"
+   ]
+  ],
+  "tickers": [
+   "JNJ"
+  ],
+  "split": "relation_dev",
+  "rel_edges": [
+   [
+    "Johnson & Johnson",
+    "acquired",
+    "Halda Therapeutics OpCo, Inc."
+   ]
+  ]
+ },
+ {
+  "id": "fin10k_v1-relation-02282",
+  "question": "According to Johnson & Johnson's 10-K filings, Aragon Pharmaceuticals, Inc. is a subsidiary of which company?",
+  "start_nodes": {
+   "entity": [
+    "Aragon Pharmaceuticals, Inc.",
+    "Johnson & Johnson"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "JNJ_FY2024_ITEM8_0189",
+    "JNJ_FY2025_ITEM8_0179"
+   ],
+   "attribute": [],
+   "entity": [
+    "Johnson & Johnson"
+   ]
+  },
+  "answer": "Johnson & Johnson",
+  "template": "relation",
+  "hops": 2,
+  "path": [
+   [
+    "Aragon Pharmaceuticals, Inc.",
+    "subsidiary_of",
+    "Johnson & Johnson"
+   ],
+   [
+    "Aragon Pharmaceuticals, Inc.",
+    "is_mentioned_in",
+    "JNJ_FY2024_ITEM8_0189"
+   ],
+   [
+    "Aragon Pharmaceuticals, Inc.",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0179"
+   ]
+  ],
+  "tickers": [
+   "JNJ"
+  ],
+  "split": "relation_dev",
+  "rel_edges": [
+   [
+    "Aragon Pharmaceuticals, Inc.",
+    "subsidiary_of",
+    "Johnson & Johnson"
+   ]
+  ]
+ },
+ {
+  "id": "fin10k_v1-relation-02293",
+  "question": "According to Johnson & Johnson's 10-K filings, which company or product collaborates with Gilead Sciences Ireland UC?",
+  "start_nodes": {
+   "entity": [
+    "Gilead Sciences Ireland UC",
+    "Johnson & Johnson"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "JNJ_FY2024_ITEM8_0188"
+   ],
+   "attribute": [],
+   "entity": [
+    "Janssen Products, LP",
+    "Janssen Sciences Ireland Unlimited Company"
+   ]
+  },
+  "answer": "Janssen Products, LP; Janssen Sciences Ireland Unlimited Company",
+  "template": "relation",
+  "hops": 2,
+  "path": [
+   [
+    "Janssen Products, LP",
+    "partners_with",
+    "Gilead Sciences Ireland UC"
+   ],
+   [
+    "Janssen Sciences Ireland Unlimited Company",
+    "partners_with",
+    "Gilead Sciences Ireland UC"
+   ],
+   [
+    "Gilead Sciences Ireland UC",
+    "is_mentioned_in",
+    "JNJ_FY2024_ITEM8_0188"
+   ]
+  ],
+  "tickers": [
+   "JNJ"
+  ],
+  "split": "relation_dev",
+  "rel_edges": [
+   [
+    "Janssen Products, LP",
+    "partners_with",
+    "Gilead Sciences Ireland UC"
+   ],
+   [
+    "Janssen Sciences Ireland Unlimited Company",
+    "partners_with",
+    "Gilead Sciences Ireland UC"
+   ]
+  ]
+ },
+ {
+  "id": "fin10k_v1-relation-02308",
+  "question": "According to Johnson & Johnson's 10-K filings, which company acquired Ambrx Biopharma, Inc.?",
+  "start_nodes": {
+   "entity": [
+    "Ambrx Biopharma, Inc.",
+    "Johnson & Johnson"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "JNJ_FY2024_ITEM8_0132",
+    "JNJ_FY2024_ITEM8_0133",
+    "JNJ_FY2024_ITEM8_0137",
+    "JNJ_FY2025_ITEM8_0139",
+    "JNJ_FY2025_ITEM8_0140",
+    "JNJ_FY2025_ITEM8_0142"
+   ],
+   "attribute": [],
+   "entity": [
+    "Johnson & Johnson"
+   ]
+  },
+  "answer": "Johnson & Johnson",
+  "template": "relation",
+  "hops": 2,
+  "path": [
+   [
+    "Johnson & Johnson",
+    "acquired",
+    "Ambrx Biopharma, Inc."
+   ],
+   [
+    "Ambrx Biopharma, Inc.",
+    "is_mentioned_in",
+    "JNJ_FY2024_ITEM8_0132"
+   ],
+   [
+    "Ambrx Biopharma, Inc.",
+    "is_mentioned_in",
+    "JNJ_FY2024_ITEM8_0133"
+   ],
+   [
+    "Ambrx Biopharma, Inc.",
+    "is_mentioned_in",
+    "JNJ_FY2024_ITEM8_0137"
+   ],
+   [
+    "Ambrx Biopharma, Inc.",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0139"
+   ],
+   [
+    "Ambrx Biopharma, Inc.",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0140"
+   ],
+   [
+    "Ambrx Biopharma, Inc.",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0142"
+   ]
+  ],
+  "tickers": [
+   "JNJ"
+  ],
+  "split": "relation_dev",
+  "rel_edges": [
+   [
+    "Johnson & Johnson",
+    "acquired",
+    "Ambrx Biopharma, Inc."
+   ]
+  ]
+ },
+ {
+  "id": "fin10k_v1-relation-02323",
+  "question": "According to Johnson & Johnson's 10-K filings, Royalty A&M LLC is a subsidiary of which company?",
+  "start_nodes": {
+   "entity": [
+    "Johnson & Johnson",
+    "Royalty A&M LLC"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "JNJ_FY2024_ITEM8_0150",
+    "JNJ_FY2025_ITEM8_0151"
+   ],
+   "attribute": [],
+   "entity": [
+    "LTL Management LLC"
+   ]
+  },
+  "answer": "LTL Management LLC",
+  "template": "relation",
+  "hops": 2,
+  "path": [
+   [
+    "Royalty A&M LLC",
+    "subsidiary_of",
+    "LTL Management LLC"
+   ],
+   [
+    "Royalty A&M LLC",
+    "is_mentioned_in",
+    "JNJ_FY2024_ITEM8_0150"
+   ],
+   [
+    "Royalty A&M LLC",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0151"
+   ]
+  ],
+  "tickers": [
+   "JNJ"
+  ],
+  "split": "relation_dev",
+  "rel_edges": [
+   [
+    "Royalty A&M LLC",
+    "subsidiary_of",
+    "LTL Management LLC"
+   ]
+  ]
+ },
+ {
+  "id": "fin10k_v1-relation-02334",
+  "question": "According to Johnson & Johnson's 10-K filings, Janssen Pharmaceuticals, Inc. is a subsidiary of which company?",
+  "start_nodes": {
+   "entity": [
+    "Janssen Pharmaceuticals, Inc.",
+    "Johnson & Johnson"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "JNJ_FY2025_ITEM8_0171",
+    "JNJ_FY2025_ITEM8_0177"
+   ],
+   "attribute": [],
+   "entity": [
+    "Johnson & Johnson"
+   ]
+  },
+  "answer": "Johnson & Johnson",
+  "template": "relation",
+  "hops": 2,
+  "path": [
+   [
+    "Janssen Pharmaceuticals, Inc.",
+    "subsidiary_of",
+    "Johnson & Johnson"
+   ],
+   [
+    "Janssen Pharmaceuticals, Inc.",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0171"
+   ],
+   [
+    "Janssen Pharmaceuticals, Inc.",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0177"
+   ]
+  ],
+  "tickers": [
+   "JNJ"
+  ],
+  "split": "relation_dev",
+  "rel_edges": [
+   [
+    "Janssen Pharmaceuticals, Inc.",
+    "subsidiary_of",
+    "Johnson & Johnson"
+   ]
+  ]
+ },
+ {
+  "id": "fin10k_v1-relation-02337",
+  "question": "According to Johnson & Johnson's 10-K filings, which company acquired Abiomed?",
+  "start_nodes": {
+   "entity": [
+    "Johnson & Johnson",
+    "Abiomed (JNJ)"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "JNJ_FY2024_ITEM7_0031",
+    "JNJ_FY2024_ITEM7_0035",
+    "JNJ_FY2024_ITEM8_0129",
+    "JNJ_FY2024_ITEM8_0130",
+    "JNJ_FY2024_ITEM8_0131",
+    "JNJ_FY2024_ITEM8_0139",
+    "JNJ_FY2025_ITEM7_0031",
+    "JNJ_FY2025_ITEM7_0034",
+    "JNJ_FY2025_ITEM8_0130",
+    "JNJ_FY2025_ITEM8_0132",
+    "JNJ_FY2025_ITEM8_0133"
+   ],
+   "attribute": [],
+   "entity": [
+    "Johnson & Johnson"
+   ]
+  },
+  "answer": "Johnson & Johnson",
+  "template": "relation",
+  "hops": 2,
+  "path": [
+   [
+    "Johnson & Johnson",
+    "acquired",
+    "Abiomed (JNJ)"
+   ],
+   [
+    "Abiomed (JNJ)",
+    "is_mentioned_in",
+    "JNJ_FY2024_ITEM7_0031"
+   ],
+   [
+    "Abiomed (JNJ)",
+    "is_mentioned_in",
+    "JNJ_FY2024_ITEM7_0035"
+   ],
+   [
+    "Abiomed (JNJ)",
+    "is_mentioned_in",
+    "JNJ_FY2024_ITEM8_0129"
+   ],
+   [
+    "Abiomed (JNJ)",
+    "is_mentioned_in",
+    "JNJ_FY2024_ITEM8_0130"
+   ],
+   [
+    "Abiomed (JNJ)",
+    "is_mentioned_in",
+    "JNJ_FY2024_ITEM8_0131"
+   ],
+   [
+    "Abiomed (JNJ)",
+    "is_mentioned_in",
+    "JNJ_FY2024_ITEM8_0139"
+   ],
+   [
+    "Abiomed (JNJ)",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM7_0031"
+   ],
+   [
+    "Abiomed (JNJ)",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM7_0034"
+   ],
+   [
+    "Abiomed (JNJ)",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0130"
+   ],
+   [
+    "Abiomed (JNJ)",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0132"
+   ],
+   [
+    "Abiomed (JNJ)",
+    "is_mentioned_in",
+    "JNJ_FY2025_ITEM8_0133"
+   ]
+  ],
+  "tickers": [
+   "JNJ"
+  ],
+  "split": "relation_dev",
+  "rel_edges": [
+   [
+    "Johnson & Johnson",
+    "acquired",
+    "Abiomed (JNJ)"
+   ]
+  ]
+ },
+ {
+  "id": "fin10k_v1-relation-02340",
+  "question": "According to Johnson & Johnson's 10-K filings, Red River Talc LLC is a subsidiary of which company?",
+  "start_nodes": {
+   "entity": [
+    "Red River Talc LLC",
+    "Johnson & Johnson"
+   ]
+  },
+  "target_nodes": {
+   "document": [
+    "JNJ_FY2024_ITEM8_0225"
+   ],
+   "attribute": [],
+   "entity": [
+    "Johnson & Johnson"
+   ]
+  },
+  "answer": "Johnson & Johnson",
+  "template": "relation",
+  "hops": 2,
+  "path": [
+   [
+    "Red River Talc LLC",
+    "subsidiary_of",
+    "Johnson & Johnson"
+   ],
+   [
+    "Red River Talc LLC",
+    "is_mentioned_in",
+    "JNJ_FY2024_ITEM8_0225"
+   ]
+  ],
+  "tickers": [
+   "JNJ"
+  ],
+  "split": "relation_dev",
+  "rel_edges": [
+   [
+    "Red River Talc LLC",
+    "subsidiary_of",
+    "Johnson & Johnson"
+   ]
+  ]
+ }
+]

@@ -11,6 +11,11 @@ Templates (all answers are computed from graph values, never typed by hand):
   share        product or segment revenue / company revenue, same year       (2 facts, up to 3 hops)
   compare      the same metric for two companies in the same fiscal year     (cross-company)
   subsidiary   company -has_subsidiary-> subsidiary -incorporated_in-> place  (2 hops)
+  relation     entity -acquired / licensed_from / invests_in / partners_with / subsidiary_of-> entity, from the
+               LLM-extracted edges of fin10k_v1, asked from both ends; gold chunks = the edges' evidence  (2 hops)
+  relation_chain  the relation hop, then one structured hop from the answer: where it is incorporated
+               (Exhibit 21) or its revenue  (3 hops)
+  A few relation facts are held out of training (relation_dev.json) to tell learning from memorising.
 
 Each pair has gfmrag's SFT fields (id, question, start_nodes, target_nodes) plus answer, template,
 hops, path (the gold edges), tickers and split. Start nodes come from entity_index.EntityIndex, the
@@ -19,11 +24,13 @@ same matcher used at query time, so training and inference see the same inputs.
 Leakage guards:
   - split by company: any question touching a --test-tickers company goes to test, so test companies
     are never seen in training;
-  - golden overlap: a question that asks for a number that appears in a golden-set answer for the
-    same company is moved out of train/test into golden_overlap.json.
+  - golden overlap (golden set v2 by default): a question that asks for a number that appears in a
+    golden-set answer for the same company, or a subsidiary question about a subsidiary that a golden
+    question or answer names, or a relation question naming an entity that a golden question or answer
+    names, is moved out of train/test into golden_overlap.json.
 
 Standard library only:
-    python make_synthetic_questions.py --repo .. --out synthetic/fin10k_v0
+    python make_synthetic_questions.py --repo .. --out synthetic/fin10k_v1
 """
 from __future__ import annotations
 
@@ -80,9 +87,12 @@ class Graph:
             self.nodes[r["name"]] = (r["type"], ast.literal_eval(r["attributes"]) if r["attributes"] else {})
         self.out = collections.defaultdict(list)   # source -> [(relation, target)]
         self.inn = collections.defaultdict(list)   # target -> [(relation, source)]
+        self.edge_attrs = {}                       # (source, relation, target) -> attributes (LLM edges: evidence)
         for r in csv.DictReader(open(os.path.join(stage1, "edges.csv"), encoding="utf-8")):
             self.out[r["source"]].append((r["relation"], r["target"]))
             self.inn[r["target"]].append((r["relation"], r["source"]))
+            if r["attributes"]:
+                self.edge_attrs[(r["source"], r["relation"], r["target"])] = ast.literal_eval(r["attributes"])
 
     def kind(self, n):
         t, a = self.nodes[n]
@@ -117,10 +127,11 @@ def subject_text(g, subj):
             "BusinessLine": f"{possessive(comp)} {base(subj)} business"}.get(k, f"{possessive(comp)} {base(subj)}")
 
 
-# Known errors in the team graph, excluded until the graph is fixed. fin10k_v0: J&J's
-# "research and development expense" Values are really "Charges for acquired in-process research
-# and development" from the cash-flow statement ($109M FY2025, $1,841M FY2024; JNJ_FY2025_ITEM8_0008).
-KNOWN_BAD_VALUES = [("JNJ", "Research and development expense")]
+# Known errors per graph version, excluded from the pairs. fin10k_v0: J&J's "research and development
+# expense" Values are really "Charges for acquired in-process research and development" from the cash-flow
+# statement ($109M FY2025, $1,841M FY2024; JNJ_FY2025_ITEM8_0008). Fixed in fin10k_v1 (total R&D $14,665M
+# FY2025; acquired IPR&D is its own metric), so nothing is excluded there.
+KNOWN_BAD_VALUES = {"fin10k_v0": [("JNJ", "Research and development expense")]}
 
 
 def owner_phrase(g, subj):
@@ -128,11 +139,11 @@ def owner_phrase(g, subj):
     return possessive(short_company(subj)) if g.kind(subj) == "Company" else subject_text(g, subj)
 
 
-def collect_values(g):
-    """One record per Value node that is linked to at least one chunk (known-bad facts skipped)."""
+def collect_values(g, bad=()):
+    """One record per Value node that is linked to at least one chunk (known-bad (ticker, metric) skipped)."""
     vals = []
     for n, (t, a) in g.nodes.items():
-        if a.get("kind") != "Value" or (a.get("ticker"), a.get("metric")) in KNOWN_BAD_VALUES:
+        if a.get("kind") != "Value" or (a.get("ticker"), a.get("metric")) in bad:
             continue
         docs = g.docs(n)
         subj = g.sources(n, "has_value")
@@ -263,10 +274,108 @@ def gen_subsidiary(g):
                             [[sub, "is_mentioned_in", d] for d in docs], tickers=[a["ticker"]])
 
 
-def golden_numbers(repo):
-    """{ticker: {number strings}} from golden-set answers, to keep golden facts out of training."""
-    path = os.path.join(repo, "vector_rag_baseline", "data", "questions.jsonl")
-    out = collections.defaultdict(set)
+# Relation questions use only LLM-extracted edges (fin10k_v1) whose meaning is clear from the evidence. Left out:
+# competes_with (mostly co-defendants in patent suits, not competitors), supplies_to / manufactures (2-3 edges,
+# Kenvue only) and has_product (already used by the hierarchy template).
+# Each relation phrased from both ends. FORWARD names the head and asks for the tail; INVERSE names the tail
+# and asks for the head. {s}/{t} = the named entity, {c} = "Johnson & Johnson's" (or "its").
+REL_FORWARD = {
+    "acquired": "which companies or businesses did {s} acquire",
+    "invests_in": "which companies has {s} invested in",
+    "licensed_from": "from which company or companies does {s} license rights",
+    "partners_with": "which companies does {s} collaborate with",
+    "subsidiary_of": "{s} is a subsidiary of which company",
+}
+REL_INVERSE = {
+    "acquired": "which company acquired {t}",
+    "invests_in": "which company has invested in {t}",
+    "licensed_from": "which company or product holds a license from {t}",
+    "partners_with": "which company or product collaborates with {t}",
+    "subsidiary_of": "which companies are subsidiaries of {t}",
+}
+REL_QUESTION = REL_FORWARD
+
+
+def llm_edges(g, rels):
+    """[(source, relation, target, evidence chunk ids)] for LLM-extracted edges of these relations, skipping
+    edges inside one corporate family ("Bayer AG" -partners_with-> "Bayer Intellectual Property GmbH")."""
+    out = []
+    for (s, r, t), attrs in sorted(g.edge_attrs.items()):
+        if r not in rels or attrs.get("source") != "llm" or not attrs.get("chunk_ids"):
+            continue
+        if base(s).split()[0].lower() == base(t).split()[0].lower():
+            continue
+        # LLM errors seen in the review: the filing company as someone's subsidiary ("Johnson & Johnson
+        # -subsidiary_of-> JPI") or as the target of an investment or acquisition ("Red River Talc -invests_in->
+        # Johnson & Johnson")
+        if (r == "subsidiary_of" and g.kind(s) == "Company") or (r in ("invests_in", "acquired") and g.kind(t) == "Company"):
+            continue
+        out.append((s, r, t, sorted(attrs["chunk_ids"])))
+    return out
+
+
+def name_text(g, n):
+    return short_company(n) if g.kind(n) == "Company" else base(n)
+
+
+def _ask(g, phrase, named, ticker):
+    """'According to Johnson & Johnson's 10-K filings, which company acquired Auris Health, Inc.'"""
+    comp = company_of(g, ticker)
+    c = "its" if named == comp else possessive(short_company(comp))
+    return f"According to {c} 10-K filings, " + phrase.format(s=name_text(g, named), t=name_text(g, named))
+
+
+def gen_relation(g, vals):
+    """Relation questions from the LLM edges, in three forms:
+      relation        one hop, both directions (A): names one end, asks for everything at the other end;
+      relation_chain  relation hop + one structured hop from the answer entity (B): where it is incorporated
+                      (Exhibit 21) or what its revenue was. Only when the answer is unique.
+    Every record keeps `rel_edges` (the LLM edges it uses) so whole facts can be held out."""
+    edges = llm_edges(g, REL_FORWARD)
+    revenue = collections.defaultdict(list)
+    for v in vals:
+        if v["metric"] == "Revenue" and not v["loc"] and g.kind(v["subject"]) == "Product":
+            revenue[v["subject"]].append(v)
+    for direction, phrases in (("forward", REL_FORWARD), ("inverse", REL_INVERSE)):
+        groups = collections.defaultdict(list)          # (named end, relation) -> [(answer end, edge, docs)]
+        for s, r, t, docs in edges:
+            named, ans = (s, t) if direction == "forward" else (t, s)
+            groups[(named, r)].append((ans, (s, r, t), docs))
+        for (named, r), ends in sorted(groups.items()):
+            tickers = sorted({d.split("_")[0] for _, _, docs in ends for d in docs})
+            if len(tickers) != 1:
+                continue
+            ans = sorted({a for a, _, _ in ends})
+            docs = sorted({d for _, _, ds in ends for d in ds})
+            rel_edges = [list(e) for _, e, _ in ends]
+            q = _ask(g, phrases[r], named, tickers[0])
+            yield dict(template="relation", hops=2, question=q + "?", answer="; ".join(name_text(g, a) for a in ans),
+                       key_entities=[named], docs=docs, attributes=[], entities=ans, rel_edges=rel_edges,
+                       path=rel_edges + [[named, "is_mentioned_in", d] for d in docs], tickers=tickers)
+            if len(ans) != 1:                            # a chain needs one answer entity to continue from
+                continue
+            x, (_, e, edocs) = ans[0], ends[0]
+            locs = g.targets(x, "incorporated_in")
+            if len(locs) == 1 and g.kind(x) != "Company":
+                xdocs = [d for d in g.docs(x) if "_EX21_" in d] or g.docs(x)
+                yield dict(template="relation_chain", hops=3,
+                           question=q + ", and in which jurisdiction is it incorporated or organized?",
+                           answer=f"{name_text(g, x)}; {locs[0]}", key_entities=[named],
+                           docs=sorted(set(edocs) | set(xdocs)), attributes=[], entities=[x, locs[0]],
+                           rel_edges=[list(e)], tickers=tickers,
+                           path=[list(e), [x, "incorporated_in", locs[0]]] + [[x, "is_mentioned_in", d] for d in xdocs])
+            for v in revenue.get(x, []):
+                yield dict(template="relation_chain", hops=3,
+                           question=q + f", and what was its revenue in {fy_text(v['fy'])}?",
+                           answer=f"{name_text(g, x)}; {v['display']} in {fy_text(v['fy'])}", key_entities=[named],
+                           docs=sorted(set(edocs) | set(v["docs"])), attributes=[v["node"]], entities=[x],
+                           rel_edges=[list(e)], tickers=tickers, path=[list(e)] + value_path(g, v))
+
+
+def golden_facts(path):
+    """({ticker: {number strings}}, {ticker: question + answer text}) from the golden set, to keep golden
+    facts out of training: numbers in the answers, and names (e.g. a subsidiary) in questions or answers."""
+    nums_out, text_out = collections.defaultdict(set), collections.defaultdict(str)
     for line in open(path, encoding="utf-8"):
         if not line.strip():
             continue
@@ -274,31 +383,44 @@ def golden_numbers(repo):
         tickers = {g.split("_")[0] for g in q["gold_chunk_ids"]}
         nums = {n for n in re.findall(r"\d[\d,]*(?:\.\d+)?", q["gold_answer"]) if len(re.sub(r"\D", "", n)) >= 3}
         for t in tickers:
-            out[t] |= nums
-    return out
+            nums_out[t] |= nums
+            text_out[t] += " " + q["question"] + " " + q["gold_answer"]
+    return nums_out, text_out
+
+
+def names_in(text, name):
+    """Does the golden text name this node? Compared without the legal suffix ("Janssen Biotech, Inc.")."""
+    from entity_index import LEGAL_SUFFIX
+    short = LEGAL_SUFFIX.sub("", base(name)).strip()
+    return len(short) >= 4 and re.search(r"(?<!\w)" + re.escape(short) + r"(?!\w)", text) is not None
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--repo", default=os.path.dirname(HERE))
-    ap.add_argument("--graph", default="fin10k_v0")
+    ap.add_argument("--graph", default="fin10k_v1")
+    ap.add_argument("--golden", default=None,
+                    help="golden set kept out of the pairs (default: vector_rag_baseline/data/questions_v2.jsonl)")
     ap.add_argument("--out", required=True)
     ap.add_argument("--test-tickers", nargs="+", default=["MSFT"],
                     help="companies held out for test (with 8 companies, hold out 2)")
     ap.add_argument("--max-per-template", type=int, default=600, help="cap so one template does not dominate")
     ap.add_argument("--review", type=int, default=40, help="pairs written to review.md for hand inspection")
     ap.add_argument("--seed", type=int, default=13)
+    ap.add_argument("--relation-dev", type=int, default=10,
+                    help="relation facts (LLM edges) held out of training as a check for memorisation")
     a = ap.parse_args()
 
     stage1 = os.path.join(a.repo, "data", "graph", a.graph, "processed", "stage1")
     g, idx = Graph(stage1), EntityIndex(os.path.join(stage1, "nodes.csv"))
-    vals = collect_values(g)
+    vals = collect_values(g, KNOWN_BAD_VALUES.get(a.graph, ()))
     rng = random.Random(a.seed)
-    golden = golden_numbers(a.repo)
+    golden_path = a.golden or os.path.join(a.repo, "vector_rag_baseline", "data", "questions_v2.jsonl")
+    golden, golden_text = golden_facts(golden_path)
 
     pairs, dropped = [], collections.Counter()
     gens = [gen_lookup(g, vals), gen_change(g, vals), gen_hierarchy(g, vals), gen_share(g, vals),
-            gen_compare(g, vals), gen_subsidiary(g)]
+            gen_compare(g, vals), gen_subsidiary(g), gen_relation(g, vals)]
     for gen in gens:
         items = list(gen)
         rng.shuffle(items)
@@ -326,20 +448,54 @@ def main():
     buckets = {"train": [], "test": [], "golden_overlap": []}
     for i, p in enumerate(uniq):
         nums = {number_key(g.nodes[n][1]["display"]) for n in p["attributes"]}
+        # also numbers computed for the answer (shares, changes): "13.1%" of DARZALEX in FY2024 is a golden answer
+        # even though neither of the two values it is computed from is
+        nums |= {x for x in re.findall(r"\d[\d,]*(?:\.\d+)?", p["answer"])
+                 if len(re.sub(r"\D", "", x)) >= 3 and not re.fullmatch(r"(19|20)\d\d", x)}
         overlap = any(n and n in golden.get(t, set()) for t in p["tickers"] for n in nums)
+        if p["template"] == "subsidiary":
+            overlap = overlap or any(names_in(golden_text.get(t, ""), p["key_entities"][0]) for t in p["tickers"])
+        if p["template"].startswith("relation"):             # any named or answer entity in the golden set
+            # filers are in every golden question and places ("Delaware") in many: check the specific entities only
+            ents = [e for e in p["key_entities"] + p["entities"] if g.kind(e) not in ("Company", "Location")]
+            overlap = overlap or any(names_in(golden_text.get(t, ""), e) for t in p["tickers"] for e in ents)
         split = "golden_overlap" if overlap else ("test" if set(p["tickers"]) & set(a.test_tickers) else "train")
         rec = {"id": f"{a.graph}-{p['template']}-{i:05d}", "question": p["question"],
                "start_nodes": {"entity": p["start_nodes"]},
                "target_nodes": {"document": p["docs"], "attribute": p["attributes"], "entity": p["entities"]},
                "answer": p["answer"], "template": p["template"], "hops": p["hops"], "path": p["path"],
                "tickers": p["tickers"], "split": split}
+        if p.get("rel_edges"):
+            rec["rel_edges"] = p["rel_edges"]
         buckets[split].append(rec)
+
+    # Held-out relation facts: a few LLM edges that only training would see are moved, with every question that
+    # uses them, to relation_dev. After fine-tuning, better scores there (facts never trained on) mean the model
+    # learned to follow relation edges; better scores only on trained facts mean it memorised them.
+    trained = sorted({tuple(e) for r in buckets["train"] for e in r.get("rel_edges", [])})
+    held = set(random.Random(a.seed).sample(trained, min(a.relation_dev, len(trained))))
+    uses = lambda r: {tuple(e) for e in r.get("rel_edges", [])}  # noqa: E731
+    # dev keeps only questions made purely of held-out facts; a question mixing held-out and trained facts
+    # ("which companies does X collaborate with" -> one held-out, one trained answer) is dropped from both
+    buckets["relation_dev"] = [r for r in buckets["train"] if uses(r) and uses(r) <= held]
+    mixed = [r for r in buckets["train"] if uses(r) & held and not uses(r) <= held]
+    buckets["train"] = [r for r in buckets["train"] if not uses(r) & held]
+    for r in buckets["relation_dev"]:
+        r["split"] = "relation_dev"
 
     os.makedirs(a.out, exist_ok=True)
     for name, recs in buckets.items():
         json.dump(recs, open(os.path.join(a.out, f"{name}.json"), "w", encoding="utf-8"), indent=1, ensure_ascii=False)
+    # the same held-out questions in golden-set format, for: evaluate.py --questions relation_dev_questions.jsonl
+    with open(os.path.join(a.out, "relation_dev_questions.jsonl"), "w", encoding="utf-8") as f:
+        for r in buckets["relation_dev"]:
+            f.write(json.dumps({"qid": r["id"], "type": r["template"], "hops": r["hops"], "companies": r["tickers"],
+                                "question": r["question"], "gold_chunk_ids": r["target_nodes"]["document"],
+                                "gold_answer": r["answer"]}, ensure_ascii=False) + "\n")
 
-    stats = {"graph": a.graph, "test_tickers": a.test_tickers, "values_with_chunks": len(vals),
+    stats = {"graph": a.graph, "golden": os.path.relpath(golden_path, a.repo), "test_tickers": a.test_tickers,
+             "relation_dev_edges": sorted(list(e) for e in held), "relation_dev_mixed_dropped": len(mixed),
+             "excluded_values": KNOWN_BAD_VALUES.get(a.graph, []), "values_with_chunks": len(vals),
              "pairs": len(uniq), "by_split": {k: len(v) for k, v in buckets.items()},
              "by_template": dict(collections.Counter(p["template"] for p in uniq)),
              "by_template_and_split": {k: dict(collections.Counter(r["template"] for r in v)) for k, v in buckets.items()},

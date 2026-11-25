@@ -258,13 +258,57 @@ acquired Intra-Cellular Therapies, Halda Therapeutics, Shockwave Medical and ABI
 Microsoft invests_in and partners_with OpenAI. `fin10k_v1/value_sources.csv` is copied from
 `fin10k_v0`.
 
-Known weak spots (to be measured by the hand check of 30 LLM edges, Nov 22):
+Weak spots noticed while building (before the hand check below):
 - patent ownership still read as has_product once (Genmab A/S has_product DARZALEX);
 - some has_product edges between two products point the wrong way (OpenAI API has_product Azure);
 - 4 new "Segment" nodes are licensing programs (e.g. "Open Value"); they link only to generic
   product nodes with no reported numbers;
 - bare names of acquired businesses ("Shockwave", "V-Wave", "Ethicon") stay separate from the
   subsidiaries of the same name.
+
+### Hand check of 30 LLM edges (Nov 25)
+
+`make_llm_edge_check.py` drew 30 LLM edges (fixed seed), spread over all 9 relations so that each
+one is checked: 12 has_product and 18 of the other relations. Each edge was checked by hand against
+its passage (`edge_check_llm.md`) and marked in `edge_check_llm.csv`, the same way as
+`edge_check.csv`.
+
+**Result: 18 of 30 correct (60%).** Because the sample deliberately over-represents the small,
+weak relations, the share of correct LLM edges in the whole graph is higher: weighting each
+relation by how many edges it really has gives **about 71%** (rough: 30 edges, about ±15 points).
+For comparison, the rule-based edges of `fin10k_v0` were 29 of 30 correct.
+
+| Relation | Checked | Correct | LLM edges in `fin10k_v1` |
+| --- | ---: | ---: | ---: |
+| has_product | 12 | 10 | 276 |
+| competes_with | 4 | 0 | 29 |
+| acquired | 3 | 3 | 18 |
+| partners_with | 3 | 0 | 18 |
+| subsidiary_of | 2 | 0 | 15 |
+| licensed_from | 2 | 2 | 13 |
+| invests_in | 2 | 2 | 8 |
+| supplies_to | 1 | 1 | 3 |
+| manufactures | 1 | 0 | 2 |
+| **Total** | **30** | **18** | **382** |
+
+Errors: 7 wrong relation, 4 relation not stated in the passage, 1 name matched to the wrong node.
+
+**Why.** 9 of the 12 errors come from lawsuit passages (J&J's legal-proceedings notes in Item 8).
+The prompt offers 9 business relations and none for "parties to the same lawsuit", so the model
+picks the closest one: defendants in a Xarelto patent suit become `competes_with`, co-plaintiffs
+become `partners_with`, and companies listed together in a case become `subsidiary_of`. The build
+step only checks that the quote is in the passage, not that it supports the relation. The other 3
+errors join the wrong kind of node (a segment as a product, `Kenvue manufactures Johnson &
+Johnson` instead of `supplies_to`, a product competing with a company), which nothing checks.
+
+**What it means.** LLM edges are reliable for has_product, acquired, licensed_from and invests_in
+(so the DARZALEX licence chain and the acquisitions hold), and unreliable for competes_with,
+partners_with and subsidiary_of. `fin10k_v1` is kept as it is, because G-reasoner and Personalized
+PageRank were run and fine-tuned on it. Two rules would remove 10 of the 12 errors (drop triples
+quoted from lawsuit text; require company-to-company for competes_with, partners_with,
+subsidiary_of, acquired and invests_in), but they also remove correct edges (114 of 382 edges in
+total), so they are left for a separate graph in the final report. Better extraction would add a
+lawsuit relation or skip legal-proceedings passages, and check node kinds.
 
 `fin10k_v1` is in git (released to G-reasoner on Nov 21); the Gemini cache (`llm_cache/`) stays
 local. A rerun with a stronger Gemini model is still planned.

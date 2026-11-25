@@ -16,16 +16,17 @@ split into 1,855 text chunks, and a golden set of 39 hand-checked questions.
 3. **Traceability and errors:** can each number in an answer be traced to its source, how often do
    answers state numbers their evidence does not hold, and at which stage do errors start?
 
-## Current state (Nov 20, 2026)
+## Current state (Nov 25, 2026)
 
 | Part | Folder | Status | Owner |
 | --- | --- | --- | --- |
 | Filings | `data/edgar_10k/` | Done: 10-K + Exhibit 21 from SEC EDGAR | Mohini |
 | Chunks | `data/chunks/` | Done: 1,855 chunks with a full filing header (fixed Nov 18) | Mohini |
 | Graph `fin10k_v0` | `data/graph/` | Done: rule-based, 3,622 nodes; every number tied to its filing, section, chunk and XBRL tag | Mohini |
-| Graph `fin10k_v1` | `data/graph/` | Done: `fin10k_v0` + 382 LLM-extracted relation edges (3,841 nodes); hand check of 30 LLM edges on Nov 22 | Mohini |
+| Graph `fin10k_v1` | `data/graph/` | Done: `fin10k_v0` + 382 LLM-extracted relation edges (3,841 nodes); hand check: 18 of 30 LLM edges correct, about 71% weighted (errors mostly from lawsuit text) | Mohini |
 | Vector-RAG baseline, golden set v2 | `vector_rag_baseline/` | Done on golden set v2 | Mahua |
-| G-reasoner | `G-reasoner/` | Zero-shot runs on `fin10k_v0`; re-index on `fin10k_v1` and fine-tuning next | Rida |
+| G-reasoner | `G-reasoner/` | Zero-shot, fine-tuned and Personalized PageRank retrieval on golden set v2 | Rida |
+| Answer step with citations, trace view | `answer_step/` | Built (Nov 25); vector RAG answered and scored (69% correct, same as the baseline); graph retrievers next | Mohini |
 | Report | `report/` | Preliminary report done (Oct 21); poster Nov 30, final report Dec 7 | All |
 
 **Results so far (vector RAG, golden set v2, k = 10):** the best setup (bge-small + reranking)
@@ -43,6 +44,7 @@ Details: `vector_rag_baseline/results/v2_all_baselines/summary.md`.
 | `data/graph/` | The knowledge graph in gfmrag's format (`fin10k_v0`, `fin10k_v1`), build and check scripts | `README.md` |
 | `vector_rag_baseline/` | Vector RAG (bge-small, FAISS, reranker, Gemini), golden set v2, metrics, results | `README.md` |
 | `G-reasoner/` | G-reasoner retriever on the graph (Colab), evaluation, synthetic training pairs | `README.md` |
+| `answer_step/` | Retrieved chunks, Values and subgraph -> Gemini answer citing chunk and Value ids; scoring; trace view | `README.md` |
 | `report/` | Preliminary report (CVPR format) and the schema figure | |
 
 ## Rebuild the data and the graph
@@ -62,9 +64,8 @@ the README in their folders.
 
 ## Next steps
 
-- Nov 22: hand-check 30 LLM edges; G-reasoner zero-shot on `fin10k_v1` (Rida)
-- Nov 22-25: Personalized PageRank; G-reasoner fine-tuning (Rida); answer step that cites Value
-  and chunk ids, then answers for every system (Mohini)
+- Nov 25-26: answers from G-reasoner (zero-shot, fine-tuned) and Personalized PageRank through the
+  answer step, once Rida's per-question files are pushed (Mohini)
 - Nov 25-26: tag the failure stage of every wrong answer (Mohini, Rida)
 - Nov 30: poster; Dec 7: final report and open-source release
 

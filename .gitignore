@@ -66,3 +66,8 @@ report/prelim_sections.pdf
 # Vector-RAG baseline: machine-specific config and the FAISS index cache
 vector_rag_baseline/rag/local_config.py
 vector_rag_baseline/indexes/
+
+# Answer step: Gemini reply cache (kept local, like llm_cache) and scratch outputs
+answer_step/cache/
+answer_step/_to_delete/
+answer_step/results/*_dryrun/

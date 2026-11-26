@@ -73,6 +73,43 @@ class Graph:
         return list(dict.fromkeys(direct + bridged))[:cap]
 
 
+SUBJECT_KINDS = {"Company", "Segment", "BusinessLine", "Product"}
+
+
+def select_values(g, nodes, cap=10):
+    """Item 2: Values chosen by rule from the question's linked nodes instead of the retriever's ranking.
+
+    nodes: start nodes and retrieved entities. A Value is kept if its subject is one of these nodes
+    (Company, Segment, BusinessLine or Product), its metric is one of the linked Metric nodes, and its fiscal
+    year is one of the linked FiscalYear nodes of that company (any year if none is linked for that company).
+    Values limited to a region (U.S., Europe, ...) come after company-wide ones. Returns [] when no Metric
+    node is linked (the question names no measurable figure), so the caller can fall back."""
+    nodes = [n for n in dict.fromkeys(nodes) if n in g.nodes]
+    metrics = {n for n in nodes if g.kind(n) == "Metric"}
+    if not metrics:
+        return []
+    years = collections.defaultdict(set)
+    for n in nodes:
+        if g.kind(n) == "FiscalYear":
+            a = g.nodes[n][1]
+            years[a["ticker"]].add(n.split(" ")[0])
+    regional = {s for s, r, t in g.edges if r == "in_location"} if not hasattr(g, "_regional") else g._regional
+    g._regional = regional
+    out = []
+    for subj in nodes:
+        if g.kind(subj) not in SUBJECT_KINDS:
+            continue
+        for nb, (s, r, t) in g.adj[subj]:
+            if r != "has_value" or s != subj:
+                continue
+            a = g.nodes[t][1]
+            if a["metric"] in metrics and (not years[a["ticker"]] or a["fiscal_year"] in years[a["ticker"]]):
+                out.append(t)
+    out = sorted(dict.fromkeys(out), key=lambda v: (v in regional, nodes.index(next(
+        s for s, r, t in [(x[1][0], x[1][1], x[1][2]) for x in g.adj[v]] if r == "has_value")), v))
+    return out[:cap]
+
+
 def triple_text(g, e):
     s, r, t = e
     show = lambda n: f"{n} [{g.value_id[n]}]" if g.is_value(n) else n

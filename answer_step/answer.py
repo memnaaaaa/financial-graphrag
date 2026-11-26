@@ -25,7 +25,7 @@ sys.path.insert(0, os.path.join(REPO, "vector_rag_baseline"))
 from rag import error_stage, generate, judge, metrics  # noqa: E402  (Mahua's code, imported unchanged)
 
 import retrievals  # noqa: E402
-from graph_context import VALUE_ID_RE, Graph, load_chunks, triple_text  # noqa: E402
+from graph_context import VALUE_ID_RE, Graph, load_chunks, select_values, triple_text  # noqa: E402
 from llm import DEFAULT_MODEL, FakeGemini, Gemini  # noqa: E402
 
 GRAPH_SYSTEM = generate.SYSTEM + (
@@ -35,9 +35,12 @@ GRAPH_SYSTEM = generate.SYSTEM + (
     "passage id. Use the Facts to connect companies, subsidiaries and products.")
 
 
-def build_prompt(g, chunks, q, ret, use_graph):
+def build_prompt(g, chunks, q, ret, use_graph, value_mode="retriever"):
     passages = [(c, chunks[c]["text"]) for c in ret["chunks"] if c in chunks]
     values = [v for v in ret["values"] if v in g.value_id] if use_graph else []
+    if use_graph and value_mode == "rule":
+        # item 2: Values picked by rule from the linked nodes; the retriever's own Values only as a fallback
+        values = select_values(g, (ret["start_nodes"] or []) + ret["entities"]) or values
     seeds = (ret["start_nodes"] or []) + ret["entities"] + values if use_graph else []
     triples = g.subgraph(seeds) if seeds else []
     if not (values or triples):
@@ -117,6 +120,9 @@ def main():
     ap.add_argument("--graph", default=os.path.join(REPO, "data/graph/fin10k_v1/processed/stage1"))
     ap.add_argument("--chunks", default=os.path.join(REPO, "data/chunks/chunks.jsonl"))
     ap.add_argument("--no-graph-context", action="store_true", help="ignore retrieved nodes: chunks only")
+    ap.add_argument("--values", choices=["retriever", "rule"], default="retriever",
+                    help="which Value nodes go to Gemini: the retriever's top Values, or chosen by rule from the "
+                         "question's linked company/product, metric and fiscal-year nodes (item 2)")
     ap.add_argument("--model", default=DEFAULT_MODEL)
     ap.add_argument("--rpm", type=float, default=10, help="max Gemini requests per minute")
     ap.add_argument("--types", nargs="+", help="only these question types (e.g. relation relation_deep)")
@@ -144,7 +150,7 @@ def main():
         if q["qid"] not in rets:
             continue
         ret = rets[q["qid"]]
-        system, prompt, values, triples = build_prompt(g, chunks, q, ret, not a.no_graph_context)
+        system, prompt, values, triples = build_prompt(g, chunks, q, ret, not a.no_graph_context, a.values)
         answer = llm.generate(prompt, system=system)
         j = judge.judge(llm, q["question"], q["gold_answer"], answer)
         rec = {"system": a.system, "k": a.k, "qid": q["qid"], "type": q["type"], "hops": q.get("hops"),
@@ -167,6 +173,7 @@ def main():
         by_type[r["type"]].append(r)
     summary = {"system": a.system, "k": a.k, "model": a.model, "graph": os.path.relpath(a.graph, REPO),
                "retrievals": os.path.relpath(a.retrievals, REPO), "config": a.config, "dry_run": a.dry_run,
+               "values": a.values,
                "fact_check": recs[0]["fact_check"] if recs else None,
                "overall": summarize(recs), "by_type": {t: summarize(rs) for t, rs in sorted(by_type.items())}}
     json.dump(summary, open(os.path.join(out, "summary.json"), "w"), indent=2)

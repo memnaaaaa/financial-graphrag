@@ -6,11 +6,11 @@
   "retrievals": "vector_rag_baseline\\results\\v2_all_baselines\\per_question_all.jsonl",
   "config": "bge-small+rerank",
   "dry_run": false,
-  "fact_check": "gold_chunk_hit",
+  "fact_check": "fact_chunks",
   "overall": {
     "n": 39,
     "hit": 0.8205128205128205,
-    "all_facts": 0.8205128205128205,
+    "all_facts": 0.6410256410256411,
     "correct_rate": 0.6923076923076923,
     "hallucination_rate": 0.0,
     "missing_rate": 0.3076923076923077,
@@ -23,15 +23,15 @@
     "value_cite_accuracy": null,
     "stages": {
       "ok": 27,
-      "generation": 6,
-      "retrieval": 6
+      "retrieval": 11,
+      "generation": 1
     }
   },
   "by_type": {
     "cross_company": {
       "n": 3,
       "hit": 0.6666666666666666,
-      "all_facts": 0.6666666666666666,
+      "all_facts": 0.3333333333333333,
       "correct_rate": 0.0,
       "hallucination_rate": 0.0,
       "missing_rate": 1.0,
@@ -43,14 +43,14 @@
       "value_cites": 0,
       "value_cite_accuracy": null,
       "stages": {
-        "generation": 2,
-        "retrieval": 1
+        "generation": 1,
+        "retrieval": 2
       }
     },
     "cross_year": {
       "n": 4,
       "hit": 0.5,
-      "all_facts": 0.5,
+      "all_facts": 0.25,
       "correct_rate": 0.5,
       "hallucination_rate": 0.0,
       "missing_rate": 0.5,
@@ -69,7 +69,7 @@
     "relation": {
       "n": 6,
       "hit": 0.8333333333333334,
-      "all_facts": 0.8333333333333334,
+      "all_facts": 0.5,
       "correct_rate": 0.6666666666666666,
       "hallucination_rate": 0.0,
       "missing_rate": 0.3333333333333333,
@@ -82,14 +82,13 @@
       "value_cite_accuracy": null,
       "stages": {
         "ok": 4,
-        "generation": 1,
-        "retrieval": 1
+        "retrieval": 2
       }
     },
     "relation_deep": {
       "n": 5,
       "hit": 1.0,
-      "all_facts": 1.0,
+      "all_facts": 0.4,
       "correct_rate": 0.4,
       "hallucination_rate": 0.0,
       "missing_rate": 0.6,
@@ -101,7 +100,7 @@
       "value_cites": 0,
       "value_cite_accuracy": null,
       "stages": {
-        "generation": 3,
+        "retrieval": 3,
         "ok": 2
       }
     },

@@ -1,6 +1,6 @@
 # Answer step with citations and trace view
 
-Owner: Mohini. Turns any retriever's output into a cited answer, scores it, and traces each number back to
+Turns any retriever's output into a cited answer, scores it, and traces each number back to
 its filing. Every system gets the same model (`gemini-3.5-flash-lite`, temperature 0), the same answer rules
 and the same scoring, so differences between systems come from retrieval.
 
@@ -65,21 +65,95 @@ python answer_step/trace.py answer_step/results/g_reasoner_finetuned_k10/per_que
 ```
 
 Options: `--dry-run` (no Gemini calls, fake answers: checks the pipeline only), `--types relation relation_deep`
-or `--only v2_q11` (a subset), `--no-graph-context` (chunks only), `--rpm` (requests per minute, default 10).
+or `--only v2_q11` (a subset), `--no-graph-context` (chunks only), `--values rule` (Values chosen by rule), `--rpm` (requests per minute, default 10).
 One run is 39 answers + 39 judge calls.
 
-## Results so far
+## Two improvements (Nov 25)
 
-| Run | Correct | Halluc. | Missing | Unsupported numbers | Citation acc. |
-| --- | --- | --- | --- | --- | --- |
-| `vector_rag_k10` (bge-small + rerank, k = 10), Nov 25 | 69.2% | 0.0% | 30.8% | 23.3% (7 of 30) | 85.7% |
+- **Hybrid retrieval** (`make_hybrid.py`): vector RAG and a graph retriever fail on different questions, so
+  their chunks are merged (interleaved, about 5 each, 10 in total); the entities, Values and start nodes come
+  from the graph retriever. Every needed fact is in the 10 chunks for 29 of 39 questions with fine-tuned
+  G-reasoner, against 25 for vector RAG alone and 19 for the graph alone.
+- **Values chosen by rule** (`answer.py --values rule`): instead of the retriever's top Values (often
+  unrelated, e.g. FY2023 cost of sales for a revenue question), Gemini gets the Values of the linked
+  companies, segments and products for the linked metric and fiscal years (e.g. v2_q37: Apple FY2025 and
+  Microsoft FY2025/FY2026 R&D). Questions that name no metric keep the retriever's Values.
 
-Sanity check: the vector RAG run reproduces the baseline's 69.2% correct
-(`vector_rag_baseline/results/v2_all_baselines`), with the same judge verdict on 38 of 39 questions. The
-higher unsupported-number rate (baseline 0%) comes from two answers Gemini worded differently this run:
-v2_q37 states six numbers without a citation and then refuses, and v2_q10's "$60.4 billion" is not found in
-its cited passage. G-reasoner (zero-shot, fine-tuned) and Personalized PageRank are next; their
-per-question retrieval files are in `G-reasoner/results/` (commands above).
+```bash
+python answer_step/make_hybrid.py --graph G-reasoner/results/finetuned_fin10k_v1/per_question.jsonl --name hybrid_finetuned
+python answer_step/answer.py --system hybrid_finetuned_rule --retrievals answer_step/retrievals/hybrid_finetuned.jsonl --values rule
+```
+
+## Results (Nov 25, golden set v2, k = 10)
+
+All four systems answered with the same model, prompt rules and scoring (`results/comparison.md`).
+Error stages use the golden set's `fact_chunks` (every gold fact checked).
+
+| System | Correct | Halluc. | Missing | Unsupported numbers | Citation acc. | Value-cite acc. | Wrong: retrieval / generation |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Vector RAG (bge-small + rerank) | 69% | 0% | 31% | 23% | 86% | - | 11 / 1 |
+| G-reasoner zero-shot | 15% | 0% | 85% | 0% | 100% | 100% (1 cite) | 31 / 2 |
+| G-reasoner fine-tuned | 51% | 3% | 46% | 8% | 84% | - (no cites) | 18 / 1 |
+| Personalized PageRank | 51% | 3% | 46% | 6% | 92% | 100% (17 cites) | 19 / 0 |
+| G-reasoner fine-tuned, Values by rule | 54% | 3% | 44% | 11% | 83% | 100% | 17 / 1 |
+| Personalized PageRank, Values by rule | 51% | 8% | 41% | 15% | 79% | 96% | 18 / 1 |
+| **Hybrid: vector + fine-tuned G-reasoner** | **77%** | 3% | 21% | 8% | 89% | - (1 cite) | 8 / 1 |
+| **Hybrid (fine-tuned), Values by rule** | **77%** | 3% | 21% | 8% | 89% | 90% | 8 / 1 |
+| Hybrid: vector + PPR, Values by rule | 69% | 0% | 31% | 5% | 93% | 92% | 12 / 0 |
+
+| Correct by type | single (9) | relation (6) | relation_text (12) | relation_deep (5) | cross_year (4) | cross_company (3) |
+| --- | --- | --- | --- | --- | --- | --- |
+| Vector RAG | 100% | 67% | 83% | 40% | 50% | 0% |
+| G-reasoner zero-shot | 33% | 0% | 17% | 0% | 25% | 0% |
+| G-reasoner fine-tuned | 100% | 33% | 42% | 40% | 0% | 67% |
+| Personalized PageRank | 100% | 17% | 33% | 60% | 25% | 67% |
+| Hybrid: vector + fine-tuned G-reasoner | 100% | 50% | 83% | 80% | 50% | 67% |
+
+**What the results show**
+
+1. **Retrieval causes almost every wrong answer, in every system** (92% of wrong answers for vector RAG,
+   94-100% for the graph retrievers). When the needed facts reach Gemini it answers correctly; it refuses
+   rather than guesses when they do not (hallucination 0-3%). The one vector-RAG generation error is
+   v2_q37: both R&D figures were retrieved and cited, but the comparison was wrong.
+2. **Five questions fail for every system:** v2_q11 (Janssen Biotech's state, a bare Exhibit 21 table
+   row), v2_q23 (STELARA), v2_q28 (Shockwave chain, 3-4 facts) and v2_q33/v2_q34 (employee counts for two
+   years).
+3. **Some facts are not in the graph at all:** employee counts (v2_q33, v2_q34) and remaining performance
+   obligations (v2_q36) are not among the 26 XBRL concepts the graph keeps, so a graph retriever cannot
+   reach them. These are graph-stage failures; the automatic tagger counts them as retrieval, so they are
+   re-tagged by hand.
+4. **The graph misses facts that exist only in prose and that the question describes instead of names:**
+   Genmab's patents and expiry (v2_q16), the Activision acquisition (v2_q19), manufacturing and tariffs
+   (v2_q21), Proteologix (v2_q22), the EU Digital Markets Act (v2_q26), the Epic litigation (v2_q27). The
+   start node is then often only the company, and the walk spreads into its Exhibit 21 subsidiaries. This
+   is most of the gap on `relation_text` (83% vs 33-42%).
+5. **The graph helps when the question names several entities:** cross-company v2_q39 (Apple vs J&J net
+   income: both companies' figures retrieved by the graph, neither by vector RAG), v2_q29 (Activision
+   goodwill), and v2_q13 for the fine-tuned model.
+6. **Fine-tuning brought G-reasoner from 15% to 51%, level with Personalized PageRank but not above it.**
+7. **Value citations are accurate when used but rare:** the retrievers seldom return the Values a question
+   needs, so Gemini cites passages instead.
+8. **Cross-year is weaker for the graph** (fine-tuned 0 of 4): partly point 3, partly the two years'
+   Values not both being retrieved (v2_q35, DARZALEX FY2024 vs FY2025).
+
+**The two improvements (Nov 26)**
+
+9. **Hybrid retrieval is the best system: 77% correct** (vector RAG 69%, either graph retriever 51%). It
+   answers 5 questions vector RAG misses (v2_q24, v2_q29, v2_q31, v2_q37, v2_q39) and loses 2 (v2_q10,
+   v2_q21); deep questions go from 40% to 80% and cross-company from 0% to 67%. Vector search and the
+   graph fail on different questions, so combining them works. With PPR instead of the fine-tuned model
+   the hybrid only matches vector RAG (69%): fine-tuning matters once the graph is combined with vectors.
+10. **Values chosen by rule make answers traceable without changing accuracy:** in the hybrid, the
+    verdicts are identical, but 12 answers now cite a Value and 90% of those citations hold the stated
+    number. Alone, the rule adds one correct answer for fine-tuned G-reasoner (51% to 54%) and none for
+    PPR, where extra numbers pushed two weak answers into hallucinations (3% to 8%).
+
+The two improvements were designed after seeing the failure patterns above, on the same 39 questions;
+77% vs 69% is 3 questions.
+
+Caveats: 39 questions, 3-12 per type, so one question moves a type's rate by 8-33 points. Sanity check:
+the vector-RAG run reproduces the baseline's 69.2% correct with the same verdict on 38 of 39 questions; its
+higher unsupported-number rate comes from two answers worded differently this run (v2_q37, v2_q10).
 
 ## Files
 
@@ -89,5 +163,6 @@ per-question retrieval files are in `G-reasoner/results/` (commands above).
 | `graph_context.py` | loads the graph, Value ids, subgraph |
 | `retrievals.py` | reads vector RAG / G-reasoner / PPR outputs into one format |
 | `llm.py` | Gemini REST client with the reply cache |
+| `make_hybrid.py` | merges vector RAG and graph retrievals into one retrieval file (`retrievals/`) |
 | `compare.py` | one table over all runs |
 | `trace.py` | trace view: answer sentence -> Value -> passage line -> filing -> SEC EDGAR link (`traces/`) |

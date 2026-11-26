@@ -16,7 +16,7 @@ split into 1,855 text chunks, and a golden set of 39 hand-checked questions.
 3. **Traceability and errors:** can each number in an answer be traced to its source, how often do
    answers state numbers their evidence does not hold, and at which stage do errors start?
 
-## Current state (Nov 25, 2026)
+## Current state (Nov 26, 2026)
 
 | Part | Folder | Status | Owner |
 | --- | --- | --- | --- |
@@ -26,7 +26,7 @@ split into 1,855 text chunks, and a golden set of 39 hand-checked questions.
 | Graph `fin10k_v1` | `data/graph/` | Done: `fin10k_v0` + 382 LLM-extracted relation edges (3,841 nodes); hand check: 18 of 30 LLM edges correct, about 71% weighted (errors mostly from lawsuit text) | Mohini |
 | Vector-RAG baseline, golden set v2 | `vector_rag_baseline/` | Done on golden set v2 | Mahua |
 | G-reasoner | `G-reasoner/` | Done on golden set v2: zero-shot (E2), fine-tuned (E3), Personalized PageRank (E4), hop analysis (E7); per-question files for the answer step in `G-reasoner/results/` | Rida |
-| Answer step with citations, trace view | `answer_step/` | Built (Nov 25); vector RAG answered and scored (69% correct, same as the baseline); graph retrievers next | Mohini |
+| Answer step with citations, trace view | `answer_step/` | Done (Nov 26): all systems answered and scored; vector + fine-tuned G-reasoner hybrid best at 77% correct (vector RAG 69%, graph alone 51%) | Mohini |
 | Report | `report/` | Preliminary report done (Oct 21); poster Nov 30, final report Dec 7 | All |
 
 **Results so far (vector RAG, golden set v2, k = 10):** the best setup (bge-small + reranking)
@@ -70,9 +70,8 @@ the README in their folders.
 
 ## Next steps
 
-- Nov 25-26: answers from G-reasoner (zero-shot, fine-tuned) and Personalized PageRank through the
-  answer step (Mohini); retrieval files: `G-reasoner/results/{zero_shot,finetuned,ppr}_fin10k_v1/per_question.jsonl`
-- Nov 25-26: tag the failure stage of every wrong answer (Mohini, Rida)
+- Nov 26-27: hand-tag the graph-stage failures (facts missing from the graph, e.g. employee counts) with
+  Rida; poster panels and a visual demo page
 - Nov 30: poster; Dec 7: final report and open-source release
 
 Contribution log: `CONTRIBUTIONS.md`.

@@ -289,5 +289,5 @@ Each record has gfmrag's SFT fields (`id`, `question`, `start_nodes`, `target_no
 
 1. **Nov 24:** decide on E8 (G-reasoner's own graph from the 10-K text); otherwise it goes to the final report.
 2. **Nov 25-26:** answer step on E2–E4 (Mohini), then failure tagging (E6, with Mohini); E9 `fin10k_v0` vs `v1`.
-3. **Nov 25-30:** poster (draft Nov 25, numbers in Nov 27, freeze Nov 28, rehearsal Nov 29, poster Nov 30).
+3. **Nov 25-Dec 2:** poster (draft Nov 25, numbers in Nov 27, freeze Nov 28, rehearsal Nov 29, poster Dec 2).
 4. **Dec 2-7:** report sections: retriever, fine-tuning, PageRank, hop analysis.

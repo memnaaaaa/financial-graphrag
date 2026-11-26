@@ -28,7 +28,7 @@ split into 1,855 text chunks, and a golden set of 39 hand-checked questions.
 | G-reasoner | `G-reasoner/` | Done on golden set v2: zero-shot (E2), fine-tuned (E3), Personalized PageRank (E4), hop analysis (E7); per-question files for the answer step in `G-reasoner/results/` | Rida |
 | Answer step with citations, trace view | `answer_step/` | Done (Nov 26): all systems answered and scored; vector + fine-tuned G-reasoner hybrid best at 77% correct (vector RAG 69%, graph alone 51%) | Mohini |
 | Poster demo ("Follow the Number") | `demo/` | Done (Nov 26): interactive page with the showcase questions, subgraphs, citation traces and the hop analysis; live at https://memnaaaaa.github.io/financial-graphrag/demo/ | Mohini |
-| Report | `report/` | Preliminary report done (Oct 21); poster Nov 30, final report Dec 7 | All |
+| Report | `report/` | Preliminary report done (Oct 21); poster Dec 2, final report Dec 7 | All |
 
 **Results so far (vector RAG, golden set v2, k = 10):** the best setup (bge-small + reranking)
 answers 69% of questions correctly and hallucinates in 0-3%. Almost every wrong answer is a
@@ -74,6 +74,6 @@ the README in their folders.
 
 - Nov 26-27: hand-tag the graph-stage failures (facts missing from the graph, e.g. employee counts) with
   Rida; poster panels
-- Nov 30: poster; Dec 7: final report and open-source release
+- Dec 2: poster; Dec 7: final report and open-source release
 
 Contribution log: `CONTRIBUTIONS.md`.

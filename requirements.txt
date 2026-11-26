@@ -10,3 +10,16 @@ tokenizers>=0.19
 # answer_step to run vector RAG through the answer step for sanity check:
 # correct answers should land near Mahua's 69% for bge-small + rerank at k = 10
 numpy>=1.26
+
+##Vector Rag 
+sentence-transformers>=3.0
+faiss-cpu>=1.8
+numpy
+pypdf
+google-genai
+google-auth
+requests
+python-dotenv
+pytest
+truststore
+rank-bm25

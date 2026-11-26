@@ -4,7 +4,7 @@ Baseline retrieval-augmented generation over SEC 10-K filings (J&J, Apple, Micro
 GNN retriever (G-Reasoner) and a Personalized PageRank walk on the same filings. This README is maintained by hand
 (`scripts/make_docs.py` no longer overwrites it).
 
-**Status (Nov 19).** Baseline rerun done on Mohini's fixed chunks (1,855 chunks, 6 filings) with `gemini-3.5-flash-lite` as generator and judge, on golden set v2 (39 questions, hand-checked). The new grounding measures and the failure-stage rules are in. Results are below.
+**Status (Nov 25).** Baseline rerun done on Mohini's fixed chunks (1,855 chunks, 6 filings) with `gemini-3.5-flash-lite` as generator and judge, on golden set v2 (39 questions, hand-checked): bge-small and DistilBERT, with and without reranking, k = 5 and 10. The grounding measures (unsupported numbers, citation accuracy, answer support) and the failure-stage rules are in. Best baseline: bge-small + rerank at k = 10, 69% correct, AllFacts 0.64. Retrieval is the bottleneck: nearly every wrong answer is a retrieval failure. Start with `results/v2_all_baselines/summary.md` (setup, tables, error stages, causes). Per-question data (question, gold, retrieved chunk ids, answer, verdict, failure stage) is in `results/v2_all_baselines/per_question_all.csv` and `.jsonl`.
 
 ## Pipeline
 
@@ -134,26 +134,47 @@ Traceability columns: **Unsupported numbers** = numbers in answers found in none
 
 ## Rerun
 
+Run everything from the folder that holds `rag/`, `scripts/` and `data/` (`vector_rag_baseline/` in the repo). `data/chunks.jsonl` is not stored in git: copy Mohini's fixed chunk file there (1,855 chunks for the 6 filings; the file may also hold other companies, `--tickers` keeps the three).
+
 ```bash
-cd vector_rag
-python -m venv .venv && .venv/bin/pip install -r requirements.txt   # once
-cp .env.example .env                                                # Gemini access, see the file
+python -m venv .venv && .venv/bin/pip install -r requirements.txt   # once (requirements.txt is also at the repo root)
+cp .env.example .env                                                # Gemini access, see "Gemini access" below
 # 1. baseline: retrieval metrics + answers + judge + grounding checks + failure stage
 .venv/bin/python scripts/run_eval.py --chunks data/chunks.jsonl --questions data/questions_v2.jsonl \
     --tickers JNJ AAPL MSFT --encoders bge-small --rerank --out results/v2_fixed_chunks
-# 2. one table by question type
-.venv/bin/python scripts/results_by_type.py results/v2_fixed_chunks --questions data/questions_v2.jsonl
+.venv/bin/python scripts/run_eval.py --chunks data/chunks.jsonl --questions data/questions_v2.jsonl \
+    --tickers JNJ AAPL MSFT --encoders distilbert --rerank --out results/v2_distilbert
+# 2. one table by question type (several runs can be combined)
+.venv/bin/python scripts/results_by_type.py results/v2_fixed_chunks results/v2_distilbert \
+    --questions data/questions_v2.jsonl --chunks data/chunks.jsonl --out results/v2_all_baselines
+# 3. one file with every question, retrieved chunks, answer, verdict and failure stage (for comparing systems)
+.venv/bin/python scripts/export_per_question.py results/v2_fixed_chunks results/v2_distilbert
 # retrieval-only check (no Gemini needed): add --no-llm to step 1
 # unit tests
 .venv/bin/python -m pytest -q tests
 ```
 
+`--rerank` runs each encoder with and without reranking; `--ks` defaults to 5 and 10. To rebuild the golden set and `golden_v2_review.md` after editing `scripts/build_questions_v2.py`: `.venv/bin/python scripts/build_questions_v2.py`.
+
+### Gemini access
+
+`gemini-3.5-flash-lite` is served only from the `global` location (404 elsewhere). Either use a Google AI Studio key (`GEMINI_API_KEY` in `.env`, no GCP needed) or Vertex AI (`GOOGLE_CLOUD_PROJECT` in `.env`, then `gcloud auth login`; the location defaults to `global`). Without any Gemini access, `--no-llm` still gives all retrieval metrics.
+
+## Side experiments (do not change the baseline)
+
+| Experiment | Files | Result |
+|---|---|---|
+| Company + fiscal-year filter before the vector search (bge-small) | `experiments/filtered_retrieval.py`, `experiments/run_filtered.py`, `results/v2_filtered/`, `results/v2_comparison_plain_vs_filtered.md` | AllFacts@10 56% to 67% (64% to 74% with rerank); no help on cross-year or cross-company |
+| Old short chunk header vs the new full header (same 1,855 ids, same bodies; only the first line differs) | `experiments/compare_headers.py`, `results/v2_header_comparison.md`, `results/v2_old_header_retrieval/` | wrong-year chunks in the top 10 fall from about 41% to 34% (bge-small + rerank); recall@10 0.54 to 0.63; AllFacts only improves on cross-year and cross-company |
+
 ## Layout
 
 | Path | Contents |
 |---|---|
-| `rag/` | `config.py` (models), `embed.py`, `index.py`, `retrieve.py`, `generate.py`, `judge.py`, `metrics.py` (retrieval, fact-level and grounding metrics), `error_stage.py`, `llm.py` |
-| `scripts/` | `run_eval.py`, `results_by_type.py`, `build_questions_v2.py` (rebuilds the golden set and `golden_v2_review.md`) |
-| `data/` | `questions_v2.jsonl`, `golden_v2_review.md`; `chunks.jsonl` is not stored here (it comes from the shared chunk file) |
-| `docs/` | `ERROR_STAGES.md`, method and report drafts |
-| `results/` | one folder per run (`per_question.jsonl`, `summary.json`, `results_by_type.md`) |
+| `rag/` | `config.py` (models, locations), `embed.py`, `index.py`, `retrieve.py`, `generate.py`, `judge.py`, `metrics.py` (retrieval, fact-level and grounding metrics incl. `answer_support`), `error_stage.py`, `llm.py` |
+| `scripts/` | `run_eval.py`, `results_by_type.py`, `export_per_question.py`, `build_questions_v2.py`; older helpers (`build_questions.py`, `build_label_pools.py`, `ingest_labels.py`, `chunk_10k_pdf.py`, `grep_chunks.py`, `probe.py`, `smoke_test.py`) are from the first version |
+| `data/` | `questions_v2.jsonl` (fields: qid, type, hops, companies, filings, question, gold_chunk_ids, gold_answer, gold_facts, fact_chunks, answer_kind, relation_chain), `golden_v2_review.md`; `chunks.jsonl` is not stored here |
+| `experiments/` | the two side experiments above |
+| `docs/` | `ERROR_STAGES.md`, method and report drafts, contribution log entries |
+| `results/` | `v2_fixed_chunks/` (bge-small) and `v2_distilbert/` (raw runs: `per_question.jsonl`, `summary.json`), `v2_all_baselines/` (`summary.md`, `results_by_type.md`, `pivot_by_type.md`, `error_stages.md`, `error_cases.csv`, `per_question_all.*`), `v2_filtered/`, `v2_old_header_retrieval/` and the two comparison files |
+| `tests/` | `test_units.py` (10 tests: grounding checks, error stage, fact-level retrieval, answer support) |

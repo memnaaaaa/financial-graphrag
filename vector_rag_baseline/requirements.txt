@@ -3,6 +3,8 @@ faiss-cpu>=1.8
 numpy
 pypdf
 google-genai
+google-auth
+requests
 groq
 python-dotenv
 pytest

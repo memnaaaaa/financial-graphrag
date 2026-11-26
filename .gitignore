@@ -71,3 +71,6 @@ vector_rag_baseline/indexes/
 answer_step/cache/
 answer_step/_to_delete/
 answer_step/results/*_dryrun/
+
+# G-reasoner venv on a local GPU machine (see requirements.txt)
+.venv-greasoner/

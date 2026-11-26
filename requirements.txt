@@ -23,3 +23,13 @@ python-dotenv
 pytest
 truststore
 rank-bm25
+
+## G-reasoner
+# Local scripts: ppr.py and compare_by_type.py use only the standard library; plot_*.py need matplotlib.
+matplotlib>=3.8
+# G-reasoner itself needs Python 3.12, Linux and an NVIDIA GPU (vLLM uses CUDA; it does not run on a Mac), so it
+# is NOT installed by this file. Install it in its own venv: on Colab (T4, see G-reasoner/g_reasoner_fin10k.ipynb,
+# cells 1-4) or on a Linux GPU machine:
+#   python3.12 -m venv .venv-greasoner && .venv-greasoner/bin/pip install -r G-reasoner/requirements-colab.txt
+# gfmrag==2.0.0
+# ninja

@@ -131,3 +131,35 @@ def aggregate_traceability(per_q: list[dict]) -> dict:
         "citation_rate": nk / nc if nc else 0.0,
         "citation_accuracy": nr / nc if nc else 0.0,
     }
+
+
+# ---------------------------------------------------------------------------------------------------------------
+# Traceability for answers that are text, not numbers: is each answer sentence found in the chunk it cites?
+# Lexical check (no LLM): the content words of a sentence must appear in the cited chunks.
+# ---------------------------------------------------------------------------------------------------------------
+_STOP = set("""about above after again also among and any are because been before being between both but can cannot
+could did does each for from had has have her his into its may more most not only other our out over per such than that
+the their them then there these they this those through under was were what when where which while who whom why will with
+would your context provided based answer question company companies filing fiscal year""".split())
+_WORD = re.compile(r"[a-z][a-z&'\-]{3,}")
+
+
+def _content_words(text: str) -> set[str]:
+    t = re.sub(r"['\u2019]s\b", "", _strip_citations(text).lower())  # drop possessives: "apple's" -> "apple"
+    return {w for w in _WORD.findall(t) if w not in _STOP}
+
+
+def answer_support(answer: str, chunk_text: dict, min_cover: float = 0.7) -> dict:
+    """Sentence-level support. Each answer sentence (refusals ignored) needs >=1 cited chunk, and at least `min_cover`
+    of its content words must appear in the text of the chunks it cites. Returns counts for aggregation."""
+    sents = [s.strip() for s in re.split(r"(?<=[.;!?])\s+|\n+", answer) if len(_content_words(s)) >= 3]
+    sents = [s for s in sents if "cannot answer" not in s.lower()]
+    ok = 0
+    for s in sents:
+        ids = [i for i in cited_ids(s) if i in chunk_text]
+        words = _content_words(s)
+        if not ids or not words:
+            continue
+        blob = " ".join(chunk_text[i] for i in ids).lower()
+        ok += sum(w in blob for w in words) / len(words) >= min_cover
+    return {"n_sentences": len(sents), "n_supported_sentences": ok}

@@ -1,76 +1,76 @@
-chunks.jsonl (7,339 chunks, 16 filings)      questions.jsonl = GOLDEN SET (19 questions, gold chunk ids + gold answer)
-        │                                         │
-        ▼                                         │
-[1] EMBED chunks  ── bge-small (33M)              │
-                  └─ DistilBERT (66M)             │
-        ▼                                         ▼
-[2] INDEX         ── FAISS IndexFlatIP      [3] EMBED query (same encoder)
-        │                                         │
-        └──────────────► [4] RETRIEVE top-k (k = 5, 10), cosine search
-                                      │
-                    (optional) [5] RERANK top-20 ── cross-encoder MiniLM-L6 (22M)
-                                      │
-                ┌─────────────────────┴──────────────────────┐
-                ▼                                            ▼
-   [6] RETRIEVAL METRICS                          [7] GENERATE answer from retrieved chunks
-       precision@k, recall@k, hit@k vs gold ids        Gemini 2.5 Flash-Lite, temp 0
-       (no LLM involved)                                          │
-                                                                  ▼
-                                                   [8] JUDGE answer vs gold answer
-                                                       Gemini 2.5 Flash, temp 0
-                                                       → correct / hallucination / missing
-                                                                  │
-                                                                  ▼
-                                       [9] LATENCY = retrieve + rerank + generate (judge not counted)
-                                           → results/<run>/summary.json + per_question.jsonl
+chunks.jsonl (1,855 chunks, 6 filings: J&J, Apple, Microsoft FY2024-26)      questions_v2.jsonl = GOLDEN SET v2
+(Mohini's fixed chunks, full filing header)                                  (39 questions; gold chunk ids, gold answer,
+        │                                                                     gold_facts, fact_chunks; hand-checked)
+        ▼                                                                          │
+[1] EMBED chunks  ── bge-small (33M)                                               │
+                  └─ DistilBERT (66M)                                              │
+        ▼                                                                          ▼
+[2] INDEX         ── FAISS IndexFlatIP (exact cosine)                    [3] EMBED query (same encoder)
+        │                                                                          │
+        └──────────────────────────► [4] RETRIEVE top-k (k = 5, 10), cosine search
+                                                │
+                              (optional) [5] RERANK top-20 ── cross-encoder MiniLM-L6 (22M)
+                                                │
+                    ┌───────────────────────────┴───────────────────────────┐
+                    ▼                                                       ▼
+   [6] RETRIEVAL METRICS (no LLM)                            [7] GENERATE answer from retrieved chunks
+       precision@k, recall@k, hit@k vs gold ids                  Gemini 3.5 Flash-Lite, temp 0
+       AllFacts@k: every gold fact in a retrieved chunk          cites [chunk_id] after every number
+       (fact_chunks)                                                           │
+                                                                               ▼
+                                                              [8] JUDGE answer vs gold answer
+                                                                  Gemini 3.5 Flash-Lite, temp 0 (rag/judge.py)
+                                                                  -> correct / hallucination / missing
+                                                                               │
+                                                                               ▼
+                                                              [9] GROUNDING CHECKS (rag/metrics.py, no LLM)
+                                                                  unsupported-number rate: numbers not in cited chunks
+                                                                  citation accuracy: cited chunk holds the number,
+                                                                    right filing and year
+                                                                  answer support: text answers vs cited chunks
+                                                                               │
+                                                                               ▼
+                                                              [10] FAILURE STAGE (rag/error_stage.py)
+                                                                  first stage that failed: graph, entity linking,
+                                                                  retrieval, generation (vector RAG: the last two)
+                                                                               │
+                                                                               ▼
+                                              [11] LATENCY = retrieve + rerank + generate (judge not counted)
+                                                   -> results/<run>/summary.json + per_question.jsonl
 
 
-Mean time per question (run full_run_2, V100 GPU):
-    query embed + FAISS search   ~11 ms
-    rerank of top 20             ~38 ms   (only when rerank is on)
-    generate (Flash-Lite)        ~468 ms  (94% of end-to-end time)
-    judge (Flash)                ~1.6 s   (evaluation only, not counted)
+Mean time per question (k = 10, Nov 19 run, laptop):
+    query embed + FAISS search   ~50-60 ms
+    rerank of top 20             ~80-100 ms   (only when rerank is on)
+    generate (Flash-Lite)        ~760-840 ms  (about 90% of end-to-end time)
+    judge (Flash-Lite)           ~600 ms      (evaluation only, not counted)
 
 
-GOLDEN SET (data/questions.jsonl) - how the gold chunk ids are made
-===================================================================
+GOLDEN SET v2 (data/questions_v2.jsonl)
+=======================================
 
-Status: 1 of 19 questions validated by an independent LLM labeler (q01).
-        q02-q19 use pattern-matched labels that are NOT yet verified. All numbers are preliminary.
+Status: 39 questions, all hand-checked against the filings (gold_source = "hand-checked").
 
-Types: 9 single-fact, 5 multi-hop within one company, 5 cross-company.
+Types: 9 single, 6 relation (2 hops), 12 relation_text (descriptive answer), 5 relation_deep (3-5 hops),
+       4 cross_year, 3 cross_company.
 
- [a] PATTERN LABELS (all questions)
-     gold = every chunk in the named company + fiscal-year filing whose text matches a label+number pattern
-     (scripts/build_questions.py)  ->  data/questions.jsonl, backup kept in data/questions_pattern_gold.jsonl
-        │
-        ▼
- [b] CANDIDATE POOLS (scripts/build_label_pools.py)
-     per question: top chunks from bge-small + DistilBERT + BM25, restricted to the filings the question names
-     + 8 off-target chunks (other years/companies); shuffled; no reference answer
-     40 chunks (single filing) or 72 chunks (two filings)  ->  data/labeling/qNN.txt   (not stored in the repo)
-        │
-        ▼
- [c] OTHER LLM (different model family) + data/labeling/PROMPT.txt
-     labels every chunk: answer / supporting / irrelevant, with a verbatim quote for each "answer"
-     one chat per question  ->  JSON reply saved as data/labeling/replies/qNN.json
-        │
-        ▼
- [d] VALIDATE (scripts/ingest_labels.py)
-     accept only if: every candidate labeled once, quote found verbatim in the chunk and contains a figure,
-     chunk is from the company + fiscal year the question names
-        │
-        ▼
- [e] APPLY (--apply): validated "answer" chunks replace the gold set in data/questions.jsonl
-     (gold_source = "llm-labeler (validated)"); the rest stay "pattern-match (unverified)"
+ [a] Gold chunks: regex patterns per fact (scripts/build_questions_v2.py) -> every chunk that states a gold fact
+ [b] Automatic check: every number and key phrase of the gold answer appears in the gold chunks
+ [c] Hand check of every question and answer against the filings -> data/golden_v2_review.md
+ [d] fact_chunks: for each gold fact, the chunks that state it (makes the retrieval stage checkable fact by fact)
 
 
-Run 2 results (19 questions, mixed gold) - main findings
-========================================================
+Main results (39 questions, fixed chunks, Gemini 3.5 Flash-Lite)
+================================================================
 
-  - Retrieval never picks the wrong company, but picks the wrong fiscal year of the right company 43% of the time.
-  - Cross-company questions: both companies' answer chunks found for only 0-1 of the 5 questions in every config.
-  - When a gold chunk is retrieved, the answer is judged correct only 47-64% of the time.
-  - Rerunning gave identical retrievals and answers (0/152 changed); 1 of 152 judge verdicts flipped on the same text.
+  - Best baseline: bge-small + rerank, k = 10: 69% correct, AllFacts 0.64, hallucination 2.6%, missing 28%.
+  - DistilBERT is weaker (51% correct at k = 10); reranking helps it more (64%).
+  - Nearly every wrong answer is a retrieval failure (11-18 per configuration at k = 10); 1 is a generation error.
+  - Main cause: right filing, wrong passage. Wrong fiscal year of the right company is rare (2 facts).
+  - Cross-company: 0% correct everywhere (one company swamps the top 10). Cross-year: 0-50%. Deep (3-5 hops): 40%.
+  - Single-hop 100% and descriptive 83-92% with bge-small.
+  - Full chunk header vs old short header (same ids and bodies): wrong-year chunks in the top k fall from about 41% to 34%,
+    recall@10 0.54 to 0.63 (bge-small + rerank); only cross-year and cross-company AllFacts improve.
 
-Files: README.md, GOLDEN_SET.md, docs/baseline_report_v2.docx, results/full_run_2/
+Files: README.md, results/v2_all_baselines/summary.md (start here), results/v2_all_baselines/per_question_all.csv,
+       results/v2_header_comparison.md, docs/ERROR_STAGES.md

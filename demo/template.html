@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Follow the Number · Financial GraphRAG</title>
+<script>/*__VIS_NETWORK__*/</script>
+<style>
+  :root {
+    --paper: #ffffff; --bg: #f6f5f1; --ink: #1d1d1f; --muted: #5f6368; --rule: #d9d6cf; --soft: #efede7;
+    --accent: #1f4e79; --ok: #2e6b48; --warn: #9a6a12; --bad: #9b3434;
+    --serif: "Charter", "Georgia", "Cambria", "Times New Roman", serif;
+    --sans: "Segoe UI", "Helvetica Neue", Arial, sans-serif; --mono: "Consolas", "SFMono-Regular", Menlo, monospace;
+  }
+  body.dark { --paper: #1c1d21; --bg: #141518; --ink: #e8e6e1; --muted: #a3a6ad; --rule: #3a3c43; --soft: #26282d; --accent: #8db4dd; }
+  * { box-sizing: border-box; }
+  html, body { overflow-x: hidden; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.55 var(--serif); }
+  .page { max-width: 1120px; margin: 28px auto; background: var(--paper); border: 1px solid var(--rule); padding: 40px 56px 28px; }
+  header { text-align: center; border-bottom: 1px solid var(--rule); padding-bottom: 18px; margin-bottom: 22px; position: relative; }
+  h1 { font-size: 34px; margin: 0 0 4px; font-weight: 700; letter-spacing: -0.3px; }
+  .subtitle { font-size: 18px; margin: 0 0 8px; color: var(--ink); font-style: italic; }
+  .authors { font: 14px var(--sans); color: var(--muted); margin: 0; }
+  .mode { position: absolute; right: 0; top: 0; font: 12px var(--sans); background: none; border: 1px solid var(--rule);
+          color: var(--muted); padding: 3px 10px; cursor: pointer; border-radius: 3px; }
+  h2 { font-size: 20px; margin: 26px 0 8px; }
+  .sec { font-variant: small-caps; letter-spacing: .5px; color: var(--accent); margin-right: 6px; }
+  p { margin: 0 0 10px; }
+  .caption { font-size: 14px; color: var(--muted); margin: 8px 0 18px; }
+  .caption b { color: var(--ink); }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; }
+  th, td { padding: 6px 10px; text-align: left; vertical-align: top; }
+  thead th { border-top: 2px solid var(--ink); border-bottom: 1px solid var(--ink); font-weight: 600; }
+  tbody tr:last-child td { border-bottom: 2px solid var(--ink); }
+  th.num { text-align: right; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .bar { display: inline-block; height: 8px; background: var(--soft); width: 160px; vertical-align: middle; margin-left: 8px; }
+  .bar i { display: block; height: 100%; background: var(--accent); }
+  tr.best td { font-weight: 700; }
+  .tabs { display: flex; flex-wrap: wrap; gap: 0; border-bottom: 1px solid var(--rule); margin: 6px 0 18px; }
+  .tab { font: 14px var(--sans); background: none; border: 1px solid transparent; border-bottom: none; padding: 8px 14px;
+         cursor: pointer; color: var(--muted); margin-bottom: -1px; text-align: left; }
+  .tab b { display: block; color: var(--ink); font-size: 13px; font-family: var(--mono); font-weight: 500; }
+  .tab.active { border-color: var(--rule); background: var(--paper); color: var(--ink); border-top: 2px solid var(--accent); }
+  .panel { animation: fade .25s ease-out; }
+  @keyframes fade { from { opacity: 0 } to { opacity: 1 } }
+  .figure { border: 1px solid var(--rule); padding: 16px 18px; }
+  .question { font-size: 21px; margin: 2px 0 10px; }
+  .node { display: inline-block; font: 13px var(--sans); padding: 1px 8px; margin: 2px 3px 2px 0; border: 1px solid var(--rule);
+          border-radius: 2px; background: var(--soft); }
+  .node.start { border: 1.5px solid var(--ink); }
+  .story { border-left: 3px solid var(--accent); padding: 4px 0 4px 12px; margin: 12px 0 4px; }
+  .net { height: 540px; background: var(--paper); }
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; font: 12.5px var(--sans); color: var(--muted); margin-top: 10px;
+            border-top: 1px solid var(--rule); padding-top: 8px; }
+  .sw { display: inline-block; width: 11px; height: 11px; margin-right: 5px; vertical-align: -1px; border: 1px solid rgba(0,0,0,.25); }
+  .sw.round { border-radius: 50%; } .sw.diamond { transform: rotate(45deg) scale(.85); }
+  .sw.start { border: 2px solid var(--ink); }
+  .ln { display: inline-block; width: 26px; margin-right: 6px; vertical-align: 3px; border-top: 1.5px solid #8f8f99; }
+  .ln.dashed { border-top: 1.5px dashed #b4bcc8; }
+  .legend .edges { flex-basis: 100%; }
+  table.answers { table-layout: fixed; }
+  .answers th:nth-child(1) { width: 150px; } .answers th:nth-child(3) { width: 110px; }
+  .answers td { border-bottom: 1px solid var(--rule); overflow-wrap: anywhere; }
+  .answers td.sys { width: 150px; font-weight: 600; }
+  .verdict { font: 12px var(--sans); font-weight: 600; padding: 1px 7px; border: 1px solid currentColor; border-radius: 2px; white-space: nowrap; }
+  .verdict.correct { color: var(--ok); } .verdict.missing { color: var(--warn); } .verdict.hallucination { color: var(--bad); }
+  .ans { font-size: 15.5px; }
+  .cite { font: 11.5px var(--mono); color: var(--accent); background: none; border: none; border-bottom: 1px dotted var(--accent);
+          padding: 0; cursor: pointer; }
+  .cite.value { color: var(--ok); border-bottom-color: var(--ok); }
+  .ret { font: 11.5px var(--mono); color: var(--muted); margin-top: 6px; line-height: 1.7; }
+  .ret span { margin-right: 8px; display: inline-block; }
+  .ret span.gold { color: var(--ok); font-weight: 700; }
+  .meta { font: 12.5px var(--sans); color: var(--muted); }
+  .drawer { position: fixed; top: 0; right: 0; width: min(460px, 94vw); height: 100%; background: var(--paper);
+            border-left: 1px solid var(--rule); box-shadow: -8px 0 24px rgba(0,0,0,.08); padding: 26px; overflow-y: auto;
+            transform: translateX(105%); transition: transform .25s ease; z-index: 10; }
+  .drawer.open { transform: translateX(0); }
+  .drawer .x { float: right; font: 13px var(--sans); background: none; border: 1px solid var(--rule); color: var(--muted); cursor: pointer; padding: 2px 8px; }
+  .chain { list-style: none; padding: 0; margin: 14px 0; counter-reset: s; }
+  .chain li { position: relative; padding: 0 0 16px 30px; border-left: 1px solid var(--rule); margin-left: 9px; counter-increment: s; }
+  .chain li:last-child { border-left-color: transparent; }
+  .chain li::before { content: counter(s); position: absolute; left: -10px; top: 0; width: 19px; height: 19px; border-radius: 50%;
+                      background: var(--paper); border: 1px solid var(--accent); color: var(--accent); font: 11px/17px var(--sans); text-align: center; }
+  .chain .lbl { font: 600 12px var(--sans); text-transform: uppercase; letter-spacing: .6px; color: var(--muted); display: block; }
+  code { font: 12.5px var(--mono); background: var(--soft); padding: 1px 4px; word-break: break-word; }
+  a.src { font: 13px var(--sans); color: var(--accent); }
+  .hopbar { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; font: 14px var(--sans); margin-bottom: 8px; }
+  .hopbar input[type=range] { width: 260px; accent-color: var(--accent); }
+  .seg button { font: 13px var(--sans); border: 1px solid var(--rule); background: var(--paper); color: var(--ink); padding: 3px 12px; cursor: pointer; }
+  .seg button.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn { font: 13px var(--sans); border: 1px solid var(--rule); background: var(--paper); color: var(--ink); padding: 3px 12px; cursor: pointer; }
+  .layer { font: 600 15px var(--sans); }
+  table.ranks { font: 13px var(--sans); margin-top: 12px; }
+  table.ranks td, table.ranks th { text-align: right; padding: 3px 8px; }
+  table.ranks td:first-child, table.ranks th:first-child { text-align: left; }
+  table.ranks .cur { background: var(--soft); font-weight: 700; }
+  footer { font: 12.5px var(--sans); color: var(--muted); border-top: 1px solid var(--rule); margin-top: 26px; padding-top: 10px; text-align: center; }
+</style>
+</head>
+<body>
+<div class="page">
+<header>
+  <button class="mode" id="dark">Dark mode</button>
+  <h1>Follow the Number</h1>
+  <p class="subtitle">Answering questions about 10-K filings with a knowledge graph, and tracing every number back to its source</p>
+  <p class="authors">Mohini, Mahua, Rida · CSC 8851 Deep Learning · Georgia State University · Fall 2026</p>
+</header>
+
+<h2><span class="sec">Results</span>How often each system answers correctly</h2>
+<table id="scoreboard"></table>
+<p class="caption"><b>Table 1.</b> Share of the 39 golden-set questions answered correctly (judge verdict), Gemini 3.5
+  Flash-Lite as generator for every system, k = 10. The hybrid merges vector RAG and fine-tuned G-reasoner retrievals.
+  Source: <code>answer_step/results/comparison.md</code>.</p>
+
+<h2><span class="sec">Examples</span>Six questions, one per outcome</h2>
+<div class="tabs" id="tabs"></div>
+<div id="stage"></div>
+
+<footer>Data: J&amp;J, Apple and Microsoft 10-K filings (6 filings, 1,855 passages) from SEC EDGAR · golden set v2 (39 questions) ·
+  graph <code>fin10k_v1</code> · all answers precomputed, no live model calls ·
+  <a class="src" href="https://github.com/memnaaaaa/financial-graphrag">github.com/memnaaaaa/financial-graphrag</a></footer>
+</div>
+<aside class="drawer" id="drawer"></aside>
+
+<script id="demo-data" type="application/json">__DEMO_DATA__</script>
+<script>
+const DATA = JSON.parse(document.getElementById('demo-data').textContent);
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const css = (v) => getComputedStyle(document.body).getPropertyValue(v).trim();
+const VERDICT = { correct: '✓ Correct', hallucination: '✗ Incorrect', missing: '? Refused' };
+const MARK = Object.fromEntries(DATA.systems.map(s => [s.id, s.emoji]));   // legend markers for the graph
+
+// ---- Table 1 ----
+function scoreboard() {
+  const best = Math.max(...DATA.scoreboard.map(s => s.correct));
+  $('#scoreboard').innerHTML = `<thead><tr><th>System</th><th class="num">Correct</th><th class="num">Incorrect</th><th class="num">Refused</th><th></th></tr></thead><tbody>` +
+    DATA.scoreboard.map(s => `<tr class="${s.correct === best ? 'best' : ''}"><td>${esc(s.label)}</td>
+      <td class="num">${(s.correct * 100).toFixed(0)}%</td><td class="num">${(s.hallucination * 100).toFixed(0)}%</td>
+      <td class="num">${(s.missing * 100).toFixed(0)}%</td><td><span class="bar"><i style="width:${s.correct * 100}%"></i></span></td></tr>`).join('') + '</tbody>';
+}
+
+// ---- example tabs ----
+function tabs(active) {
+  const items = DATA.questions.map((q, i) => ({ key: String(i), id: q.qid.replace('v2_', '').toUpperCase(), tag: q.tag }));
+  if (DATA.hop_case) items.push({ key: 'hop', id: 'Q10', tag: 'How it hops' });
+  $('#tabs').innerHTML = items.map(t => `<button class="tab ${t.key === String(active) ? 'active' : ''}" data-k="${t.key}"><b>${t.id}</b>${esc(t.tag)}</button>`).join('');
+  document.querySelectorAll('.tab').forEach(b => b.onclick = () => b.dataset.k === 'hop' ? showHop() : show(+b.dataset.k));
+}
+
+function answerHtml(text, sys, qi) {
+  return esc(text).replace(/\[([^\]]+)\]/g, (m, inner) => '[' + inner.split(/,\s*/).map(id =>
+    `<button class="cite ${/^V-[A-Z]+-\d{4}$/.test(id) ? 'value' : ''}" data-sys="${sys}" data-qi="${qi}" data-id="${esc(id)}">${esc(id)}</button>`).join(', ') + ']');
+}
+
+function show(qi) {
+  tabs(qi);
+  const q = DATA.questions[qi];
+  const kindOf = (s) => (q.graph.nodes.find(n => n.id === s) || {}).kind || '';
+  $('#stage').innerHTML = `<div class="panel">
+    <div class="figure">
+      <div class="meta">${esc(q.qid)} · ${esc(q.type.replace('_', ' '))} · ${esc(q.hops)} hop(s)</div>
+      <div class="question">${esc(q.question)}</div>
+      <div class="meta">Start nodes linked from the question:</div>
+      ${q.start_nodes.map(s => `<span class="node start" title="${esc(kindOf(s))}">${esc(s)}</span>`).join('')}
+      <p class="story">${esc(q.story)}</p>
+      <div class="meta">Reference answer: ${esc(q.gold_answer)}</div>
+    </div>
+    <p class="caption"><b>Figure 1.</b> Question, the graph nodes the entity linker found in it, and what this example shows.
+      Source: <code>vector_rag_baseline/data/questions_v2.jsonl</code>, <code>G-reasoner/results/finetuned_fin10k_v1/</code>.</p>
+
+    <div class="figure"><div class="net" id="net"></div>${legend()}</div>
+    <p class="caption"><b>Figure 2.</b> Subgraph of <code>fin10k_v1</code> around the question: linked entities, Value nodes,
+      and every passage that holds a gold fact or was retrieved by a system (${q.graph.nodes.length} nodes,
+      ${q.graph.edges.length} edges). Drag, zoom and hover for details.</p>
+
+    <table class="answers"><thead><tr><th>System</th><th>Answer (click a citation to trace it)</th><th>Verdict</th></tr></thead><tbody>
+      ${DATA.systems.map(s => row(q, s, qi)).join('')}</tbody></table>
+    <p class="caption"><b>Table 2.</b> Each system's answer with its citations, the passages it retrieved (bold green = holds a
+      gold fact) and the judge's verdict. Source: <code>answer_step/results/&lt;system&gt;_k10/per_question.jsonl</code>.</p>
+  </div>`;
+  document.querySelectorAll('.cite').forEach(b => b.onclick = () => trace(+b.dataset.qi, b.dataset.sys, b.dataset.id));
+  drawGraph(q);
+}
+
+function row(q, s, qi) {
+  const r = q.runs[s.id];
+  return `<tr><td class="sys">${esc(s.label)} <span class="meta">${s.emoji}</span></td>
+    <td><div class="ans">${answerHtml(r.answer, s.id, qi)}</div>
+      <div class="ret">${r.retrieved.map(c => `<span class="${r.gold_hits.includes(c) ? 'gold' : ''}">${esc(c)}</span>`).join('')}</div>
+      <div class="meta">${r.gold_hits.length} of ${r.retrieved.length} retrieved passages hold a gold fact · error stage: ${esc(r.stage)}</div></td>
+    <td><span class="verdict ${r.verdict}">${VERDICT[r.verdict] || esc(r.verdict)}</span></td></tr>`;
+}
+
+function legend() {
+  const sw = (c, cls = '') => `<span class="sw ${cls}" style="background:${c}"></span>`;
+  return `<div class="legend">
+    <span>${sw(COLORS.Company, 'round')}Company / subsidiary</span><span>${sw(COLORS.Product, 'round')}Segment / product</span>
+    <span>${sw(COLORS.Value, 'diamond')}Value (reported number)</span><span>${sw(COLORS.Metric, 'round')}Metric / fiscal year / place</span>
+    <span>${sw(COLORS.chunk)}Passage</span><span>${sw(GOLD)}Passage with a gold fact</span><span>${sw('transparent', 'round start')}Start node</span>
+    <span>Under a passage: ${DATA.systems.map(s => `${s.emoji} ${esc(s.label)}`).join(' · ')} retrieved it</span>
+    <span class="edges"><span class="ln"></span>Relation between two nodes, named on the line (e.g. has value, has product, licensed from)
+      &nbsp;&nbsp;<span class="ln dashed"></span>Mention: the node appears in that passage (the evidence link from the graph to the text)</span></div>`;
+}
+
+// ---- Figure 3: provenance trace (drawer) ----
+function trace(qi, sys, id) {
+  const r = DATA.questions[qi].runs[sys];
+  const t = r.traces.find(t => t.steps.some(st => st.id === id));
+  const st = t ? t.steps.find(st => st.id === id) : null;
+  let h = `<button class="x" onclick="document.getElementById('drawer').classList.remove('open')">Close</button>
+    <h2 style="margin-top:0">Provenance trace</h2><div class="meta">Figure 3 · ${esc(DATA.systems.find(s => s.id === sys).label)} · <code>${esc(id)}</code></div>`;
+  if (!st) {
+    h += `<p style="margin-top:14px">This citation supports a sentence without a number (years are not counted), so there is no number to trace.
+          The cited passage is <code>${esc(id)}</code>.</p>`;
+  } else {
+    h += `<ol class="chain"><li><span class="lbl">Claim in the answer</span>${esc(t.sentence)}</li>`;
+    if (st.kind === 'value') h += `<li><span class="lbl">Value node</span><code>${esc(st.id)}</code> ${esc(st.name)}<br>
+      <span class="meta">${esc(st.metric)} · ${esc(st.fy)} · ${esc(st.display)} · XBRL <code>${esc(st.xbrl)}</code>, fact <code>${esc(st.fact_id)}</code></span><br>
+      Number in the claim matches the Value: <b>${st.matches ? 'yes' : 'no'}</b></li>`;
+    if (st.kind === 'unknown') h += `<li><span class="lbl">Unknown id</span><code>${esc(st.id)}</code> is not a node or passage in the corpus.</li>`;
+    else h += `<li><span class="lbl">Passage</span><code>${esc(st.chunk || st.id)}</code><br>
+      ${st.line ? `Line that prints the number:<br><code>${esc(st.line)}</code>` : '<b>The number does not appear in this passage.</b>'}</li>
+      <li><span class="lbl">Filing</span>${esc(st.filing)}, ${esc(st.section)}<br><span class="meta">EDGAR accession ${esc(st.accession)}</span><br>
+      <a class="src" href="${esc(st.url)}" target="_blank" rel="noopener">Open the filing on SEC EDGAR${st.kind === 'value' ? ' at this number' : ''} ↗</a></li>`;
+    h += '</ol>';
+  }
+  $('#drawer').innerHTML = h;
+  $('#drawer').classList.add('open');
+}
+
+// ---- living graphs: slow drift (viscous springs pull nodes back) and a node grows under the cursor ----
+const FLOAT_PHYSICS = { solver: 'forceAtlas2Based', forceAtlas2Based: { gravitationalConstant: -60, springLength: 120, damping: 0.75 },
+  maxVelocity: 8, minVelocity: 0.05, timestep: 0.35 };
+function makeAlive(nw, ds, box) {
+  const orig = {}; let hovered = null;
+  nw.on('hoverNode', p => {
+    const n = ds.get(p.node); hovered = p.node;
+    if (orig[p.node]) return;                       // already enlarged (hover can fire twice)
+    orig[p.node] = { size: n.size, font: n.font, margin: n.margin };
+    ds.update({ id: p.node, size: (n.size || 13) * 1.45, margin: 11,
+                // inside a box (passages) the label sits on the lighter hover colour: black; dots and diamonds draw
+                // their label outside the node, on the page background: the page's text colour (light in dark mode)
+                font: Object.assign({}, n.font, { size: ((n.font && n.font.size) || 14) * 1.3,
+                                                   color: n.shape === 'box' ? '#000000' : css('--ink') }) });
+    box.style.cursor = 'pointer';
+  });
+  const restore = (id) => {
+    const o = orig[id];
+    if (o) ds.update({ id, size: o.size, font: o.font, margin: o.margin ?? 6 });
+    delete orig[id];
+  };
+  nw.on('blurNode', p => { restore(p.node); hovered = null; box.style.cursor = ''; });
+  // the cursor can leave the canvas without a blur event: put every enlarged node back
+  box.addEventListener('mouseleave', () => { Object.keys(orig).forEach(restore); hovered = null; box.style.cursor = ''; });
+  const timer = setInterval(() => {
+    if (!document.body.contains(box)) return clearInterval(timer);
+    const ids = ds.getIds(), pos = nw.getPositions();
+    for (let k = 0; k < Math.max(2, Math.round(ids.length / 5)); k++) {
+      const id = ids[Math.floor(Math.random() * ids.length)];
+      if (id === hovered || !pos[id]) continue;
+      nw.moveNode(id, pos[id].x + (Math.random() - 0.5) * 16, pos[id].y + (Math.random() - 0.5) * 16);
+    }
+    nw.startSimulation();
+  }, 1400);
+  nw._aliveTimer = timer;
+}
+function dispose(nw) { if (nw) { clearInterval(nw._aliveTimer); nw.destroy(); } }
+
+// ---- Figure 2: graph (vis-network) ----
+const COLORS = { Company: '#4a6fa5', Subsidiary: '#4a6fa5', Organization: '#7d97bf', Product: '#c08a3e', BusinessLine: '#c99c5e',
+  Segment: '#b07a2e', Value: '#5b8c6e', Metric: '#a3a3ad', FiscalYear: '#a3a3ad', Location: '#bdbdc6', chunk: '#e4e9f0' };
+const GOLD = '#2e6b48', GOLD_HOVER = '#cfe8d8';
+let net = null, currentQ = null;
+function nodeStyle(n) {
+  const isChunk = n.kind === 'chunk', bg = isChunk && n.gold ? GOLD : (COLORS[n.kind] || '#ccc');
+  return { id: n.id, shape: isChunk ? 'box' : (n.kind === 'Value' ? 'diamond' : 'dot'),
+    label: (n.value_id ? n.value_id + '\n' : '') + n.label + (isChunk && n.retrieved_by.length ? '\n' + n.retrieved_by.map(r => MARK[r]).join(' ') : ''),
+    title: n.id + (isChunk ? (n.gold ? '\nholds a gold fact' : '') : '\n' + n.kind),
+    size: n.start ? 20 : (n.kind === 'Value' ? 11 : 13),
+    color: { background: bg, border: n.start ? css('--ink') : (isChunk ? '#9aa9bd' : bg), highlight: { background: bg, border: css('--accent') },
+             // gold passages keep a (lighter) green under the cursor, so they still read as "holds a gold fact"
+             ...(isChunk && n.gold ? { hover: { background: GOLD_HOVER, border: GOLD } } : {}) },
+    borderWidth: n.start ? 3 : 1, shapeProperties: { borderRadius: 2 },
+    font: { color: isChunk ? (n.gold ? '#fff' : '#1d1d1f') : css('--ink'), size: n.start ? 17 : 14, face: 'Segoe UI, Helvetica, Arial' },
+    widthConstraint: { maximum: 170 }, margin: 6 };
+}
+function edgeStyle(e, i) {
+  const m = e.r === 'is_mentioned_in';
+  return { id: i, from: e.s, to: e.t, arrows: { to: { scaleFactor: .5 } }, title: e.r, label: m ? '' : e.r.replace(/_/g, ' '),
+    dashes: m, width: m ? .7 : 1.2, color: { color: m ? '#c4cad3' : '#8f8f99' },
+    font: { size: 11, color: css('--muted'), strokeWidth: 3, strokeColor: css('--paper'), face: 'Segoe UI, Helvetica, Arial' } };
+}
+function drawGraph(q) {
+  currentQ = q;
+  const box = document.getElementById('net');
+  if (!box || typeof vis === 'undefined') return;
+  dispose(net);
+  const nodes = new vis.DataSet(q.graph.nodes.map(nodeStyle));
+  net = new vis.Network(box, { nodes, edges: new vis.DataSet(q.graph.edges.map(edgeStyle)) }, {
+    physics: Object.assign({ stabilization: { iterations: 250 } }, FLOAT_PHYSICS),
+    interaction: { hover: true, tooltipDelay: 120 }, layout: { randomSeed: 7 } });
+  net.once('stabilizationIterationsDone', () => net.fit({ animation: { duration: 500 } }));
+  makeAlive(net, nodes, box);
+}
+
+// ---- Figure 4: hop analysis (Rida's E7 data, v2_q10) ----
+let hopModel = 'finetuned', hopLayer = 0, hopTimer = null, hopNet = null;
+const rankSize = (rank, of) => 7 + 30 * Math.max(0, 1 - Math.log(rank) / Math.log(of));
+function showHop() {
+  tabs('hop');
+  const H = DATA.hop_case;
+  $('#stage').innerHTML = `<div class="panel">
+    <div class="figure">
+      <div class="meta">v2_q10 · relation · per-layer readout of G-reasoner</div>
+      <div class="question">${esc(H.question)}</div>
+      <p class="story">G-reasoner passes messages along the graph's edges, so each of its 6 layers carries the signal about one hop
+        further. The relation chain runs Genmab A/S → DARZALEX → Oncology → Innovative Medicine → its sales and passages.
+        Node size shows how highly the model ranks the node after the selected layer.</p>
+      <div class="hopbar">
+        <span class="seg"><button data-m="finetuned">Fine-tuned</button><button data-m="zero_shot">Zero-shot</button></span>
+        <button class="btn" id="play">Play</button>
+        <input type="range" id="layer" min="0" max="6" step="1" value="0"><span class="layer" id="lname">Layer 0</span></div>
+      <div class="net" id="hopnet" style="height:460px"></div>
+      <div class="legend"><span><span class="ln"></span>Relation between two nodes, named on the line</span>
+        <span><span class="ln dashed"></span>Mention: the node appears in that passage</span>
+        <span>Node size: rank after the selected layer (bigger = ranked higher)</span>
+        <span><span class="sw round start" style="background:transparent"></span>Start node</span></div>
+      <div id="ranks"></div>
+    </div>
+    <p class="caption"><b>Figure 4.</b> Rank of each tracked node among nodes of the same type after every GNN layer (1 = best),
+      for the fine-tuned and zero-shot models. Reference answer: ${esc(H.gold_answer)}
+      Source: <code>G-reasoner/results/hop_case/</code> (E7).</p></div>`;
+  document.querySelectorAll('.seg button').forEach(b => b.onclick = () => { hopModel = b.dataset.m; drawHop(); });
+  $('#layer').oninput = (e) => { hopLayer = +e.target.value; updateHop(); };
+  $('#play').onclick = () => {
+    if (hopTimer) { clearInterval(hopTimer); hopTimer = null; $('#play').textContent = 'Play'; return; }
+    $('#play').textContent = 'Pause'; hopLayer = 0; updateHop();
+    hopTimer = setInterval(() => { if (hopLayer >= 6) { clearInterval(hopTimer); hopTimer = null; $('#play').textContent = 'Play'; return; }
+      hopLayer++; updateHop(); }, 1100);
+  };
+  drawHop();
+}
+function drawHop() {
+  const H = DATA.hop_case, M = H[hopModel];
+  document.querySelectorAll('.seg button').forEach(b => b.classList.toggle('on', b.dataset.m === hopModel));
+  const nodes = new vis.DataSet(M.tracked.map(t => {
+    const kind = H.kinds[t.node], isChunk = kind === 'chunk', start = M.start_nodes.includes(t.node);
+    return { id: t.node, label: H.labels[t.node], shape: isChunk ? 'box' : (kind === 'Value' ? 'diamond' : 'dot'),
+      color: { background: COLORS[kind] || '#ccc', border: start ? css('--ink') : (isChunk ? '#9aa9bd' : COLORS[kind] || '#ccc') },
+      borderWidth: start ? 3 : 1, shapeProperties: { borderRadius: 2 }, widthConstraint: { maximum: 150 } };
+  }));
+  dispose(hopNet);
+  const hbox = document.getElementById('hopnet');
+  hopNet = new vis.Network(hbox, { nodes, edges: new vis.DataSet(H.edges.map(edgeStyle)) }, {
+    physics: Object.assign({ stabilization: { iterations: 300 } }, FLOAT_PHYSICS), layout: { randomSeed: 3 }, interaction: { hover: true } });
+  hopNet._nodes = nodes;
+  makeAlive(hopNet, nodes, hbox);
+  updateHop();
+}
+function updateHop() {
+  const H = DATA.hop_case, M = H[hopModel];
+  $('#layer').value = hopLayer; $('#lname').textContent = `Layer ${hopLayer}`;
+  M.tracked.forEach(t => {
+    const r = t.ranks[hopLayer], sz = rankSize(r, t.of), isChunk = H.kinds[t.node] === 'chunk';
+    hopNet._nodes.update({ id: t.node, size: sz, title: `${t.node}\nrank ${r} of ${t.of} after layer ${hopLayer}`,
+      widthConstraint: isChunk ? { minimum: 40 + sz * 3, maximum: 200 } : { maximum: 150 },
+      font: { size: 12 + sz / 3, face: 'Segoe UI, Helvetica, Arial', color: isChunk ? '#1d1d1f' : css('--ink') } });
+  });
+  $('#ranks').innerHTML = `<table class="ranks"><thead><tr><th>Node</th>${[0,1,2,3,4,5,6].map(l => `<th class="${l === hopLayer ? 'cur' : ''}">L${l}</th>`).join('')}</tr></thead><tbody>
+    ${M.tracked.map(t => `<tr><td>${esc(H.labels[t.node])}</td>${t.ranks.map((r, l) => `<td class="${l === hopLayer ? 'cur' : ''}">${r}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+}
+
+$('#dark').onclick = () => {
+  document.body.classList.toggle('dark');
+  $('#dark').textContent = document.body.classList.contains('dark') ? 'Light mode' : 'Dark mode';
+  if (document.getElementById('hopnet')) drawHop(); else if (currentQ) drawGraph(currentQ);
+};
+scoreboard();
+show(0);
+</script>
+</body>
+</html>

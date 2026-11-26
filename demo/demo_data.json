@@ -1,0 +1,4882 @@
+{
+ "scoreboard": [
+  {
+   "id": "vector_rag",
+   "label": "Vector RAG",
+   "emoji": "🔍",
+   "correct": 0.6923076923076923,
+   "hallucination": 0.0,
+   "missing": 0.3076923076923077
+  },
+  {
+   "id": "g_reasoner_finetuned",
+   "label": "Graph (G-reasoner)",
+   "emoji": "🕸️",
+   "correct": 0.5128205128205128,
+   "hallucination": 0.02564102564102564,
+   "missing": 0.46153846153846156
+  },
+  {
+   "id": "ppr",
+   "label": "PageRank",
+   "emoji": "🚶",
+   "correct": 0.5128205128205128,
+   "hallucination": 0.02564102564102564,
+   "missing": 0.46153846153846156
+  },
+  {
+   "id": "hybrid_finetuned_rule",
+   "label": "Hybrid",
+   "emoji": "🤝",
+   "correct": 0.7692307692307693,
+   "hallucination": 0.02564102564102564,
+   "missing": 0.20512820512820512
+  }
+ ],
+ "systems": [
+  {
+   "id": "vector_rag",
+   "label": "Vector RAG",
+   "emoji": "🔍"
+  },
+  {
+   "id": "g_reasoner_finetuned",
+   "label": "Graph (G-reasoner)",
+   "emoji": "🕸️"
+  },
+  {
+   "id": "hybrid_finetuned_rule",
+   "label": "Hybrid",
+   "emoji": "🤝"
+  }
+ ],
+ "questions": [
+  {
+   "qid": "v2_q01",
+   "tag": "Single fact",
+   "emoji": "🎯",
+   "story": "One number in one table: every system gets it. The hybrid cites the Value node, so the number traces straight to its XBRL tag.",
+   "type": "single",
+   "hops": 1,
+   "question": "What were Apple's total net sales in fiscal 2025 (fiscal year ended September 27, 2025)?",
+   "gold_answer": "$416,161 million (about $416.2 billion).",
+   "facts": {
+    "a_sales25": [
+     "AAPL_FY2025_ITEM7_0004",
+     "AAPL_FY2025_ITEM7_0005",
+     "AAPL_FY2025_ITEM8_0000",
+     "AAPL_FY2025_ITEM8_0015",
+     "AAPL_FY2025_ITEM8_0048",
+     "AAPL_FY2025_ITEM8_0051"
+    ]
+   },
+   "start_nodes": [
+    "Revenue",
+    "Apple Inc.",
+    "FY2025 (AAPL)"
+   ],
+   "graph": {
+    "nodes": [
+     {
+      "id": "Revenue",
+      "label": "Revenue",
+      "kind": "Metric",
+      "start": true
+     },
+     {
+      "id": "Apple Inc.",
+      "label": "Apple Inc.",
+      "kind": "Company",
+      "start": true
+     },
+     {
+      "id": "FY2025 (AAPL)",
+      "label": "FY2025 (AAPL)",
+      "kind": "FiscalYear",
+      "start": true
+     },
+     {
+      "id": "China",
+      "label": "China",
+      "kind": "Location",
+      "start": false
+     },
+     {
+      "id": "iPhone (AAPL)",
+      "label": "iPhone (AAPL)",
+      "kind": "Product",
+      "start": false
+     },
+     {
+      "id": "Apple Inc. revenue FY2025 = $416,161 million",
+      "label": "Apple Inc. revenue FY2025 = $416,161 million",
+      "kind": "Value",
+      "start": false,
+      "value_id": "V-AAPL-0069"
+     },
+     {
+      "id": "iPhone (AAPL) revenue FY2025 = $209,586 million",
+      "label": "iPhone (AAPL) revenue FY2025 = $209,586 million",
+      "kind": "Value",
+      "start": false,
+      "value_id": "V-AAPL-0176"
+     },
+     {
+      "id": "Apple Inc. revenue in China FY2025 = $64,377 million",
+      "label": "Apple Inc. revenue in China FY2025 = $64,377 million",
+      "kind": "Value",
+      "start": false,
+      "value_id": "V-AAPL-0073"
+     },
+     {
+      "id": "Apple Inc. revenue in Other Countries (AAPL) FY2025 = $199,994 million",
+      "label": "Apple Inc. revenue in Other Countries (AAPL) FY2025 = $199,…",
+      "kind": "Value",
+      "start": false,
+      "value_id": "V-AAPL-0077"
+     },
+     {
+      "id": "Apple Inc. revenue in United States FY2025 = $151,790 million",
+      "label": "Apple Inc. revenue in United States FY2025 = $151,790 milli…",
+      "kind": "Value",
+      "start": false,
+      "value_id": "V-AAPL-0081"
+     },
+     {
+      "id": "Apple Computer Trading (Shanghai) Co., Ltd.",
+      "label": "Apple Computer Trading (Shanghai) Co., Ltd.",
+      "kind": "Subsidiary",
+      "start": false
+     },
+     {
+      "id": "AAPL_FY2025_ITEM7_0004",
+      "label": "AAPL FY25 Item 7 #4",
+      "kind": "chunk",
+      "start": false,
+      "gold": true,
+      "retrieved_by": [
+       "vector_rag",
+       "g_reasoner_finetuned",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "AAPL_FY2025_ITEM7_0005",
+      "label": "AAPL FY25 Item 7 #5",
+      "kind": "chunk",
+      "start": false,
+      "gold": true,
+      "retrieved_by": [
+       "g_reasoner_finetuned",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "AAPL_FY2025_ITEM8_0000",
+      "label": "AAPL FY25 Item 8 #0",
+      "kind": "chunk",
+      "start": false,
+      "gold": true,
+      "retrieved_by": [
+       "vector_rag",
+       "g_reasoner_finetuned",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "AAPL_FY2025_ITEM8_0015",
+      "label": "AAPL FY25 Item 8 #15",
+      "kind": "chunk",
+      "start": false,
+      "gold": true,
+      "retrieved_by": [
+       "vector_rag",
+       "g_reasoner_finetuned",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "AAPL_FY2025_ITEM8_0048",
+      "label": "AAPL FY25 Item 8 #48",
+      "kind": "chunk",
+      "start": false,
+      "gold": true,
+      "retrieved_by": [
+       "vector_rag",
+       "g_reasoner_finetuned",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "AAPL_FY2025_ITEM8_0051",
+      "label": "AAPL FY25 Item 8 #51",
+      "kind": "chunk",
+      "start": false,
+      "gold": true,
+      "retrieved_by": [
+       "vector_rag",
+       "g_reasoner_finetuned",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "AAPL_FY2025_ITEM8_0049",
+      "label": "AAPL FY25 Item 8 #49",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag",
+       "g_reasoner_finetuned",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "AAPL_FY2025_ITEM8_0050",
+      "label": "AAPL FY25 Item 8 #50",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "AAPL_FY2025_ITEM8_0016",
+      "label": "AAPL FY25 Item 8 #16",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "AAPL_FY2024_ITEM7_0004",
+      "label": "AAPL FY24 Item 7 #4",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag",
+       "g_reasoner_finetuned",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "AAPL_FY2025_ITEM7_0006",
+      "label": "AAPL FY25 Item 7 #6",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag"
+      ]
+     },
+     {
+      "id": "AAPL_FY2025_ITEM7_0003",
+      "label": "AAPL FY25 Item 7 #3",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned"
+      ]
+     },
+     {
+      "id": "AAPL_FY2024_ITEM7_0002",
+      "label": "AAPL FY24 Item 7 #2",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned"
+      ]
+     }
+    ],
+    "edges": [
+     {
+      "s": "Apple Inc.",
+      "r": "has_product",
+      "t": "iPhone (AAPL)"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "has_value",
+      "t": "Apple Inc. revenue FY2025 = $416,161 million"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "has_value",
+      "t": "Apple Inc. revenue in China FY2025 = $64,377 million"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "has_value",
+      "t": "Apple Inc. revenue in Other Countries (AAPL) FY2025 = $199,994 million"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "has_value",
+      "t": "Apple Inc. revenue in United States FY2025 = $151,790 million"
+     },
+     {
+      "s": "Apple Inc. revenue in China FY2025 = $64,377 million",
+      "r": "in_location",
+      "t": "China"
+     },
+     {
+      "s": "iPhone (AAPL)",
+      "r": "has_value",
+      "t": "iPhone (AAPL) revenue FY2025 = $209,586 million"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "has_subsidiary",
+      "t": "Apple Computer Trading (Shanghai) Co., Ltd."
+     },
+     {
+      "s": "Apple Computer Trading (Shanghai) Co., Ltd.",
+      "r": "incorporated_in",
+      "t": "China"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM7_0004"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM7_0004"
+     },
+     {
+      "s": "China",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM7_0004"
+     },
+     {
+      "s": "iPhone (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM7_0004"
+     },
+     {
+      "s": "Apple Inc. revenue FY2025 = $416,161 million",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM7_0004"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM7_0005"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM7_0005"
+     },
+     {
+      "s": "iPhone (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM7_0005"
+     },
+     {
+      "s": "Apple Inc. revenue FY2025 = $416,161 million",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM7_0005"
+     },
+     {
+      "s": "iPhone (AAPL) revenue FY2025 = $209,586 million",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM7_0005"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0000"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0000"
+     },
+     {
+      "s": "Apple Inc. revenue FY2025 = $416,161 million",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0000"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0015"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0015"
+     },
+     {
+      "s": "China",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0015"
+     },
+     {
+      "s": "iPhone (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0015"
+     },
+     {
+      "s": "Apple Inc. revenue FY2025 = $416,161 million",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0015"
+     },
+     {
+      "s": "iPhone (AAPL) revenue FY2025 = $209,586 million",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0015"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0048"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0048"
+     },
+     {
+      "s": "Apple Inc. revenue FY2025 = $416,161 million",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0048"
+     },
+     {
+      "s": "Apple Inc. revenue in China FY2025 = $64,377 million",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0048"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0051"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0051"
+     },
+     {
+      "s": "China",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0051"
+     },
+     {
+      "s": "Apple Inc. revenue FY2025 = $416,161 million",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0051"
+     },
+     {
+      "s": "Apple Inc. revenue in China FY2025 = $64,377 million",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0051"
+     },
+     {
+      "s": "Apple Inc. revenue in Other Countries (AAPL) FY2025 = $199,994 million",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0051"
+     },
+     {
+      "s": "Apple Inc. revenue in United States FY2025 = $151,790 million",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0051"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0049"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0049"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0050"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0050"
+     },
+     {
+      "s": "Apple Inc. revenue in United States FY2025 = $151,790 million",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0050"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0016"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0016"
+     },
+     {
+      "s": "China",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0016"
+     },
+     {
+      "s": "iPhone (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0016"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2024_ITEM7_0004"
+     },
+     {
+      "s": "iPhone (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2024_ITEM7_0004"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM7_0006"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM7_0006"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM7_0003"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM7_0003"
+     },
+     {
+      "s": "China",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM7_0003"
+     },
+     {
+      "s": "Apple Inc. revenue in China FY2025 = $64,377 million",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM7_0003"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2024_ITEM7_0002"
+     },
+     {
+      "s": "China",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2024_ITEM7_0002"
+     },
+     {
+      "s": "iPhone (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2024_ITEM7_0002"
+     }
+    ]
+   },
+   "runs": {
+    "vector_rag": {
+     "verdict": "correct",
+     "judge_reason": "The system answer provides Apple's total net sales for fiscal 2025 as $416,161 million, which matches the reference answer.",
+     "answer": "Apple's total net sales in fiscal 2025 were $416,161 million [AAPL_FY2025_ITEM8_0000].",
+     "stage": "ok",
+     "missing_facts": [],
+     "retrieved": [
+      "AAPL_FY2025_ITEM8_0051",
+      "AAPL_FY2025_ITEM8_0049",
+      "AAPL_FY2025_ITEM8_0050",
+      "AAPL_FY2025_ITEM8_0015",
+      "AAPL_FY2025_ITEM8_0016",
+      "AAPL_FY2025_ITEM8_0048",
+      "AAPL_FY2024_ITEM7_0004",
+      "AAPL_FY2025_ITEM7_0004",
+      "AAPL_FY2025_ITEM8_0000",
+      "AAPL_FY2025_ITEM7_0006"
+     ],
+     "gold_hits": [
+      "AAPL_FY2025_ITEM8_0051",
+      "AAPL_FY2025_ITEM8_0015",
+      "AAPL_FY2025_ITEM8_0048",
+      "AAPL_FY2025_ITEM7_0004",
+      "AAPL_FY2025_ITEM8_0000"
+     ],
+     "values_given": [],
+     "traces": [
+      {
+       "sentence": "Apple's total net sales in fiscal 2025 were $416,161 million [AAPL_FY2025_ITEM8_0000].",
+       "steps": [
+        {
+         "kind": "chunk",
+         "id": "AAPL_FY2025_ITEM8_0000",
+         "line": "Total net sales | 416,161 | 391,035 | 383,285",
+         "filing": "Apple Inc. 10-K FY2025",
+         "section": "Item 8",
+         "accession": "0000320193-25-000079",
+         "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm"
+        }
+       ]
+      }
+     ]
+    },
+    "g_reasoner_finetuned": {
+     "verdict": "correct",
+     "judge_reason": "The system answer correctly provides Apple's total net sales for fiscal 2025 matching the reference answer.",
+     "answer": "Apple's total net sales in fiscal 2025 (fiscal year ended September 27, 2025) were $416,161 million [AAPL_FY2025_ITEM8_0000].",
+     "stage": "ok",
+     "missing_facts": [],
+     "retrieved": [
+      "AAPL_FY2025_ITEM7_0005",
+      "AAPL_FY2025_ITEM8_0015",
+      "AAPL_FY2025_ITEM7_0004",
+      "AAPL_FY2025_ITEM8_0000",
+      "AAPL_FY2025_ITEM8_0051",
+      "AAPL_FY2025_ITEM8_0048",
+      "AAPL_FY2025_ITEM7_0003",
+      "AAPL_FY2024_ITEM7_0004",
+      "AAPL_FY2024_ITEM7_0002",
+      "AAPL_FY2025_ITEM8_0049"
+     ],
+     "gold_hits": [
+      "AAPL_FY2025_ITEM7_0005",
+      "AAPL_FY2025_ITEM8_0015",
+      "AAPL_FY2025_ITEM7_0004",
+      "AAPL_FY2025_ITEM8_0000",
+      "AAPL_FY2025_ITEM8_0051",
+      "AAPL_FY2025_ITEM8_0048"
+     ],
+     "values_given": [
+      "V-AAPL-0001",
+      "V-AAPL-0139",
+      "V-AAPL-0101",
+      "V-AAPL-0138",
+      "V-AAPL-0123"
+     ],
+     "traces": [
+      {
+       "sentence": "Apple's total net sales in fiscal 2025 (fiscal year ended September 27, 2025) were $416,161 million [AAPL_FY2025_ITEM8_0000].",
+       "steps": [
+        {
+         "kind": "chunk",
+         "id": "AAPL_FY2025_ITEM8_0000",
+         "line": "Total net sales | 416,161 | 391,035 | 383,285",
+         "filing": "Apple Inc. 10-K FY2025",
+         "section": "Item 8",
+         "accession": "0000320193-25-000079",
+         "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm"
+        }
+       ]
+      }
+     ]
+    },
+    "hybrid_finetuned_rule": {
+     "verdict": "correct",
+     "judge_reason": "The system answer provides Apple's total net sales for fiscal 2025 as $416,161 million, matching the reference answer.",
+     "answer": "Apple Inc.'s total net sales in fiscal 2025 were $416,161 million [V-AAPL-0069].",
+     "stage": "ok",
+     "missing_facts": [],
+     "retrieved": [
+      "AAPL_FY2025_ITEM8_0051",
+      "AAPL_FY2025_ITEM7_0005",
+      "AAPL_FY2025_ITEM8_0049",
+      "AAPL_FY2025_ITEM8_0015",
+      "AAPL_FY2025_ITEM8_0050",
+      "AAPL_FY2025_ITEM7_0004",
+      "AAPL_FY2025_ITEM8_0000",
+      "AAPL_FY2025_ITEM8_0016",
+      "AAPL_FY2025_ITEM8_0048",
+      "AAPL_FY2024_ITEM7_0004"
+     ],
+     "gold_hits": [
+      "AAPL_FY2025_ITEM8_0051",
+      "AAPL_FY2025_ITEM7_0005",
+      "AAPL_FY2025_ITEM8_0015",
+      "AAPL_FY2025_ITEM7_0004",
+      "AAPL_FY2025_ITEM8_0000",
+      "AAPL_FY2025_ITEM8_0048"
+     ],
+     "values_given": [
+      "V-AAPL-0069",
+      "V-AAPL-0176",
+      "V-AAPL-0073",
+      "V-AAPL-0077",
+      "V-AAPL-0081"
+     ],
+     "traces": [
+      {
+       "sentence": "Apple Inc.'s total net sales in fiscal 2025 were $416,161 million [V-AAPL-0069].",
+       "steps": [
+        {
+         "kind": "value",
+         "id": "V-AAPL-0069",
+         "name": "Apple Inc. revenue FY2025 = $416,161 million",
+         "metric": "Revenue",
+         "fy": "FY2025",
+         "display": "$416,161 million",
+         "xbrl": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+         "fact_id": "f-78",
+         "matches": true,
+         "chunk": "AAPL_FY2025_ITEM8_0000",
+         "line": "Total net sales | 416,161 | 391,035 | 383,285",
+         "filing": "Apple Inc. 10-K FY2025",
+         "section": "Item 8",
+         "accession": "0000320193-25-000079",
+         "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm#f-78"
+        }
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "qid": "v2_q39",
+   "tag": "Graph wins",
+   "emoji": "🏆",
+   "story": "Two companies in one question. Vector search lands in J&J's text only and gives up; the graph starts from both company nodes and finds both net incomes.",
+   "type": "cross_company",
+   "hops": 2,
+   "question": "Which earned more net income, Apple in fiscal 2025 or Johnson & Johnson in 2025, and roughly how many times as much?",
+   "gold_answer": "Apple: $112,010 million versus Johnson & Johnson's $26,804 million, about 4.2 times as much.",
+   "facts": {
+    "a_ni25": [
+     "AAPL_FY2025_ITEM8_0001",
+     "AAPL_FY2025_ITEM8_0016"
+    ],
+    "j_ne25": [
+     "JNJ_FY2025_ITEM8_0003",
+     "JNJ_FY2025_ITEM8_0004",
+     "JNJ_FY2025_ITEM8_0008"
+    ]
+   },
+   "start_nodes": [
+    "Johnson & Johnson",
+    "Net income",
+    "Apple Inc.",
+    "FY2025 (AAPL)",
+    "FY2025 (JNJ)"
+   ],
+   "graph": {
+    "nodes": [
+     {
+      "id": "Johnson & Johnson",
+      "label": "Johnson & Johnson",
+      "kind": "Company",
+      "start": true
+     },
+     {
+      "id": "Net income",
+      "label": "Net income",
+      "kind": "Metric",
+      "start": true
+     },
+     {
+      "id": "Apple Inc.",
+      "label": "Apple Inc.",
+      "kind": "Company",
+      "start": true
+     },
+     {
+      "id": "FY2025 (AAPL)",
+      "label": "FY2025 (AAPL)",
+      "kind": "FiscalYear",
+      "start": true
+     },
+     {
+      "id": "FY2025 (JNJ)",
+      "label": "FY2025 (JNJ)",
+      "kind": "FiscalYear",
+      "start": true
+     },
+     {
+      "id": "Johnson & Johnson net income FY2025 = $26,804 million",
+      "label": "Johnson & Johnson net income FY2025 = $26,804 million",
+      "kind": "Value",
+      "start": false,
+      "value_id": "V-JNJ-0291"
+     },
+     {
+      "id": "Apple Inc. net income FY2025 = $112,010 million",
+      "label": "Apple Inc. net income FY2025 = $112,010 million",
+      "kind": "Value",
+      "start": false,
+      "value_id": "V-AAPL-0053"
+     },
+     {
+      "id": "AAPL_FY2025_ITEM8_0001",
+      "label": "AAPL FY25 Item 8 #1",
+      "kind": "chunk",
+      "start": false,
+      "gold": true,
+      "retrieved_by": [
+       "g_reasoner_finetuned"
+      ]
+     },
+     {
+      "id": "AAPL_FY2025_ITEM8_0016",
+      "label": "AAPL FY25 Item 8 #16",
+      "kind": "chunk",
+      "start": false,
+      "gold": true,
+      "retrieved_by": [
+       "g_reasoner_finetuned",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "JNJ_FY2025_ITEM8_0003",
+      "label": "JNJ FY25 Item 8 #3",
+      "kind": "chunk",
+      "start": false,
+      "gold": true,
+      "retrieved_by": [
+       "g_reasoner_finetuned",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "JNJ_FY2025_ITEM8_0004",
+      "label": "JNJ FY25 Item 8 #4",
+      "kind": "chunk",
+      "start": false,
+      "gold": true,
+      "retrieved_by": [
+       "g_reasoner_finetuned",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "JNJ_FY2025_ITEM8_0008",
+      "label": "JNJ FY25 Item 8 #8",
+      "kind": "chunk",
+      "start": false,
+      "gold": true,
+      "retrieved_by": [
+       "g_reasoner_finetuned",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "JNJ_FY2025_ITEM8_0072",
+      "label": "JNJ FY25 Item 8 #72",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "JNJ_FY2025_ITEM7_0029",
+      "label": "JNJ FY25 Item 7 #29",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "JNJ_FY2025_ITEM8_0043",
+      "label": "JNJ FY25 Item 8 #43",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "JNJ_FY2025_ITEM8_0005",
+      "label": "JNJ FY25 Item 8 #5",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "JNJ_FY2025_ITEM7_0034",
+      "label": "JNJ FY25 Item 7 #34",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "JNJ_FY2025_ITEM8_0104",
+      "label": "JNJ FY25 Item 8 #104",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag"
+      ]
+     },
+     {
+      "id": "JNJ_FY2025_ITEM7_0033",
+      "label": "JNJ FY25 Item 7 #33",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag"
+      ]
+     },
+     {
+      "id": "JNJ_FY2025_ITEM8_0130",
+      "label": "JNJ FY25 Item 8 #130",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag"
+      ]
+     },
+     {
+      "id": "JNJ_FY2025_ITEM8_0070",
+      "label": "JNJ FY25 Item 8 #70",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag"
+      ]
+     },
+     {
+      "id": "JNJ_FY2025_ITEM7_0003",
+      "label": "JNJ FY25 Item 7 #3",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag"
+      ]
+     },
+     {
+      "id": "JNJ_FY2025_ITEM8_0007",
+      "label": "JNJ FY25 Item 8 #7",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "AAPL_FY2025_ITEM8_0006",
+      "label": "AAPL FY25 Item 8 #6",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned"
+      ]
+     },
+     {
+      "id": "AAPL_FY2025_ITEM8_0005",
+      "label": "AAPL FY25 Item 8 #5",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned"
+      ]
+     },
+     {
+      "id": "JNJ_FY2025_ITEM8_0002",
+      "label": "JNJ FY25 Item 8 #2",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned"
+      ]
+     },
+     {
+      "id": "AAPL_FY2025_ITEM8_0000",
+      "label": "AAPL FY25 Item 8 #0",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned"
+      ]
+     }
+    ],
+    "edges": [
+     {
+      "s": "Johnson & Johnson",
+      "r": "has_value",
+      "t": "Johnson & Johnson net income FY2025 = $26,804 million"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "has_value",
+      "t": "Apple Inc. net income FY2025 = $112,010 million"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0001"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0001"
+     },
+     {
+      "s": "Apple Inc. net income FY2025 = $112,010 million",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0001"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0016"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0016"
+     },
+     {
+      "s": "Apple Inc. net income FY2025 = $112,010 million",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0016"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM8_0003"
+     },
+     {
+      "s": "FY2025 (JNJ)",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM8_0003"
+     },
+     {
+      "s": "Johnson & Johnson net income FY2025 = $26,804 million",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM8_0003"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM8_0004"
+     },
+     {
+      "s": "FY2025 (JNJ)",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM8_0004"
+     },
+     {
+      "s": "Johnson & Johnson net income FY2025 = $26,804 million",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM8_0004"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM8_0008"
+     },
+     {
+      "s": "FY2025 (JNJ)",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM8_0008"
+     },
+     {
+      "s": "Johnson & Johnson net income FY2025 = $26,804 million",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM8_0008"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM8_0072"
+     },
+     {
+      "s": "FY2025 (JNJ)",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM8_0072"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM7_0029"
+     },
+     {
+      "s": "FY2025 (JNJ)",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM7_0029"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM8_0043"
+     },
+     {
+      "s": "FY2025 (JNJ)",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM8_0043"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM8_0005"
+     },
+     {
+      "s": "FY2025 (JNJ)",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM8_0005"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM7_0034"
+     },
+     {
+      "s": "FY2025 (JNJ)",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM7_0034"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM8_0104"
+     },
+     {
+      "s": "FY2025 (JNJ)",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM8_0104"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM7_0033"
+     },
+     {
+      "s": "FY2025 (JNJ)",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM7_0033"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM8_0130"
+     },
+     {
+      "s": "FY2025 (JNJ)",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM8_0130"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM8_0070"
+     },
+     {
+      "s": "FY2025 (JNJ)",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM8_0070"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM7_0003"
+     },
+     {
+      "s": "FY2025 (JNJ)",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM7_0003"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM8_0007"
+     },
+     {
+      "s": "FY2025 (JNJ)",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM8_0007"
+     },
+     {
+      "s": "Johnson & Johnson net income FY2025 = $26,804 million",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM8_0007"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0006"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0006"
+     },
+     {
+      "s": "Apple Inc. net income FY2025 = $112,010 million",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0006"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0005"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0005"
+     },
+     {
+      "s": "Apple Inc. net income FY2025 = $112,010 million",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0005"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM8_0002"
+     },
+     {
+      "s": "FY2025 (JNJ)",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM8_0002"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0000"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0000"
+     }
+    ]
+   },
+   "runs": {
+    "vector_rag": {
+     "verdict": "missing",
+     "judge_reason": "The system answer states it cannot answer from the provided context, which matches the 'missing' verdict criteria.",
+     "answer": "I cannot answer from the provided context.",
+     "stage": "retrieval",
+     "missing_facts": [
+      "a_ni25",
+      "j_ne25"
+     ],
+     "retrieved": [
+      "JNJ_FY2025_ITEM8_0072",
+      "JNJ_FY2025_ITEM7_0029",
+      "JNJ_FY2025_ITEM8_0043",
+      "JNJ_FY2025_ITEM8_0005",
+      "JNJ_FY2025_ITEM7_0034",
+      "JNJ_FY2025_ITEM8_0104",
+      "JNJ_FY2025_ITEM7_0033",
+      "JNJ_FY2025_ITEM8_0130",
+      "JNJ_FY2025_ITEM8_0070",
+      "JNJ_FY2025_ITEM7_0003"
+     ],
+     "gold_hits": [],
+     "values_given": [],
+     "traces": []
+    },
+    "g_reasoner_finetuned": {
+     "verdict": "correct",
+     "judge_reason": "The system answer correctly identifies Apple as earning more net income and provides the accurate net income figures and the relative ratio matching the reference answer.",
+     "answer": "Apple in fiscal 2025 earned more net income than Johnson & Johnson in fiscal 2025 [AAPL_FY2025_ITEM8_0016], [JNJ_FY2025_ITEM8_0003]. Apple's net income for fiscal 2025 was $112,010 million [AAPL_FY2025_ITEM8_0016], and Johnson & Johnson's net earnings for fiscal 2025 were $26,804 million [JNJ_FY2025_ITEM8_0003]. Apple earned approximately 4.18 times as much net income as Johnson & Johnson ($112,010 million / $26,804 million) [AAPL_FY2025_ITEM8_0016], [JNJ_FY2025_ITEM8_0003].",
+     "stage": "ok",
+     "missing_facts": [],
+     "retrieved": [
+      "JNJ_FY2025_ITEM8_0008",
+      "JNJ_FY2025_ITEM8_0004",
+      "JNJ_FY2025_ITEM8_0003",
+      "AAPL_FY2025_ITEM8_0016",
+      "JNJ_FY2025_ITEM8_0007",
+      "AAPL_FY2025_ITEM8_0001",
+      "AAPL_FY2025_ITEM8_0006",
+      "AAPL_FY2025_ITEM8_0005",
+      "JNJ_FY2025_ITEM8_0002",
+      "AAPL_FY2025_ITEM8_0000"
+     ],
+     "gold_hits": [
+      "JNJ_FY2025_ITEM8_0008",
+      "JNJ_FY2025_ITEM8_0004",
+      "JNJ_FY2025_ITEM8_0003",
+      "AAPL_FY2025_ITEM8_0016",
+      "AAPL_FY2025_ITEM8_0001"
+     ],
+     "values_given": [
+      "V-AAPL-0052",
+      "V-AAPL-0051",
+      "V-JNJ-0290",
+      "V-JNJ-0289",
+      "V-MSFT-0083"
+     ],
+     "traces": [
+      {
+       "sentence": "Apple's net income for fiscal 2025 was $112,010 million [AAPL_FY2025_ITEM8_0016], and Johnson & Johnson's net earnings for fiscal 2025 were $26,804 million [JNJ_FY2025_ITEM8_0003].",
+       "steps": [
+        {
+         "kind": "chunk",
+         "id": "AAPL_FY2025_ITEM8_0016",
+         "line": "Net income | $112,010 | $93,736 | $96,995",
+         "filing": "Apple Inc. 10-K FY2025",
+         "section": "Item 8",
+         "accession": "0000320193-25-000079",
+         "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm"
+        },
+        {
+         "kind": "chunk",
+         "id": "JNJ_FY2025_ITEM8_0003",
+         "line": "Net earnings from continuing operations | 26,804 | 14,066 | 13,326",
+         "filing": "Johnson & Johnson 10-K FY2025",
+         "section": "Item 8",
+         "accession": "0000200406-26-000016",
+         "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm"
+        }
+       ]
+      },
+      {
+       "sentence": "Apple earned approximately 4.18 times as much net income as Johnson & Johnson ($112,010 million / $26,804 million) [AAPL_FY2025_ITEM8_0016], [JNJ_FY2025_ITEM8_0003].",
+       "steps": [
+        {
+         "kind": "chunk",
+         "id": "AAPL_FY2025_ITEM8_0016",
+         "line": "Net income | $112,010 | $93,736 | $96,995",
+         "filing": "Apple Inc. 10-K FY2025",
+         "section": "Item 8",
+         "accession": "0000320193-25-000079",
+         "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm"
+        },
+        {
+         "kind": "chunk",
+         "id": "JNJ_FY2025_ITEM8_0003",
+         "line": "Net earnings from continuing operations | 26,804 | 14,066 | 13,326",
+         "filing": "Johnson & Johnson 10-K FY2025",
+         "section": "Item 8",
+         "accession": "0000200406-26-000016",
+         "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm"
+        }
+       ]
+      }
+     ]
+    },
+    "hybrid_finetuned_rule": {
+     "verdict": "correct",
+     "judge_reason": "The system answer correctly identifies that Apple earned more net income, provides the exact figures matching the reference, and accurately calculates the multiplier.",
+     "answer": "Apple earned more net income in fiscal year 2025 than Johnson & Johnson did in fiscal year 2025 [V-JNJ-0291], [V-AAPL-0053]. Apple's net income for fiscal year 2025 was $112,010 million [V-AAPL-0053], while Johnson & Johnson's net income for fiscal year 2025 was $26,804 million [V-JNJ-0291]. Apple earned approximately 4.18 times as much net income as Johnson & Johnson in fiscal year 2025 (computed as $112,010 million [V-AAPL-0053] divided by $26,804 million [V-JNJ-0291]).",
+     "stage": "ok",
+     "missing_facts": [],
+     "retrieved": [
+      "JNJ_FY2025_ITEM8_0072",
+      "JNJ_FY2025_ITEM8_0008",
+      "JNJ_FY2025_ITEM7_0029",
+      "JNJ_FY2025_ITEM8_0004",
+      "JNJ_FY2025_ITEM8_0043",
+      "JNJ_FY2025_ITEM8_0003",
+      "JNJ_FY2025_ITEM8_0005",
+      "AAPL_FY2025_ITEM8_0016",
+      "JNJ_FY2025_ITEM7_0034",
+      "JNJ_FY2025_ITEM8_0007"
+     ],
+     "gold_hits": [
+      "JNJ_FY2025_ITEM8_0008",
+      "JNJ_FY2025_ITEM8_0004",
+      "JNJ_FY2025_ITEM8_0003",
+      "AAPL_FY2025_ITEM8_0016"
+     ],
+     "values_given": [
+      "V-JNJ-0291",
+      "V-AAPL-0053"
+     ],
+     "traces": [
+      {
+       "sentence": "Apple's net income for fiscal year 2025 was $112,010 million [V-AAPL-0053], while Johnson & Johnson's net income for fiscal year 2025 was $26,804 million [V-JNJ-0291].",
+       "steps": [
+        {
+         "kind": "value",
+         "id": "V-AAPL-0053",
+         "name": "Apple Inc. net income FY2025 = $112,010 million",
+         "metric": "Net income",
+         "fy": "FY2025",
+         "display": "$112,010 million",
+         "xbrl": "us-gaap:NetIncomeLoss",
+         "fact_id": "f-114",
+         "matches": true,
+         "chunk": "AAPL_FY2025_ITEM8_0001",
+         "line": "Net income | $112,010 | $93,736 | $96,995",
+         "filing": "Apple Inc. 10-K FY2025",
+         "section": "Item 8",
+         "accession": "0000320193-25-000079",
+         "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm#f-114"
+        },
+        {
+         "kind": "value",
+         "id": "V-JNJ-0291",
+         "name": "Johnson & Johnson net income FY2025 = $26,804 million",
+         "metric": "Net income",
+         "fy": "FY2025",
+         "display": "$26,804 million",
+         "xbrl": "us-gaap:NetIncomeLoss",
+         "fact_id": "f-202",
+         "matches": true,
+         "chunk": "JNJ_FY2025_ITEM8_0003",
+         "line": "Net earnings from continuing operations | 26,804 | 14,066 | 13,326",
+         "filing": "Johnson & Johnson 10-K FY2025",
+         "section": "Item 8",
+         "accession": "0000200406-26-000016",
+         "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm#f-202"
+        }
+       ]
+      },
+      {
+       "sentence": "Apple earned approximately 4.18 times as much net income as Johnson & Johnson in fiscal year 2025 (computed as $112,010 million [V-AAPL-0053] divided by $26,804 million [V-JNJ-0291]).",
+       "steps": [
+        {
+         "kind": "value",
+         "id": "V-AAPL-0053",
+         "name": "Apple Inc. net income FY2025 = $112,010 million",
+         "metric": "Net income",
+         "fy": "FY2025",
+         "display": "$112,010 million",
+         "xbrl": "us-gaap:NetIncomeLoss",
+         "fact_id": "f-114",
+         "matches": true,
+         "chunk": "AAPL_FY2025_ITEM8_0001",
+         "line": "Net income | $112,010 | $93,736 | $96,995",
+         "filing": "Apple Inc. 10-K FY2025",
+         "section": "Item 8",
+         "accession": "0000320193-25-000079",
+         "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm#f-114"
+        },
+        {
+         "kind": "value",
+         "id": "V-JNJ-0291",
+         "name": "Johnson & Johnson net income FY2025 = $26,804 million",
+         "metric": "Net income",
+         "fy": "FY2025",
+         "display": "$26,804 million",
+         "xbrl": "us-gaap:NetIncomeLoss",
+         "fact_id": "f-202",
+         "matches": true,
+         "chunk": "JNJ_FY2025_ITEM8_0003",
+         "line": "Net earnings from continuing operations | 26,804 | 14,066 | 13,326",
+         "filing": "Johnson & Johnson 10-K FY2025",
+         "section": "Item 8",
+         "accession": "0000200406-26-000016",
+         "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm#f-202"
+        }
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "qid": "v2_q12",
+   "tag": "Wrong answer",
+   "emoji": "⚠️",
+   "story": "The graph's passages hold a real but different number ($5.0B effect on net income, not the $6.5B of gains). Supported by its source, still wrong: only the judge catches it.",
+   "type": "relation",
+   "hops": 2,
+   "question": "What effect did the OpenAI Recapitalization have on Microsoft's other income in fiscal 2026, and how large were the net gains from its OpenAI investments?",
+   "gold_answer": "Microsoft's ownership of OpenAI was diluted and it recorded dilution gains in other income (expense), net; net gains from OpenAI investments were $6.5 billion in fiscal 2026 (vs $4.8 billion of net losses in fiscal 2025).",
+   "facts": {
+    "m_openai_recap": [
+     "MSFT_FY2026_ITEM8_0026"
+    ],
+    "m_openai_gain": [
+     "MSFT_FY2026_ITEM7_0019"
+    ]
+   },
+   "start_nodes": [
+    "Microsoft Corporation",
+    "OpenAI",
+    "FY2026 (MSFT)"
+   ],
+   "graph": {
+    "nodes": [
+     {
+      "id": "Microsoft Corporation",
+      "label": "Microsoft Corporation",
+      "kind": "Company",
+      "start": true
+     },
+     {
+      "id": "OpenAI",
+      "label": "OpenAI",
+      "kind": "Organization",
+      "start": true
+     },
+     {
+      "id": "FY2026 (MSFT)",
+      "label": "FY2026 (MSFT)",
+      "kind": "FiscalYear",
+      "start": true
+     },
+     {
+      "id": "Gaming (MSFT)",
+      "label": "Gaming (MSFT)",
+      "kind": "Product",
+      "start": false
+     },
+     {
+      "id": "Europe",
+      "label": "Europe",
+      "kind": "Location",
+      "start": false
+     },
+     {
+      "id": "Americas (AAPL) cost of sales FY2023 = $92,394 million",
+      "label": "Americas (AAPL) cost of sales FY2023 = $92,394 million",
+      "kind": "Value",
+      "start": false,
+      "value_id": "V-AAPL-0001"
+     },
+     {
+      "id": "Europe (AAPL) cost of sales FY2023 = $54,101 million",
+      "label": "Europe (AAPL) cost of sales FY2023 = $54,101 million",
+      "kind": "Value",
+      "start": false,
+      "value_id": "V-AAPL-0101"
+     },
+     {
+      "id": "Japan (AAPL) cost of sales FY2023 = $11,542 million",
+      "label": "Japan (AAPL) cost of sales FY2023 = $11,542 million",
+      "kind": "Value",
+      "start": false,
+      "value_id": "V-AAPL-0123"
+     },
+     {
+      "id": "Products (AAPL) cost of sales FY2022 = $201,471 million",
+      "label": "Products (AAPL) cost of sales FY2022 = $201,471 million",
+      "kind": "Value",
+      "start": false,
+      "value_id": "V-AAPL-0138"
+     },
+     {
+      "id": "Products (AAPL) cost of sales FY2023 = $189,282 million",
+      "label": "Products (AAPL) cost of sales FY2023 = $189,282 million",
+      "kind": "Value",
+      "start": false,
+      "value_id": "V-AAPL-0139"
+     },
+     {
+      "id": "Products (AAPL)",
+      "label": "Products (AAPL)",
+      "kind": "Product",
+      "start": false
+     },
+     {
+      "id": "MSFT_FY2026_ITEM7_0019",
+      "label": "MSFT FY26 Item 7 #19",
+      "kind": "chunk",
+      "start": false,
+      "gold": true,
+      "retrieved_by": [
+       "vector_rag",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "MSFT_FY2026_ITEM8_0026",
+      "label": "MSFT FY26 Item 8 #26",
+      "kind": "chunk",
+      "start": false,
+      "gold": true,
+      "retrieved_by": [
+       "vector_rag",
+       "g_reasoner_finetuned",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "MSFT_FY2026_ITEM7_0020",
+      "label": "MSFT FY26 Item 7 #20",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag",
+       "g_reasoner_finetuned",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "MSFT_FY2026_ITEM7_0011",
+      "label": "MSFT FY26 Item 7 #11",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag",
+       "g_reasoner_finetuned",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "MSFT_FY2026_ITEM7_0012",
+      "label": "MSFT FY26 Item 7 #12",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "MSFT_FY2026_ITEM8_0035",
+      "label": "MSFT FY26 Item 8 #35",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "MSFT_FY2026_ITEM8_0025",
+      "label": "MSFT FY26 Item 8 #25",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag"
+      ]
+     },
+     {
+      "id": "MSFT_FY2025_ITEM7_0019",
+      "label": "MSFT FY25 Item 7 #19",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag",
+       "g_reasoner_finetuned",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "MSFT_FY2026_ITEM7_0023",
+      "label": "MSFT FY26 Item 7 #23",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag"
+      ]
+     },
+     {
+      "id": "MSFT_FY2026_ITEM7_0002",
+      "label": "MSFT FY26 Item 7 #2",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag",
+       "g_reasoner_finetuned",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "MSFT_FY2025_ITEM7_0002",
+      "label": "MSFT FY25 Item 7 #2",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "MSFT_FY2026_ITEM7_0003",
+      "label": "MSFT FY26 Item 7 #3",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "MSFT_FY2026_ITEM8_0000",
+      "label": "MSFT FY26 Item 8 #0",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned"
+      ]
+     },
+     {
+      "id": "MSFT_FY2026_ITEM8_0005",
+      "label": "MSFT FY26 Item 8 #5",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned"
+      ]
+     },
+     {
+      "id": "MSFT_FY2026_ITEM8_0001",
+      "label": "MSFT FY26 Item 8 #1",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned"
+      ]
+     }
+    ],
+    "edges": [
+     {
+      "s": "Microsoft Corporation",
+      "r": "has_product",
+      "t": "Gaming (MSFT)"
+     },
+     {
+      "s": "Microsoft Corporation",
+      "r": "invests_in",
+      "t": "OpenAI"
+     },
+     {
+      "s": "Microsoft Corporation",
+      "r": "licensed_from",
+      "t": "OpenAI"
+     },
+     {
+      "s": "Microsoft Corporation",
+      "r": "partners_with",
+      "t": "OpenAI"
+     },
+     {
+      "s": "Products (AAPL)",
+      "r": "has_value",
+      "t": "Products (AAPL) cost of sales FY2022 = $201,471 million"
+     },
+     {
+      "s": "Products (AAPL)",
+      "r": "has_value",
+      "t": "Products (AAPL) cost of sales FY2023 = $189,282 million"
+     },
+     {
+      "s": "Microsoft Corporation",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM7_0019"
+     },
+     {
+      "s": "FY2026 (MSFT)",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM7_0019"
+     },
+     {
+      "s": "Microsoft Corporation",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM8_0026"
+     },
+     {
+      "s": "OpenAI",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM8_0026"
+     },
+     {
+      "s": "FY2026 (MSFT)",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM8_0026"
+     },
+     {
+      "s": "Microsoft Corporation",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM7_0020"
+     },
+     {
+      "s": "OpenAI",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM7_0020"
+     },
+     {
+      "s": "FY2026 (MSFT)",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM7_0020"
+     },
+     {
+      "s": "Microsoft Corporation",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM7_0011"
+     },
+     {
+      "s": "OpenAI",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM7_0011"
+     },
+     {
+      "s": "FY2026 (MSFT)",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM7_0011"
+     },
+     {
+      "s": "Microsoft Corporation",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM7_0012"
+     },
+     {
+      "s": "FY2026 (MSFT)",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM7_0012"
+     },
+     {
+      "s": "Microsoft Corporation",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM8_0035"
+     },
+     {
+      "s": "FY2026 (MSFT)",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM8_0035"
+     },
+     {
+      "s": "Microsoft Corporation",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM8_0025"
+     },
+     {
+      "s": "OpenAI",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM8_0025"
+     },
+     {
+      "s": "FY2026 (MSFT)",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM8_0025"
+     },
+     {
+      "s": "Microsoft Corporation",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2025_ITEM7_0019"
+     },
+     {
+      "s": "OpenAI",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2025_ITEM7_0019"
+     },
+     {
+      "s": "Microsoft Corporation",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM7_0023"
+     },
+     {
+      "s": "FY2026 (MSFT)",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM7_0023"
+     },
+     {
+      "s": "Microsoft Corporation",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM7_0002"
+     },
+     {
+      "s": "OpenAI",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM7_0002"
+     },
+     {
+      "s": "FY2026 (MSFT)",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM7_0002"
+     },
+     {
+      "s": "Microsoft Corporation",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2025_ITEM7_0002"
+     },
+     {
+      "s": "OpenAI",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2025_ITEM7_0002"
+     },
+     {
+      "s": "Microsoft Corporation",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM7_0003"
+     },
+     {
+      "s": "OpenAI",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM7_0003"
+     },
+     {
+      "s": "FY2026 (MSFT)",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM7_0003"
+     },
+     {
+      "s": "Microsoft Corporation",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM8_0000"
+     },
+     {
+      "s": "FY2026 (MSFT)",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM8_0000"
+     },
+     {
+      "s": "Microsoft Corporation",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM8_0005"
+     },
+     {
+      "s": "FY2026 (MSFT)",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM8_0005"
+     },
+     {
+      "s": "Microsoft Corporation",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM8_0001"
+     },
+     {
+      "s": "FY2026 (MSFT)",
+      "r": "is_mentioned_in",
+      "t": "MSFT_FY2026_ITEM8_0001"
+     }
+    ]
+   },
+   "runs": {
+    "vector_rag": {
+     "verdict": "correct",
+     "judge_reason": "The system answer accurately captures both the dilution gain effect on other income and the specific $6.5 billion net gain from OpenAI investments in fiscal 2026.",
+     "answer": "The net gains recorded for fiscal year 2026 from investments in OpenAI primarily relate to the dilution gain from the OpenAI Recapitalization [MSFT_FY2026_ITEM7_0020]. Other income (expense), net included $6.5 billion of net gains for fiscal year 2026 from investments in OpenAI [MSFT_FY2026_ITEM7_0019].",
+     "stage": "ok",
+     "missing_facts": [],
+     "retrieved": [
+      "MSFT_FY2026_ITEM7_0020",
+      "MSFT_FY2026_ITEM8_0026",
+      "MSFT_FY2026_ITEM7_0019",
+      "MSFT_FY2026_ITEM7_0011",
+      "MSFT_FY2026_ITEM7_0012",
+      "MSFT_FY2026_ITEM8_0035",
+      "MSFT_FY2026_ITEM8_0025",
+      "MSFT_FY2025_ITEM7_0019",
+      "MSFT_FY2026_ITEM7_0023",
+      "MSFT_FY2026_ITEM7_0002"
+     ],
+     "gold_hits": [
+      "MSFT_FY2026_ITEM8_0026",
+      "MSFT_FY2026_ITEM7_0019"
+     ],
+     "values_given": [],
+     "traces": [
+      {
+       "sentence": "Other income (expense), net included $6.5 billion of net gains for fiscal year 2026 from investments in OpenAI [MSFT_FY2026_ITEM7_0019].",
+       "steps": [
+        {
+         "kind": "chunk",
+         "id": "MSFT_FY2026_ITEM7_0019",
+         "line": "Other income (expense), net included $6.5 billion of net gains and $4.8 billion of net losses for fiscal years 2026 and 2025, respectively, from investments in OpenAI, primarily net recognized gains (losses) on our equity method investment ",
+         "filing": "Microsoft Corporation 10-K FY2026",
+         "section": "Item 7",
+         "accession": "0001193125-26-323660",
+         "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+        }
+       ]
+      }
+     ]
+    },
+    "g_reasoner_finetuned": {
+     "verdict": "hallucination",
+     "judge_reason": "The system answer states the net gains were $5.0 billion, which contradicts the reference answer of $6.5 billion.",
+     "answer": "In fiscal year 2026, net gains recorded primarily relate to the dilution gain from the OpenAI Recapitalization in other income (expense), net [MSFT_FY2026_ITEM7_0020]. Net gains from investments in OpenAI resulted in an increase in net income of $5.0 billion in fiscal year 2026 [MSFT_FY2026_ITEM7_0011].",
+     "stage": "retrieval",
+     "missing_facts": [
+      "m_openai_gain"
+     ],
+     "retrieved": [
+      "MSFT_FY2025_ITEM7_0019",
+      "MSFT_FY2025_ITEM7_0002",
+      "MSFT_FY2026_ITEM7_0002",
+      "MSFT_FY2026_ITEM7_0020",
+      "MSFT_FY2026_ITEM7_0003",
+      "MSFT_FY2026_ITEM8_0000",
+      "MSFT_FY2026_ITEM8_0005",
+      "MSFT_FY2026_ITEM8_0001",
+      "MSFT_FY2026_ITEM7_0011",
+      "MSFT_FY2026_ITEM8_0026"
+     ],
+     "gold_hits": [
+      "MSFT_FY2026_ITEM8_0026"
+     ],
+     "values_given": [
+      "V-AAPL-0001",
+      "V-AAPL-0101",
+      "V-AAPL-0123",
+      "V-AAPL-0138",
+      "V-AAPL-0139"
+     ],
+     "traces": [
+      {
+       "sentence": "Net gains from investments in OpenAI resulted in an increase in net income of $5.0 billion in fiscal year 2026 [MSFT_FY2026_ITEM7_0011].",
+       "steps": [
+        {
+         "kind": "chunk",
+         "id": "MSFT_FY2026_ITEM7_0011",
+         "line": "Current year net income and diluted EPS were positively impacted by net gains from investments in OpenAI, which resulted in an increase in net income and diluted EPS of $5.0 billion and $0.67, respectively. Prior year net income and diluted",
+         "filing": "Microsoft Corporation 10-K FY2026",
+         "section": "Item 7",
+         "accession": "0001193125-26-323660",
+         "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+        }
+       ]
+      }
+     ]
+    },
+    "hybrid_finetuned_rule": {
+     "verdict": "correct",
+     "judge_reason": "The system answer accurately captures the key facts from the reference, including the dilution gains in other income and the $6.5 billion net gains from OpenAI investments.",
+     "answer": "In fiscal year 2026, the net gains recorded from the OpenAI Recapitalization were dilution gains reflected in other income (expense), net [MSFT_FY2026_ITEM7_0019], and investments in OpenAI included $6.5 billion of net gains [MSFT_FY2026_ITEM7_0019].",
+     "stage": "ok",
+     "missing_facts": [],
+     "retrieved": [
+      "MSFT_FY2026_ITEM7_0020",
+      "MSFT_FY2025_ITEM7_0019",
+      "MSFT_FY2026_ITEM8_0026",
+      "MSFT_FY2025_ITEM7_0002",
+      "MSFT_FY2026_ITEM7_0019",
+      "MSFT_FY2026_ITEM7_0002",
+      "MSFT_FY2026_ITEM7_0011",
+      "MSFT_FY2026_ITEM7_0012",
+      "MSFT_FY2026_ITEM7_0003",
+      "MSFT_FY2026_ITEM8_0035"
+     ],
+     "gold_hits": [
+      "MSFT_FY2026_ITEM8_0026",
+      "MSFT_FY2026_ITEM7_0019"
+     ],
+     "values_given": [
+      "V-AAPL-0001",
+      "V-AAPL-0101",
+      "V-AAPL-0123",
+      "V-AAPL-0138",
+      "V-AAPL-0139"
+     ],
+     "traces": [
+      {
+       "sentence": "In fiscal year 2026, the net gains recorded from the OpenAI Recapitalization were dilution gains reflected in other income (expense), net [MSFT_FY2026_ITEM7_0019], and investments in OpenAI included $6.5 billion of net gains [MSFT_FY2026_ITEM7_0019].",
+       "steps": [
+        {
+         "kind": "chunk",
+         "id": "MSFT_FY2026_ITEM7_0019",
+         "line": "Other income (expense), net included $6.5 billion of net gains and $4.8 billion of net losses for fiscal years 2026 and 2025, respectively, from investments in OpenAI, primarily net recognized gains (losses) on our equity method investment ",
+         "filing": "Microsoft Corporation 10-K FY2026",
+         "section": "Item 7",
+         "accession": "0001193125-26-323660",
+         "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+        }
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "qid": "v2_q16",
+   "tag": "Missing",
+   "emoji": "🤷",
+   "story": "The question says \"J&J's largest product\" instead of naming DARZALEX, so the graph starts from J&J alone and wanders into its 450 subsidiaries. Gemini refuses; vector search finds the patent passage.",
+   "type": "relation_text",
+   "hops": 3,
+   "question": "Which company owns the patent families behind Johnson & Johnson's largest product, which J&J subsidiary licenses them, and when do the U.S. patents expire?",
+   "gold_answer": "Genmab A/S owns the two DARZALEX patent families; Janssen Biotech, Inc. (a wholly-owned J&J subsidiary) holds the exclusive license. The U.S. patents both expire in 2029; in Europe, compound/use protection in select countries extends to 2031/2032.",
+   "facts": {
+    "j_genmab": [
+     "JNJ_FY2025_ITEM1_0011"
+    ],
+    "j_patent_exp": [
+     "JNJ_FY2025_ITEM1_0011"
+    ]
+   },
+   "start_nodes": [
+    "Johnson & Johnson"
+   ],
+   "graph": {
+    "nodes": [
+     {
+      "id": "Johnson & Johnson",
+      "label": "Johnson & Johnson",
+      "kind": "Company",
+      "start": true
+     },
+     {
+      "id": "Hetero USA, Inc.",
+      "label": "Hetero USA, Inc.",
+      "kind": "Organization",
+      "start": false
+     },
+     {
+      "id": "China",
+      "label": "China",
+      "kind": "Location",
+      "start": false
+     },
+     {
+      "id": "Sandoz",
+      "label": "Sandoz",
+      "kind": "Organization",
+      "start": false
+     },
+     {
+      "id": "Russia",
+      "label": "Russia",
+      "kind": "Location",
+      "start": false
+     },
+     {
+      "id": "Japan (AAPL) cost of sales FY2023 = $11,542 million",
+      "label": "Japan (AAPL) cost of sales FY2023 = $11,542 million",
+      "kind": "Value",
+      "start": false,
+      "value_id": "V-AAPL-0123"
+     },
+     {
+      "id": "Europe (AAPL) cost of sales FY2023 = $54,101 million",
+      "label": "Europe (AAPL) cost of sales FY2023 = $54,101 million",
+      "kind": "Value",
+      "start": false,
+      "value_id": "V-AAPL-0101"
+     },
+     {
+      "id": "Europe (AAPL) revenue FY2023 = $94,294 million",
+      "label": "Europe (AAPL) revenue FY2023 = $94,294 million",
+      "kind": "Value",
+      "start": false,
+      "value_id": "V-AAPL-0109"
+     },
+     {
+      "id": "Americas (AAPL) cost of sales FY2023 = $92,394 million",
+      "label": "Americas (AAPL) cost of sales FY2023 = $92,394 million",
+      "kind": "Value",
+      "start": false,
+      "value_id": "V-AAPL-0001"
+     },
+     {
+      "id": "Europe (AAPL) revenue FY2022 = $95,118 million",
+      "label": "Europe (AAPL) revenue FY2022 = $95,118 million",
+      "kind": "Value",
+      "start": false,
+      "value_id": "V-AAPL-0108"
+     },
+     {
+      "id": "Erleada (JNJ)",
+      "label": "Erleada (JNJ)",
+      "kind": "Product",
+      "start": false
+     },
+     {
+      "id": "AMO (Hangzhou) Co., Ltd.",
+      "label": "AMO (Hangzhou) Co., Ltd.",
+      "kind": "Subsidiary",
+      "start": false
+     },
+     {
+      "id": "JTNL LLC",
+      "label": "JTNL LLC",
+      "kind": "Subsidiary",
+      "start": false
+     },
+     {
+      "id": "Europe (AAPL)",
+      "label": "Europe (AAPL)",
+      "kind": "Segment",
+      "start": false
+     },
+     {
+      "id": "JNJ_FY2025_ITEM1_0011",
+      "label": "JNJ FY25 Item 1 #11",
+      "kind": "chunk",
+      "start": false,
+      "gold": true,
+      "retrieved_by": [
+       "vector_rag",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "JNJ_FY2025_ITEM1_0012",
+      "label": "JNJ FY25 Item 1 #12",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "JNJ_FY2024_ITEM1_0010",
+      "label": "JNJ FY24 Item 1 #10",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "JNJ_FY2024_ITEM1_0011",
+      "label": "JNJ FY24 Item 1 #11",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "JNJ_FY2024_EX21_0000",
+      "label": "JNJ FY24 Ex.21 #0",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "JNJ_FY2024_ITEM8_0183",
+      "label": "JNJ FY24 Item 8 #183",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag"
+      ]
+     },
+     {
+      "id": "JNJ_FY2025_EX21_0000",
+      "label": "JNJ FY25 Ex.21 #0",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag"
+      ]
+     },
+     {
+      "id": "JNJ_FY2024_ITEM1A_0017",
+      "label": "JNJ FY24 Item 1A #17",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag"
+      ]
+     },
+     {
+      "id": "JNJ_FY2024_EX21_0002",
+      "label": "JNJ FY24 Ex.21 #2",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag"
+      ]
+     },
+     {
+      "id": "JNJ_FY2024_EX21_0009",
+      "label": "JNJ FY24 Ex.21 #9",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag"
+      ]
+     },
+     {
+      "id": "JNJ_FY2024_ITEM8_0207",
+      "label": "JNJ FY24 Item 8 #207",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "JNJ_FY2024_ITEM7_0034",
+      "label": "JNJ FY24 Item 7 #34",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "JNJ_FY2024_ITEM8_0208",
+      "label": "JNJ FY24 Item 8 #208",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "JNJ_FY2024_ITEM8_0014",
+      "label": "JNJ FY24 Item 8 #14",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "JNJ_FY2024_ITEM7_0031",
+      "label": "JNJ FY24 Item 7 #31",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "JNJ_FY2024_ITEM8_0054",
+      "label": "JNJ FY24 Item 8 #54",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned"
+      ]
+     },
+     {
+      "id": "JNJ_FY2024_ITEM7_0045",
+      "label": "JNJ FY24 Item 7 #45",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned"
+      ]
+     },
+     {
+      "id": "JNJ_FY2025_ITEM8_0055",
+      "label": "JNJ FY25 Item 8 #55",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned"
+      ]
+     },
+     {
+      "id": "JNJ_FY2025_ITEM8_0130",
+      "label": "JNJ FY25 Item 8 #130",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned"
+      ]
+     },
+     {
+      "id": "JNJ_FY2025_ITEM8_0037",
+      "label": "JNJ FY25 Item 8 #37",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned"
+      ]
+     }
+    ],
+    "edges": [
+     {
+      "s": "Johnson & Johnson",
+      "r": "has_product",
+      "t": "Erleada (JNJ)"
+     },
+     {
+      "s": "Erleada (JNJ)",
+      "r": "competes_with",
+      "t": "Hetero USA, Inc."
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "has_subsidiary",
+      "t": "AMO (Hangzhou) Co., Ltd."
+     },
+     {
+      "s": "AMO (Hangzhou) Co., Ltd.",
+      "r": "incorporated_in",
+      "t": "China"
+     },
+     {
+      "s": "Erleada (JNJ)",
+      "r": "competes_with",
+      "t": "Sandoz"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "has_subsidiary",
+      "t": "JTNL LLC"
+     },
+     {
+      "s": "JTNL LLC",
+      "r": "incorporated_in",
+      "t": "Russia"
+     },
+     {
+      "s": "Europe (AAPL)",
+      "r": "has_value",
+      "t": "Europe (AAPL) cost of sales FY2023 = $54,101 million"
+     },
+     {
+      "s": "Europe (AAPL)",
+      "r": "has_value",
+      "t": "Europe (AAPL) revenue FY2023 = $94,294 million"
+     },
+     {
+      "s": "Europe (AAPL)",
+      "r": "has_value",
+      "t": "Europe (AAPL) revenue FY2022 = $95,118 million"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM1_0011"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM1_0012"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2024_ITEM1_0010"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2024_ITEM1_0011"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2024_EX21_0000"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2024_ITEM8_0183"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_EX21_0000"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2024_ITEM1A_0017"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2024_EX21_0002"
+     },
+     {
+      "s": "Russia",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2024_EX21_0002"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2024_EX21_0009"
+     },
+     {
+      "s": "China",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2024_EX21_0009"
+     },
+     {
+      "s": "Russia",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2024_EX21_0009"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2024_ITEM8_0207"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2024_ITEM7_0034"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2024_ITEM8_0208"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2024_ITEM8_0014"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2024_ITEM7_0031"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2024_ITEM8_0054"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2024_ITEM7_0045"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM8_0055"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM8_0130"
+     },
+     {
+      "s": "Johnson & Johnson",
+      "r": "is_mentioned_in",
+      "t": "JNJ_FY2025_ITEM8_0037"
+     }
+    ]
+   },
+   "runs": {
+    "vector_rag": {
+     "verdict": "correct",
+     "judge_reason": "The system answer accurately identifies the patent owner, the licensing J&J subsidiary, and the U.S. patent expiration year as stated in the reference.",
+     "answer": "Genmab A/S owns two patent families related to DARZALEX, Janssen Biotech, Inc. licenses them, and both patent families expire in the United States in 2029 [JNJ_FY2025_ITEM1_0011].",
+     "stage": "ok",
+     "missing_facts": [],
+     "retrieved": [
+      "JNJ_FY2025_ITEM1_0012",
+      "JNJ_FY2025_ITEM1_0011",
+      "JNJ_FY2024_ITEM1_0010",
+      "JNJ_FY2024_ITEM1_0011",
+      "JNJ_FY2024_EX21_0000",
+      "JNJ_FY2024_ITEM8_0183",
+      "JNJ_FY2025_EX21_0000",
+      "JNJ_FY2024_ITEM1A_0017",
+      "JNJ_FY2024_EX21_0002",
+      "JNJ_FY2024_EX21_0009"
+     ],
+     "gold_hits": [
+      "JNJ_FY2025_ITEM1_0011"
+     ],
+     "values_given": [],
+     "traces": []
+    },
+    "g_reasoner_finetuned": {
+     "verdict": "missing",
+     "judge_reason": "The system answer states it cannot answer from the provided context.",
+     "answer": "I cannot answer from the provided context.",
+     "stage": "retrieval",
+     "missing_facts": [
+      "j_genmab",
+      "j_patent_exp"
+     ],
+     "retrieved": [
+      "JNJ_FY2024_ITEM8_0207",
+      "JNJ_FY2024_ITEM7_0034",
+      "JNJ_FY2024_ITEM8_0208",
+      "JNJ_FY2024_ITEM8_0014",
+      "JNJ_FY2024_ITEM7_0031",
+      "JNJ_FY2024_ITEM8_0054",
+      "JNJ_FY2024_ITEM7_0045",
+      "JNJ_FY2025_ITEM8_0055",
+      "JNJ_FY2025_ITEM8_0130",
+      "JNJ_FY2025_ITEM8_0037"
+     ],
+     "gold_hits": [],
+     "values_given": [
+      "V-AAPL-0123",
+      "V-AAPL-0101",
+      "V-AAPL-0109",
+      "V-AAPL-0001",
+      "V-AAPL-0108"
+     ],
+     "traces": []
+    },
+    "hybrid_finetuned_rule": {
+     "verdict": "correct",
+     "judge_reason": "The system answer correctly identifies Genmab A/S as the patent owner, Janssen Biotech, Inc. as the licensing subsidiary, and 2029 as the U.S. patent expiration date for J&J's largest product.",
+     "answer": "Genmab A/S owns two patent families related to DARZALEX (daratumumab) and DARZALEX FASPRO (daratumumab and hyaluronidase-fihj), which collectively make up Johnson & Johnson's largest product, and Janssen Biotech, Inc. (a wholly-owned subsidiary of the Company) has an exclusive license to those patent families [JNJ_FY2025_ITEM1_0011]. The two patent families both expire in the United States in 2029 [JNJ_FY2025_ITEM1_0011].",
+     "stage": "ok",
+     "missing_facts": [],
+     "retrieved": [
+      "JNJ_FY2025_ITEM1_0012",
+      "JNJ_FY2024_ITEM8_0207",
+      "JNJ_FY2025_ITEM1_0011",
+      "JNJ_FY2024_ITEM7_0034",
+      "JNJ_FY2024_ITEM1_0010",
+      "JNJ_FY2024_ITEM8_0208",
+      "JNJ_FY2024_ITEM1_0011",
+      "JNJ_FY2024_ITEM8_0014",
+      "JNJ_FY2024_EX21_0000",
+      "JNJ_FY2024_ITEM7_0031"
+     ],
+     "gold_hits": [
+      "JNJ_FY2025_ITEM1_0011"
+     ],
+     "values_given": [
+      "V-AAPL-0123",
+      "V-AAPL-0101",
+      "V-AAPL-0109",
+      "V-AAPL-0001",
+      "V-AAPL-0108"
+     ],
+     "traces": []
+    }
+   }
+  },
+  {
+   "qid": "v2_q33",
+   "tag": "Everyone fails",
+   "emoji": "🧱",
+   "story": "Employee headcount is in the text but not in the graph (it is not one of the 26 XBRL concepts), and vector search misses both years' passages. Nobody can answer.",
+   "type": "cross_year",
+   "hops": 2,
+   "question": "How did Apple's full-time equivalent headcount change between its fiscal 2024 and fiscal 2025 10-Ks?",
+   "gold_answer": "It rose by about 2,000, from approximately 164,000 (Sept 28, 2024) to approximately 166,000 (Sept 27, 2025).",
+   "facts": {
+    "a_fte24": [
+     "AAPL_FY2024_ITEM1_0009",
+     "AAPL_FY2024_ITEM1_0010"
+    ],
+    "a_fte25": [
+     "AAPL_FY2025_ITEM1_0010",
+     "AAPL_FY2025_ITEM1_0011"
+    ]
+   },
+   "start_nodes": [
+    "Apple Inc.",
+    "FY2024 (AAPL)",
+    "FY2025 (AAPL)"
+   ],
+   "graph": {
+    "nodes": [
+     {
+      "id": "Apple Inc.",
+      "label": "Apple Inc.",
+      "kind": "Company",
+      "start": true
+     },
+     {
+      "id": "FY2024 (AAPL)",
+      "label": "FY2024 (AAPL)",
+      "kind": "FiscalYear",
+      "start": true
+     },
+     {
+      "id": "FY2025 (AAPL)",
+      "label": "FY2025 (AAPL)",
+      "kind": "FiscalYear",
+      "start": true
+     },
+     {
+      "id": "Dividends paid",
+      "label": "Dividends paid",
+      "kind": "Metric",
+      "start": false
+     },
+     {
+      "id": "Shareholders' equity",
+      "label": "Shareholders' equity",
+      "kind": "Metric",
+      "start": false
+     },
+     {
+      "id": "Apple Inc. dividends paid FY2024 = $15,234 million",
+      "label": "Apple Inc. dividends paid FY2024 = $15,234 million",
+      "kind": "Value",
+      "start": false,
+      "value_id": "V-AAPL-0033"
+     },
+     {
+      "id": "Apple Inc. dividends paid FY2025 = $15,421 million",
+      "label": "Apple Inc. dividends paid FY2025 = $15,421 million",
+      "kind": "Value",
+      "start": false,
+      "value_id": "V-AAPL-0034"
+     },
+     {
+      "id": "Apple Inc. shareholders' equity at end of FY2024 = $56,950 million",
+      "label": "Apple Inc. shareholders' equity at end of FY2024 = $56,950 …",
+      "kind": "Value",
+      "start": false,
+      "value_id": "V-AAPL-0093"
+     },
+     {
+      "id": "Apple Inc. shareholders' equity at end of FY2025 = $73,733 million",
+      "label": "Apple Inc. shareholders' equity at end of FY2025 = $73,733 …",
+      "kind": "Value",
+      "start": false,
+      "value_id": "V-AAPL-0094"
+     },
+     {
+      "id": "AAPL_FY2024_ITEM1_0009",
+      "label": "AAPL FY24 Item 1 #9",
+      "kind": "chunk",
+      "start": false,
+      "gold": true,
+      "retrieved_by": []
+     },
+     {
+      "id": "AAPL_FY2024_ITEM1_0010",
+      "label": "AAPL FY24 Item 1 #10",
+      "kind": "chunk",
+      "start": false,
+      "gold": true,
+      "retrieved_by": []
+     },
+     {
+      "id": "AAPL_FY2025_ITEM1_0010",
+      "label": "AAPL FY25 Item 1 #10",
+      "kind": "chunk",
+      "start": false,
+      "gold": true,
+      "retrieved_by": []
+     },
+     {
+      "id": "AAPL_FY2025_ITEM1_0011",
+      "label": "AAPL FY25 Item 1 #11",
+      "kind": "chunk",
+      "start": false,
+      "gold": true,
+      "retrieved_by": []
+     },
+     {
+      "id": "AAPL_FY2025_ITEM7_0008",
+      "label": "AAPL FY25 Item 7 #8",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "AAPL_FY2025_ITEM8_0009",
+      "label": "AAPL FY25 Item 8 #9",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "AAPL_FY2025_ITEM7_0009",
+      "label": "AAPL FY25 Item 7 #9",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "AAPL_FY2024_ITEM8_0002",
+      "label": "AAPL FY24 Item 8 #2",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "AAPL_FY2025_ITEM8_0002",
+      "label": "AAPL FY25 Item 8 #2",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "AAPL_FY2024_ITEM7_0001",
+      "label": "AAPL FY24 Item 7 #1",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag"
+      ]
+     },
+     {
+      "id": "AAPL_FY2024_ITEM8_0006",
+      "label": "AAPL FY24 Item 8 #6",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag"
+      ]
+     },
+     {
+      "id": "AAPL_FY2024_ITEM8_0009",
+      "label": "AAPL FY24 Item 8 #9",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag"
+      ]
+     },
+     {
+      "id": "AAPL_FY2025_ITEM7_0001",
+      "label": "AAPL FY25 Item 7 #1",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag"
+      ]
+     },
+     {
+      "id": "AAPL_FY2025_ITEM7_0007",
+      "label": "AAPL FY25 Item 7 #7",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "vector_rag"
+      ]
+     },
+     {
+      "id": "AAPL_FY2024_ITEM8_0000",
+      "label": "AAPL FY24 Item 8 #0",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "AAPL_FY2024_ITEM8_0001",
+      "label": "AAPL FY24 Item 8 #1",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "AAPL_FY2025_ITEM8_0001",
+      "label": "AAPL FY25 Item 8 #1",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "AAPL_FY2025_ITEM8_0000",
+      "label": "AAPL FY25 Item 8 #0",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "AAPL_FY2025_ITEM8_0003",
+      "label": "AAPL FY25 Item 8 #3",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned",
+       "hybrid_finetuned_rule"
+      ]
+     },
+     {
+      "id": "AAPL_FY2025_ITEM8_0049",
+      "label": "AAPL FY25 Item 8 #49",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned"
+      ]
+     },
+     {
+      "id": "AAPL_FY2025_ITEM8_0006",
+      "label": "AAPL FY25 Item 8 #6",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned"
+      ]
+     },
+     {
+      "id": "AAPL_FY2025_ITEM8_0004",
+      "label": "AAPL FY25 Item 8 #4",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned"
+      ]
+     },
+     {
+      "id": "AAPL_FY2025_ITEM8_0048",
+      "label": "AAPL FY25 Item 8 #48",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned"
+      ]
+     },
+     {
+      "id": "AAPL_FY2025_ITEM8_0016",
+      "label": "AAPL FY25 Item 8 #16",
+      "kind": "chunk",
+      "start": false,
+      "gold": false,
+      "retrieved_by": [
+       "g_reasoner_finetuned"
+      ]
+     }
+    ],
+    "edges": [
+     {
+      "s": "Apple Inc.",
+      "r": "has_value",
+      "t": "Apple Inc. dividends paid FY2024 = $15,234 million"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "has_value",
+      "t": "Apple Inc. dividends paid FY2025 = $15,421 million"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "has_value",
+      "t": "Apple Inc. shareholders' equity at end of FY2024 = $56,950 million"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "has_value",
+      "t": "Apple Inc. shareholders' equity at end of FY2025 = $73,733 million"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2024_ITEM1_0009"
+     },
+     {
+      "s": "FY2024 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2024_ITEM1_0009"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2024_ITEM1_0010"
+     },
+     {
+      "s": "FY2024 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2024_ITEM1_0010"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM1_0010"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM1_0010"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM1_0011"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM1_0011"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM7_0008"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM7_0008"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0009"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0009"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM7_0009"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM7_0009"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2024_ITEM8_0002"
+     },
+     {
+      "s": "FY2024 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2024_ITEM8_0002"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0002"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0002"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2024_ITEM7_0001"
+     },
+     {
+      "s": "FY2024 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2024_ITEM7_0001"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2024_ITEM8_0006"
+     },
+     {
+      "s": "FY2024 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2024_ITEM8_0006"
+     },
+     {
+      "s": "Apple Inc. shareholders' equity at end of FY2024 = $56,950 million",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2024_ITEM8_0006"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2024_ITEM8_0009"
+     },
+     {
+      "s": "FY2024 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2024_ITEM8_0009"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM7_0001"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM7_0001"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM7_0007"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM7_0007"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2024_ITEM8_0000"
+     },
+     {
+      "s": "FY2024 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2024_ITEM8_0000"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2024_ITEM8_0001"
+     },
+     {
+      "s": "FY2024 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2024_ITEM8_0001"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0001"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0001"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0000"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0000"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0003"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0003"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0049"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0049"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0006"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0006"
+     },
+     {
+      "s": "Apple Inc. shareholders' equity at end of FY2024 = $56,950 million",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0006"
+     },
+     {
+      "s": "Apple Inc. shareholders' equity at end of FY2025 = $73,733 million",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0006"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0004"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0004"
+     },
+     {
+      "s": "Apple Inc. shareholders' equity at end of FY2024 = $56,950 million",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0004"
+     },
+     {
+      "s": "Apple Inc. shareholders' equity at end of FY2025 = $73,733 million",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0004"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0048"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0048"
+     },
+     {
+      "s": "Apple Inc.",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0016"
+     },
+     {
+      "s": "FY2025 (AAPL)",
+      "r": "is_mentioned_in",
+      "t": "AAPL_FY2025_ITEM8_0016"
+     }
+    ]
+   },
+   "runs": {
+    "vector_rag": {
+     "verdict": "missing",
+     "judge_reason": "The system answer states it cannot answer from the provided context.",
+     "answer": "I cannot answer from the provided context.",
+     "stage": "retrieval",
+     "missing_facts": [
+      "a_fte24",
+      "a_fte25"
+     ],
+     "retrieved": [
+      "AAPL_FY2025_ITEM7_0008",
+      "AAPL_FY2025_ITEM8_0009",
+      "AAPL_FY2025_ITEM7_0009",
+      "AAPL_FY2024_ITEM8_0002",
+      "AAPL_FY2025_ITEM8_0002",
+      "AAPL_FY2024_ITEM7_0001",
+      "AAPL_FY2024_ITEM8_0006",
+      "AAPL_FY2024_ITEM8_0009",
+      "AAPL_FY2025_ITEM7_0001",
+      "AAPL_FY2025_ITEM7_0007"
+     ],
+     "gold_hits": [],
+     "values_given": [],
+     "traces": []
+    },
+    "g_reasoner_finetuned": {
+     "verdict": "missing",
+     "judge_reason": "The system answer states it cannot answer from the provided context.",
+     "answer": "I cannot answer from the provided context.",
+     "stage": "retrieval",
+     "missing_facts": [
+      "a_fte24",
+      "a_fte25"
+     ],
+     "retrieved": [
+      "AAPL_FY2024_ITEM8_0000",
+      "AAPL_FY2024_ITEM8_0001",
+      "AAPL_FY2025_ITEM8_0001",
+      "AAPL_FY2025_ITEM8_0000",
+      "AAPL_FY2025_ITEM8_0003",
+      "AAPL_FY2025_ITEM8_0049",
+      "AAPL_FY2025_ITEM8_0006",
+      "AAPL_FY2025_ITEM8_0004",
+      "AAPL_FY2025_ITEM8_0048",
+      "AAPL_FY2025_ITEM8_0016"
+     ],
+     "gold_hits": [],
+     "values_given": [
+      "V-AAPL-0101",
+      "V-AAPL-0001",
+      "V-AAPL-0123",
+      "V-AAPL-0131",
+      "V-AAPL-0126"
+     ],
+     "traces": []
+    },
+    "hybrid_finetuned_rule": {
+     "verdict": "missing",
+     "judge_reason": "The system answer states it cannot answer from the provided context.",
+     "answer": "I cannot answer from the provided context.",
+     "stage": "retrieval",
+     "missing_facts": [
+      "a_fte24",
+      "a_fte25"
+     ],
+     "retrieved": [
+      "AAPL_FY2025_ITEM7_0008",
+      "AAPL_FY2024_ITEM8_0000",
+      "AAPL_FY2025_ITEM8_0009",
+      "AAPL_FY2024_ITEM8_0001",
+      "AAPL_FY2025_ITEM7_0009",
+      "AAPL_FY2025_ITEM8_0001",
+      "AAPL_FY2024_ITEM8_0002",
+      "AAPL_FY2025_ITEM8_0000",
+      "AAPL_FY2025_ITEM8_0002",
+      "AAPL_FY2025_ITEM8_0003"
+     ],
+     "gold_hits": [],
+     "values_given": [
+      "V-AAPL-0033",
+      "V-AAPL-0034",
+      "V-AAPL-0093",
+      "V-AAPL-0094"
+     ],
+     "traces": []
+    }
+   }
+  }
+ ],
+ "chunks": {
+  "AAPL_FY2025_ITEM8_0051": {
+   "id": "AAPL_FY2025_ITEM8_0051",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2025",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000320193-25-000079",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+   "gold": true,
+   "snippet": "2025 | 2024 | 2023\nNet sales:\nU.S. | $151,790 | $142,196 | $138,573\nChina (1) | 64,377 | 66,952 | 72,559\nOther countries | 199,994 | 181,887 | 172,153\nTotal net sales | $416,161 | $391,035 | $383,285\n2025 | 2024\nLong-lived assets:\nU.S. | $40,274 | $35,664\nChina (1) | 3,617 | 4,797\nOther countries | 5,943 | 5,219\nTotal long-lived assets | $49,834 | $45,680\n(1) China includes Hong Kong and Taiwan.\nReport of Independent"
+  },
+  "AAPL_FY2025_ITEM8_0049": {
+   "id": "AAPL_FY2025_ITEM8_0049",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2025",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000320193-25-000079",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+   "gold": false,
+   "snippet": "2024\nNet sales | $167,045 | $101,328 | $66,952 | $25,052 | $30,658 | $— | $391,035\nCost of sales | (89,587) | (55,197) | (37,519) | (11,744) | (16,305) | — | (210,352)\nResearch and development | — | — | — | — | — | (31,370) | (31,370)\nSelling and marketing | (9,802) | (4,341) | (2,351) | (854) | (1,291) | — | (18,639)\nGeneral and administrative | — | — | — | — | — | (7,458) | (7,458)\nOperating income/(loss) | $67,656"
+  },
+  "AAPL_FY2025_ITEM8_0050": {
+   "id": "AAPL_FY2025_ITEM8_0050",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2025",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000320193-25-000079",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+   "gold": false,
+   "snippet": "2023\nNet sales | $162,560 | $94,294 | $72,559 | $24,257 | $29,615 | $— | $383,285\nCost of sales | (92,394) | (54,101) | (39,787) | (11,542) | (16,313) | — | (214,137)\nResearch and development | — | — | — | — | — | (29,915) | (29,915)\nSelling and marketing | (9,658) | (4,095) | (2,444) | (827) | (1,236) | — | (18,260)\nGeneral and administrative | — | — | — | — | — | (6,672) | (6,672)\nOperating income/(loss) | $60,508 "
+  },
+  "AAPL_FY2025_ITEM8_0015": {
+   "id": "AAPL_FY2025_ITEM8_0015",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2025",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000320193-25-000079",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+   "gold": true,
+   "snippet": "2025 | 2024 | 2023\nnet sales only the commission it retains. The following table shows disaggregated net sales, as well as the portion of total net sales that was previously deferred, for 2025, 2024 and 2023 (in millions):\n2025 | 2024 | 2023\niPhone | $209,586 | $201,183 | $200,583\nMac | 33,708 | 29,984 | 29,357\niPad | 28,023 | 26,694 | 28,300\nWearables, Home and Accessories | 35,686 | 37,005 | 39,845\nServices (1) | 1"
+  },
+  "AAPL_FY2025_ITEM8_0016": {
+   "id": "AAPL_FY2025_ITEM8_0016",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2025",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000320193-25-000079",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+   "gold": true,
+   "snippet": "revenue source was generally consistent for each reportable segment in Note 13, “Segment Information and Geographic Data” for 2025, 2024 and 2023, except in Greater China, where iPhone revenue represented a moderately higher proportion of net sales.\nAs of September 27, 2025 and September 28, 2024, the Company had total deferred revenue of $ 13.7 billion and $ 12.8 billion, respectively. As of September 27, 2025, the "
+  },
+  "AAPL_FY2025_ITEM8_0048": {
+   "id": "AAPL_FY2025_ITEM8_0048",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2025",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000320193-25-000079",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+   "gold": true,
+   "snippet": "2025\nAmericas | Europe | GreaterChina | Japan | Rest ofAsia Pacific | Corporate | Total\nNet sales | $178,353 | $111,032 | $64,377 | $28,703 | $33,696 | $— | $416,161\nCost of sales | (95,699) | (58,617) | (35,141) | (13,779) | (17,724) | — | (220,960)\nResearch and development | — | — | — | — | — | (34,550) | (34,550)\nSelling and marketing | (10,174) | (4,676) | (2,319) | (969) | (1,386) | — | (19,524)\nGeneral and admi"
+  },
+  "AAPL_FY2024_ITEM7_0004": {
+   "id": "AAPL_FY2024_ITEM7_0004",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2024",
+   "section": "Item 7",
+   "section_title": "Management's Discussion and Analysis of Financial Condition and Results of Operations",
+   "accession": "0000320193-24-000123",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm",
+   "gold": false,
+   "snippet": "Total net sales | $391,035 | 2% | $383,285 | (3)% | $394,328\n(1) Services net sales include amortization of the deferred value of services bundled in the sales price of certain products.\niPhone\niPhone net sales were relatively flat during 2024 compared to 2023.\nMac\nMac net sales increased during 2024 compared to 2023 due primarily to higher net sales of laptops.\niPad\niPad net sales decreased during 2024 compared to 2"
+  },
+  "AAPL_FY2025_ITEM7_0004": {
+   "id": "AAPL_FY2025_ITEM7_0004",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2025",
+   "section": "Item 7",
+   "section_title": "Management's Discussion and Analysis of Financial Condition and Results of Operations",
+   "accession": "0000320193-25-000079",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+   "gold": true,
+   "snippet": "2025 | Change | 2024 | Change | 2023\nJapan | 28,703 | 15% | 25,052 | 3% | 24,257\nRest of Asia Pacific | 33,696 | 10% | 30,658 | 4% | 29,615\nTotal net sales | $416,161 | 6% | $391,035 | 2% | $383,285\nAmericas\nAmericas net sales increased during 2025 compared to 2024 primarily due to higher net sales of iPhone and Services. The weakness in foreign currencies relative to the U.S. dollar had an unfavorable year-over-year"
+  },
+  "AAPL_FY2025_ITEM8_0000": {
+   "id": "AAPL_FY2025_ITEM8_0000",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2025",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000320193-25-000079",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+   "gold": true,
+   "snippet": "Item 8. Financial Statements and Supplementary Data\nAll financial statement schedules have been omitted, since the required information is not applicable or is not present in amounts sufficient to require submission of the schedule, or because the information required is included in the consolidated financial statements and accompanying notes.\nApple Inc.\nCONSOLIDATED STATEMENTS OF OPERATIONS\n(In millions, except numb"
+  },
+  "AAPL_FY2025_ITEM7_0006": {
+   "id": "AAPL_FY2025_ITEM7_0006",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2025",
+   "section": "Item 7",
+   "section_title": "Management's Discussion and Analysis of Financial Condition and Results of Operations",
+   "accession": "0000320193-25-000079",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+   "gold": false,
+   "snippet": "iPad, partially offset by lower net sales of iPad Pro. Wearables, Home and Accessories Wearables, Home and Accessories net sales decreased during 2025 compared to 2024 primarily due to lower net sales of Accessories and Wearables. Services\nServices net sales increased during 2025 compared to 2024 primarily due to higher net sales from advertising, the App Store and cloud services.\nGross Margin\nProducts and Services g"
+  },
+  "AAPL_FY2025_ITEM7_0005": {
+   "id": "AAPL_FY2025_ITEM7_0005",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2025",
+   "section": "Item 7",
+   "section_title": "Management's Discussion and Analysis of Financial Condition and Results of Operations",
+   "accession": "0000320193-25-000079",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+   "gold": true,
+   "snippet": "2025 | Change | 2024 | Change | 2023\niPhone | $209,586 | 4% | $201,183 | —% | $200,583\nMac | 33,708 | 12% | 29,984 | 2% | 29,357\niPad | 28,023 | 5% | 26,694 | (6)% | 28,300\nWearables, Home and Accessories | 35,686 | (4)% | 37,005 | (7)% | 39,845\nServices (1) | 109,158 | 14% | 96,169 | 13% | 85,200\nTotal net sales | $416,161 | 6% | $391,035 | 2% | $383,285\n(1) Services net sales include amortization of the deferred va"
+  },
+  "AAPL_FY2025_ITEM7_0003": {
+   "id": "AAPL_FY2025_ITEM7_0003",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2025",
+   "section": "Item 7",
+   "section_title": "Management's Discussion and Analysis of Financial Condition and Results of Operations",
+   "accession": "0000320193-25-000079",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+   "gold": false,
+   "snippet": "impacting the Company's supply chain, the availability of rare earths and other raw materials and components, pricing and gross margin. The ultimate impact remains uncertain and will depend on several factors, including whether additional or incremental U.S.\nTariffs or other measures are announced or imposed, to what extent other countries implement tariffs or other retaliatory measures in response, and the overall m"
+  },
+  "AAPL_FY2024_ITEM7_0002": {
+   "id": "AAPL_FY2024_ITEM7_0002",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2024",
+   "section": "Item 7",
+   "section_title": "Management's Discussion and Analysis of Financial Condition and Results of Operations",
+   "accession": "0000320193-24-000123",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm",
+   "gold": false,
+   "snippet": "2024 | Change | 2023 | Change | 2022\nEurope | 101,328 | 7% | 94,294 | (1)% | 95,118\nGreater China | 66,952 | (8)% | 72,559 | (2)% | 74,200\nJapan | 25,052 | 3% | 24,257 | (7)% | 25,977\nRest of Asia Pacific | 30,658 | 4% | 29,615 | 1% | 29,375\nTotal net sales | $391,035 | 2% | $383,285 | (3)% | $394,328\nAmericas\nAmericas net sales increased during 2024 compared to 2023 due primarily to higher net sales of Services.\nEur"
+  },
+  "JNJ_FY2025_ITEM8_0072": {
+   "id": "JNJ_FY2025_ITEM8_0072",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2025",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000200406-26-000016",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm",
+   "gold": false,
+   "snippet": "the U.S. tax code as well as related foreign tax credits. The fiscal year 2024 effective tax rate increased 4.2 % as compared to the fiscal year 2023 effective tax rate. The primary drivers of this change are discussed below.\nIn fiscal year 2024, The Company had more income in higher tax jurisdictions compared to fiscal year 2023, primarily in the U.S. where the Company recorded a charge of approximately $ 5.1 billio"
+  },
+  "JNJ_FY2025_ITEM7_0029": {
+   "id": "JNJ_FY2025_ITEM7_0029",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2025",
+   "section": "Item 7",
+   "section_title": "Management's Discussion and Analysis of Financial Condition and Results of Operations",
+   "accession": "0000200406-26-000016",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm",
+   "gold": false,
+   "snippet": "investment (income)/loss related to employee benefit programs, gains and losses on divestitures, certain transactional currency gains and losses, acquisition and divestiture related costs, litigation accruals and settlements, as well as royalty income.\nOther (income) expense, net for the fiscal year 2025 reflected an increase in income of $11.9 billion as compared to the prior year primarily due to the following:\n(Do"
+  },
+  "JNJ_FY2025_ITEM8_0043": {
+   "id": "JNJ_FY2025_ITEM8_0043",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2025",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000200406-26-000016",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm",
+   "gold": false,
+   "snippet": "million, respectively. Depreciation expense, including the amortization of capitalized interest in fiscal years 2025, 2024 and 2023 was $ 2.9 billion, $ 2.8 billion and $ 2.6 billion, respectively.\nUpon retirement or other disposal of property, plant and equipment, the costs and related amounts of accumulated depreciation or amortization are eliminated from the asset and accumulated depreciation accounts, respectivel"
+  },
+  "JNJ_FY2025_ITEM8_0005": {
+   "id": "JNJ_FY2025_ITEM8_0005",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2025",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000200406-26-000016",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm",
+   "gold": false,
+   "snippet": "2025 | 2024 | 2023\nReclassifications to earnings | — | — | —\nNet change | (1) | 2 | 26\nEmployee benefit plans:\nPrior service credit (cost), net of amortization | (144) | (154) | (149)\nGain (loss), net of amortization | 1,130 | 541 | (1,183)\nConsumer settlement/ curtailment | — | — | 23\nEffect of exchange rates | (128) | 62 | (90)\nNet change | 858 | 449 | (1,399)\nDerivatives & hedges:\nUnrealized gain (loss) arising du"
+  },
+  "JNJ_FY2025_ITEM7_0034": {
+   "id": "JNJ_FY2025_ITEM7_0034",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2025",
+   "section": "Item 7",
+   "section_title": "Management's Discussion and Analysis of Financial Condition and Results of Operations",
+   "accession": "0000200406-26-000016",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm",
+   "gold": false,
+   "snippet": "• Litigation income of $0.1 billion in 2025 versus expense of $0.4 billion in 2024, primarily related to Risperdal Gynecomastia • Research & development leverage resulting from investment prioritization partially offset by\n• Acquisition, integration and divestiture related net expense of $0.4 billion in 2025 primarily related to Intra-Cellular and Halda Therapeutics and $0.1 billion in 2024\n• Monetization of royalty "
+  },
+  "JNJ_FY2025_ITEM8_0104": {
+   "id": "JNJ_FY2025_ITEM8_0104",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2025",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000200406-26-000016",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm",
+   "gold": false,
+   "snippet": "full value award in excess of 40 million will be counted on a 5-for-1 basis against the share reserve. Shares available for future grants under the 2022 Long-Term Incentive Plan were 93 million at the end of fiscal year 2025.\nThe compensation cost that has been charged against income for these plans was $ 1.4 billion, $ 1.2 billion and $ 1.1 billion for fiscal years 2025, 2024 and 2023, respectively. The total income"
+  },
+  "JNJ_FY2025_ITEM7_0033": {
+   "id": "JNJ_FY2025_ITEM7_0033",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2025",
+   "section": "Item 7",
+   "section_title": "Management's Discussion and Analysis of Financial Condition and Results of Operations",
+   "accession": "0000200406-26-000016",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm",
+   "gold": false,
+   "snippet": "Worldwide income before tax | $32,581 | 16,687 | 94,193 | 88,821 | 34.6% | 18.8 (1) See Note 17 to the Consolidated Financial Statements for more details.\n(2) Amounts not allocated to segments include interest (income) expense and general corporate (income) expense. The fiscal year 2025 includes the reversal of approximately $7.0 billion, a significant portion of the previously accrued talc reserve. The fiscal year 2"
+  },
+  "JNJ_FY2025_ITEM8_0130": {
+   "id": "JNJ_FY2025_ITEM8_0130",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2025",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000200406-26-000016",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm",
+   "gold": false,
+   "snippet": "15.1 %, and 14.2 % of the total gross revenues. (1) Other segment expenses for each reportable segment include charges related to other income and expenses, restructuring activities and impairment charges related to in-process research and development.\n(2) Amounts not allocated to segments include interest (income)/expense and general corporate (income)/expense. The fiscal year 2025 includes the reversal of approxima"
+  },
+  "JNJ_FY2025_ITEM8_0070": {
+   "id": "JNJ_FY2025_ITEM8_0070",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2025",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000200406-26-000016",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm",
+   "gold": false,
+   "snippet": "NCTI for the changes in the tax rate and recorded a one-time re-measurement cost of approximately $ 1.0 billion which is reflected in the effective tax rate table under effects of changes in tax laws or rates enacted in the current period.\nThe Company's 2025 effective tax rate was also unfavorably impacted by more income in higher tax jurisdictions, specifically in the U.S. In fiscal year 2025, the Company reversed p"
+  },
+  "JNJ_FY2025_ITEM7_0003": {
+   "id": "JNJ_FY2025_ITEM7_0003",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2025",
+   "section": "Item 7",
+   "section_title": "Management's Discussion and Analysis of Financial Condition and Results of Operations",
+   "accession": "0000200406-26-000016",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm",
+   "gold": false,
+   "snippet": "for approximately 25% of 2025 sales. In 2025, $14.7 billion was invested in research and development reflecting management's commitment to create life-enhancing innovations and to create value through partnerships that will profoundly impact of health for humanity.\nOur approximately 138,200 employees are critical drivers of the Company's success. Employees are empowered and inspired to lead with Our Credo and purpose"
+  },
+  "JNJ_FY2025_ITEM8_0008": {
+   "id": "JNJ_FY2025_ITEM8_0008",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2025",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000200406-26-000016",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm",
+   "gold": true,
+   "snippet": "Total | RetainedEarnings andAdditionalpaid-incapital | AccumulatedOtherComprehensiveIncome (Loss) | CommonStockIssuedAmount | TreasuryStockAmount\nEmployee compensation and stock option plans | 4,773 | (1,236) | 6,009\nRepurchase of common stock | (5,953) | (5,953)\nOther comprehensive income (loss), net of tax | (3,189) | (3,189)\nBalance, December 28, 2025 | $81,544 | 168,978 | (14,930) | 3,120 | (75,624)\nSee Notes to "
+  },
+  "JNJ_FY2025_ITEM8_0004": {
+   "id": "JNJ_FY2025_ITEM8_0004",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2025",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000200406-26-000016",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm",
+   "gold": true,
+   "snippet": "2025 | 2024 | 2023\nContinuing operations - basic | $11.13 | 5.84 | 5.26\nDiscontinued operations - basic | — | — | 8.62\nTotal net earnings per share - basic | $11.13 | 5.84 | 13.88\nContinuing operations - diluted | $11.03 | 5.79 | 5.20\nDiscontinued operations - diluted | — | — | 8.52\nTotal net earnings per share - diluted | $11.03 | 5.79 | 13.72\nAverage shares outstanding (Notes 1 and 15)\nBasic | 2,407.4 | 2,407.3 | 2"
+  },
+  "JNJ_FY2025_ITEM8_0003": {
+   "id": "JNJ_FY2025_ITEM8_0003",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2025",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000200406-26-000016",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm",
+   "gold": true,
+   "snippet": "2025 | 2024 | 2023\nGross profit | 63,937 | 61,350 | 58,606\nSelling, marketing and administrative expenses | 23,676 | 22,869 | 21,512\nResearch and development expense | 14,665 | 17,232 | 15,085\nIn-process research and development impairments | 81 | 211 | 313\nInterest income | (1,056) | (1,332) | (1,261)\nInterest expense, net of portion capitalized (Note 4) | 971 | 755 | 772\nOther (income) expense, net | (7,209) | 4,69"
+  },
+  "JNJ_FY2025_ITEM8_0007": {
+   "id": "JNJ_FY2025_ITEM8_0007",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2025",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000200406-26-000016",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm",
+   "gold": false,
+   "snippet": "Total | RetainedEarnings andAdditionalpaid-incapital | AccumulatedOtherComprehensiveIncome (Loss) | CommonStockIssuedAmount | TreasuryStockAmount\nOther comprehensive income (loss), net of tax | (4,741) | (4,741)\nBalance, December 31, 2023 | 68,774 | 153,843 | (12,527) | 3,120 | (75,662)\nNet earnings | 14,066 | 14,066\nCash dividends paid ($4.91 per share) | (11,823) | (11,823)\nEmployee compensation and stock option pl"
+  },
+  "AAPL_FY2025_ITEM8_0001": {
+   "id": "AAPL_FY2025_ITEM8_0001",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2025",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000320193-25-000079",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+   "gold": true,
+   "snippet": "Years ended\nTotal operating expenses | 62,151 | 57,467 | 54,847\nOperating income | 133,050 | 123,216 | 114,301\nOther income/(expense), net | (321) | 269 | (565)\nIncome before provision for income taxes | 132,729 | 123,485 | 113,736\nProvision for income taxes | 20,719 | 29,749 | 16,741\nNet income | $112,010 | $93,736 | $96,995\nEarnings per share:\nBasic | $7.49 | $6.11 | $6.16\nDiluted | $7.46 | $6.08 | $6.13\nShares use"
+  },
+  "AAPL_FY2025_ITEM8_0006": {
+   "id": "AAPL_FY2025_ITEM8_0006",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2025",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000320193-25-000079",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+   "gold": false,
+   "snippet": "Years ended\nEnding balances | (14,264) | (19,154) | (214)\nAccumulated other comprehensive loss:\nBeginning balances | (7,172) | (11,452) | (11,109)\nOther comprehensive income/(loss) | 1,601 | 4,280 | (343)\nEnding balances | (5,571) | (7,172) | (11,452)\nTotal shareholders' equity, ending balances | $73,733 | $56,950 | $62,146\nDividends and dividend equivalents declared per share or RSU | $1.02 | $0.98 | $0.94\nSee accom"
+  },
+  "AAPL_FY2025_ITEM8_0005": {
+   "id": "AAPL_FY2025_ITEM8_0005",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2025",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000320193-25-000079",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+   "gold": false,
+   "snippet": "Years ended\nTotal shareholders' equity, beginning balances | $56,950 | $62,146 | $50,672\nCommon stock and additional paid-in capital:\nBeginning balances | 83,276 | 73,812 | 64,849\nCommon stock issued | 1,498 | 1,423 | 1,346\nCommon stock withheld related to net share settlement of equity awards | (4,452) | (3,993) | (3,521)\nShare-based compensation | 13,246 | 12,034 | 11,138\nEnding balances | 93,568 | 83,276 | 73,812\n"
+  },
+  "JNJ_FY2025_ITEM8_0002": {
+   "id": "JNJ_FY2025_ITEM8_0002",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2025",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000200406-26-000016",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm",
+   "gold": false,
+   "snippet": "2025 | 2024\nTotal liabilities | 117,666 | 108,614\nCommitments and Contingencies (Note 19)\nShareholders' equity\nPreferred stock — without par value (authorized and unissued 2,000,000 shares) | — | —\nCommon stock — par value $1.00 per share (Note 12) (authorized 4,320,000,000 shares; issued 3,119,843,000 shares) | 3,120 | 3,120\nAccumulated other comprehensive income (loss) (Note 13) | (14,930) | (11,741)\nRetained earni"
+  },
+  "MSFT_FY2026_ITEM7_0020": {
+   "id": "MSFT_FY2026_ITEM7_0020",
+   "company": "Microsoft Corporation",
+   "ticker": "MSFT",
+   "fy": "FY2026",
+   "section": "Item 7",
+   "section_title": "Management's Discussion and Analysis of Financial Condition and Results of Operations",
+   "accession": "0001193125-26-323660",
+   "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+   "gold": false,
+   "snippet": "gains (losses) on our equity method investment reflected in Other, net. The net gains recorded for fiscal year 2026 primarily relate to the dilution gain from the OpenAI Recapitalization. Fiscal Year 2026 Compared with Fiscal Year 2025\nInterest and dividends income increased primarily due to higher portfolio balances and higher yields on debt securities. Interest expense increased primarily due to higher finance leas"
+  },
+  "MSFT_FY2026_ITEM8_0026": {
+   "id": "MSFT_FY2026_ITEM8_0026",
+   "company": "Microsoft Corporation",
+   "ticker": "MSFT",
+   "fy": "FY2026",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0001193125-26-323660",
+   "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+   "gold": true,
+   "snippet": "method because our liquidation rights and priorities differ from our underlying ownership interest. Under the HLBV method, we recognize income or loss based on the change in the amount we would receive if the net assets of the investee were distributed at book value.\nIn October 2025, OpenAI formed a public benefit corporation and completed a recapitalization (“OpenAI Recapitalization”). During fiscal year 2026, our p"
+  },
+  "MSFT_FY2026_ITEM7_0019": {
+   "id": "MSFT_FY2026_ITEM7_0019",
+   "company": "Microsoft Corporation",
+   "ticker": "MSFT",
+   "fy": "FY2026",
+   "section": "Item 7",
+   "section_title": "Management's Discussion and Analysis of Financial Condition and Results of Operations",
+   "accession": "0001193125-26-323660",
+   "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+   "gold": true,
+   "snippet": "(In millions)\nYear Ended June 30, | 2026 | 2025\nInterest and dividends income | $3,301 | $2,647\nInterest expense | (3,051) | (2,385)\nNet recognized gains (losses) on investments | 4,385 | (349)\nNet gains (losses) on derivatives | 1,867 | (260)\nNet gains (losses) on foreign currency remeasurements | (527) | 171\nOther, net | 4,722 | (4,725)\nTotal | $10,697 | $(4,901)\nWe use derivative instruments to manage risks relate"
+  },
+  "MSFT_FY2026_ITEM7_0011": {
+   "id": "MSFT_FY2026_ITEM7_0011",
+   "company": "Microsoft Corporation",
+   "ticker": "MSFT",
+   "fy": "FY2026",
+   "section": "Item 7",
+   "section_title": "Management's Discussion and Analysis of Financial Condition and Results of Operations",
+   "accession": "0001193125-26-323660",
+   "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+   "gold": false,
+   "snippet": "offset in part by growth in Search advertising. Cost of revenue increased $18.5 billion or 21% driven by growth in Microsoft Cloud. Gross margin increased $31.6 billion or 16% with growth across each of our segments. •\nGross margin percentage decreased slightly driven by continued investments in AI infrastructure and growing AI product usage, offset in part by efficiency gains across the Microsoft Cloud.\n•\nMicrosoft "
+  },
+  "MSFT_FY2026_ITEM7_0012": {
+   "id": "MSFT_FY2026_ITEM7_0012",
+   "company": "Microsoft Corporation",
+   "ticker": "MSFT",
+   "fy": "FY2026",
+   "section": "Item 7",
+   "section_title": "Management's Discussion and Analysis of Financial Condition and Results of Operations",
+   "accession": "0001193125-26-323660",
+   "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+   "gold": false,
+   "snippet": "(In millions, except percentages) | 2026 | 2025 | PercentageChange\nPrior year net income and diluted EPS were negatively impacted by net losses from investments in OpenAI, which resulted in a decrease in net income and diluted EPS of $3.6 billion and $0.49, respectively. SEGMENT RESULTS OF OPERATIONS\n(In millions, except percentages) | 2026 | 2025 | PercentageChange\nProductivity and Business Processes\nRevenue | $139,"
+  },
+  "MSFT_FY2026_ITEM8_0035": {
+   "id": "MSFT_FY2026_ITEM8_0035",
+   "company": "Microsoft Corporation",
+   "ticker": "MSFT",
+   "fy": "FY2026",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0001193125-26-323660",
+   "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+   "gold": false,
+   "snippet": "(In millions)\nNet recognized gains (losses) on investments | 4,385 | (349) | (118)\nNet gains (losses) on derivatives | 1,867 | (260) | (187)\nNet gains (losses) on foreign currency remeasurements | (527) | 171 | (244)\nOther, net | 4,722 | (4,725) | (1,319)\nTotal | $10,697 | $(4,901) | $(1,646)\nOther income (expense), net included $ 6.5 billion of net gains, $ 4.8 billion of net losses, and $ 1.5 billion of net losses "
+  },
+  "MSFT_FY2026_ITEM8_0025": {
+   "id": "MSFT_FY2026_ITEM8_0025",
+   "company": "Microsoft Corporation",
+   "ticker": "MSFT",
+   "fy": "FY2026",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0001193125-26-323660",
+   "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+   "gold": false,
+   "snippet": "to the VIE. We have determined we are not the primary beneficiary of any of our VIE investments. Therefore, our VIE investments are not consolidated and the majority are accounted for under the equity method of accounting or the measurement alternative. PART II\nWe have a long-term strategic partnership with OpenAI. In October 2025, we signed a new definitive agreement with OpenAI that extends this partnership. We hav"
+  },
+  "MSFT_FY2025_ITEM7_0019": {
+   "id": "MSFT_FY2025_ITEM7_0019",
+   "company": "Microsoft Corporation",
+   "ticker": "MSFT",
+   "fy": "FY2025",
+   "section": "Item 7",
+   "section_title": "Management's Discussion and Analysis of Financial Condition and Results of Operations",
+   "accession": "0000950170-25-100235",
+   "url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+   "gold": false,
+   "snippet": "higher gains on equity investments in the current period. Net losses on derivatives increased primarily due to higher losses on equity derivatives in the current period. Other, net primarily reflects net recognized losses on equity method investments, including OpenAI. INCOME TAXES Effective Tax Rate\nOur effective tax rate for both fiscal years 2025 and 2024 was 18%. Our effective tax rate for the fiscal year ended J"
+  },
+  "MSFT_FY2026_ITEM7_0023": {
+   "id": "MSFT_FY2026_ITEM7_0023",
+   "company": "Microsoft Corporation",
+   "ticker": "MSFT",
+   "fy": "FY2026",
+   "section": "Item 7",
+   "section_title": "Management's Discussion and Analysis of Financial Condition and Results of Operations",
+   "accession": "0001193125-26-323660",
+   "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+   "gold": false,
+   "snippet": "(In millions, except percentages and per share amounts) | 2026 | 2025 | 2024 | PercentageChange 2026 Versus 2025 | PercentageChange 2025 Versus 2024\nOther income (expense), net | $10,697 | $(4,901) | $(1,646) | 318% | (198)%\nNet (gains) losses from investments in OpenAI | (6,530) | 4,763 | 1,482 | (237)% | 221%\nAdjusted other income (expense), net (non-GAAP) | $4,167 | $(138) | $(164) | 3,120% | 16%\nNet income | $133"
+  },
+  "MSFT_FY2026_ITEM7_0002": {
+   "id": "MSFT_FY2026_ITEM7_0002",
+   "company": "Microsoft Corporation",
+   "ticker": "MSFT",
+   "fy": "FY2026",
+   "section": "Item 7",
+   "section_title": "Management's Discussion and Analysis of Financial Condition and Results of Operations",
+   "accession": "0001193125-26-323660",
+   "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+   "gold": false,
+   "snippet": "cloud services revenue increased 41%. • Windows OEM and Devices revenue decreased slightly. • XBOX content and services revenue decreased 5%. • Search advertising (formerly Search and news advertising) revenue excluding traffic acquisition costs increased 12%. Industry Trends and Opportunities\nOur industry is dynamic and highly competitive, with frequent changes in both technologies and business models. Each industry"
+  },
+  "MSFT_FY2025_ITEM7_0002": {
+   "id": "MSFT_FY2025_ITEM7_0002",
+   "company": "Microsoft Corporation",
+   "ticker": "MSFT",
+   "fy": "FY2025",
+   "section": "Item 7",
+   "section_title": "Management's Discussion and Analysis of Financial Condition and Results of Operations",
+   "accession": "0000950170-25-100235",
+   "url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+   "gold": false,
+   "snippet": "Azure and other cloud services revenue growth of 34%. • Windows OEM and Devices revenue increased 3%. • Xbox content and services revenue increased 16%. • Search and news advertising revenue excluding traffic acquisition costs increased 20%. Industry Trends and Opportunities\nOur industry is dynamic and highly competitive, with frequent changes in both technologies and business models. Each industry shift is an opport"
+  },
+  "MSFT_FY2026_ITEM7_0003": {
+   "id": "MSFT_FY2026_ITEM7_0003",
+   "company": "Microsoft Corporation",
+   "ticker": "MSFT",
+   "fy": "FY2026",
+   "section": "Item 7",
+   "section_title": "Management's Discussion and Analysis of Financial Condition and Results of Operations",
+   "accession": "0001193125-26-323660",
+   "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+   "gold": false,
+   "snippet": "Microsoft is a major investor in OpenAI and will continue to receive revenue-sharing payments. We hold rights to OpenAI's intellectual property, including models and infrastructure, for integration into our products. PART II Economic Conditions, Challenges, and Risks\nThe markets for software, devices, and cloud-based services are dynamic and highly competitive. Our competitors are developing new software and devices,"
+  },
+  "MSFT_FY2026_ITEM8_0000": {
+   "id": "MSFT_FY2026_ITEM8_0000",
+   "company": "Microsoft Corporation",
+   "ticker": "MSFT",
+   "fy": "FY2026",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0001193125-26-323660",
+   "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+   "gold": false,
+   "snippet": "ITEM 8. FINANCIAL STATE MENTS AND SUPPLEMENTARY DATA\nINC OME STATEMENTS\n(In millions, except per share amounts)\nYear Ended June 30, | 2026 | 2025 | 2024\nRevenue:\nProduct | $64,696 | $63,946 | $64,773\nService and other | 267,143 | 217,778 | 180,349\nTotal revenue | 331,839 | 281,724 | 245,122\nCost of revenue:\nProduct | 12,098 | 13,501 | 15,272\nService and other | 94,276 | 74,330 | 58,842\nTotal cost of revenue | 106,374"
+  },
+  "MSFT_FY2026_ITEM8_0005": {
+   "id": "MSFT_FY2026_ITEM8_0005",
+   "company": "Microsoft Corporation",
+   "ticker": "MSFT",
+   "fy": "FY2026",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0001193125-26-323660",
+   "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+   "gold": false,
+   "snippet": "(In millions)\nIncome taxes | (1,875) | (38) | 1,687\nOther current liabilities | 6,847 | 5,922 | 4,867\nOther long-term liabilities | (4,707) | (975) | 749\nNet cash from operations | 182,935 | 136,162 | 118,548\nFinancing\nProceeds from issuance (repayments) of debt, maturities of 90 days or less, net | 0 | (5,746) | 5,250\nProceeds from issuance of debt | 0 | 0 | 24,395\nRepayments of debt | (3,000) | (3,216) | (29,070)\nC"
+  },
+  "MSFT_FY2026_ITEM8_0001": {
+   "id": "MSFT_FY2026_ITEM8_0001",
+   "company": "Microsoft Corporation",
+   "ticker": "MSFT",
+   "fy": "FY2026",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0001193125-26-323660",
+   "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+   "gold": false,
+   "snippet": "(In millions, except per share amounts)\nProvision for income taxes | 32,185 | 21,795 | 19,651\nNet income | $133,749 | $101,832 | $88,136\nEarnings per share:\nBasic | $18.00 | $13.70 | $11.86\nDiluted | $17.95 | $13.64 | $11.80\nWeighted average shares outstanding:\nBasic | 7,429 | 7,433 | 7,431\nDiluted | 7,453 | 7,465 | 7,469\nRefer to accompanying notes.\nPART II\nCOMPREHENSIVE IN COME STATEMENTS\n(In millions)\nYear Ended J"
+  },
+  "JNJ_FY2025_ITEM1_0012": {
+   "id": "JNJ_FY2025_ITEM1_0012",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2025",
+   "section": "Item 1",
+   "section_title": "Business",
+   "accession": "0000200406-26-000016",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm",
+   "gold": false,
+   "snippet": "in 2029, and in Europe, compound/use patent protection in select countries extends to 2031/2032. Janssen Biotech, Inc. owns separate patent portfolios related to DARZALEX FASPRO and DARZALEX IV.\nSales of the Company's second largest product, STELARA (ustekinumab) accounted for approximately 6.5% of the Company's total revenues for fiscal 2025. Third parties have filed biologics license applications with the U.S. FDA,"
+  },
+  "JNJ_FY2025_ITEM1_0011": {
+   "id": "JNJ_FY2025_ITEM1_0011",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2025",
+   "section": "Item 1",
+   "section_title": "Business",
+   "accession": "0000200406-26-000016",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm",
+   "gold": true,
+   "snippet": "expiration of the applicable patents covering those products. Significant legal proceedings and claims involving the Company's patent and other intellectual property are described in Note 19 Legal proceedings—Intellectual property of the Notes to Consolidated Financial Statements included in Item 8 of this Report.\nSales of the Company's largest product, collectively DARZALEX (daratumumab) and DARZALEX FASPRO (daratum"
+  },
+  "JNJ_FY2024_ITEM1_0010": {
+   "id": "JNJ_FY2024_ITEM1_0010",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2024",
+   "section": "Item 1",
+   "section_title": "Business",
+   "accession": "0000200406-25-000038",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040625000038/jnj-20241229.htm",
+   "gold": false,
+   "snippet": "of the applicable patents covering those products. Significant legal proceedings 2 and claims involving the Company's patent and other intellectual property are described in Note 19 Legal proceedings—Intellectual property of the Notes to Consolidated Financial Statements included in Item 8 of this Report.\nSales of the Company's largest product, collectively DARZALEX (daratumumab) and DARZALEX FASPRO (daratumumab and "
+  },
+  "JNJ_FY2024_ITEM1_0011": {
+   "id": "JNJ_FY2024_ITEM1_0011",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2024",
+   "section": "Item 1",
+   "section_title": "Business",
+   "accession": "0000200406-25-000038",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040625000038/jnj-20241229.htm",
+   "gold": false,
+   "snippet": "2024. According to patent settlement and license agreements, the Company expects continued launches of biosimilar versions of STELARA in Europe and the United States in 2025 which will impact the Company's sales of STELARA. Trademarks\nThe Company's subsidiaries have made a practice of selling their products under trademarks and of obtaining protection for these trademarks by all available means. These trademarks are "
+  },
+  "JNJ_FY2024_EX21_0000": {
+   "id": "JNJ_FY2024_EX21_0000",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2024",
+   "section": "Exhibit 21",
+   "section_title": "Subsidiaries of the Registrant",
+   "accession": "0000200406-25-000038",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040625000038/ex21-subsidiariesxform10xk.htm",
+   "gold": false,
+   "snippet": "EXHIBIT 21\nSUBSIDIARIES\nJohnson & Johnson, a New Jersey corporation, had the U.S. and international subsidiaries shown below as of December 29, 2024. Johnson & Johnson is not a subsidiary of any other entity.\nName of Subsidiary | Jurisdiction\nU.S. Subsidiaries:\nABD Holding Company, Inc. | Delaware\nABIOMED COMMERCIAL, LLC | Delaware\nABIOMED R&D, Inc. | Delaware\nABIOMED, Inc. | Delaware\nActelion Pharmaceuticals US, Inc"
+  },
+  "JNJ_FY2024_ITEM8_0183": {
+   "id": "JNJ_FY2024_ITEM8_0183",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2024",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000200406-25-000038",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040625000038/jnj-20241229.htm",
+   "gold": false,
+   "snippet": "process with the United States Patent and Trademark Office (USPTO), created under the 2011 America Invents Act, is also being used at times by generic companies in conjunction with ANDAs and lawsuits to challenge the applicable patents. XARELTO\nBeginning in March 2021, Janssen Pharmaceuticals, Inc.; Bayer Pharma AG; Bayer AG; and Bayer Intellectual Property GmbH filed patent infringement lawsuits in United States dis"
+  },
+  "JNJ_FY2025_EX21_0000": {
+   "id": "JNJ_FY2025_EX21_0000",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2025",
+   "section": "Exhibit 21",
+   "section_title": "Subsidiaries of the Registrant",
+   "accession": "0000200406-26-000016",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/ex21-subsidiariesxform10xk.htm",
+   "gold": false,
+   "snippet": "EXHIBIT 21\nSUBSIDIARIES\nJohnson & Johnson, a New Jersey corporation, had the U.S. and international subsidiaries shown below as of December 28, 2025. Johnson & Johnson is not a subsidiary of any other entity.\nName of Subsidiary | Jurisdiction\nU.S. Subsidiaries:\nABD Holding Company, Inc. | Delaware\nABIOMED COMMERCIAL, LLC | Delaware\nABIOMED R&D, Inc. | Delaware\nABIOMED, Inc. | Delaware\nActelion Pharmaceuticals US, Inc"
+  },
+  "JNJ_FY2024_ITEM1A_0017": {
+   "id": "JNJ_FY2024_ITEM1A_0017",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2024",
+   "section": "Item 1A",
+   "section_title": "Risk Factors",
+   "accession": "0000200406-25-000038",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040625000038/jnj-20241229.htm",
+   "gold": false,
+   "snippet": "both within and outside the U.S., has become increasingly unfavorable toward intellectual property rights. The Company cannot be certain that it will secure and maintain adequate patent protection for new products and technologies in the United States and other important markets.\nCompetitors routinely challenge the validity or extent of the Company's owned or licensed patents and proprietary rights through litigation"
+  },
+  "JNJ_FY2024_EX21_0002": {
+   "id": "JNJ_FY2024_EX21_0002",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2024",
+   "section": "Exhibit 21",
+   "section_title": "Subsidiaries of the Registrant",
+   "accession": "0000200406-25-000038",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040625000038/ex21-subsidiariesxform10xk.htm",
+   "gold": false,
+   "snippet": "Name of Subsidiary | Jurisdiction\nJanssen-Cilag Manufacturing, LLC | Delaware\nJevco Holding, Inc. | New Jersey\nJJHC, LLC | Delaware\nJNJ International Investment LLC | Delaware\nJNTL (Russia) HoldCo LLC | Delaware\nJohnson & Johnson | New Jersey\nJohnson & Johnson (Middle East) Inc. | New Jersey\nJohnson & Johnson (Singapore) HoldCo LLC | Delaware\nJohnson & Johnson Enterprise Innovation Inc. | Delaware\nJohnson & Johnson F"
+  },
+  "JNJ_FY2024_EX21_0009": {
+   "id": "JNJ_FY2024_EX21_0009",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2024",
+   "section": "Exhibit 21",
+   "section_title": "Subsidiaries of the Registrant",
+   "accession": "0000200406-25-000038",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040625000038/ex21-subsidiariesxform10xk.htm",
+   "gold": false,
+   "snippet": "Name of Subsidiary | Jurisdiction\nJanssen-Pharma, S.L. | Spain\nJ-C Health Care Ltd. | Israel\nJJ Surgical Vision Spain, S.L. | Spain\nJJC Acquisition Company B.V. | Netherlands\nJJSV Belgium BV | Belgium\nJJSV Manufacturing Malaysia SDN. BHD. | Malaysia\nJJSV Norden AB | Sweden\nJJSV Produtos Oticos Ltda. | Brazil\nJNJ Global Business Services s.r.o. | Czech Republic\nJNJ Holding EMEA B.V. | Netherlands\nJNTL Russia HoldCo 1 "
+  },
+  "JNJ_FY2024_ITEM8_0207": {
+   "id": "JNJ_FY2024_ITEM8_0207",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2024",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000200406-25-000038",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040625000038/jnj-20241229.htm",
+   "gold": false,
+   "snippet": "have been reflected as discontinued operations in the Company's consolidated statements of earnings as Net earnings from discontinued operations, net of taxes through August 23, 2023, the date of the exchange offer. Prior periods have been recast to reflect this presentation.\nOn May 15, 2024, the Company issued $ 3.6 billion aggregate principal amount of commercial paper and received $ 3.6 billion of net cash proceed"
+  },
+  "JNJ_FY2024_ITEM7_0034": {
+   "id": "JNJ_FY2024_ITEM7_0034",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2024",
+   "section": "Item 7",
+   "section_title": "Management's Discussion and Analysis of Financial Condition and Results of Operations",
+   "accession": "0000200406-25-000038",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040625000038/jnj-20241229.htm",
+   "gold": false,
+   "snippet": "the debt to equity exchange of the Company's remaining shares of Kenvue Common Stock. The fiscal year 2023 includes an approximately $0.4 billion unfavorable change in the fair value of the retained stake in Kenvue.\nInnovative Medicine segment:\nIn 2024, the Innovative Medicine segment income before tax as a percent to sales was 33.2% versus 33.3% in 2023. The decrease in the income before tax as a percent of sales wa"
+  },
+  "JNJ_FY2024_ITEM8_0208": {
+   "id": "JNJ_FY2024_ITEM8_0208",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2024",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000200406-25-000038",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040625000038/jnj-20241229.htm",
+   "gold": false,
+   "snippet": "Debt-for-Equity Exchange, the Commercial Paper was satisfied and discharged and the Company no longer owns any shares of Kenvue Common Stock. This exchange resulted in a loss of approximately $ 0.4 billion recorded in Other (income) expense.\nOn May 8, 2023, Kenvue, completed an initial public offering (the IPO) resulting in the issuance of 198,734,444 shares of its common stock, par value $ 0.01 per share (the “Kenvu"
+  },
+  "JNJ_FY2024_ITEM8_0014": {
+   "id": "JNJ_FY2024_ITEM8_0014",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2024",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000200406-25-000038",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040625000038/jnj-20241229.htm",
+   "gold": false,
+   "snippet": "and sale of a broad range of products in the healthcare field. The Company conducts business in virtually all countries of the world and its primary focus is on products related to human health and well-being. Kenvue IPO/separation and discontinued operations\nOn May 8, 2023, Kenvue, completed an initial public offering (the IPO) resulting in the issuance of 198,734,444 shares of its common stock, par value $ 0.01 per"
+  },
+  "JNJ_FY2024_ITEM7_0031": {
+   "id": "JNJ_FY2024_ITEM7_0031",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2024",
+   "section": "Item 7",
+   "section_title": "Management's Discussion and Analysis of Financial Condition and Results of Operations",
+   "accession": "0000200406-25-000038",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040625000038/jnj-20241229.htm",
+   "gold": false,
+   "snippet": "(2) The fiscal year 2024 is primarily related to the acquisition of Shockwave. The fiscal year 2023 is primarily related to the impairment of Ponvory and one-time integration costs related to the acquisition of Abiomed.\n(3) The fiscal year 2024 includes the loss of $0.4 billion on the completion of the debt for equity exchange of the retained stake in Kenvue. The fiscal year 2023 includes $0.4 billion related to the "
+  },
+  "JNJ_FY2024_ITEM8_0054": {
+   "id": "JNJ_FY2024_ITEM8_0054",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2024",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000200406-25-000038",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040625000038/jnj-20241229.htm",
+   "gold": false,
+   "snippet": "| 4,473 | 4,473 Equity Investments without readily determinable value | $613 | 1 | 82 | 696 | 696 (1) Recorded in Other Income/Expense (2) Other includes impact of currency\n* The December 31, 2023 balance includes the 9.5 % remaining stake in Kenvue. A debt-for-equity exchange was completed in the fiscal second quarter of 2024.\nOn May 15, 2024, the Company issued $ 3.6 billion aggregate principal amount of commercial"
+  },
+  "JNJ_FY2024_ITEM7_0045": {
+   "id": "JNJ_FY2024_ITEM7_0045",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2024",
+   "section": "Item 7",
+   "section_title": "Management's Discussion and Analysis of Financial Condition and Results of Operations",
+   "accession": "0000200406-25-000038",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040625000038/jnj-20241229.htm",
+   "gold": false,
+   "snippet": "total outstanding shares of Kenvue Common Stock that was recorded in other assets within continuing operations at the fair market value of $4.3 billion as of August 23, 2023 and $3.9 billion as of December 31, 2023.\nJohnson & Johnson divested net assets of $11.6 billion as of August 23, 2023, and the accumulated other comprehensive loss attributable to the Consumer Health business at that date was $4.3 billion. Addit"
+  },
+  "JNJ_FY2025_ITEM8_0055": {
+   "id": "JNJ_FY2025_ITEM8_0055",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2025",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000200406-26-000016",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm",
+   "gold": false,
+   "snippet": "| 451 | 451 Equity Investments without readily determinable value | $696 | (197) | 274 | 773 | 773 (1) Recorded in Other Income/Expense (2) Other includes impact of currency\n* The December 31, 2023 balance includes the 9.5 % remaining stake in Kenvue. A debt-for-equity exchange was completed in the fiscal second quarter of 2024.\nOn May 15, 2024, the Company issued $ 3.6 billion aggregate principal amount of commercia"
+  },
+  "JNJ_FY2025_ITEM8_0037": {
+   "id": "JNJ_FY2025_ITEM8_0037",
+   "company": "Johnson & Johnson",
+   "ticker": "JNJ",
+   "fy": "FY2025",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000200406-26-000016",
+   "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm",
+   "gold": false,
+   "snippet": "Confirmed invoices paid during the year | 3,016 | 2,964 Effect of exchange rates | 15 | — Confirmed obligations - end of the year | $784 | 788 Kenvue IPO/separation and discontinued operations\nOn May 8, 2023, Kenvue, completed an initial public offering (the IPO) resulting in the issuance of 198,734,444 shares of its common stock, par value $ 0.01 per share (the Kenvue Common Stock), at an initial public offering of "
+  },
+  "AAPL_FY2025_ITEM7_0008": {
+   "id": "AAPL_FY2025_ITEM7_0008",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2025",
+   "section": "Item 7",
+   "section_title": "Management's Discussion and Analysis of Financial Condition and Results of Operations",
+   "accession": "0000320193-25-000079",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+   "gold": false,
+   "snippet": "| 7% | 7% Total operating expenses | $62,151 | 8% | $57,467 | 5% | $54,847 Percentage of total net sales | 15% | 15% | 14% Research and Development\nThe growth in R&D expense during 2025 compared to 2024 was primarily driven by increases in headcount-related expenses and infrastructure-related costs.\nSelling, General and Administrative\nThe growth in selling, general and administrative expense during 2025 compared to 2"
+  },
+  "AAPL_FY2025_ITEM8_0009": {
+   "id": "AAPL_FY2025_ITEM8_0009",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2025",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000320193-25-000079",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+   "gold": false,
+   "snippet": "Years ended\nIncrease/(Decrease) in cash, cash equivalents, and restricted cash and cash equivalents | 5,991 | (794) | 5,760\nCash, cash equivalents, and restricted cash and cash equivalents, ending balances | $35,934 | $29,943 | $30,737\nSupplemental cash flow disclosure:\nCash paid for income taxes, net | $43,369 | $26,102 | $18,679\nSee accompanying Notes to Consolidated Financial Statements.\nApple Inc.\nNotes to Consol"
+  },
+  "AAPL_FY2025_ITEM7_0009": {
+   "id": "AAPL_FY2025_ITEM7_0009",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2025",
+   "section": "Item 7",
+   "section_title": "Management's Discussion and Analysis of Financial Condition and Results of Operations",
+   "accession": "0000320193-25-000079",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+   "gold": false,
+   "snippet": "including the impact of changes in unrecognized tax benefits, the impact of the U.S. federal R&D credit, and tax benefits from share-based compensation, partially offset by a change in valuation allowance and state income taxes.\nThe Company's effective tax rate for 2025 was lower compared to 2024 due to a $10.7 billion year-over-year decrease in the provision for income taxes related to the State Aid Decision (refer "
+  },
+  "AAPL_FY2024_ITEM8_0002": {
+   "id": "AAPL_FY2024_ITEM8_0002",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2024",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000320193-24-000123",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm",
+   "gold": false,
+   "snippet": "Years ended\nChange in unrealized gains/losses on derivative instruments, net of tax:\nChange in fair value of derivative instruments | (832) | 323 | 3,212\nAdjustment for net (gains)/losses realized and included in net income | (1,337) | (1,717) | (1,074)\nTotal change in unrealized gains/losses on derivative instruments | (2,169) | (1,394) | 2,138\nChange in unrealized gains/losses on marketable debt securities, net of "
+  },
+  "AAPL_FY2025_ITEM8_0002": {
+   "id": "AAPL_FY2025_ITEM8_0002",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2025",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000320193-25-000079",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+   "gold": false,
+   "snippet": "Years ended\nOther comprehensive income/(loss):\nChange in foreign currency translation, net of tax | (267) | 395 | (765)\nChange in unrealized gains/losses on derivative instruments, net of tax:\nChange in fair value of derivative instruments | 849 | (832) | 323\nAdjustment for net (gains)/losses realized and included in net income | (212) | (1,337) | (1,717)\nTotal change in unrealized gains/losses on derivative instrume"
+  },
+  "AAPL_FY2024_ITEM7_0001": {
+   "id": "AAPL_FY2024_ITEM7_0001",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2024",
+   "section": "Item 7",
+   "section_title": "Management's Discussion and Analysis of Financial Condition and Results of Operations",
+   "accession": "0000320193-24-000123",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm",
+   "gold": false,
+   "snippet": "18, updates to the Company's operating systems; and • Apple Intelligence™, a personal intelligence system that uses generative models. Fourth Quarter 2024: • iPhone 16, iPhone 16 Plus, iPhone 16 Pro and iPhone 16 Pro Max;\n• Apple Watch Series 10; and\n• AirPods 4.\nFiscal Period\nThe Company's fiscal year is the 52- or 53-week period that ends on the last Saturday of September. An additional week is included in the firs"
+  },
+  "AAPL_FY2024_ITEM8_0006": {
+   "id": "AAPL_FY2024_ITEM8_0006",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2024",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000320193-24-000123",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm",
+   "gold": false,
+   "snippet": "Years ended\nAccumulated other comprehensive income/(loss):\nBeginning balances | (11,452) | (11,109) | 163\nOther comprehensive income/(loss) | 4,280 | (343) | (11,272)\nEnding balances | (7,172) | (11,452) | (11,109)\nTotal shareholders' equity, ending balances | $56,950 | $62,146 | $50,672\nDividends and dividend equivalents declared per share or RSU | $0.98 | $0.94 | $0.90\nSee accompanying Notes to Consolidated Financi"
+  },
+  "AAPL_FY2024_ITEM8_0009": {
+   "id": "AAPL_FY2024_ITEM8_0009",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2024",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000320193-24-000123",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm",
+   "gold": false,
+   "snippet": "Years ended\nCash, cash equivalents, and restricted cash and cash equivalents, ending balances | $29,943 | $30,737 | $24,977\nSupplemental cash flow disclosure:\nCash paid for income taxes, net | $26,102 | $18,679 | $19,573\nSee accompanying Notes to Consolidated Financial Statements.\nApple Inc.\nNotes to Consolidated Financial Statements\nNote 1 – Summary of Significant Accounting Policies\nBasis of Presentation and Prepar"
+  },
+  "AAPL_FY2025_ITEM7_0001": {
+   "id": "AAPL_FY2025_ITEM7_0001",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2025",
+   "section": "Item 7",
+   "section_title": "Management's Discussion and Analysis of Financial Condition and Results of Operations",
+   "accession": "0000320193-25-000079",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+   "gold": false,
+   "snippet": "visionOS 26 and tvOS 26 Fourth Quarter 2025: • iPhone 17, iPhone Air, iPhone 17 Pro and iPhone 17 Pro Max • Apple Watch Series 11, Apple Watch SE 3 and Apple Watch Ultra 3 • AirPods Pro 3 Fiscal Period\nThe Company's fiscal year is the 52- or 53-week period that ends on the last Saturday of September. An additional week is included in the first fiscal quarter every five or six years to realign the Company's fiscal qua"
+  },
+  "AAPL_FY2025_ITEM7_0007": {
+   "id": "AAPL_FY2025_ITEM7_0007",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2025",
+   "section": "Item 7",
+   "section_title": "Management's Discussion and Analysis of Financial Condition and Results of Operations",
+   "accession": "0000320193-25-000079",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+   "gold": false,
+   "snippet": "to 2024 primarily due to a different mix of products and tariff costs, partially offset by other favorable costs. Services Gross Margin Services gross margin increased during 2025 compared to 2024 primarily due to higher Services net sales and a different mix of services.\nServices gross margin percentage increased during 2025 compared to 2024 primarily due to a different mix of services, partially offset by higher co"
+  },
+  "AAPL_FY2024_ITEM8_0000": {
+   "id": "AAPL_FY2024_ITEM8_0000",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2024",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000320193-24-000123",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm",
+   "gold": false,
+   "snippet": "Item 8. Financial Statements and Supplementary Data\nAll financial statement schedules have been omitted, since the required information is not applicable or is not present in amounts sufficient to require submission of the schedule, or because the information required is included in the consolidated financial statements and accompanying notes.\nApple Inc.\nCONSOLIDATED STATEMENTS OF OPERATIONS\n(In millions, except numb"
+  },
+  "AAPL_FY2024_ITEM8_0001": {
+   "id": "AAPL_FY2024_ITEM8_0001",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2024",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000320193-24-000123",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm",
+   "gold": false,
+   "snippet": "Years ended\nOperating income | 123,216 | 114,301 | 119,437\nOther income/(expense), net | 269 | (565) | (334)\nIncome before provision for income taxes | 123,485 | 113,736 | 119,103\nProvision for income taxes | 29,749 | 16,741 | 19,300\nNet income | $93,736 | $96,995 | $99,803\nEarnings per share:\nBasic | $6.11 | $6.16 | $6.15\nDiluted | $6.08 | $6.13 | $6.11\nShares used in computing earnings per share:\nBasic | 15,343,783"
+  },
+  "AAPL_FY2025_ITEM8_0003": {
+   "id": "AAPL_FY2025_ITEM8_0003",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2025",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000320193-25-000079",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+   "gold": false,
+   "snippet": "September 27,2025 | September 28,2024\nASSETS:\nCurrent assets:\nCash and cash equivalents | $35,934 | $29,943\nMarketable securities | 18,763 | 35,228\nAccounts receivable, net | 39,777 | 33,410\nVendor non-trade receivables | 33,180 | 32,833\nInventories | 5,718 | 7,286\nOther current assets | 14,585 | 14,287\nTotal current assets | 147,957 | 152,987\nNon-current assets:\nMarketable securities | 77,723 | 91,479\nProperty, plan"
+  },
+  "AAPL_FY2025_ITEM8_0004": {
+   "id": "AAPL_FY2025_ITEM8_0004",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2025",
+   "section": "Item 8",
+   "section_title": "Financial Statements and Supplementary Data",
+   "accession": "0000320193-25-000079",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+   "gold": false,
+   "snippet": "September 27,2025 | September 28,2024\nTotal current liabilities | 165,631 | 176,392\nNon-current liabilities:\nTerm debt | 78,328 | 85,750\nOther non-current liabilities | 41,549 | 45,888\nTotal non-current liabilities | 119,877 | 131,638\nTotal liabilities | 285,508 | 308,030\nCommitments and contingencies\nShareholders' equity:\nCommon stock and additional paid-in capital, $0.00001 par value: 50,400,000 shares authorized; "
+  },
+  "AAPL_FY2024_ITEM1_0010": {
+   "id": "AAPL_FY2024_ITEM1_0010",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2024",
+   "section": "Item 1",
+   "section_title": "Business",
+   "accession": "0000320193-24-000123",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm",
+   "gold": true,
+   "snippet": "inclusive, safe and supportive environment for all of its team members, so that its people can do the best work of their lives. As of September 28, 2024, the Company had approximately 164,000 full-time equivalent employees. Compensation and Benefits\nThe Company believes that compensation should be competitive and equitable, and should enable employees to share in the Company's success. The Company recognizes its peop"
+  },
+  "AAPL_FY2025_ITEM1_0010": {
+   "id": "AAPL_FY2025_ITEM1_0010",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2025",
+   "section": "Item 1",
+   "section_title": "Business",
+   "accession": "0000320193-25-000079",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+   "gold": true,
+   "snippet": "processes and services. While the Company has generally been able to obtain such licenses on commercially reasonable terms in the past, there is no guarantee that such licenses could be obtained in the future on reasonable terms or at all. Business Seasonality and Product Introductions\nThe Company has historically experienced higher net sales in its first quarter compared to other quarters in its fiscal year due in p"
+  },
+  "AAPL_FY2024_ITEM1_0009": {
+   "id": "AAPL_FY2024_ITEM1_0009",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2024",
+   "section": "Item 1",
+   "section_title": "Business",
+   "accession": "0000320193-24-000123",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm",
+   "gold": true,
+   "snippet": "processes and services. While the Company has generally been able to obtain such licenses on commercially reasonable terms in the past, there is no guarantee that such licenses could be obtained in the future on reasonable terms or at all. Business Seasonality and Product Introductions\nThe Company has historically experienced higher net sales in its first quarter compared to other quarters in its fiscal year due in p"
+  },
+  "AAPL_FY2025_ITEM1_0011": {
+   "id": "AAPL_FY2025_ITEM1_0011",
+   "company": "Apple Inc.",
+   "ticker": "AAPL",
+   "fy": "FY2025",
+   "section": "Item 1",
+   "section_title": "Business",
+   "accession": "0000320193-25-000079",
+   "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+   "gold": true,
+   "snippet": "do the best work of their lives. The Company is an equal opportunity employer committed to inclusion and to providing a workplace free of harassment or discrimination. As of September 27, 2025, the Company had approximately 166,000 full-time equivalent employees.\nThe Company believes that compensation should be competitive and equitable, and offers discretionary cash and equity awards to enable employees to share in "
+  }
+ },
+ "hop_case": {
+  "zero_shot": {
+   "tracked": [
+    {
+     "node": "Genmab A/S",
+     "type": "entity",
+     "of": 889,
+     "ranks": [
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "node": "DARZALEX (JNJ)",
+     "type": "entity",
+     "of": 889,
+     "ranks": [
+      576,
+      495,
+      175,
+      24,
+      6,
+      5,
+      4
+     ]
+    },
+    {
+     "node": "Oncology (JNJ)",
+     "type": "entity",
+     "of": 889,
+     "ranks": [
+      268,
+      176,
+      140,
+      51,
+      49,
+      10,
+      28
+     ]
+    },
+    {
+     "node": "Innovative Medicine (JNJ)",
+     "type": "entity",
+     "of": 889,
+     "ranks": [
+      471,
+      297,
+      367,
+      133,
+      21,
+      12,
+      48
+     ]
+    },
+    {
+     "node": "Innovative Medicine (JNJ) revenue FY2025 = $60,401 million",
+     "type": "attribute",
+     "of": 1097,
+     "ranks": [
+      636,
+      750,
+      789,
+      840,
+      799,
+      803,
+      616
+     ]
+    },
+    {
+     "node": "JNJ_FY2025_ITEM1_0011",
+     "type": "document",
+     "of": 1855,
+     "ranks": [
+      1154,
+      935,
+      781,
+      178,
+      49,
+      147,
+      23
+     ]
+    },
+    {
+     "node": "JNJ_FY2025_ITEM1_0001",
+     "type": "document",
+     "of": 1855,
+     "ranks": [
+      1116,
+      955,
+      941,
+      898,
+      690,
+      783,
+      244
+     ]
+    },
+    {
+     "node": "JNJ_FY2025_ITEM7_0012",
+     "type": "document",
+     "of": 1855,
+     "ranks": [
+      1094,
+      1166,
+      1249,
+      1078,
+      881,
+      352,
+      368
+     ]
+    },
+    {
+     "node": "JNJ_FY2025_ITEM7_0032",
+     "type": "document",
+     "of": 1855,
+     "ranks": [
+      1329,
+      1337,
+      1352,
+      1390,
+      1165,
+      482,
+      209
+     ]
+    },
+    {
+     "node": "JNJ_FY2025_ITEM8_0120",
+     "type": "document",
+     "of": 1855,
+     "ranks": [
+      572,
+      322,
+      241,
+      118,
+      43,
+      5,
+      26
+     ]
+    },
+    {
+     "node": "JNJ_FY2025_ITEM8_0126",
+     "type": "document",
+     "of": 1855,
+     "ranks": [
+      646,
+      453,
+      407,
+      413,
+      61,
+      13,
+      260
+     ]
+    },
+    {
+     "node": "DARZALEX (JNJ) revenue FY2025 = $14,351 million",
+     "type": "attribute",
+     "of": 1097,
+     "ranks": [
+      1038,
+      1033,
+      1061,
+      1082,
+      1071,
+      1033,
+      939
+     ]
+    }
+   ],
+   "start_nodes": [
+    "Johnson & Johnson",
+    "Genmab A/S",
+    "Revenue",
+    "FY2025 (JNJ)"
+   ]
+  },
+  "finetuned": {
+   "tracked": [
+    {
+     "node": "Genmab A/S",
+     "type": "entity",
+     "of": 889,
+     "ranks": [
+      4,
+      23,
+      8,
+      2,
+      1,
+      1,
+      3
+     ]
+    },
+    {
+     "node": "DARZALEX (JNJ)",
+     "type": "entity",
+     "of": 889,
+     "ranks": [
+      644,
+      617,
+      151,
+      66,
+      34,
+      8,
+      11
+     ]
+    },
+    {
+     "node": "Oncology (JNJ)",
+     "type": "entity",
+     "of": 889,
+     "ranks": [
+      452,
+      242,
+      138,
+      70,
+      72,
+      37,
+      46
+     ]
+    },
+    {
+     "node": "Innovative Medicine (JNJ)",
+     "type": "entity",
+     "of": 889,
+     "ranks": [
+      612,
+      363,
+      110,
+      72,
+      28,
+      14,
+      22
+     ]
+    },
+    {
+     "node": "Innovative Medicine (JNJ) revenue FY2025 = $60,401 million",
+     "type": "attribute",
+     "of": 1097,
+     "ranks": [
+      814,
+      772,
+      833,
+      816,
+      1055,
+      1022,
+      1019
+     ]
+    },
+    {
+     "node": "JNJ_FY2025_ITEM1_0011",
+     "type": "document",
+     "of": 1855,
+     "ranks": [
+      1406,
+      1063,
+      865,
+      175,
+      21,
+      31,
+      7
+     ]
+    },
+    {
+     "node": "JNJ_FY2025_ITEM1_0001",
+     "type": "document",
+     "of": 1855,
+     "ranks": [
+      1257,
+      962,
+      960,
+      939,
+      308,
+      129,
+      51
+     ]
+    },
+    {
+     "node": "JNJ_FY2025_ITEM7_0012",
+     "type": "document",
+     "of": 1855,
+     "ranks": [
+      542,
+      350,
+      319,
+      259,
+      103,
+      25,
+      20
+     ]
+    },
+    {
+     "node": "JNJ_FY2025_ITEM7_0032",
+     "type": "document",
+     "of": 1855,
+     "ranks": [
+      675,
+      389,
+      386,
+      336,
+      77,
+      12,
+      2
+     ]
+    },
+    {
+     "node": "JNJ_FY2025_ITEM8_0120",
+     "type": "document",
+     "of": 1855,
+     "ranks": [
+      236,
+      74,
+      35,
+      12,
+      2,
+      3,
+      17
+     ]
+    },
+    {
+     "node": "JNJ_FY2025_ITEM8_0126",
+     "type": "document",
+     "of": 1855,
+     "ranks": [
+      659,
+      330,
+      268,
+      166,
+      31,
+      36,
+      71
+     ]
+    },
+    {
+     "node": "DARZALEX (JNJ) revenue FY2025 = $14,351 million",
+     "type": "attribute",
+     "of": 1097,
+     "ranks": [
+      1035,
+      1030,
+      1061,
+      1049,
+      1095,
+      1085,
+      1083
+     ]
+    }
+   ],
+   "start_nodes": [
+    "Johnson & Johnson",
+    "Genmab A/S",
+    "Revenue",
+    "FY2025 (JNJ)"
+   ]
+  },
+  "question": "Which Johnson & Johnson segment sells the drug licensed from Genmab, and what were that segment's sales in fiscal 2025?",
+  "gold_answer": "DARZALEX is licensed from Genmab A/S and sold by the Innovative Medicine segment, whose fiscal 2025 sales were $60,401 million.",
+  "edges": [
+   {
+    "s": "DARZALEX (JNJ)",
+    "r": "has_value",
+    "t": "DARZALEX (JNJ) revenue FY2025 = $14,351 million"
+   },
+   {
+    "s": "DARZALEX (JNJ)",
+    "r": "is_mentioned_in",
+    "t": "JNJ_FY2025_ITEM1_0001"
+   },
+   {
+    "s": "DARZALEX (JNJ)",
+    "r": "is_mentioned_in",
+    "t": "JNJ_FY2025_ITEM1_0011"
+   },
+   {
+    "s": "DARZALEX (JNJ)",
+    "r": "licensed_from",
+    "t": "Genmab A/S"
+   },
+   {
+    "s": "Genmab A/S",
+    "r": "has_product",
+    "t": "DARZALEX (JNJ)"
+   },
+   {
+    "s": "Genmab A/S",
+    "r": "is_mentioned_in",
+    "t": "JNJ_FY2025_ITEM1_0011"
+   },
+   {
+    "s": "Innovative Medicine (JNJ)",
+    "r": "has_business_line",
+    "t": "Oncology (JNJ)"
+   },
+   {
+    "s": "Innovative Medicine (JNJ)",
+    "r": "has_value",
+    "t": "Innovative Medicine (JNJ) revenue FY2025 = $60,401 million"
+   },
+   {
+    "s": "Innovative Medicine (JNJ)",
+    "r": "is_mentioned_in",
+    "t": "JNJ_FY2025_ITEM1_0001"
+   },
+   {
+    "s": "Innovative Medicine (JNJ)",
+    "r": "is_mentioned_in",
+    "t": "JNJ_FY2025_ITEM7_0012"
+   },
+   {
+    "s": "Innovative Medicine (JNJ)",
+    "r": "is_mentioned_in",
+    "t": "JNJ_FY2025_ITEM7_0032"
+   },
+   {
+    "s": "Innovative Medicine (JNJ)",
+    "r": "is_mentioned_in",
+    "t": "JNJ_FY2025_ITEM8_0120"
+   },
+   {
+    "s": "Innovative Medicine (JNJ) revenue FY2025 = $60,401 million",
+    "r": "is_mentioned_in",
+    "t": "JNJ_FY2025_ITEM7_0012"
+   },
+   {
+    "s": "Innovative Medicine (JNJ) revenue FY2025 = $60,401 million",
+    "r": "is_mentioned_in",
+    "t": "JNJ_FY2025_ITEM7_0032"
+   },
+   {
+    "s": "Innovative Medicine (JNJ) revenue FY2025 = $60,401 million",
+    "r": "is_mentioned_in",
+    "t": "JNJ_FY2025_ITEM8_0120"
+   },
+   {
+    "s": "Innovative Medicine (JNJ) revenue FY2025 = $60,401 million",
+    "r": "is_mentioned_in",
+    "t": "JNJ_FY2025_ITEM8_0126"
+   },
+   {
+    "s": "Oncology (JNJ)",
+    "r": "has_product",
+    "t": "DARZALEX (JNJ)"
+   },
+   {
+    "s": "Oncology (JNJ)",
+    "r": "is_mentioned_in",
+    "t": "JNJ_FY2025_ITEM1_0001"
+   },
+   {
+    "s": "Oncology (JNJ)",
+    "r": "is_mentioned_in",
+    "t": "JNJ_FY2025_ITEM7_0012"
+   }
+  ],
+  "kinds": {
+   "Genmab A/S": "Organization",
+   "DARZALEX (JNJ)": "Product",
+   "Oncology (JNJ)": "BusinessLine",
+   "Innovative Medicine (JNJ)": "Segment",
+   "Innovative Medicine (JNJ) revenue FY2025 = $60,401 million": "Value",
+   "JNJ_FY2025_ITEM1_0011": "chunk",
+   "JNJ_FY2025_ITEM1_0001": "chunk",
+   "JNJ_FY2025_ITEM7_0012": "chunk",
+   "JNJ_FY2025_ITEM7_0032": "chunk",
+   "JNJ_FY2025_ITEM8_0120": "chunk",
+   "JNJ_FY2025_ITEM8_0126": "chunk",
+   "DARZALEX (JNJ) revenue FY2025 = $14,351 million": "Value"
+  },
+  "labels": {
+   "Genmab A/S": "Genmab A/S",
+   "DARZALEX (JNJ)": "DARZALEX (JNJ)",
+   "Oncology (JNJ)": "Oncology (JNJ)",
+   "Innovative Medicine (JNJ)": "Innovative Medicine (JNJ)",
+   "Innovative Medicine (JNJ) revenue FY2025 = $60,401 million": "Innovative Medicine (JNJ) revenue FY2025 = $60,…",
+   "JNJ_FY2025_ITEM1_0011": "JNJ FY25 Item 1 #11",
+   "JNJ_FY2025_ITEM1_0001": "JNJ FY25 Item 1 #1",
+   "JNJ_FY2025_ITEM7_0012": "JNJ FY25 Item 7 #12",
+   "JNJ_FY2025_ITEM7_0032": "JNJ FY25 Item 7 #32",
+   "JNJ_FY2025_ITEM8_0120": "JNJ FY25 Item 8 #120",
+   "JNJ_FY2025_ITEM8_0126": "JNJ FY25 Item 8 #126",
+   "DARZALEX (JNJ) revenue FY2025 = $14,351 million": "DARZALEX (JNJ) revenue FY2025 = $14,351 million"
+  }
+ }
+}

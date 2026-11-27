@@ -1,4 +1,4 @@
-# Old chunk header vs new chunk header (experiment E10)
+# Old chunk header vs new chunk header 
 
 ## What changed (and what did not)
 

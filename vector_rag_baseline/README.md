@@ -173,7 +173,7 @@ cp .env.example .env                                                # Gemini acc
 | `rag/` | `config.py` (models, locations), `embed.py`, `index.py`, `retrieve.py`, `generate.py`, `judge.py`, `metrics.py` (retrieval, fact-level and grounding metrics incl. `answer_support`), `error_stage.py`, `llm.py` |
 | `scripts/` | `run_eval.py`, `results_by_type.py`, `export_per_question.py`, `build_questions_v2.py`; older helpers (`build_questions.py`, `build_label_pools.py`, `ingest_labels.py`, `chunk_10k_pdf.py`, `grep_chunks.py`, `probe.py`, `smoke_test.py`) are from the first version |
 | `data/` | `questions_v2.jsonl` (fields: qid, type, hops, companies, filings, question, gold_chunk_ids, gold_answer, gold_facts, fact_chunks, answer_kind, relation_chain), `golden_v2_review.md`; `chunks.jsonl` is not stored here |
-| `experiments/` | the two side experiments above |
+| `experiments/` | one side experiments above |
 | `docs/` | `ERROR_STAGES.md`, method and report drafts, contribution log entries |
 | `results/` | `v2_fixed_chunks/` (bge-small) and `v2_distilbert/` (raw runs: `per_question.jsonl`, `summary.json`), `v2_all_baselines/` (`summary.md`, `results_by_type.md`, `pivot_by_type.md`, `error_stages.md`, `error_cases.csv`, `per_question_all.*`), `v2_filtered/`, `v2_old_vs_new_header/` (old vs new chunk header comparison) and `v2_comparison_plain_vs_filtered.md` |
 | `tests/` | `test_units.py` (10 tests: grounding checks, error stage, fact-level retrieval, answer support) |

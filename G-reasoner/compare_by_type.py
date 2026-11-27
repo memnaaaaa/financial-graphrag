@@ -2,11 +2,9 @@
 
 Systems (columns): vector RAG bge-small without and with reranking (E1, Mahua's v2_all_baselines run),
 G-reasoner zero-shot (E2), fine-tuned (E3) and Personalized PageRank (E4), all on the same 39 questions.
-Rows: question types in the baseline's order, plus ALL. One table per measure and k (Hit, P, R at 5 and 10).
-
-AllFacts is left out on purpose: the baseline run had fact_chunks, the graph runs did not (their AllFacts is
-Hit), so the two would not be comparable. Add it once questions_v2.jsonl carries fact_chunks and the graph
-runs are redone.
+Rows: question types in the baseline's order, plus ALL. One table per measure and k (Hit, AllFacts, P, R at
+5 and 10). AllFacts = every gold fact has a chunk in the top k (fact_chunks); the script stops if a graph run
+still holds the Hit fallback (rescore it with rescore_facts.py).
 
 Every system must cover exactly the same qids at each k, or the script stops.
 
@@ -33,7 +31,7 @@ SYSTEMS = [
 ORDER = ["single", "relation", "relation_text", "relation_deep", "cross_year", "cross_company"]
 TYPE_LABEL = {"single": "Single fact", "relation": "Relation", "relation_text": "Relation, descriptive",
               "relation_deep": "Deep chain (3-5 hops)", "cross_year": "Cross-year", "cross_company": "Cross-company"}
-MEASURES = [("hit", "Hit"), ("precision", "Precision"), ("recall", "Recall")]
+MEASURES = [("hit", "Hit"), ("all_facts", "AllFacts"), ("precision", "Precision"), ("recall", "Recall")]
 
 
 def main():
@@ -58,6 +56,10 @@ def main():
             if got != ref:
                 raise SystemExit(f"{label} k={k} covers different questions: missing {sorted(ref - got)}, "
                                  f"extra {sorted(got - ref)}")
+        fallback = [label for label, *_ in SYSTEMS
+                    if any(r.get("all_facts_source") == "hit_fallback" for r in data[(label, k)].values())]
+        if fallback:
+            raise SystemExit(f"k={k}: {fallback} have AllFacts from the Hit fallback; run rescore_facts.py first")
         if ref - set(qtype):
             raise SystemExit(f"qids not in {a.questions}: {sorted(ref - set(qtype))}")
     n_q = len(data[(SYSTEMS[0][0], a.ks[0])])
@@ -70,7 +72,7 @@ def main():
              + "; ".join(f"{label} = {exp} (`{cfg}`)" for label, exp, _, cfg in SYSTEMS) + ".",
              "Vector RAG retrieves from the chunk index; the graph systems rank document nodes of `fin10k_v1` "
              "from the same rule-based start nodes. Best value in each row in bold.",
-             "AllFacts is not shown: only the vector run had `fact_chunks` (see compare_by_type.py).", ""]
+             "AllFacts = every gold fact has at least one chunk in the top k (`fact_chunks` in the question file).", ""]
     for key, name in MEASURES:
         for k in a.ks:
             lines += [f"**{name}@{k}**", "",

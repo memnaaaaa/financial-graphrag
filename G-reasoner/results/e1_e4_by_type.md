@@ -2,7 +2,7 @@
 
 39 questions, same for every system. Systems: Vector = E1 (`bge-small`); Vector+rerank = E1 (`bge-small+rerank`); G-r zero-shot = E2 (`g-reasoner`); G-r fine-tuned = E3 (`g-reasoner-ft`); PageRank = E4 (`ppr`).
 Vector RAG retrieves from the chunk index; the graph systems rank document nodes of `fin10k_v1` from the same rule-based start nodes. Best value in each row in bold.
-AllFacts is not shown: only the vector run had `fact_chunks` (see compare_by_type.py).
+AllFacts = every gold fact has at least one chunk in the top k (`fact_chunks` in the question file).
 
 **Hit@5**
 
@@ -27,6 +27,30 @@ AllFacts is not shown: only the vector run had `fact_chunks` (see compare_by_typ
 | Cross-year | 4 | **0.50** | **0.50** | **0.50** | 0.00 | 0.25 |
 | Cross-company | 3 | 0.67 | 0.67 | 0.00 | **1.00** | **1.00** |
 | **ALL** | 39 | **0.85** | 0.82 | 0.28 | 0.69 | 0.72 |
+
+**AllFacts@5**
+
+| Question type | n | Vector | Vector+rerank | G-r zero-shot | G-r fine-tuned | PageRank |
+|---|---|---|---|---|---|---|
+| Single fact | 9 | 0.78 | 0.89 | 0.11 | **1.00** | **1.00** |
+| Relation | 6 | **0.33** | 0.17 | 0.00 | 0.00 | 0.00 |
+| Relation, descriptive | 12 | **0.75** | **0.75** | 0.08 | 0.33 | 0.33 |
+| Deep chain (3-5 hops) | 5 | **0.20** | **0.20** | 0.00 | **0.20** | 0.00 |
+| Cross-year | 4 | 0.00 | **0.25** | **0.25** | 0.00 | **0.25** |
+| Cross-company | 3 | 0.00 | 0.00 | 0.00 | **1.00** | 0.00 |
+| **ALL** | 39 | 0.49 | **0.51** | 0.08 | 0.44 | 0.36 |
+
+**AllFacts@10**
+
+| Question type | n | Vector | Vector+rerank | G-r zero-shot | G-r fine-tuned | PageRank |
+|---|---|---|---|---|---|---|
+| Single fact | 9 | **1.00** | 0.89 | 0.33 | **1.00** | **1.00** |
+| Relation | 6 | 0.33 | **0.50** | 0.00 | 0.17 | 0.17 |
+| Relation, descriptive | 12 | **0.83** | **0.83** | 0.08 | 0.42 | 0.33 |
+| Deep chain (3-5 hops) | 5 | 0.20 | **0.40** | 0.00 | 0.20 | 0.00 |
+| Cross-year | 4 | 0.00 | **0.25** | **0.25** | 0.00 | **0.25** |
+| Cross-company | 3 | 0.00 | 0.33 | 0.00 | **1.00** | 0.67 |
+| **ALL** | 39 | 0.56 | **0.64** | 0.13 | 0.49 | 0.44 |
 
 **Precision@5**
 

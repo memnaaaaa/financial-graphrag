@@ -11,18 +11,24 @@ knowledge graph (`data/graph/fin10k_v1`). It covers the retriever experiments:
 All of these are scored on golden set v2 (`vector_rag_baseline/data/questions_v2.jsonl`, 39 questions)
 with the vector baseline's metrics.
 
-**Status (Nov 25, 2026):** E2, E3, E4 and E7 are done on `fin10k_v1`. The results are in `results/`,
-and the E1–E4 table by question type is in `[results/e1_e4_by_type.md](results/e1_e4_by_type.md)`.
+**Status (Nov 26, 2026):** E2, E3, E4 and E7 are done on `fin10k_v1`. The results are in `results/`,
+and the E1–E4 table by question type is in [`results/e1_e4_by_type.md`](results/e1_e4_by_type.md).
+The answer step (Mohini, [`answer_step/`](../answer_step/README.md)) has answered with every retriever.
+Fine-tuned G-reasoner and PageRank each get 51% correct, against 69% for vector RAG. **The hybrid of vector
+RAG and fine-tuned G-reasoner gets 77%**, the best of all systems, because the two fail on different
+questions.
+
 Still open:
 
-- E8, G-reasoner's own graph built from the 10-K text
-- E9, `fin10k_v0` vs `fin10k_v1`
-- failure tagging with the answer step (E6)
+- E6: failure tagging of the wrong answers, with Mohini (Nov 26-27)
+- E9: `fin10k_v0` vs `fin10k_v1`
+- E8: G-reasoner's own graph built from the 10-K text, moved to the final report (Dec 7); not on the poster
+
 - **Using the retrievals in the answer step?** Use the per-question files under [Per-question files](#per-question-files-for-the-answer-step).
 - **Writing the report?** Use the [headline result](#headline-result-golden-set-v2-fin10k_v1) and the
-[hop analysis](#hop-analysis-e7). Earlier notes on `fin10k_v0` are in `[REPORT_NOTES.md](REPORT_NOTES.md)`.
+[hop analysis](#hop-analysis-e7). Earlier notes on `fin10k_v0` are in [`REPORT_NOTES.md`](REPORT_NOTES.md).
 - **Running the code?** Follow [Setup and how to run it](#setup-and-how-to-run-it). Open `g_reasoner_fin10k.ipynb` in Colab on a T4 and run all.
-- **Input format** and how our graph maps onto it: `[docs/INPUT_FORMAT.md](docs/INPUT_FORMAT.md)`.
+- **Input format** and how our graph maps onto it: [`docs/INPUT_FORMAT.md`](docs/INPUT_FORMAT.md).
 
 
 
@@ -31,21 +37,25 @@ Still open:
 The same 39 questions are used for every system. All graph systems start from the same rule-based start nodes (`entity_index.py`).
 
 
-| System                                            | Exp. | Hit@5    | P@5      | R@5      | Hit@10   | R@10     |
-| ------------------------------------------------- | ---- | -------- | -------- | -------- | -------- | -------- |
-| Vector RAG, bge-small (Mahua, `v2_all_baselines`) | E1   | 0.74     | 0.22     | 0.46     | **0.85** | 0.56     |
-| Vector RAG, bge-small + rerank                    | E1   | **0.79** | 0.24     | **0.51** | 0.82     | **0.63** |
-| G-reasoner-34M, zero-shot                         | E2   | 0.15     | 0.04     | 0.06     | 0.28     | 0.12     |
-| G-reasoner-34M, fine-tuned                        | E3   | 0.59     | **0.28** | 0.45     | 0.69     | 0.55     |
-| Personalized PageRank                             | E4   | 0.69     | 0.22     | 0.38     | 0.72     | 0.52     |
+| System                                            | Exp. | Hit@5    | AllFacts@5 | P@5      | R@5      | Hit@10   | AllFacts@10 | R@10     |
+| ------------------------------------------------- | ---- | -------- | ---------- | -------- | -------- | -------- | ----------- | -------- |
+| Vector RAG, bge-small (Mahua, `v2_all_baselines`) | E1   | 0.74     | 0.49       | 0.22     | 0.46     | **0.85** | 0.56        | 0.56     |
+| Vector RAG, bge-small + rerank                    | E1   | **0.79** | **0.51**   | 0.24     | **0.51** | 0.82     | **0.64**    | **0.63** |
+| G-reasoner-34M, zero-shot                         | E2   | 0.15     | 0.08       | 0.04     | 0.06     | 0.28     | 0.13        | 0.12     |
+| G-reasoner-34M, fine-tuned                        | E3   | 0.59     | 0.44       | **0.28** | 0.45     | 0.69     | 0.49        | 0.55     |
+| Personalized PageRank                             | E4   | 0.69     | 0.36       | 0.22     | 0.38     | 0.72     | 0.44        | 0.52     |
+
+Hit = at least one gold chunk in the top k. AllFacts = every gold fact has a chunk in the top k (`fact_chunks`), so
+a multi-hop question only counts if no hop is missing.
 
 
-The breakdown by question type, for Hit, P and R at k=5 and 10, is in `results/e1_e4_by_type.md`. In short:
+The breakdown by question type, for Hit, AllFacts, P and R at k=5 and 10, is in `results/e1_e4_by_type.md`. In short:
 
 - **Fine-tuning helps a lot.** Hit@5 rises from 0.15 to 0.59. On the held-out relation questions (`relation_dev`, 9 q), Hit@5 rises from 0.56 to 0.89 and R@10 from 0.32 to 0.88.
-- **The graph methods win on single-fact and cross-company questions.** Fine-tuned and PageRank both reach Hit@10 = 1.00 there.
+- **The graph methods win on single-fact and cross-company questions.** Fine-tuned and PageRank both reach Hit@10 = 1.00 there. On cross-company, fine-tuned G-reasoner finds every fact for all 3 questions (AllFacts@5 1.00), where vector RAG finds every fact for none at k=5 (and for 1 of 3 at k=10, with reranking).
+- **On relation questions the graph finds one hop, not all of them.** Fine-tuned reaches Hit@10 1.00 but AllFacts@10 0.17: it retrieves a chunk for one side of the relation and misses the other.
 - **They lose on descriptive relations and cross-year questions.** Fine-tuned gets 0 of 4 cross-year questions. The question's topic (headcount, patents, a lawsuit, remaining performance obligations) is not a node in the graph. So the start nodes are just the company and the fiscal year, which are hubs linked to hundreds of chunks. Vector RAG reads the text and finds most of these. This is a graph-coverage limit, to be tagged in E6.
-- **AllFacts is not compared.** Only the vector run had `fact_chunks`. In the graph runs AllFacts equals Hit until `questions_v2.jsonl` carries that field.
+- **AllFacts for the graph runs was rescored on Nov 26** after `fact_chunks` was added to `questions_v2.jsonl`. `rescore_facts.py` recomputes it from each run's saved retrievals (no Colab needed) and stops if P, R or Hit no longer match, i.e. if the gold labels changed. They did not; PageRank was also rerun and gave identical rankings.
 
 Earlier result on `fin10k_v0` (Oct 21, 11 questions): zero-shot Hit@5 was 0.18. Using Gemini instead of the rule-based matcher to pick start nodes gave the same results. Details are in `REPORT_NOTES.md` and in `results/zero_shot_fin10k_v0/`, `results/gemini_ner_fin10k_v0/` and `results/ner_ablation_fin10k_v0/`.
 
@@ -141,7 +151,8 @@ This is the same format as the vector baseline, so `answer_step/retrievals.py` r
 | `ppr.py`                                                | anywhere (stdlib)     | E4 Personalized PageRank, same inputs and output format as `evaluate.py`                                                                                                                   |
 | `hop_case.py`                                           | Colab                 | E7: per-layer rank of a question's chain nodes, gold chunks and distractors                                                                                                                |
 | `plot_hop_case.py`                                      | anywhere (matplotlib) | E7 figure (zero-shot vs fine-tuned heatmap) and the same numbers as a markdown table                                                                                                       |
-| `compare_by_type.py`                                    | anywhere (stdlib)     | E1–E4 table by question type (Hit, P, R at k=5, 10); stops if the systems cover different questions                                                                                        |
+| `compare_by_type.py`                                    | anywhere (stdlib)     | E1–E4 table by question type (Hit, AllFacts, P, R at k=5, 10); stops if the systems cover different questions                                                                                        |
+| `rescore_facts.py` | anywhere (stdlib) | Recomputes AllFacts of a finished run from its saved retrievals after `fact_chunks` changed; checks P, R and Hit still match |
 | `gemini_ner.py`, `g_reasoner_gemini_ner_ablation.ipynb` | local / Colab         | Oct ablation: Gemini picks the start nodes instead of the rules (`fin10k_v0`)                                                                                                              |
 | `requirements-colab.txt`                                | Colab                 | Pinned gfmrag version for the Python 3.12 venv                                                                                                                                             |
 
@@ -318,7 +329,6 @@ Each record has gfmrag's SFT fields (`id`, `question`, `start_nodes`, `target_no
 
 ## Known issues
 
-- `fact_chunks` **is missing** from `questions_v2.jsonl` on main, so AllFacts equals Hit in the graph runs. Mahua's baseline was scored with the field. Rerun `evaluate.py` and `ppr.py` once it is pushed.
 - **Topics that are not in the graph.** Headcount, patents, litigation, the EU DMA, outsourcing and remaining performance obligations have no node. Those questions start only from company and year hubs, which explains most graph misses on descriptive-relation and cross-year questions. Tag them as "graph" failures in E6.
 - **Value nodes rank poorly** even after fine-tuning (see E7). Retrieved Values should not be used as evidence on their own.
 - **Small test set.** 39 questions, so one question moves Hit by 0.03 overall and by 0.25 on cross-year (n = 4). Do not tune settings on the golden set.

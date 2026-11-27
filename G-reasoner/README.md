@@ -11,26 +11,14 @@ knowledge graph (`data/graph/fin10k_v1`). It covers the retriever experiments:
 All of these are scored on golden set v2 (`vector_rag_baseline/data/questions_v2.jsonl`, 39 questions)
 with the vector baseline's metrics.
 
-**Status (Nov 26, 2026):** E2, E3, E4 and E7 are done on `fin10k_v1`. The results are in `results/`,
-and the E1–E4 table by question type is in [`results/e1_e4_by_type.md`](results/e1_e4_by_type.md).
-The answer step (Mohini, [`answer_step/`](../answer_step/README.md)) has answered with every retriever.
-Fine-tuned G-reasoner and PageRank each get 51% correct, against 69% for vector RAG. **The hybrid of vector
-RAG and fine-tuned G-reasoner gets 77%**, the best of all systems, because the two fail on different
-questions.
+**Status (Nov 26, 2026):** E2, E3, E4 and E7 are done. Table by question type:
+[results/e1_e4_by_type.md](results/e1_e4_by_type.md). In the answer step ([answer_step](../answer_step/README.md)),
+vector RAG + fine-tuned G-reasoner is the best system at 77% correct (vector RAG alone 69%).
+Still open: E6 failure tagging (with Mohini) and E9 (`fin10k_v0` vs `fin10k_v1`).
 
-Still open:
-
-- E6: failure tagging of the wrong answers, with Mohini (Nov 26-27)
-- E9: `fin10k_v0` vs `fin10k_v1`
-- E8: G-reasoner's own graph built from the 10-K text, moved to the final report (Dec 7); not on the poster
-
-- **Using the retrievals in the answer step?** Use the per-question files under [Per-question files](#per-question-files-for-the-answer-step).
-- **Writing the report?** Use the [headline result](#headline-result-golden-set-v2-fin10k_v1) and the
-[hop analysis](#hop-analysis-e7). Earlier notes on `fin10k_v0` are in [`REPORT_NOTES.md`](REPORT_NOTES.md).
-- **Running the code?** Follow [Setup and how to run it](#setup-and-how-to-run-it). Open `g_reasoner_fin10k.ipynb` in Colab on a T4 and run all.
-- **Input format** and how our graph maps onto it: [`docs/INPUT_FORMAT.md`](docs/INPUT_FORMAT.md).
-
-
+- **Answer step:** [Per-question files](#per-question-files-for-the-answer-step)
+- **Report:** [Headline result](#headline-result-golden-set-v2-fin10k_v1), [hop analysis](#hop-analysis-e7)
+- **Running the code:** [Setup](#setup-and-how-to-run-it) (Colab, T4)
 
 ## Headline result (golden set v2, `fin10k_v1`)
 

@@ -164,8 +164,7 @@ cp .env.example .env                                                # Gemini acc
 
 | Experiment | Files | Result |
 |---|---|---|
-| Company + fiscal-year filter before the vector search (bge-small) | `experiments/filtered_retrieval.py`, `experiments/run_filtered.py`, `results/v2_filtered/`, `results/v2_comparison_plain_vs_filtered.md` | AllFacts@10 56% to 67% (64% to 74% with rerank); no help on cross-year or cross-company |
-| Old short chunk header vs the new full header (same 1,855 ids, same bodies; only the first line differs) | `experiments/compare_headers.py`, `results/v2_header_comparison.md`, `results/v2_old_header_retrieval/` | wrong-year chunks in the top 10 fall from about 41% to 34% (bge-small + rerank); recall@10 0.54 to 0.63; AllFacts only improves on cross-year and cross-company |
+| Old short chunk header vs the new full header (same 1,855 ids, same bodies; only the first line differs) | `experiments/compare_headers.py`, `experiments/compare_headers_llm.py`, `results/v2_old_vs_new_header/` (`comparison.md` and the old-header run) | wrong-year chunks in the top 10 fall from about 41% to 34% (bge-small + rerank); recall@10 0.54 to 0.63; correct answers +5 to +10 points at k = 5, about unchanged at k = 10; helps cross-year, cross-company and single-hop, not descriptive or deep questions |
 
 ## Layout
 
@@ -176,5 +175,5 @@ cp .env.example .env                                                # Gemini acc
 | `data/` | `questions_v2.jsonl` (fields: qid, type, hops, companies, filings, question, gold_chunk_ids, gold_answer, gold_facts, fact_chunks, answer_kind, relation_chain), `golden_v2_review.md`; `chunks.jsonl` is not stored here |
 | `experiments/` | the two side experiments above |
 | `docs/` | `ERROR_STAGES.md`, method and report drafts, contribution log entries |
-| `results/` | `v2_fixed_chunks/` (bge-small) and `v2_distilbert/` (raw runs: `per_question.jsonl`, `summary.json`), `v2_all_baselines/` (`summary.md`, `results_by_type.md`, `pivot_by_type.md`, `error_stages.md`, `error_cases.csv`, `per_question_all.*`), `v2_filtered/`, `v2_old_header_retrieval/` and the two comparison files |
+| `results/` | `v2_fixed_chunks/` (bge-small) and `v2_distilbert/` (raw runs: `per_question.jsonl`, `summary.json`), `v2_all_baselines/` (`summary.md`, `results_by_type.md`, `pivot_by_type.md`, `error_stages.md`, `error_cases.csv`, `per_question_all.*`), `v2_filtered/`, `v2_old_vs_new_header/` (old vs new chunk header comparison) and `v2_comparison_plain_vs_filtered.md` |
 | `tests/` | `test_units.py` (10 tests: grounding checks, error stage, fact-level retrieval, answer support) |
